@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { NoteContext } from '../contexts/NoteContext'
+import { Input, Button } from 'reactstrap'
 import { nanoid } from 'nanoid'
 
 import styles from '../styles/components/Form.module.css'
@@ -18,8 +19,14 @@ export function Form(props) {
   }
 
   return (
-    <form className={styles.inputContainer} onSubmit={handleSubmit}>
-      <input type='text' value={inputNote} onChange={handleChange} required />
+    <form
+
+      className={styles.inputContainer} onSubmit={handleSubmit}>
+      <Input
+        style={{
+          border: '1px solid #ccc',
+        }}
+        type='text' value={inputNote} onChange={handleChange} required />
       {props.children}
     </form>
   )

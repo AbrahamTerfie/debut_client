@@ -1,16 +1,25 @@
+
+import React, { useState } from 'react'
 import './styles/global.css'
 import styles from './styles/App.module.css'
 import HomePage from './Pages/HomePage'
+import Admin from './Pages/Admin'
 
-import { Button } from './components/Button'
-import { Note } from './components/Note'
-import { Form } from './components/Form'
 
-import { NoteProvider } from './contexts/NoteContext'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <HomePage/> 
+    <div>
+      <main>
+        <Switch>
+          <Route path='/' component={HomePage} exact />
+          <Route path='/admin' component={Admin} exact />
+
+        </Switch>
+      </main>
+    </div>
+
   )
 }
 
