@@ -1,9 +1,7 @@
-import React from 'react'
+import PurchaseMasterData from "./PMasterData/PurchaseMasterData";
+import POrder from "./POrder/POrder";
+import PRequisition from "./PRequisition/PRequisition";
+import PSettings from "./PSettings/PSettings";
+import Reports from "./Reports/Reports";
 
-export default function Purchase() {
-    return (
-        <div>
-            this is  purchase 
-        </div>
-    )
-}
+export {POrder,PRequisition,PSettings,PurchaseMasterData,Reports,}
