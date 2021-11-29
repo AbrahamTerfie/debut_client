@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Finance() {
+export default function Cash() {
     return (
         <div>
-            this is finance 
+            this is cash management 
         </div>
     )
 }
