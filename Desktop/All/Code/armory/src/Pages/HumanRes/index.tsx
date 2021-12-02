@@ -1,10 +1,10 @@
 import {
-  POrder,
-  PRequisition,
-  PSettings,
-  PurchaseMasterData,
-  Reports,
-} from "./Purchase";
+  Attendance,
+  Employee,
+  HRReports,
+  HRSettings,
+  Payroll,
+} from "./Humanres";
 
 import React, { useState } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from "reactstrap";
@@ -27,7 +27,7 @@ const Finance = (props: any) => {
               toggle("1");
             }}
           >
-            master data
+            attendance
           </NavLink>
         </NavItem>
         <NavItem>
@@ -37,7 +37,7 @@ const Finance = (props: any) => {
               toggle("2");
             }}
           >
-            purchase order
+            employee
           </NavLink>
         </NavItem>
         <NavItem>
@@ -47,7 +47,7 @@ const Finance = (props: any) => {
               toggle("3");
             }}
           >
-            purchase requisition
+            payroll
           </NavLink>
         </NavItem>
         <NavItem>
@@ -74,27 +74,27 @@ const Finance = (props: any) => {
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>
-            <PurchaseMasterData />
+            <Attendance />
           </Row>
         </TabPane>
         <TabPane tabId="2">
           <Row>
-            <POrder />
+            <Employee />
           </Row>
         </TabPane>
         <TabPane tabId="3">
           <Row>
-            <PRequisition />
+            <Payroll />
           </Row>
         </TabPane>
         <TabPane tabId="4">
           <Row>
-            <Reports />
+            <HRReports />
           </Row>
         </TabPane>
         <TabPane tabId="5">
           <Row>
-            <PSettings />
+            <HRSettings />
           </Row>
         </TabPane>
       </TabContent>

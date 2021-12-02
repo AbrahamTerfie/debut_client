@@ -1,9 +1,9 @@
 import Finance from "./Finance/index";
-import Humanres from "./HumanRes/Humanres";
+import Humanres from "./HumanRes/index";
 import Purchase from "./Purchase/index";
-import Sales from "./Sales/Sales";
+import Sales from "./Sales/index";
+import Warehouse from "./Warehouse/index";
 import Settings from "./Settings/Settings";
-import Warehouse from "./Warehouse/Warehouse";
 
 
 export {

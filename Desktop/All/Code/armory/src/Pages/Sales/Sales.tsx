@@ -1,9 +1,13 @@
-import React from 'react'
+import SalesMasterdata from "./MasterData/SalesMasterdata";
+import SalesOrder from "./SalesOrder/SalesOrder";
+import SalesQuotes from "./SalesQoutes/SalesQuotes";
+import SalesReports from "./SalesReports/SalesReports";
+import SalesSettings from "./SalesSettings/SalesSettings";
 
-export default function Sales() {
-    return (
-        <div>
-        this is sales     
-        </div>
-    )
-}
+export {
+  SalesMasterdata,
+  SalesOrder,
+  SalesQuotes,
+  SalesReports,
+  SalesSettings,
+};

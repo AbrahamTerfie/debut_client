@@ -1,10 +1,10 @@
 import {
-  POrder,
-  PRequisition,
-  PSettings,
-  PurchaseMasterData,
-  Reports,
-} from "./Purchase";
+  SalesMasterdata,
+  SalesOrder,
+  SalesQuotes,
+  SalesReports,
+  SalesSettings,
+} from "./Sales";
 
 import React, { useState } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from "reactstrap";
@@ -37,7 +37,7 @@ const Finance = (props: any) => {
               toggle("2");
             }}
           >
-            purchase order
+            sales order
           </NavLink>
         </NavItem>
         <NavItem>
@@ -47,7 +47,7 @@ const Finance = (props: any) => {
               toggle("3");
             }}
           >
-            purchase requisition
+            sales quotes
           </NavLink>
         </NavItem>
         <NavItem>
@@ -74,27 +74,27 @@ const Finance = (props: any) => {
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>
-            <PurchaseMasterData />
+            <SalesMasterdata />
           </Row>
         </TabPane>
         <TabPane tabId="2">
           <Row>
-            <POrder />
+            <SalesOrder />
           </Row>
         </TabPane>
         <TabPane tabId="3">
           <Row>
-            <PRequisition />
+            <SalesQuotes />
           </Row>
         </TabPane>
         <TabPane tabId="4">
           <Row>
-            <Reports />
+            <SalesReports />
           </Row>
         </TabPane>
         <TabPane tabId="5">
           <Row>
-            <PSettings />
+            <SalesSettings />
           </Row>
         </TabPane>
       </TabContent>

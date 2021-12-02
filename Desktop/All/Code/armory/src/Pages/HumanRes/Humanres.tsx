@@ -1,5 +1,7 @@
-import React from "react";
+import Attendance from "./Attendance/Attendance";
+import Employee from "./Employee/Employee";
+import Payroll from "./Payroll/Payroll";
+import HRReports from "./Reports/HRReports";
+import HRSettings from "./Settings/HRSettings";
 
-export default function Humanres() {
-  return <div>this is human reds</div>;
-}
+export { Attendance, Employee, Payroll, HRReports, HRSettings };

@@ -33,78 +33,82 @@ const Finance = (props: any) => {
 
   return (
     <div>
-      <Nav tabs>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "1" })}
-            onClick={() => {
-              toggle("1");
-            }}
-          >
-            cash
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "2" })}
-            onClick={() => {
-              toggle("2");
-            }}
-          >
-            fixed assets
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "3" })}
-            onClick={() => {
-              toggle("3");
-            }}
-          >
-            journals
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "4" })}
-            onClick={() => {
-              toggle("4");
-            }}
-          >
-            ledger entries
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "5" })}
-            onClick={() => {
-              toggle("5");
-            }}
-          >
-            purchase
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "6" })}
-            onClick={() => {
-              toggle("6");
-            }}
-          >
-            sales
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "7" })}
-            onClick={() => {
-              toggle("7");
-            }}
-          >
-            settings
-          </NavLink>
-        </NavItem>
-      </Nav>
+
+        <Nav className="tabs" >
+          <NavItem>
+            <NavLink
+              className={activeTab === "1" ? "activePage" : "notActivePage"}
+              // className={classnames({ active: activeTab === "1" })}
+              onClick={() => {
+                toggle("1");
+              }}
+            >
+              cash
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "2" ? "activePage" : "notActivePage"}
+              // className={classnames({ active: activeTab === "2" })}
+              onClick={() => {
+                toggle("2");
+              }}
+            >
+              fixed assets
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "3" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("3");
+              }}
+            >
+              journals
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "4" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("4");
+              }}
+            >
+              ledger entries
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "5" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("5");
+              }}
+            >
+              purchase
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "6" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("6");
+              }}
+            >
+              sales
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "7" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("7");
+              }}
+            >
+              settings
+            </NavLink>
+          </NavItem>
+        </Nav>
+
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>

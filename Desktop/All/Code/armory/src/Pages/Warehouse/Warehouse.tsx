@@ -1,9 +1,13 @@
-import React from 'react'
+import WarehouseMasterData from "./WarehouseMasterData/WarehouseMasterData";
+import WarehouseOut from "./WarehouseOut/WarehouseOut";
+import WarehouseIn from "./WarehouseIn/WarehouseIn";
+import WarehouseRports from "./WarehouseRports/WarehouseRports";
+import WarehouseSettings from "./WarehouseSettings/WarehouseSettings";
 
-export default function Warehouse() {
-    return (
-        <div>
-            this is warehouse 
-        </div>
-    )
+export {
+    WarehouseMasterData,
+    WarehouseIn,
+    WarehouseOut,
+    WarehouseRports,
+    WarehouseSettings
 }

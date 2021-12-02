@@ -1,10 +1,19 @@
+// import React from 'react'
+// import Warehouse from './Warehouse'
+// export default function index() {
+//     return (
+//         <div>
+//             <Warehouse/>
+//         </div>
+//     )
+// }
 import {
-  POrder,
-  PRequisition,
-  PSettings,
-  PurchaseMasterData,
-  Reports,
-} from "./Purchase";
+  WarehouseMasterData,
+  WarehouseOut,
+  WarehouseIn,
+  WarehouseRports,
+  WarehouseSettings,
+} from "./Warehouse";
 
 import React, { useState } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from "reactstrap";
@@ -37,7 +46,7 @@ const Finance = (props: any) => {
               toggle("2");
             }}
           >
-            purchase order
+            out
           </NavLink>
         </NavItem>
         <NavItem>
@@ -47,7 +56,7 @@ const Finance = (props: any) => {
               toggle("3");
             }}
           >
-            purchase requisition
+            in
           </NavLink>
         </NavItem>
         <NavItem>
@@ -74,27 +83,27 @@ const Finance = (props: any) => {
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>
-            <PurchaseMasterData />
+            <WarehouseMasterData />
           </Row>
         </TabPane>
         <TabPane tabId="2">
           <Row>
-            <POrder />
+            <WarehouseOut />
           </Row>
         </TabPane>
         <TabPane tabId="3">
           <Row>
-            <PRequisition />
+            <WarehouseIn />
           </Row>
         </TabPane>
         <TabPane tabId="4">
           <Row>
-            <Reports />
+            <WarehouseRports />
           </Row>
         </TabPane>
         <TabPane tabId="5">
           <Row>
-            <PSettings />
+            <WarehouseSettings />
           </Row>
         </TabPane>
       </TabContent>
