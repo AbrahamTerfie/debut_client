@@ -33,8 +33,9 @@ const Finance = (props: any) => {
 
   return (
     <div>
-
-        <Nav className="tabs" >
+      <h1 className="m-4 mb-0">finance</h1>
+      <Row>
+        <Nav className="tabs">
           <NavItem>
             <NavLink
               className={activeTab === "1" ? "activePage" : "notActivePage"}
@@ -108,7 +109,7 @@ const Finance = (props: any) => {
             </NavLink>
           </NavItem>
         </Nav>
-
+      </Row>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>
