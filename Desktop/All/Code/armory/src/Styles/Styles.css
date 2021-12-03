@@ -67,10 +67,12 @@
   text-transform: uppercase;
 }
 .tabs .notActivePage:hover {
-  transition: 0.1.5s ease-in;
+  transition: 0.2s ease-in;
   color: purple;
   text-decoration: none;
   cursor: pointer;
   border-bottom: 0.4em solid purple;
-  transition: 0.18s ease-in;
+
+
+
 }

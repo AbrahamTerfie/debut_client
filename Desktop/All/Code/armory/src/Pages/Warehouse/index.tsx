@@ -1,12 +1,3 @@
-// import React from 'react'
-// import Warehouse from './Warehouse'
-// export default function index() {
-//     return (
-//         <div>
-//             <Warehouse/>
-//         </div>
-//     )
-// }
 import {
   WarehouseMasterData,
   WarehouseOut,
@@ -17,9 +8,8 @@ import {
 
 import React, { useState } from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from "reactstrap";
-import classnames from "classnames";
 
-const Finance = (props: any) => {
+const Warehouse = (props: any) => {
   const [activeTab, setActiveTab] = useState("1");
 
   const toggle = (tab: any) => {
@@ -28,58 +18,62 @@ const Finance = (props: any) => {
 
   return (
     <div>
-      <Nav tabs>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "1" })}
-            onClick={() => {
-              toggle("1");
-            }}
-          >
-            master data
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "2" })}
-            onClick={() => {
-              toggle("2");
-            }}
-          >
-            out
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "3" })}
-            onClick={() => {
-              toggle("3");
-            }}
-          >
-            in
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "4" })}
-            onClick={() => {
-              toggle("4");
-            }}
-          >
-            reports
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "5" })}
-            onClick={() => {
-              toggle("5");
-            }}
-          >
-            settings
-          </NavLink>
-        </NavItem>
-      </Nav>
+      <h1 className="m-4 mb-0">warehouse</h1>
+
+      <Row>
+        <Nav className="tabs">
+          <NavItem>
+            <NavLink
+              className={activeTab === "1" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("1");
+              }}
+            >
+              master data
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "2" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("2");
+              }}
+            >
+              out
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "3" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("3");
+              }}
+            >
+              in
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "4" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("4");
+              }}
+            >
+              reports
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "5" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("5");
+              }}
+            >
+              settings
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </Row>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>
@@ -111,4 +105,4 @@ const Finance = (props: any) => {
   );
 };
 
-export default Finance;
+export default Warehouse;

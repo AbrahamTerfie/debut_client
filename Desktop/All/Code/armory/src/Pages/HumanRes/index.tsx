@@ -19,58 +19,62 @@ const Finance = (props: any) => {
 
   return (
     <div>
-      <Nav tabs>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "1" })}
-            onClick={() => {
-              toggle("1");
-            }}
-          >
-            attendance
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "2" })}
-            onClick={() => {
-              toggle("2");
-            }}
-          >
-            employee
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "3" })}
-            onClick={() => {
-              toggle("3");
-            }}
-          >
-            payroll
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "4" })}
-            onClick={() => {
-              toggle("4");
-            }}
-          >
-            reports
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: activeTab === "5" })}
-            onClick={() => {
-              toggle("5");
-            }}
-          >
-            settings
-          </NavLink>
-        </NavItem>
-      </Nav>
+      <Row>
+        <h1 className="m-4 mb-0">human resource</h1>
+
+        <Nav className="tabs">
+          <NavItem>
+            <NavLink
+              className={activeTab === "1" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("1");
+              }}
+            >
+              attendance
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "2" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("2");
+              }}
+            >
+              employee
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "3" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("3");
+              }}
+            >
+              payroll
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "4" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("4");
+              }}
+            >
+              reports
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={activeTab === "5" ? "activePage" : "notActivePage"}
+              onClick={() => {
+                toggle("5");
+              }}
+            >
+              settings
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </Row>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>
