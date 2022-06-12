@@ -1,13 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Button } from 'reactstrap'
 import './App.css';
-import Backgroundanimation from './animations/backgroundanimation';
+import "animate.css/animate.min.css";
+import { Authentication, Landing } from './Pages/inedx';
+
+import { Routes, Route, Link } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
-      <Backgroundanimation />
+      {/* <Landing /> */}
 
-      
+
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/authentication" element={<Authentication />} />
+      </Routes>
 
     </div>
   );

@@ -1,0 +1,117 @@
+.landing {
+
+    /* padding:  10rem; */
+
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+
+.headerText {
+    /* font-size: 10rem; */
+    min-height: 10rem;
+    font-size: calc(3rem + 2vmin);
+    color: skyblue;
+    /* display: flex; */
+    text-align: center;
+    justify-content: center;
+    font-family: 'Bungee Shade', cursive;
+    transition: all 0.5s ease-in-out;
+}
+
+/* header text hover */
+.headerText:hover {
+    color: #ffc107;
+    font-size: calc(4rem + 2vmin);
+
+    transition: all 0.5s ease-in-out;
+}
+
+.textLeft {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #87ceeb;
+    padding: 2em;
+    font-family: 'Comfortaa', cursive;
+}
+
+.textRight {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffc107;
+    padding: 2em;
+    font-family: 'Comfortaa', cursive;
+
+}
+
+.getStartedButton {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: white;
+    padding: 0.3em;
+    font-size: 2.5em;
+    font-family: 'Comfortaa', cursive;
+    transition: all 0.5s ease-in-out;
+
+    background: linear-gradient(145deg, #e6ae06, #ffcf07);
+    /* box-shadow: 5px 5px 32px #edb307,
+        -5px -5px 32px #ffcf07; */
+    transition: all 0.5s ease-in-out;
+
+}
+
+.getStartedButton:hover {
+    transition: all 0.5s ease-in-out;
+    transform: scale(1.01);
+    border-radius: 8px;
+    background: linear-gradient(145deg, #90dcfb, #7ab9d4);
+    box-shadow: 5px 5px 32px #7ec0db,
+        -5px -5px 32px #90dcfb;
+}
+
+
+/* ============================================================ */
+
+.landing-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.landingCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 2em;
+    margin: 2em;
+    min-height: 15em;
+    width: 15em;
+    border-radius: 50%;
+
+}
+
+.landing-card-title {
+    /* font-size: 2em; */
+    font-weight: bold;
+    color: #87ceeb;
+    text-align: center;
+    /* padding: 3em; */
+    margin: 1em;
+    font-family: 'Comfortaa', cursive;
+    transition: all 0.5s ease-in-out;
+}
+
+
+/*
+ font-family: 'Bungee Shade', cursive;
+font-family: 'Comfortaa', cursive;
+font-family: 'Monoton', cursive;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Mukta', sans-serif; 
+*/
