@@ -1,8 +1,14 @@
-export const routes = {
-    Landing : '/landing',
-    debutRegistry: '/debut_registry',
-    debutEvents: '/debut_events',
-    debutBusiness: '/debut_business',
-    profile: '/profile',
-    authentication : '/authentication',
+export const appRoutes = {
+    landing: '/',
+    debut: '/debut',
+    authentication: 'authentication',
+    debutRegistry: 'debutRegistry',
+    debutEvents: 'debutEvents',
+    debutBusiness: 'debutBusiness',
+    profile: 'profile',
+
+    myDebut: 'myDebut',
+    myDebutBusiness: 'myDebutBusiness',
+    myDebutEvents: 'myDebutEvents',
+    myDebutRegistry: 'myDebutRegistry',
 }

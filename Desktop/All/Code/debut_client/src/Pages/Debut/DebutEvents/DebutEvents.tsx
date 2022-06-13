@@ -2,6 +2,10 @@ import React from 'react'
 
 export default function DebutEvents() {
     return (
-        <div> this is debut events DebutEvents</div>
+        <div
+            style={{
+                marginTop: `10vh`,
+            }}
+        > this is debut events DebutEvents</div>
     )
 }

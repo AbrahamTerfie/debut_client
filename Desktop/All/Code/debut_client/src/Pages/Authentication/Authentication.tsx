@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavBarElement } from '../../Components/index';
 import '../../Styles/Auth.css'
-import classnames from 'classnames'
+import AuthForms from './AuthForms';
 export default function Authentication() {
     const [activeTab, setActiveTab] = useState('1');
 
@@ -10,7 +10,18 @@ export default function Authentication() {
     }
     return (
         <div  >
-            <NavBarElement />
+            {/* <NavBarElement /> */}
+            <div 
+            
+            style={{
+                paddingTop: '4em',
+                border : '1px solid #e6e6e6',
+            }}
+            >
+
+                this is auth page
+                <AuthForms />
+            </div>
         </div>
     )
 }
