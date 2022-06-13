@@ -1,3 +1,6 @@
 import LandingCard from "./LandingCard/LandingCard";
-
-export { LandingCard };
+import NavBar from "./NavBar/NavBar";
+export {
+    LandingCard,
+    NavBar as NavBarElement
+};

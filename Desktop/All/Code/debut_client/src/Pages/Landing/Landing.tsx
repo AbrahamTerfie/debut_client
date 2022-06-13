@@ -47,7 +47,7 @@ export default function Landing() {
 
 
                 </Container  >
-                <Row className='landing-container' >
+                <div className='landing-container' >
 
                     <LandingCard
                         title='ask for help'
@@ -63,7 +63,7 @@ export default function Landing() {
 
 
 
-                </Row>
+                </div>
             </>
 
         </Container>
