@@ -1,7 +1,7 @@
 export const appRoutes = {
     landing: '/',
     debut: '/debut',
-    authentication: 'authentication',
+    authentication: 'auth',
     debutRegistry: 'debutRegistry',
     debutEvents: 'debutEvents',
     debutBusiness: 'debutBusiness',
