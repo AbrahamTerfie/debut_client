@@ -4,7 +4,8 @@ import { AnimationOnScroll } from 'react-animation-on-scroll'
 import { LandingCard } from '../../Components/index'
 import { Row, Col, Container, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 import { FaHandsHelping, FaHandPointUp, FaHandHoldingHeart } from 'react-icons/fa'
-
+import { Link } from 'react-router-dom'
+import { appRoutes } from '../../Routes/routes'
 const iconProperties = {
     size: `3em`,
     color: '#87ceeb'
@@ -33,14 +34,13 @@ export default function Landing() {
                             Think “baby-shower for your startup”.
 
                         </Col>
-                        <Col lg={3} sm={12} md={12}    >
-                            <div className="getStartedButton m-4" >
+                        <Col lg={3} sm={12} md={12} className="linkContainer"  >
+                            <Link to={appRoutes.authentication}>
+                                <div className="getStartedButton m-4"   >
+                                    get started
+                                </div>
+                            </Link>
 
-                                get started
-                            </div>
-                            {/* It is built based on decades of personal
-                            experience in launching companies and organizing
-                            support for entrepreneurs. */}
 
                         </Col>
                     </Row>

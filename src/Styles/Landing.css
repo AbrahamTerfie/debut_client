@@ -54,12 +54,15 @@
     font-size: 2.5em;
     font-family: 'Comfortaa', cursive;
     transition: all 0.5s ease-in-out;
-
     background: linear-gradient(145deg, #e6ae06, #ffcf07);
-    /* box-shadow: 5px 5px 32px #edb307,
-        -5px -5px 32px #ffcf07; */
     transition: all 0.5s ease-in-out;
+    text-decoration: none;
 
+
+}
+.linkContainer  a{
+text-decoration: none;
+color: #ffffff;
 }
 
 .getStartedButton:hover {

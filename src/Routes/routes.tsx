@@ -8,6 +8,7 @@ export const appRoutes = {
     profile: 'profile',
 
     myDebut: 'myDebut',
+    myDebutHome: 'myDebutHome',
     myDebutBusiness: 'myDebutBusiness',
     myDebutEvents: 'myDebutEvents',
     myDebutRegistry: 'myDebutRegistry',

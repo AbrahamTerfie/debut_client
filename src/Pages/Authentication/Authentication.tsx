@@ -4,7 +4,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, Ca
 import Login from './login';
 import SignUp from './SignUp';
 import '../../Styles/Auth.scss'
-
+import { ImFacebook, ImGoogle } from 'react-icons/im'
 export default function Authentication() {
 
     const [activeTab, setActiveTab] = useState('1');
@@ -40,24 +40,45 @@ export default function Authentication() {
             <TabContent activeTab={activeTab} className="authTabcontent" >
                 <TabPane tabId="1">
                     <Row sm="12" >
-
                         <Login />
-
+                    </Row>
+                    <Row>
+                        <div>
+                            <p className='m-4' >
+                                <small className="authText">
+                                    forgot your password?
+                                </small>
+                            </p>
+                        </div>
                     </Row>
                 </TabPane>
                 <TabPane tabId="2">
                     <Row sm="12" >
-                        {/* <Col> */}
                         <SignUp />
-                        {/* </Col> */}
                     </Row>
                 </TabPane>
             </TabContent>
-            <div className='authTabcontent' >
-                google icons <br />
-                google icons <br />
-                google icons <br />
+
+            <div>
+                <p>
+                    <span className='authText'>
+                        or authenticate with
+                    </span>
+                </p>
             </div>
+            <div className='authFooter' >
+                <Button color='warning' className='m-4' outline
+                    size='lg'  >
+                    <ImFacebook />
+                </Button>
+                <Button color='warning' className='m-4' outline
+                    size='lg'  >
+                    <ImGoogle
+
+                    />
+                </Button>
+            </div>
+
         </div>
     );
 }
