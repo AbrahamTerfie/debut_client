@@ -11,7 +11,7 @@ import {
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
-
+import { appRoutes } from "../../Routes/routes";
 
 
 const SideBar = ({ isOpen, toggle }:
@@ -24,35 +24,48 @@ const SideBar = ({ isOpen, toggle }:
             <span color="info" onClick={() => toggle()} style={{ color: "#fff" }}>
                 &times;
             </span>
-            <h3>Bootstrap Sidebar</h3>
+            <h3>My Debut</h3>
         </div>
         <div className="side-menu">
             <Nav vertical className="list-unstyled pb-3">
                 <p>Dummy Heading</p>
                 {/* <SubMenu title="Home" icon={faHome} items={submenus[0]} /> */}
+
                 <NavItem>
                     <NavLink tag={Link} to={"/about"}>
                         <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
-                        About
+                        Dashboard
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} to={"/about"}>
+                        <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
+                        Businesses
                     </NavLink>
                 </NavItem>
                 {/* <SubMenu title="Pages" icon={faCopy} items={submenus[1]} /> */}
                 <NavItem>
                     <NavLink tag={Link} to={"/pages"}>
                         <FontAwesomeIcon icon={faImage} className="mr-2" />
-                        Portfolio
+                        Events
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} to={"/faq"}>
                         <FontAwesomeIcon icon={faQuestion} className="mr-2" />
-                        FAQ
+                        Registry
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} to={"/contact"}>
                         <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
-                        Contact
+                        Supporters
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={Link} to={"/contact"}>
+                        <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
+                        Profile
                     </NavLink>
                 </NavItem>
             </Nav>

@@ -1,8 +1,8 @@
 import React from 'react'
 import '../../Styles/Landing.css'
-import { AnimationOnScroll } from 'react-animation-on-scroll'
+
 import { LandingCard } from '../../Components/index'
-import { Row, Col, Container, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
+import { Row, Col, Container} from 'reactstrap'
 import { FaHandsHelping, FaHandPointUp, FaHandHoldingHeart } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'
