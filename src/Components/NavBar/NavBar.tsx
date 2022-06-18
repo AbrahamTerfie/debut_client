@@ -1,13 +1,26 @@
-import React from 'react'
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu, Nav, NavbarText } from 'reactstrap'
+import React, { useState } from 'react'
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownItem, DropdownMenu, Nav, NavbarText, Container } from 'reactstrap'
 import '../../Styles/NavBar.css'
 import { Outlet, Link } from 'react-router-dom'
+import Topbar from '../MyDebutTopBar/TopBar'
+import SideBar from '../SIdeBar/SideBar'
+import classNames from "classnames";
 
 export default function NavBar() {
+    const [sidebarIsOpen, setSidebarOpen] = useState(true);
+    const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
+
     return (
 
-        <div>
-            <Navbar
+        <>
+            <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
+            <Container
+                fluid
+                className={classNames("content", { "is-open": sidebarIsOpen })}
+            >
+                <Topbar toggleSidebar={toggleSidebar} />
+
+                {/* <Navbar
                 color="light"
                 expand
                 fixed="top"
@@ -40,8 +53,9 @@ export default function NavBar() {
                     </NavbarText>
 
                 </Collapse>
-            </Navbar>
-            <Outlet />
-        </div>
+            </Navbar> */}
+                <Outlet />
+            </Container>
+        </>
     )
 }

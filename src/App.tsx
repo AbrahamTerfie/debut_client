@@ -6,9 +6,12 @@ import { Authentication, Landing, DebutPages, MyDebutPages, Profile } from './Pa
 import { NavBarElement } from './Components/index';
 import { Routes, Route, Link } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
+
 function App() {
   return (
-    <div className="App">
+    <div className="App wrapper">
+          {/* <Topbar toggleSidebar={toggleSidebar} /> */}
+
       <Routes>
         <Route path={appRoutes.landing} element={<Landing />} />
         <Route path={appRoutes.profile} element={<Profile />} />
