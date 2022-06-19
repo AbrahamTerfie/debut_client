@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #fff;
+  // border: 2px solid #fff;
   padding : 20px;
 }
 
@@ -41,7 +41,7 @@
   padding: 1em;
   // background-color: #f3de8aff;
   overflow: scroll;
-  white-space: nowrap;
+  // white-space: nowrap;
 
   .nav-item {
     .nav-link {
@@ -60,6 +60,8 @@
         color: #ffc107;
         display: inline-flex;
         transition: 0.3s ease-in;
+        background-color: #272838ff;
+        
         // text-transform: uppercase;
         font-weight: lighter;
         border-left: none;
@@ -86,7 +88,7 @@
         padding: 0.5em;
 
         border-bottom: 5px solid #90dcfb;
-        background-color: none;
+        background-color: #272838ff;
         // color: #90dcfb;
         border-left: none;
         border-right: none;

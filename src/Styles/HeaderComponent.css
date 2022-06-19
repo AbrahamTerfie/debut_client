@@ -1,0 +1,85 @@
+.headerComponent {
+    /* border: 1px solid #ffc107; */
+    /* full width at all times  */
+    /* width: 100%; */
+    border-radius: 10px;
+    background: linear-gradient(315deg, #232432, #2a2b3c);
+    box-shadow: -5px -5px 10px #101016,
+        5px 5px 10px #3e405a;
+}
+
+.headerComponent input {
+    border: 1px solid #ffc107;
+    background: none;
+    color: #fff;
+    font-size: 1.5em;
+    font-family: 'Comfortaa', cursive;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+
+.headerComponentSearch {
+    /* border: 1px solid #ffc107; */
+
+
+}
+
+.searchGroup {
+    /* border: 1px solid #ffc107; */
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xxx-large;
+    color: #ffc107;
+    
+    text-align: center;
+    justify-content: center;
+    font-family: 'Bungee Shade', cursive;
+    transition: all 0.5s ease-in-out;
+
+}
+
+.filterContainer {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: scroll;
+    /* hide scroll bar  */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /* hide scroll bar  */
+
+
+}
+
+.filterToolip{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9em;
+    font-family: 'Comfortaa', cursive;
+    color: #fff;
+    padding: 0.5em;
+    /* margin: 0.5em; */
+    border-radius: 7px;
+    min-width: 10em;
+    background: linear-gradient(315deg, #232432, #2a2b3c);
+    box-shadow: -5px -5px 10px #101016,
+        5px 5px 10px #3e405a;
+    
+
+
+}
+
+.filterToolip :hover{
+    border-radius: 10px;
+background: linear-gradient(45deg, #2a2b3c, #232432);
+box-shadow:  5px -5px 10px #101016,
+             -5px 5px 10px #3e405a;
+}

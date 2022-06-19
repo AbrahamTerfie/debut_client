@@ -9,7 +9,7 @@ import { appRoutes } from './Routes/routes';
 
 function App() {
   return (
-    <div className="App wrapper">
+    <div className="">
       {/* <Topbar toggleSidebar={toggleSidebar} /> */}
 
       <Routes>

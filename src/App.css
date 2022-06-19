@@ -4,7 +4,9 @@
 --rhythm: #7e7f9aff;
 --cultured: #f9f8f8ff; */
 *  {
-  /* background-color: #272838ff; */
+  background-color: #272838ff;
+  color: #f5f5f5;
+
 
   /* padding: 0.2em; */
 }
@@ -82,9 +84,9 @@ html,
 
 .App {
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   align-items: stretch;
-  background-color: #282c34
+  /* background-color: #282c34 */
 }
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
