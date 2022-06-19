@@ -5,7 +5,11 @@ export default function MyDebutHome() {
   return (
 
     <>
-      this is debut dashboard
+      new supporters <br />
+      upcomming events<br />
+      registry status<br />
+
+      dashboard
     </>
   )
 }

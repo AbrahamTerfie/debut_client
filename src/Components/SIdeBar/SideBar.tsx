@@ -4,15 +4,23 @@ import {
     faHome,
     faBriefcase,
     faPaperPlane,
-    faQuestion,
-    faImage,
-    faCopy,
+    faPeopleGroup,
+    faList,
+    faClock,
+    faFile,
+    faUser,
+    faCopy
 } from "@fortawesome/free-solid-svg-icons";
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { appRoutes } from "../../Routes/routes";
+import SubMenu from "./SubMenu";
 
+const SidebarStyle = {
+    marginRight: '1rem',
+    color: 'darkGray'
+}
 
 const SideBar = ({ isOpen, toggle }:
     {
@@ -28,43 +36,51 @@ const SideBar = ({ isOpen, toggle }:
         </div>
         <div className="side-menu">
             <Nav vertical className="list-unstyled pb-3">
-                <p>Dummy Heading</p>
+                <h5>Dummy Heading</h5>
                 {/* <SubMenu title="Home" icon={faHome} items={submenus[0]} /> */}
 
                 <NavItem>
-                    <NavLink tag={Link} to={"/about"}>
-                        <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
+                    <NavLink tag={Link} to={appRoutes.myDebutHome}>
+                        <FontAwesomeIcon icon={faFile} className="mr-2"
+                            style={SidebarStyle} />
                         Dashboard
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} to={"/about"}>
-                        <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
-                        Businesses
+                    <NavLink tag={Link} to={appRoutes.myDebutBusiness}>
+                        <FontAwesomeIcon icon={faBriefcase} className="ml-2"
+                            style={SidebarStyle}
+                        />
+
+                        Business
                     </NavLink>
                 </NavItem>
                 {/* <SubMenu title="Pages" icon={faCopy} items={submenus[1]} /> */}
                 <NavItem>
-                    <NavLink tag={Link} to={"/pages"}>
-                        <FontAwesomeIcon icon={faImage} className="mr-2" />
+                    <NavLink tag={Link} to={appRoutes.myDebutEvents}>
+                        <FontAwesomeIcon icon={faClock} className="mr-2"
+                            style={SidebarStyle} />
                         Events
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} to={"/faq"}>
-                        <FontAwesomeIcon icon={faQuestion} className="mr-2" />
+                    <NavLink tag={Link} to={appRoutes.myDebutRegistry}>
+                        <FontAwesomeIcon icon={faList} className="mr-2"
+                            style={SidebarStyle} />
                         Registry
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink tag={Link} to={"/contact"}>
-                        <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
+                        <FontAwesomeIcon icon={faPeopleGroup} className="mr-2"
+                            style={SidebarStyle} />
                         Supporters
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} to={"/contact"}>
-                        <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
+                    <NavLink tag={Link} to={appRoutes.profile}>
+                        <FontAwesomeIcon icon={faUser} className="mr-2"
+                            style={SidebarStyle} />
                         Profile
                     </NavLink>
                 </NavItem>
@@ -74,7 +90,7 @@ const SideBar = ({ isOpen, toggle }:
 );
 
 const submenus = [
-    [
+    // [
         {
             title: "Home 1",
             target: "Home-1",
@@ -87,17 +103,17 @@ const submenus = [
             itle: "Home 3",
             target: "Home-3",
         },
-    ],
-    [
-        {
-            title: "Page 1",
-            target: "Page-1",
-        },
-        {
-            title: "Page 2",
-            target: "Page-2",
-        },
-    ],
+    // ],
+    // [
+    //     {
+    //         title: "Page 1",
+    //         target: "Page-1",
+    //     },
+    //     {
+    //         title: "Page 2",
+    //         target: "Page-2",
+    //     },
+    // ],
 ];
 
 export default SideBar;

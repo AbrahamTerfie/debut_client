@@ -2,7 +2,7 @@ import React from 'react'
 import '../../Styles/Landing.css'
 
 import { LandingCard } from '../../Components/index'
-import { Row, Col, Container} from 'reactstrap'
+import { Row, Col, Container } from 'reactstrap'
 import { FaHandsHelping, FaHandPointUp, FaHandHoldingHeart } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'
@@ -21,7 +21,6 @@ export default function Landing() {
                 <Row className='headerText'  >
                     Debut
                 </Row>
-
 
 
                 <Container fluid sm={12} md="12"   >
