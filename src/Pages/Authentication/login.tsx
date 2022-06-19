@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, FormGroup, Input } from 'reactstrap';
-
-
+import { Link } from 'react-router-dom';
+import { appRoutes } from '../../Routes/routes';
 export default function Login() {
 
 
@@ -35,12 +35,15 @@ export default function Login() {
                     onChange={(e) => setLoginformData({ ...loginformData, password: e.target.value })}
                 />
             </FormGroup>
-            <Button
-                color='warning'
-                outline
-                size='lg'
-                onClick={() => { console.log(loginformData) }}
-            >login</Button>
+            <Link to={appRoutes.debutBusiness}   >
+                <Button
+                    color='warning'
+                    outline
+                    size='lg'
+                    onClick={() => { console.log(loginformData) }}
+                >login</Button>
+
+            </Link>
         </div>
         // {/* </Form> */}
 

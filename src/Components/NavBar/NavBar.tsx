@@ -18,7 +18,7 @@ export default function NavBar() {
                 fluid
                 className={classNames("content", { "is-open": sidebarIsOpen })}>
                 <Topbar toggleSidebar={toggleSidebar} />
-                <Outlet />
+                {/* <Outlet /> */}
             </Container>
         </>
     )

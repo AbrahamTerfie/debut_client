@@ -10,24 +10,27 @@ import { appRoutes } from './Routes/routes';
 function App() {
   return (
     <div className="App wrapper">
-          {/* <Topbar toggleSidebar={toggleSidebar} /> */}
+      {/* <Topbar toggleSidebar={toggleSidebar} /> */}
 
       <Routes>
         <Route path={appRoutes.landing} element={<Landing />} />
-        <Route path={appRoutes.profile} element={<Profile />} />
         <Route path={appRoutes.authentication} element={<Authentication />} />
+        <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
+        <Route path={appRoutes.profile} element={<Profile />} />
+        <Route path={appRoutes.debutBusiness} element={<DebutPages.BusinessPage />} />
+        <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
 
-        <Route path={appRoutes.debut} element={<NavBarElement />} >
-          <Route path={appRoutes.debutBusiness} element={<DebutPages.BusinessPage />} />
-          <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
-          <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
-        </Route>
 
+
+        {/* <Route path={appRoutes.debut} element={<NavBarElement />} >
+
+        </Route> */}
+        {/* 
         <Route path={appRoutes.myDebut} element={<NavBarElement />} >
           <Route path={appRoutes.myDebutHome} element={<MyDebutPages.MyDebutHome />} />
           <Route path={appRoutes.myDebutBusiness} element={<MyDebutPages.MyBusiness />} />
           <Route path={appRoutes.myDebutEvents} element={<MyDebutPages.MyDebutEvetnts />} />
-        </Route>
+        </Route> */}
       </Routes>
 
     </div>
