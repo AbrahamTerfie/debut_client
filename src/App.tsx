@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap'
 import './App.css';
 import "animate.css/animate.min.css";
-import { Authentication, Landing, DebutPages, MyDebutPages, Profile } from './Pages/inedx';
+import { Authentication, Landing, DebutPages, MyDebutPages, Profile, Home } from './Pages/inedx';
 import { NavBarElement } from './Components/index';
 import { Routes, Route, Link } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
@@ -17,6 +17,7 @@ function App() {
         <Route path={appRoutes.authentication} element={<Authentication />} />
         <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
         <Route path={appRoutes.profile} element={<Profile />} />
+        <Route path={appRoutes.home} element={<Home />} />
         <Route path={appRoutes.debutBusiness} element={<DebutPages.BusinessPage />} />
         <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
 

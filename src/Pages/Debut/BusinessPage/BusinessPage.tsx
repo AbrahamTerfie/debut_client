@@ -13,7 +13,7 @@ export default function BusinessPage() {
 
 
                 <Row>
-                    the rest of the page
+                    the rest of the pagerhgffuu
                 </Row>
 
         </div>
