@@ -1,0 +1,44 @@
+.peopleCardsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0em 1em 0em 0em;
+    width: 100%;
+    max-width: 1200px;
+    border: 1px solid #3e405a;
+    height: max-content;
+
+    transition: all 0.2s ease-in-out;
+    /* 
+    border-radius: 0px;
+    background: #272838;
+    box-shadow:  -5px -5px 4px #101016,
+                 5px 5px 4px #3e405a; */
+}
+
+.peopleCardsContainer:hover {
+    transition: 0.2s ease-in-out;
+    border-radius: 0px;
+    background: linear-gradient(315deg, #2a2b3c, #232432);
+    box-shadow: -5px -5px 4px #101016,
+        5px 5px 4px #3e405a;
+}
+
+.peopleCardsContainer img {
+    width: 70%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.userFullName{
+    font-size: 1em;
+    font-weight: bold;
+    color: #f9f8f8ff;
+}
+.userDetails{
+    font-size: 0.8em;
+    color: #f9f8f8ff;
+}

@@ -1,0 +1,47 @@
+/* --raisin-black: #272838ff;
+--buff: #f3de8aff;
+--vivid-tangerine: #eb9486ff;
+--rhythm: #7e7f9aff;
+--cultured: #f9f8f8ff; */
+
+
+.filterContainer {
+    border: 1px solid #f9f8f8ff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+
+.mainPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* align-items: center; */
+    overflow: scroll;
+    /* hide scroll bar  */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /* hide scroll bar  */
+    /* border: 1px solid #f9f8f8ff; */
+    border-radius: 2%;
+    height: 90vh;
+    padding: 1em;
+}
+
+.searchInput input {
+    width: 100%;
+    border: 1px solid #f9f8f8ff;
+    border-radius: 3em;
+    /* padding: 0.5em; */
+    /* margin: 1em 1em 1em 0; */
+    background-attachment: fixed;
+    background-color: #272838ff;
+}
+
+.searchInput input:focus {
+    background-color: #272838ff;
+    color: #f9f8f8ff;
+    outline: none;
+
+}
