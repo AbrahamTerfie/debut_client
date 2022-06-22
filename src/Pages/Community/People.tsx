@@ -3,6 +3,7 @@ import { Row, Col, Container, Input } from 'reactstrap'
 import PeopleCards from '../../Components/PeopleCards/PeopleCards'
 import FilterPeople from '../../Components/FilterPeople/FilterPeople'
 import './People.css'
+import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 export default function People() {
     return (
         <div  >
@@ -12,14 +13,9 @@ export default function People() {
                 </Col>
 
                 <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
-                    <Row className='searchInput mb-4' >
-                        <Input
-                            color='primary'
-                            type="text"
-                            name="textarea-input"
-                            placeholder='Search'
-                            prepend="Search"
-                        />
+                    <Row className='searchInput mb-1 mt-4' >
+                        <h5> People Directory </h5>
+                        <SearchComponent />
                     </Row>
 
                     <Row className='m-3'>

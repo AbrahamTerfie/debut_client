@@ -1,0 +1,24 @@
+.ChanelsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+
+
+}
+
+.channels h6 {
+    /* border: 1px solid #3e405a; */
+
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px
+}
+
+.channels h6:hover {
+    background-color: #3e405a;
+    border-radius: 1%;
+    cursor: pointer;
+    font-weight: bold;
+}

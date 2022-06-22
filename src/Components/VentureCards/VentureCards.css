@@ -1,4 +1,4 @@
-.peopleCardsContainer {
+.ventureCardsContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -14,28 +14,52 @@
 
 }
 
-.peopleCardsContainer:hover {
+.ventureCardsContainer:hover {
     transition: 0.2s ease-in-out;
     border-radius: 0px;
+    scale: 1.5;
     background: linear-gradient(315deg, #2a2b3c, #232432);
     box-shadow: -5px -5px 14px #101016,
         5px 5px 4px #3e405a;
 }
 
-.peopleCardsContainer img {
+.ventureCardsContainer img {
     width: 70%;
     height: 100%;
 
     object-fit: cover;
 }
 
-.userFullName {
+.ventureName {
     font-size: 1em;
     font-weight: bold;
     color: #f9f8f8ff;
 }
 
-.userDetails {
+.VentureDetails {
     font-size: 0.8em;
     color: #f9f8f8ff;
 }
+
+.ventureOwner {
+    font-size: 0.8em;
+    color: #f9f8f8ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ventureOwner img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+.ventureOwner:hover {
+    color: white;
+
+}
+

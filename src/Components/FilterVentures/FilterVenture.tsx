@@ -1,68 +1,63 @@
 import React from 'react'
-
 import { FormGroup, Label, Input } from 'reactstrap'
-export default function FilterPeople() {
+export default function FilterVenture() {
 
     // roles , expertiesr location programs 
     return (
         <div>
-            <h4> Roles</h4>
+            <h4> Focus Areas</h4>
             <FormGroup check>
                 <Input type="checkbox" />
-                Fellow
+                Energy and Environment
             </FormGroup>
             <FormGroup check>
                 <Input type="checkbox" />{' '}
-                Mentor
+                Food and Water
             </FormGroup>
             <FormGroup check>
                 <Input type="checkbox" />{' '}
-                Speciallist
+                Education
             </FormGroup>
             <FormGroup check>
                 <Input type="checkbox" />{' '}
-                Investor
+                New Frontiers
             </FormGroup>
             <FormGroup check>
                 <Input type="checkbox" />{' '}
-                Collective Member
+                Health
             </FormGroup>
-            <FormGroup check>
-                <Input type="checkbox" />{' '}
-                Unreasonable Staff
-            </FormGroup>
-            <FormGroup check>
-                <Input type="checkbox" />{' '}
-                Program Guest
-            </FormGroup>
+
 
 
             {/* ============= */}
 
-            <h4 className='mt-4' > Experties</h4>
+            <h4 className='mt-4' > Company Size</h4>
 
             <FormGroup check>
                 <Input type="checkbox" />
-                Business Strategy
+                1-10
             </FormGroup>
             <FormGroup check>
                 <Input type="checkbox" />{' '}
-                Team Building
+                11-50
             </FormGroup>
             <FormGroup check>
                 <Input type="checkbox" />{' '}
-                Financing / Invenstment
+                51-100
             </FormGroup>
             <FormGroup check>
                 <Input type="checkbox" />{' '}
-                Coaching / Mentoring
+                101-500
             </FormGroup>
-
+            <FormGroup check>
+                <Input type="checkbox" />{' '}
+                501 +
+            </FormGroup>
 
             {/* ================ */}
 
 
-            <h4 className='mt-4' > Location</h4>
+            <h4 className='mt-4' > Operating Regions</h4>
 
             <FormGroup check>
                 <Input type="checkbox" />
