@@ -27,12 +27,20 @@
 .headerSearchComponent input {
     background: #272838;
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1em;
     font-family: 'Comfortaa', cursive;
-    height: 2em;
+    height: 1.3em;
+    border: none;
 }
 
-.headerLogo{
+.headerSearchComponent input:focus {
+    outline: none;
+    background: #272838;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.headerLogo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +53,7 @@
 }
 
 
-.sideBarContainer{
+.sideBarContainer {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -60,10 +68,10 @@
     height: 90vh;
 
     padding: 1em;
-   
+
 }
 
-.pageView{
+.pageView {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -78,5 +86,5 @@
     height: 90vh;
 
     padding: 1em;
-   
+
 }

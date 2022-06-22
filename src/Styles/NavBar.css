@@ -1,8 +1,22 @@
-.titleText {
-    font-size: 2em;
-    /* font-weight: bold; */
+/* --raisin-black: #272838ff;
+--buff: #f3de8aff;
+--vivid-tangerine: #eb9486ff;
+--rhythm: #7e7f9aff;
+--cultured: #f9f8f8ff; */
 
 
-    font-family: 'Bungee Shade', cursive;
+.dropDownContainers{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 0.5em 20px;
+    height: max-content;
+    /* margin-bottom: 2em; */
+}
 
+
+.dropDownItems {
+    background: #7e7f9aff;
 }

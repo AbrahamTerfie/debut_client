@@ -4,12 +4,14 @@ import './App.css';
 import "animate.css/animate.min.css";
 import { Authentication, Landing, DebutPages, MyDebutPages, Profile, Home } from './Pages/inedx';
 import { NavBarElement } from './Components/index';
+import { GiveGratitude, Forum, People, Ventures } from './Pages/Community/index';
 import { Routes, Route, Link } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
-
+import NavBarComponent from './Components/NavBar/NavBar';
 function App() {
   return (
     <div className="">
+
       {/* <Topbar toggleSidebar={toggleSidebar} /> */}
 
       <Routes>
@@ -17,9 +19,20 @@ function App() {
         <Route path={appRoutes.authentication} element={<Authentication />} />
         <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
         <Route path={appRoutes.profile} element={<Profile />} />
-        <Route path={appRoutes.home} element={<Home />} />
-        <Route path={appRoutes.debutBusiness} element={<DebutPages.BusinessPage />} />
-        <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
+
+        <Route path={appRoutes.home} element={<Home />} >
+          <Route path={appRoutes.giveGratitude} element={<GiveGratitude />} />
+          <Route path={appRoutes.forum} element={<Forum />} />
+          <Route path={appRoutes.people} element={<People />} />
+          <Route path={appRoutes.ventures} element={<Ventures />} />
+
+
+
+
+          <Route path={appRoutes.debutBusiness} element={<DebutPages.BusinessPage />} />
+          <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
+
+        </Route>
 
 
 
