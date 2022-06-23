@@ -4,12 +4,23 @@ import {
     NavItem, NavLink, Nav, NavbarBrand, NavbarToggler, DropdownMenu,
     DropdownItem, UncontrolledDropdown, NavbarText
 } from 'reactstrap'
+import { BsPeople } from 'react-icons/bs'
+import { FaRegBuilding, FaRegCreditCard, FaCashRegister } from 'react-icons/fa'
+import { MdOutlineForum, MdRateReview } from 'react-icons/md'
+import { RiChatSmileLine } from 'react-icons/ri'
+import { GiReceiveMoney } from 'react-icons/gi'
 export default function NavBarComponent() {
 
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
+
+    const navMargins = {
+        backgroundColor: 'transparent',
+        marginLeft: '10px',
+        marginRight: '10px',
+    }
     return (
 
         <Navbar
@@ -17,33 +28,37 @@ export default function NavBarComponent() {
             dark
             expand="xl"
             fixed="top"
-            full
-
-
-        >
+            full  >
             <NavbarBrand href="/"  >
                 debut
             </NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse navbar>
-                <Nav className="me-auto" navbar>
+                <Nav className="me-auto dark" navbar>
 
-                    <UncontrolledDropdown dark inNavbar nav >
-                        <DropdownToggle color='dark' nav>
+                    <UncontrolledDropdown dark inNavbar nav color='warning'   >
+                        <DropdownToggle color='dark' nav split={true}    >
+
+                            <BsPeople size={25} />
                             Community
                         </DropdownToggle>
-                        <DropdownMenu right>
-                            <DropdownItem>
-                                Proples Directory
+                        <DropdownMenu right dark >
+                            <DropdownItem  >
+                                <BsPeople size={25} className='m-2' style={navMargins} />
+                                People Directory
                             </DropdownItem>
                             <DropdownItem>
+                                <FaRegBuilding size={25} className='m-2' style={navMargins} />
                                 Ventures Directory
                             </DropdownItem>
 
                             <DropdownItem>
+
+                                <MdOutlineForum size={25} className='m-2' style={navMargins} />
                                 Forum
                             </DropdownItem>
                             <DropdownItem>
+                                <RiChatSmileLine size={25} className='m-2' style={navMargins} />
                                 Give Gratitude
                             </DropdownItem>
                         </DropdownMenu>
@@ -53,19 +68,25 @@ export default function NavBarComponent() {
                     <UncontrolledDropdown dark
                         inNavbar
                         nav >
-                        <DropdownToggle color='dark' nav >
+                        <DropdownToggle nav  >
+                            <FaCashRegister className='mx-2' size={25} />
+
                             Funding
                         </DropdownToggle>
-                        <DropdownMenu right  >
+                        <DropdownMenu right dark >
                             <DropdownItem>
-                                Connections Directory
+                                <GiReceiveMoney size={25} className='m-2' style={navMargins} />
+                                Fundraising Support
                             </DropdownItem>
                             <DropdownItem>
-                                Insights
+                                <FaRegCreditCard size={25} className='m-2' style={navMargins} />
+                                Investors Directory
                             </DropdownItem>
 
                             <DropdownItem>
-                                Perks
+                                <MdRateReview size={25} className='m-2' style={navMargins} />
+
+                                Rate Investors
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
@@ -80,16 +101,16 @@ export default function NavBarComponent() {
                         <DropdownToggle color='dark' nav>
                             Resources
                         </DropdownToggle>
-                        <DropdownMenu right>
+                        <DropdownMenu right dark >
                             <DropdownItem>
-                                Option 1
+                                Connections Directory
                             </DropdownItem>
                             <DropdownItem>
-                                Option 2
+                                Insights
                             </DropdownItem>
-                            <DropdownItem divider />
+
                             <DropdownItem>
-                                Reset
+                                Perks
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>

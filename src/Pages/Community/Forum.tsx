@@ -7,7 +7,9 @@ import { Row, Col, Container, Input, Button } from 'reactstrap'
 import ForumCards from '../../Components/ForumCards/ForumCards'
 import './Forum.css'
 import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
-
+import { IoMdAdd } from 'react-icons/io'
+import { IoChatbubblesOutline } from 'react-icons/io5'
+import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 export default function Forum() {
     return (
         <div  >
@@ -25,20 +27,35 @@ export default function Forum() {
                         alignItems: 'center',
                     }} >
                         <Button
+
                             outline color='light' className='mt-3 w-100' size='md' >
+                            <IoMdAdd size={30}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                }}
+                                className='mx-1 ' />
                             New Post
                         </Button>
                     </div>
                     <div className='ChanelsContainer w-100 h-25 mt-4' >
                         <h4 className='mt-4' > Channels</h4>
-                        <div className='channels' >
-                            <h6 color='light' className='w-100 my-1 mx-3 h-25 text-left px-4 ' >
+                        <div className='channels w-100' >
+                            <h6 color='light' className='w-100  m-2 ' >
+                                <IoChatbubblesOutline size={30}
+                                    style={{ backgroundColor: 'transparent', }}
+                                    className='mx-1' />
                                 General
                             </h6>
-                            <h6 color='light' className='w-100 my-1 mx-3 h-25 text-left px-4' >
+                            <h6 color='light' className='w-100  m-2 ' >
+                                <FaRegHandPaper size={30}
+                                    style={{ backgroundColor: 'transparent', }}
+                                    className='mx-1' />
                                 Collabration
                             </h6>
-                            <h6 color='light' className='w-100 my-1 mx-3 h-25 text-left px-4' >
+                            <h6 color='light' className='w-100  m-2 ' >
+                                <FaRegHandshake size={30}
+                                    style={{ backgroundColor: 'transparent', }}
+                                    className='mx-1' />
                                 Community Board
                             </h6>
                         </div>

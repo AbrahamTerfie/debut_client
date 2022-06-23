@@ -20,3 +20,13 @@
 .dropDownItems {
     background: #7e7f9aff;
 }
+.dropDownMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: max-content;
+    background-color: #7e7f9aff;
+    /* margin-bottom: 2em; */
+}

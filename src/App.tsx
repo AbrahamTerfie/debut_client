@@ -20,11 +20,11 @@ function App() {
         <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
         <Route path={appRoutes.profile} element={<Profile />} />
 
-        <Route path={appRoutes.home} element={<Home />} >
-          <Route path={appRoutes.giveGratitude} element={<GiveGratitude />} />
-          <Route path={appRoutes.forum} element={<Forum />} />
-          <Route path={appRoutes.people} element={<People />} />
-          <Route path={appRoutes.ventures} element={<Ventures />} />
+        <Route path={appRoutes.home} caseSensitive element={<Home />} >
+          <Route path={appRoutes.giveGratitude} caseSensitive element={<GiveGratitude />} />
+          <Route path={appRoutes.forum} caseSensitive element={<Forum />} />
+          <Route path={appRoutes.people} caseSensitive element={<People />} />
+          <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
 
 
 
