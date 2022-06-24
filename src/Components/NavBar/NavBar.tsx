@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import {
-    Row, Col, Container, Navbar, Collapse, Dropdown, DropdownToggle,
-    NavItem, NavLink, Nav, NavbarBrand, NavbarToggler, DropdownMenu,
-    DropdownItem, UncontrolledDropdown, NavbarText
+    Navbar, Collapse, DropdownToggle, Nav, NavbarBrand,
+    NavbarToggler, DropdownMenu, DropdownItem, UncontrolledDropdown, NavbarText, NavItem, NavLink
 } from 'reactstrap'
 import { BsPeople } from 'react-icons/bs'
 import { FaRegBuilding, FaRegCreditCard, FaCashRegister } from 'react-icons/fa'
 import { MdOutlineForum, MdRateReview } from 'react-icons/md'
-import { RiChatSmileLine } from 'react-icons/ri'
-import { GiReceiveMoney } from 'react-icons/gi'
+import { RiChatSmileLine, RiCalendarEventLine } from 'react-icons/ri'
+import { GiReceiveMoney, GiTechnoHeart, GiBrain } from 'react-icons/gi'
+import { appRoutes } from '../../Routes/routes'
+import { Link } from 'react-router-dom'
 export default function NavBarComponent() {
 
 
@@ -21,6 +22,7 @@ export default function NavBarComponent() {
         marginLeft: '10px',
         marginRight: '10px',
     }
+    const linkStyle = { display: 'flex', justifyContent: 'center', background: 'none' }
     return (
 
         <Navbar
@@ -37,56 +39,72 @@ export default function NavBarComponent() {
                 <Nav className="me-auto dark" navbar>
 
                     <UncontrolledDropdown dark inNavbar nav color='warning'   >
-                        <DropdownToggle color='dark' nav split={true}    >
+                        <DropdownToggle color='dark' nav    >
 
                             <BsPeople size={25} />
                             Community
                         </DropdownToggle>
                         <DropdownMenu right dark >
-                            <DropdownItem  >
-                                <BsPeople size={25} className='m-2' style={navMargins} />
-                                People Directory
-                            </DropdownItem>
-                            <DropdownItem>
-                                <FaRegBuilding size={25} className='m-2' style={navMargins} />
-                                Ventures Directory
-                            </DropdownItem>
 
-                            <DropdownItem>
+                            <Link to={appRoutes.people} style={linkStyle} >
+                                <DropdownItem >
+                                    <BsPeople size={25} style={navMargins} />
+                                    People Directory
+                                </DropdownItem>
+                            </Link>
+                            <Link to={appRoutes.ventures} style={linkStyle} >
+                                <DropdownItem>
+                                    <FaRegBuilding size={25} className='m-2' style={navMargins} />
+                                    Ventures Directory
+                                </DropdownItem>
+                            </Link>
 
-                                <MdOutlineForum size={25} className='m-2' style={navMargins} />
-                                Forum
-                            </DropdownItem>
-                            <DropdownItem>
-                                <RiChatSmileLine size={25} className='m-2' style={navMargins} />
-                                Give Gratitude
-                            </DropdownItem>
+                            <Link to={appRoutes.forum} style={linkStyle} >
+                                <DropdownItem>
+                                    <MdOutlineForum size={25} className='m-2' style={navMargins} />
+                                    Forum
+                                </DropdownItem>
+                            </Link>
+
                         </DropdownMenu>
                     </UncontrolledDropdown>
+                    <NavItem>
+                        <NavLink href={appRoutes.debutEvents} >
+                            <GiReceiveMoney size={25} style={navMargins} />
+                            Debut Events
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href={appRoutes.giveGratitude} >
+                            <RiChatSmileLine size={25} style={navMargins} />
+                            Give Gratitude
+                        </NavLink>
+                    </NavItem>
+
 
                     {/* ====================== */}
                     <UncontrolledDropdown dark
                         inNavbar
                         nav >
                         <DropdownToggle nav  >
-                            <FaCashRegister className='mx-2' size={25} />
+                            <FaRegBuilding className='mx-2' size={25} />
 
-                            Funding
+                            My Debut
                         </DropdownToggle>
                         <DropdownMenu right dark >
                             <DropdownItem>
-                                <GiReceiveMoney size={25} className='m-2' style={navMargins} />
-                                Fundraising Support
+                                <GiBrain size={25} className='m-2' style={navMargins} />
+                                My Ventures
                             </DropdownItem>
                             <DropdownItem>
-                                <FaRegCreditCard size={25} className='m-2' style={navMargins} />
-                                Investors Directory
+                                <RiCalendarEventLine size={25} className='m-2' style={navMargins} />
+                                Upcomming Events
                             </DropdownItem>
 
                             <DropdownItem>
-                                <MdRateReview size={25} className='m-2' style={navMargins} />
+                                <GiTechnoHeart size={25} className='m-2' style={navMargins} />
 
-                                Rate Investors
+                                My Community
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
@@ -95,25 +113,7 @@ export default function NavBarComponent() {
 
 
 
-                    <UncontrolledDropdown dark
-                        inNavbar
-                        nav >
-                        <DropdownToggle color='dark' nav>
-                            Resources
-                        </DropdownToggle>
-                        <DropdownMenu right dark >
-                            <DropdownItem>
-                                Connections Directory
-                            </DropdownItem>
-                            <DropdownItem>
-                                Insights
-                            </DropdownItem>
 
-                            <DropdownItem>
-                                Perks
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </UncontrolledDropdown>
                 </Nav>
                 <NavbarText>
                     Simple Text

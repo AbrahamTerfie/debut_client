@@ -9,7 +9,7 @@ export default function Home() {
     const { isSidebarOpen } = useSelector((store: RootState) => store.sideBarOpen)
     return (
         <>
-            <div className='m-4' >
+            <div className='m-5' >
                 <NavBarComponent />
             </div>
             <Outlet />

@@ -6,14 +6,13 @@
 *  {
   background-color: #272838ff;
   color: #f5f5f5;
-
-
   padding: 0.2em;
 }
 
+
 .App {
-  text-align: center;
-  /* padding: 5em; */
+  margin-top: 4em;
+ 
 }
 
 .App-logo {
@@ -96,138 +95,7 @@ body {
   background: #fafafa;
 }
 
-a,
-a:hover,
-a:focus {
-  color: inherit;
+a:-webkit-any-link {
   text-decoration: none;
-  transition: all 0.3s;
-}
-
-/* ---------------------------------------------------
-      SIDEBAR STYLE
-  ----------------------------------------------------- */
-.sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  background: #f3de8aff;
-  color: #f3de8aff;
-  margin-left: -250px;
-  transition: all 0.5s;
-}
-
-.sidebar.is-open {
-  margin-left: 0;
-  transition: 0.5s;
-}
-
-.sidebar-header {
-  background: #f3de8aff;
-}
-
-.sidebar-header h3 {
-  color: #fff;
-  padding: 1em;
-}
-
-.sidebar ul p {
-  color: #fff;
-  padding: 10px;
-}
-
-.menu-open {
-  background: #f3de8aff;
-}
-
-.nav-item:hover {
-  color: #ffc107;
-  background: #f9f8f8ff;
-  border-radius: 0.2em;
-}
-
-
-.items-menu {
-  color: #eb9486ff;
-  background-color: #f9f8f8ff;
-  /* trxt colors */
-
-}
-
-li a.dropdown-toggle::after {
-  display: inline-flex;
-  position: relative;
-  left: 60%;
-  top: 10%;
-}
-
-.sidebar-header>span {
-  position: relative;
-  float: right;
-  margin: 0.5em;
-  font-size: 2rem;
-  cursor: pointer;
-  display: none;
-
-}
-
-.side-menu {
-  height: calc(100vh - 130px);
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: #f3de8aff ;
-  /* align-items: flex-start; */
-  
-  /* justify-content: flex-start; */
-}
-
-.side-menu::-webkit-scrollbar {
-  width: 10px;
-}
-
-.side-menu::-webkit-scrollbar-thumb {
-  background: #5466b3;
-  border-radius: 3px;
-}
-
-.side-menu::-webkit-scrollbar-thumb:hover {
-  background: #3a4c99;
-}
-
-/* ---------------------------------------------------
-      CONTENT STYLE
-  ----------------------------------------------------- */
-.content {
-  padding: 20px;
-  margin-left: 0;
-  height: 100vh;
-;
-}
-
-@media only screen and (max-width: 500px) {
-  body {
-    overflow: hidden;
-  }
-
-  .content.is-open {
-    margin-left: 100%;
-  }
-
-  .sidebar.is-open {
-    min-width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    transition: all 0.5s, height 0s;
-  }
-
-  .sidebar.is-open>.sidebar-header span {
-    display: unset;
-  }
-
-  li a.dropdown-toggle::after {
-    display: inline-block;
-    position: relative;
-    left: 68%;
-  }
+  color: inherit;
 }

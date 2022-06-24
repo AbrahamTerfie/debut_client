@@ -1,0 +1,85 @@
+.gratitudeCardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0em 1em 0em 0em;
+    width: 100%;
+    max-width: 1200px;
+    border: 1px solid #3e405a;
+    height: max-content;
+    transition: all 0.2s ease-in-out;
+
+
+}
+
+.gratitudeCardContainer:hover {
+    transition: 0.2s ease-in-out;
+    border-radius: 0px;
+    scale: 1.5;
+    background: linear-gradient(315deg, #2a2b3c, #232432);
+    box-shadow: -5px -5px 14px #101016,
+        5px 5px 4px #3e405a;
+}
+
+.gratitudeCardContainer h4:hover {
+    transition: 0.2s ease-in-out;
+    color: darkgray;
+}
+
+.gratitudeCardContainer img {
+    display: inline-block;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.gratitudeUserName {
+    font-size: em;
+    font-weight: bold;
+    color: #f9f8f8ff;
+}
+
+.gratitudeUserName small {
+    font-size: 0.5em;
+    color: #f9f8f8ff;
+}
+
+.profileImage {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+
+}
+
+
+.VentureDetails {
+    font-size: 0.8em;
+    color: #f9f8f8ff;
+}
+
+.ventureOwner {
+    font-size: 0.8em;
+    color: #f9f8f8ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ventureOwner img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+.ventureOwner:hover {
+    color: white;
+
+}

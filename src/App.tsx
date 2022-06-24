@@ -10,14 +10,13 @@ import { appRoutes } from './Routes/routes';
 import NavBarComponent from './Components/NavBar/NavBar';
 function App() {
   return (
-    <div className="">
+    <div className="App">
 
       {/* <Topbar toggleSidebar={toggleSidebar} /> */}
 
       <Routes>
         <Route path={appRoutes.landing} element={<Landing />} />
         <Route path={appRoutes.authentication} element={<Authentication />} />
-        <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
         <Route path={appRoutes.profile} element={<Profile />} />
 
         <Route path={appRoutes.home} caseSensitive element={<Home />} >
@@ -26,10 +25,10 @@ function App() {
           <Route path={appRoutes.people} caseSensitive element={<People />} />
           <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
 
+          <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
 
 
-
-          <Route path={appRoutes.debutBusiness} element={<DebutPages.BusinessPage />} />
+          <Route path={appRoutes.myVentures} element={<DebutPages.BusinessPage />} />
           <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
 
         </Route>

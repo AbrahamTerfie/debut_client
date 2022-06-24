@@ -12,14 +12,14 @@ export const appRoutes = {
     ventures: 'ventureDirectory',
     forum: 'forum',
     giveGratitude: 'giveGratitude',
+    profile: 'profile',
+    DebutEvents: 'DebutEvents',
+    myVentures: 'myVentures',
 
 
 
-    profile: '/profile',
 
     myDebut: 'myDebut',
     myDebutHome: 'myDebutHome',
-    myDebutBusiness: 'myDebutBusiness',
-    myDebutEvents: 'myDebutEvents',
     myDebutRegistry: 'myDebutRegistry',
 }

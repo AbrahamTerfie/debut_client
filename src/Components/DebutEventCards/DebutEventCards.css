@@ -1,0 +1,65 @@
+.debutEventsCardsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0em 1em 0em 0em;
+    width: 100%;
+    max-width: 1200px;
+    border: 1px solid #3e405a;
+    height: max-content;
+
+    transition: all 0.2s ease-in-out;
+
+}
+
+.debutEventsCardsContainer:hover {
+    transition: 0.2s ease-in-out;
+    border-radius: 0px;
+    scale: 1.5;
+    background: linear-gradient(315deg, #2a2b3c, #232432);
+    box-shadow: -5px -5px 14px #101016,
+        5px 5px 4px #3e405a;
+}
+
+.debutEventsCardsContainer img {
+    width: 70%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.ventureName {
+    font-size: 1em;
+    font-weight: bold;
+    color: #f9f8f8ff;
+}
+
+.VentureDetails {
+    font-size: 0.8em;
+    color: #f9f8f8ff;
+}
+
+.eventOwner {
+    font-size: 1em;
+    color: #f9f8f8ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.eventOwner img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+.eventOwner:hover {
+    color: white;
+
+}
+
