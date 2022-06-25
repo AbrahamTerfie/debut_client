@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { Row, Col, Container, Input, Button } from 'reactstrap'
-import DebutEventCards from '../../../Components/DebutEventCards/DebutEventCards'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import MyVentureCard from '../../../Components/MyVentureCard/MyVentureCard'
 export default function BusinessPage() {
@@ -13,7 +12,6 @@ export default function BusinessPage() {
                     <p>
                         List of all your ventures.
                     </p>
-
                 </Col>
 
                 <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
@@ -35,8 +33,6 @@ export default function BusinessPage() {
                         <MyVentureCard />
                         <MyVentureCard />
                     </Row>
-
-
                 </Col>
             </Row>
 

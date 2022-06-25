@@ -7,6 +7,8 @@ import { Authentication, Landing, DebutPages, MyDebutPages, Profile, Home } from
 import { GiveGratitude, Forum, People, Ventures } from './Pages/Community/index';
 import { Routes, Route, Link } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
+import DebutEvents from './Pages/DebutEvents/DebutEvents';
+import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
 
 function App() {
   return (
@@ -25,11 +27,12 @@ function App() {
           <Route path={appRoutes.people} caseSensitive element={<People />} />
           <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
 
-          <Route path={appRoutes.debutEvents} element={<DebutPages.DebutEvents />} />
+          <Route path={appRoutes.debutEvents} element={<DebutEvents />} />
 
 
           <Route path={appRoutes.myVentures} element={<DebutPages.BusinessPage />} />
           <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
+          <Route path={appRoutes.myEvents} element={<MyDebutEvents />} />
 
         </Route>
 

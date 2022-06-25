@@ -13,8 +13,9 @@ export const appRoutes = {
     forum: 'forum',
     giveGratitude: 'giveGratitude',
     profile: 'profile',
-    DebutEvents: 'DebutEvents',
+
     myVentures: 'myVentures',
+    myEvents: 'myEvents',
 
 
 

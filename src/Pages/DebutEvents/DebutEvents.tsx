@@ -1,8 +1,8 @@
 
 import React from 'react'
 import { Row, Col, Container, Input, Button } from 'reactstrap'
-import DebutEventCards from '../../../Components/DebutEventCards/DebutEventCards'
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
+import DebutEventCards from '../../Components/DebutEventCards/DebutEventCards'
+import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 export default function DebutEvents() {
     return (
         <div  >

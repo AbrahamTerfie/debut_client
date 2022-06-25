@@ -12,7 +12,6 @@ import { appRoutes } from '../../Routes/routes'
 import { Link } from 'react-router-dom'
 export default function NavBarComponent() {
 
-
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -35,7 +34,7 @@ export default function NavBarComponent() {
                 debut
             </NavbarBrand>
             <NavbarToggler onClick={toggle} />
-            <Collapse navbar>
+            <Collapse isOpen={dropdownOpen} navbar>
                 <Nav className="me-auto dark" navbar>
 
                     <UncontrolledDropdown dark inNavbar nav color='warning'   >
@@ -102,10 +101,14 @@ export default function NavBarComponent() {
                             </Link>
 
 
-                            <DropdownItem>
-                                <RiCalendarEventLine size={15} className='m-2' style={navMargins} />
-                                Upcomming Events
-                            </DropdownItem>
+                            <Link to={appRoutes.myEvents} style={linkStyle} >
+                                <DropdownItem>
+                                    <RiCalendarEventLine size={15} className='m-2' style={navMargins} />
+                                    Upcomming Events
+                                </DropdownItem>
+                            </Link>
+
+
 
                             <DropdownItem>
                                 <GiTechnoHeart size={15} className='m-2' style={navMargins} />
