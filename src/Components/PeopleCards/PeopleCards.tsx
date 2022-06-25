@@ -11,11 +11,13 @@ export default function PeopleCards() {
 
             <Col xs='10' sm='10' md='10' lg='10' xl='10' >
 
-                <h4 className='userFullName' >Name fill</h4>
+                <p className='fs-6 fw-semibold' >Name fill</p>
+                <div>
+                    <div className='fs-6 fw-normal' >
+                        user title , tilte expands and more
+                        <p className='fw-lighter'>  user profile description  </p>
 
-                <div className='userDetails' >
-                    user title , tilte expands and more <small>  user profile description  </small>
-
+                    </div>
                 </div>
 
 

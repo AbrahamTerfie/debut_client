@@ -15,23 +15,23 @@ export default function Ventures() {
 
                 <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
                     <Row className='searchInput mb-1 mt-4' >
-                        <h5> Venture Directory </h5>
+                        <p className='fw-bolder fs-3'> Venture Directory </p>
                         <SearchComponent />
                     </Row>
                     <Row className='m-3'>
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
-                     <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
+                        <VentureCards />
 
                     </Row>
 

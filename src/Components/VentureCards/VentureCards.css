@@ -24,31 +24,11 @@
 }
 
 .ventureCardsContainer img {
-    width: 70%;
+    width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
-.ventureName {
-    font-size: 1em;
-    font-weight: bold;
-    color: #f9f8f8ff;
-}
-
-.VentureDetails {
-    font-size: 0.8em;
-    color: #f9f8f8ff;
-}
-
-.ventureOwner {
-    font-size: 0.8em;
-    color: #f9f8f8ff;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-}
 
 .ventureOwner img {
     width: 30px;
@@ -58,8 +38,4 @@
 
 }
 
-.ventureOwner:hover {
-    color: white;
-
-}
 

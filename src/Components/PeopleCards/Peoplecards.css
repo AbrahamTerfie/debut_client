@@ -10,32 +10,21 @@
     border: 1px solid #3e405a;
     height: max-content;
 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.4s ease-in-out;
 
 }
 
 .peopleCardsContainer:hover {
-    transition: 0.2s ease-in-out;
+    transition: all 0.4s ease-in-out;
     border-radius: 0px;
-    background: linear-gradient(315deg, #2a2b3c, #232432);
-    box-shadow: -5px -5px 14px #101016,
-        5px 5px 4px #3e405a;
+    /* background: linear-gradient(315deg, #2a2b3c, #232432); */
+    box-shadow: -5px -10px 14px #101016,
+        15px 15px 14px #3e405a;
 }
 
 .peopleCardsContainer img {
-    width: 70%;
+    width: 90%;
     height: 100%;
-
     object-fit: cover;
 }
 
-.userFullName {
-    font-size: 1em;
-    font-weight: bold;
-    color: #f9f8f8ff;
-}
-
-.userDetails {
-    font-size: 0.8em;
-    color: #f9f8f8ff;
-}

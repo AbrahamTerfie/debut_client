@@ -1,20 +1,14 @@
 
-
-
-
-
 import React, { useState } from 'react'
-import classnames from 'classnames';
 import {
-    Row, Col, Container, Input, Button,
-    TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText
+    Row, Col, Button,
+    TabContent, TabPane, Nav, NavItem, NavLink
 } from 'reactstrap'
 import GratitudeCards from '../../Components/Gratitudecards/GratitudeCards';
 import './GiveGratitude.scss'
 import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 import { IoMdAdd } from 'react-icons/io'
-import { IoChatbubblesOutline } from 'react-icons/io5'
-import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
+import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
 export default function GiveGratitude() {
 
     const [activeTab, setActiveTab] = useState('1');
@@ -22,7 +16,6 @@ export default function GiveGratitude() {
     const toggle = (tab: any) => {
         if (activeTab !== tab) setActiveTab(tab);
     }
-
 
 
     return (
@@ -65,6 +58,11 @@ export default function GiveGratitude() {
 
                                     className={activeTab === "1" ? "activeTab" : "notActiveTab"}
                                     onClick={() => { toggle('1'); }}>
+                                    <MdMailOutline size={20}
+                                        style={{
+                                            backgroundColor: 'transparent',
+                                        }}
+                                        className='mx-3 ' />
                                     Inbox
                                 </NavLink>
                             </NavItem>
@@ -76,6 +74,11 @@ export default function GiveGratitude() {
                                     }
                                     onClick={() => { toggle('2'); }}
                                 >
+                                    <MdForwardToInbox size={20}
+                                        style={{
+                                            backgroundColor: 'transparent',
+                                        }}
+                                        className='mx-3 ' />
                                     Sent
                                 </NavLink>
                             </NavItem>
@@ -85,13 +88,10 @@ export default function GiveGratitude() {
                                 <GratitudeCards />
                             </TabPane>
                             <TabPane tabId="2"  >
-                                {/* <GratitudeCards /> */}
 
                                 <h4>
                                     you havent sent any gratitude acards yet
                                 </h4>
-                                {/* <GratitudeCards /> */}
-
 
                             </TabPane>
                         </TabContent>

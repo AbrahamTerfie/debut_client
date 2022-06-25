@@ -23,58 +23,11 @@
         5px 5px 4px #3e405a;
 }
 
-.forumCardsContainer h4:hover {
-    transition: 0.2s ease-in-out;
-    color: darkgray;
-}
 
-.forumCardsContainer img {
-    display: inline-block;
-    width: 4em;
-    height: 4em;
-    border-radius: 50%;
 
+.profileImage img {
+    max-width: 7em;
+    height: 100%;
     object-fit: cover;
-}
-
-.forumName {
-    font-size: 1em;
-    font-weight: bold;
-    color: #f9f8f8ff;
-}
-
-.profileImage {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: row;
-
-}
-
-
-.VentureDetails {
-    font-size: 0.8em;
-    color: #f9f8f8ff;
-}
-
-.ventureOwner {
-    font-size: 0.8em;
-    color: #f9f8f8ff;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.ventureOwner img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-
-}
-
-.ventureOwner:hover {
-    color: white;
 
 }
