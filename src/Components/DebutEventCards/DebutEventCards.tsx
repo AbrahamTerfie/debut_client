@@ -5,7 +5,7 @@ import { Row, Col, Container, Input } from 'reactstrap'
 import './DebutEventCards.css'
 export default function DebutEventCards() {
     return (
-        <Row className='debutEventsCardsContainer'>
+        <Row className='debutEventsCardsContainer  p-3'>
 
 
             <Col xs='10' sm='10' md='10' lg='10' xl='10' >
@@ -24,13 +24,13 @@ export default function DebutEventCards() {
 
                 </div>
 
-                <div className='eventOwner'>
+                <div className='eventOwner p-2'>
 
 
                     <div  >
                         <h3 className='userFullName' > Venture Name</h3>
                     </div>
-                    <div className='mt-2'>
+                    <div className='mt-2 mx-3'>
                         <p> by</p>
                     </div>
 
@@ -39,7 +39,7 @@ export default function DebutEventCards() {
 
                     </div>
                     <div  >
-                        <h4 className='userFullName' >Name fill</h4>
+                        <h4 className='userFullName mx-2' >Name fill</h4>
                     </div>
 
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import MyBusinesscard from '../../../Components/MyBusinessCards/MyBusinesscard'
+
 export default function MyBusiness() {
     return (
         <div
@@ -7,7 +7,7 @@ export default function MyBusiness() {
                 marginTop: `10vh`,
             }}
         >
-            <MyBusinesscard />
+
             list of business cards
 
 

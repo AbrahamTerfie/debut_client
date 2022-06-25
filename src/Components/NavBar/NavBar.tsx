@@ -41,27 +41,27 @@ export default function NavBarComponent() {
                     <UncontrolledDropdown dark inNavbar nav color='warning'   >
                         <DropdownToggle color='dark' nav    >
 
-                            <BsPeople size={25} />
+                            <BsPeople size={20} />
                             Community
                         </DropdownToggle>
                         <DropdownMenu right dark >
 
                             <Link to={appRoutes.people} style={linkStyle} >
                                 <DropdownItem >
-                                    <BsPeople size={25} style={navMargins} />
+                                    <BsPeople size={15} style={navMargins} />
                                     People Directory
                                 </DropdownItem>
                             </Link>
                             <Link to={appRoutes.ventures} style={linkStyle} >
                                 <DropdownItem>
-                                    <FaRegBuilding size={25} className='m-2' style={navMargins} />
+                                    <FaRegBuilding size={15} className='m-2' style={navMargins} />
                                     Ventures Directory
                                 </DropdownItem>
                             </Link>
 
                             <Link to={appRoutes.forum} style={linkStyle} >
                                 <DropdownItem>
-                                    <MdOutlineForum size={25} className='m-2' style={navMargins} />
+                                    <MdOutlineForum size={15} className='m-2' style={navMargins} />
                                     Forum
                                 </DropdownItem>
                             </Link>
@@ -70,13 +70,13 @@ export default function NavBarComponent() {
                     </UncontrolledDropdown>
                     <NavItem>
                         <NavLink href={appRoutes.debutEvents} >
-                            <GiReceiveMoney size={25} style={navMargins} />
+                            <GiReceiveMoney size={15} style={navMargins} />
                             Debut Events
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink href={appRoutes.giveGratitude} >
-                            <RiChatSmileLine size={25} style={navMargins} />
+                            <RiChatSmileLine size={15} style={navMargins} />
                             Give Gratitude
                         </NavLink>
                     </NavItem>
@@ -87,22 +87,28 @@ export default function NavBarComponent() {
                         inNavbar
                         nav >
                         <DropdownToggle nav  >
-                            <FaRegBuilding className='mx-2' size={25} />
+                            <FaRegBuilding className='mx-2' size={15} />
 
                             My Debut
                         </DropdownToggle>
                         <DropdownMenu right dark >
+
+
+                            <Link to={appRoutes.myVentures} style={linkStyle} >
+                                <DropdownItem>
+                                    <GiBrain size={15} className='m-2' style={navMargins} />
+                                    My Ventures
+                                </DropdownItem>
+                            </Link>
+
+
                             <DropdownItem>
-                                <GiBrain size={25} className='m-2' style={navMargins} />
-                                My Ventures
-                            </DropdownItem>
-                            <DropdownItem>
-                                <RiCalendarEventLine size={25} className='m-2' style={navMargins} />
+                                <RiCalendarEventLine size={15} className='m-2' style={navMargins} />
                                 Upcomming Events
                             </DropdownItem>
 
                             <DropdownItem>
-                                <GiTechnoHeart size={25} className='m-2' style={navMargins} />
+                                <GiTechnoHeart size={15} className='m-2' style={navMargins} />
 
                                 My Community
                             </DropdownItem>

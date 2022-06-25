@@ -1,0 +1,14 @@
+.myVentureContainer {
+    border: 1px solid #3e405a;
+    border-radius: 10%;
+    transition: all 0.4s ease-in-out;
+    flex-wrap: wrap;
+
+}
+
+.myVentureContainer:hover {
+    transition: all 0.2s ease-in-out;
+    border-radius: 22px;
+    box-shadow: -5px -5px 7px #191a24,
+        5px 5px 7px #636690;
+}

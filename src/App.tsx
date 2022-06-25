@@ -1,13 +1,13 @@
 import React from 'react';
-import { Button } from 'reactstrap'
+
 import './App.css';
 import "animate.css/animate.min.css";
 import { Authentication, Landing, DebutPages, MyDebutPages, Profile, Home } from './Pages/inedx';
-import { NavBarElement } from './Components/index';
+
 import { GiveGratitude, Forum, People, Ventures } from './Pages/Community/index';
 import { Routes, Route, Link } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
-import NavBarComponent from './Components/NavBar/NavBar';
+
 function App() {
   return (
     <div className="App">
