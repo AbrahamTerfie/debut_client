@@ -6,32 +6,32 @@ export default function FilterPeople() {
     // roles , expertiesr location programs 
     return (
         <div>
-            <h4> Roles</h4>
-            <FormGroup check>
+            <p className='fs-5 fw-bolder'> Roles</p>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />
                 Fellow
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light'  >
                 <Input type="checkbox" />{' '}
                 Mentor
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Speciallist
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Investor
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Collective Member
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Unreasonable Staff
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Program Guest
             </FormGroup>
@@ -39,21 +39,22 @@ export default function FilterPeople() {
 
             {/* ============= */}
 
-            <h4 className='mt-4' > Experties</h4>
+            <p className='fs-5 fw-bolder my-4'> Expertiese</p>
 
-            <FormGroup check>
+
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />
                 Business Strategy
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Team Building
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Financing / Invenstment
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Coaching / Mentoring
             </FormGroup>
@@ -62,21 +63,22 @@ export default function FilterPeople() {
             {/* ================ */}
 
 
-            <h4 className='mt-4' > Location</h4>
+            <p className='fs-5 fw-bolder my-4'> Location</p>
 
-            <FormGroup check>
+
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />
                 North America
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 Europe
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 East Asia
             </FormGroup>
-            <FormGroup check>
+            <FormGroup check className='fs-6 fw-light' >
                 <Input type="checkbox" />{' '}
                 South Asia
             </FormGroup>

@@ -35,19 +35,19 @@ export default function NavBarComponent() {
             </NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={dropdownOpen} navbar>
-                <Nav className="me-auto dark" navbar>
+                <Nav className="me-auto dark  m-2" navbar>
 
-                    <UncontrolledDropdown dark inNavbar nav color='warning'   >
+                    <UncontrolledDropdown dark inNavbar nav    >
                         <DropdownToggle color='dark' nav    >
 
-                            <BsPeople size={20} />
+                            <BsPeople size={15}  className="mx-2"  />
                             Community
                         </DropdownToggle>
                         <DropdownMenu right dark >
 
                             <Link to={appRoutes.people} style={linkStyle} >
                                 <DropdownItem >
-                                    <BsPeople size={15} style={navMargins} />
+                                    <BsPeople size={15}   style={navMargins} />
                                     People Directory
                                 </DropdownItem>
                             </Link>

@@ -28,3 +28,13 @@
     object-fit: cover;
 }
 
+.pillStyle{
+
+    border-radius: 9%;
+    margin: 0px 5px;
+    width: max-content;
+    padding: 0.3rem;
+    border: 1px solid #fff;
+    margin-right: 5px;
+    margin-left: 5px;
+}
