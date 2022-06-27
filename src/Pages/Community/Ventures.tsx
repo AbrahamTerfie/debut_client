@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Container, Input } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import VentureCards from '../../Components/VentureCards/VentureCards'
 import FilterVenture from '../../Components/FilterVentures/FilterVenture'
 import './People.css'

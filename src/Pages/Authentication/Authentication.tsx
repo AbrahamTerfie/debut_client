@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, } from 'reactstrap';
 import Login from './login';
 import SignUp from './SignUp';
 import '../../Styles/Auth.scss'
 import { ImFacebook, ImGoogle } from 'react-icons/im'
-import { Link } from 'react-router-dom';
-import { appRoutes } from '../../Routes/routes';
+
 export default function Authentication() {
 
     const [activeTab, setActiveTab] = useState('1');
@@ -22,7 +21,7 @@ export default function Authentication() {
             <Nav className="tabs" tabs  >
                 <NavItem>
                     <NavLink
-                       
+
                         className={activeTab === "1" ? "activepageTabBlue" : "notactivePageTabBlue"}
                         onClick={() => { toggle('1'); }}>
                         Log-In

@@ -4,8 +4,8 @@ import {
     NavbarToggler, DropdownMenu, DropdownItem, UncontrolledDropdown, NavbarText, NavItem, NavLink
 } from 'reactstrap'
 import { BsPeople } from 'react-icons/bs'
-import { FaRegBuilding, FaRegCreditCard, FaCashRegister } from 'react-icons/fa'
-import { MdOutlineForum, MdRateReview } from 'react-icons/md'
+import { FaRegBuilding } from 'react-icons/fa'
+import { MdOutlineForum } from 'react-icons/md'
 import { RiChatSmileLine, RiCalendarEventLine } from 'react-icons/ri'
 import { GiReceiveMoney, GiTechnoHeart, GiBrain } from 'react-icons/gi'
 import { appRoutes } from '../../Routes/routes'
@@ -40,14 +40,14 @@ export default function NavBarComponent() {
                     <UncontrolledDropdown dark inNavbar nav    >
                         <DropdownToggle color='dark' nav    >
 
-                            <BsPeople size={15}  className="mx-2"  />
+                            <BsPeople size={15} className="mx-2" />
                             Community
                         </DropdownToggle>
                         <DropdownMenu right dark >
 
                             <Link to={appRoutes.people} style={linkStyle} >
                                 <DropdownItem >
-                                    <BsPeople size={15}   style={navMargins} />
+                                    <BsPeople size={15} style={navMargins} />
                                     People Directory
                                 </DropdownItem>
                             </Link>

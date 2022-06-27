@@ -1,9 +1,6 @@
 
-
-
-
 import React from 'react'
-import { Row, Col, Container, Input, Button } from 'reactstrap'
+import { Row, Col, Button } from 'reactstrap'
 import ForumCards from '../../Components/ForumCards/ForumCards'
 import './Forum.css'
 import SearchComponent from '../../Components/GlobalSearch/SearchComponent'

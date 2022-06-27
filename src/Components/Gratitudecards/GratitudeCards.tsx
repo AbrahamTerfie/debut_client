@@ -1,6 +1,5 @@
 import React from 'react'
-// import './ForumCards.css'
-import { Row, Col, Container, Input } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import './GratitudeCards.css'
 export default function GratitudeCards() {
     return (

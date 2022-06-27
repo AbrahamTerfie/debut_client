@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, Badge } from 'reactstrap'
+import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import './Peoplecards.css'
 import MyVentureCard from '../MyVentureCard/MyVentureCard';
 import DebutEventCards from '../DebutEventCards/DebutEventCards';

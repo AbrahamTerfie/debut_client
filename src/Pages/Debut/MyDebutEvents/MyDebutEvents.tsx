@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { Row, Col, Container, Input, Button } from 'reactstrap'
-import DebutEventCards from '../../../Components/DebutEventCards/DebutEventCards'
+import { Row, Col } from 'reactstrap'
+
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import MyDebutcards from '../../../Components/MyDebutCards/MyDebutcards'
 export default function MyDebutEvents() {

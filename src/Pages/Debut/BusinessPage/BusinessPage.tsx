@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Row, Col, Container, Input, Button } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import MyVentureCard from '../../../Components/MyVentureCard/MyVentureCard'
 export default function BusinessPage() {
