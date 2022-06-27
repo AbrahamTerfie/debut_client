@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0em 1em 0em 0em;
+
     width: 100%;
     max-width: 1200px;
     border: 1px solid #3e405a;
@@ -38,4 +38,9 @@
 
 }
 
+.venturePageCollapse {
 
+    background: #33344b;
+    box-shadow: inset 7px 7px 14px #14151e,
+        inset -7px -7px 14px #525378;
+}

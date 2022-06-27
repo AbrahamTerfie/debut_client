@@ -4,7 +4,7 @@ import './App.css';
 import "animate.css/animate.min.css";
 import { Authentication, Landing, DebutPages, MyDebutPages, Profile, Home } from './Pages/inedx';
 
-import { GiveGratitude, Forum, People, Ventures } from './Pages/Community/index';
+import { GiveGratitude, Forum, People, Ventures, VenturePage } from './Pages/Community/index';
 import { Routes, Route, Link } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
 import DebutEvents from './Pages/DebutEvents/DebutEvents';
@@ -26,6 +26,7 @@ function App() {
           <Route path={appRoutes.forum} caseSensitive element={<Forum />} />
           <Route path={appRoutes.people} caseSensitive element={<People />} />
           <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
+          <Route path={appRoutes.venturePage} element={<VenturePage />} />
 
           <Route path={appRoutes.debutEvents} element={<DebutEvents />} />
 

@@ -1,7 +1,8 @@
 import Forum from "./Forum";
 import People from "./People";
 import GiveGratitude from "./GiveGratitude";
-import Ventures from "./Ventures";
+import Ventures from "./VentureDirectory/Ventures";
+import VenturePage from "./VentureDirectory/VenturePage";
 
-export { Forum, People, GiveGratitude, Ventures };
+export { Forum, People, GiveGratitude, Ventures, VenturePage };
 

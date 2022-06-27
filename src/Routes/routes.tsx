@@ -10,10 +10,10 @@ export const appRoutes = {
     debutBusiness: 'debutBusiness',
     people: 'peopleDirectory',
     ventures: 'ventureDirectory',
+    venturePage: 'ventureDirectory/:id',
     forum: 'forum',
     giveGratitude: 'giveGratitude',
     profile: 'profile',
-
     myVentures: 'myVentures',
     myEvents: 'myEvents',
 
