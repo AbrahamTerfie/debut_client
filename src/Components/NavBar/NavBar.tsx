@@ -11,11 +11,8 @@ import { GiReceiveMoney, GiTechnoHeart, GiBrain } from 'react-icons/gi'
 import { appRoutes } from '../../Routes/routes'
 import { Link } from 'react-router-dom'
 export default function NavBarComponent() {
-
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
     const toggle = () => setDropdownOpen(!dropdownOpen);
-
     const navMargins = {
         backgroundColor: 'transparent',
         marginLeft: '10px',

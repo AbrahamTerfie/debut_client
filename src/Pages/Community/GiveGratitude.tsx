@@ -44,7 +44,7 @@ export default function GiveGratitude() {
 
                 </Col>
 
-                <Col className='mainPageContainer ' xs='12' sm='12' md='12' lg='8' xl='8' >
+                <Col className=' ' xs='12' sm='12' md='12' lg='8' xl='8' >
                     <Row className='searchInput mb-1 mt-4' >
                         <h5> Gratitudes </h5>
                         <SearchComponent />

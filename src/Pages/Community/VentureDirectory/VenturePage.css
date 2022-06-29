@@ -1,4 +1,32 @@
-.ventureProfileHeader{
- 
-    border : 1px solid #fff;
+.ventureProfileHeader {
+
+    /* border: 1px solid #fff; */
+
+}
+
+.backGroundImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 15em;
+    position: relative;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+
+}
+
+.vebtureProfileImage {
+
+    width: 15%;
+    height: 20%;
+    object-fit: cover;
+    position: absolute;
+    border-radius: 0.5em;
+    top: 10em;
+    left: 10em;
+    z-index: 1;
+
+    box-shadow:  16px 16px 32px #14151e,
+                 -16px -16px 32px #525378;
 }

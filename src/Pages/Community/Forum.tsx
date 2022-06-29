@@ -59,7 +59,7 @@ export default function Forum() {
                     </div>
                 </Col>
 
-                <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
+                <Col className=' ' xs='10' sm='10' md='8' lg='8' xl='8' >
                     <Row className='searchInput mb-1 mt-4' >
                         <p className='fw-bolder fs-3'> Fellow Forum </p>
 

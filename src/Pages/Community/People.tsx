@@ -12,7 +12,7 @@ export default function People() {
                     <FilterPeople />
                 </Col>
 
-                <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
+                <Col className=' ' xs='10' sm='10' md='8' lg='8' xl='8' >
                     <Row className='searchInput mb-1 mt-4' >
                         <h5> People Directory </h5>
                         <SearchComponent />
