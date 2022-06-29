@@ -70,19 +70,20 @@ export default function AboutTab() {
         </Row>
 
         <Row>
-          <p className='fs-3 fw-light' >impacts </p>
-          <div className='mx-3'>
-            <p className='fs-5 fw-light ' > this impacr ajdsjf</p>
-            <p className='fs-5 fw-light'> this impacr ajdsjf</p>
-            <p className='fs-5 fw-light'> this impacr ajdsjf</p>
-          </div>
-        </Row>
+          <Col>
+            <p className='fs-3 fw-light' >impacts </p>
+            <div className='mx-3'>
+              <p className='fs-6 fw-light ' > this impacr ajdsjf</p>
+              <p className='fs-6 fw-light'> this impacr ajdsjf</p>
+              <p className='fs-6 fw-light'> this impacr ajdsjf</p>
+            </div></Col>
 
-        <Row>
-          <p className='fs-3 fw-light' >operating aera</p>
-          <div>
-            map
-          </div>
+          <Col>
+            <p className='fs-3 fw-light' >operating aera</p>
+            <div>
+              <p className='fs-6 fw-light' > city ,country  </p>
+            </div>
+          </Col>
         </Row>
 
       </Row>
