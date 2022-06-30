@@ -5,10 +5,13 @@ import {
 import { useParams } from 'react-router-dom'
 import './VenturePage.css'
 import { MdOutlineLocationOn, } from 'react-icons/md'
+import DebutEventCards from '../../../Components/DebutEventCards/DebutEventCards'
+
 import { ImStack } from 'react-icons/im'
 import { FaIndustry, FaGlobe } from 'react-icons/fa'
 import { RiCalendarEventLine } from 'react-icons/ri'
-import { AboutTab, FundingTab, LinksTab } from '../../../Components/VenturePageTabs'
+import RegistryCards from '../../../Components/RegistryCards/RegistryCards'
+import { AboutTab, FundingTab, LinksTab, CommunityTab } from '../../../Components/VenturePageTabs'
 
 export default function VenturePage() {
     const [activeTab, setActiveTab] = useState('1');
@@ -74,7 +77,7 @@ export default function VenturePage() {
                                     activeTab === "2" ? "activeTab" : "notActiveTab"
                                 } onClick={() => { toggle('2'); }}>
 
-                                Connect
+                                Events
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -83,7 +86,16 @@ export default function VenturePage() {
                                     activeTab === "3" ? "activeTab" : "notActiveTab"
                                 } onClick={() => { toggle('3'); }}>
 
-                                Links
+                                Registry
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink
+                                className={
+                                    activeTab === "4" ? "activeTab" : "notActiveTab"
+                                } onClick={() => { toggle('4'); }}>
+
+                                Community
                             </NavLink>
                         </NavItem>
                     </Nav>
@@ -91,11 +103,18 @@ export default function VenturePage() {
                         <TabPane tabId="1">
                             <AboutTab />
                         </TabPane>
-                        <TabPane tabId="2"  >
-                            <FundingTab />
+                        <TabPane tabId="2" className='p-3' >
+                            <DebutEventCards />
+                            <DebutEventCards />
+                            <DebutEventCards />
+                            <DebutEventCards />
+                            <DebutEventCards />
                         </TabPane>
                         <TabPane tabId="3"  >
-                            <LinksTab />
+                            <RegistryCards />
+                        </TabPane>
+                        <TabPane tabId="4"  >
+                            <CommunityTab />
                         </TabPane>
                     </TabContent>
                 </Row>

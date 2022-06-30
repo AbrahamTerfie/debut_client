@@ -9,7 +9,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
 import DebutEvents from './Pages/DebutEvents/DebutEvents';
 import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
-
+import NavBarComponent from './Components/NavBar/NavBar';
 function App() {
   return (
     <div className="App">
@@ -22,13 +22,14 @@ function App() {
         <Route path={appRoutes.profile} element={<Profile />} />
 
         <Route path={appRoutes.home} caseSensitive element={<Home />} >
+          <Route index  element={<Forum />} />
           <Route path={appRoutes.giveGratitude} caseSensitive element={<GiveGratitude />} />
-          <Route path={appRoutes.forum} caseSensitive element={<Forum />} />
           <Route path={appRoutes.people} caseSensitive element={<People />} />
           <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
           <Route path={appRoutes.venturePage} element={<VenturePage />} />
-
           <Route path={appRoutes.debutEvents} element={<DebutEvents />} />
+
+
 
 
           <Route path={appRoutes.myVentures} element={<DebutPages.BusinessPage />} />

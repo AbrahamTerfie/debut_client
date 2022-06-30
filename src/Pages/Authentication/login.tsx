@@ -35,7 +35,7 @@ export default function Login() {
                     onChange={(e) => setLoginformData({ ...loginformData, password: e.target.value })}
                 />
             </FormGroup>
-            <Link to={appRoutes.home + '/forum'}   >
+            <Link to={appRoutes.home }   >
                 <Button
                     color='warning'
                     outline
