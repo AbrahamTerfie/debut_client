@@ -6,9 +6,10 @@ export const appRoutes = {
 
 
     debutRegistry: '/debutRegistry',
-    debutEvents: '/debutEvents',
     debutBusiness: '/debutBusiness',
     people: '/peopleDirectory',
+    debutEvents: '/debutEvents',
+    debutEventPage: '/debutEvents/:id',
     ventures: '/ventureDirectory',
     venturePage: '/ventureDirectory/:id',
     forum: '/forum',

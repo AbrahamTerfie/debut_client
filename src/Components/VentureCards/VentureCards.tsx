@@ -2,20 +2,21 @@
 import React, { useState } from 'react'
 import { Row, Col, Collapse, Button, CardBody, Card } from 'reactstrap'
 import './VentureCards.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'
 import { VenturePage } from '../../Pages/Community'
 export default function VentureCards() {
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggle = () => setIsOpen(!isOpen);
+    const navigate = useNavigate()
 
     const itemlink = "itemLInk"
     return (
-        <Link to={`${appRoutes.ventures}/${itemlink}`}>
+        // <Link to={`${appRoutes.ventures}/${itemlink}`}>
 
-            <Row className='ventureCardsContainer p-3' onClick={toggle} >
+            <Row className='ventureCardsContainer p-3' 
+            onClick={() => navigate(`${appRoutes.ventures}/${itemlink}`)}>
+
+
                 <Col xs='2' sm='2' md='2' lg='2' xl='2'  >
                     <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' alt='user profile photo' />
                 </Col>
@@ -35,11 +36,9 @@ export default function VentureCards() {
 
                     </div>
                 </Col>
-                {/* <Collapse isOpen={isOpen} className="venturePageCollapse mt-3" >
-                <VenturePage />
-            </Collapse> */}
+
             </Row>
-        </Link>
+
 
     )
 }

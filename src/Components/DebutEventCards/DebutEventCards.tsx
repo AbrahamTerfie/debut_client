@@ -1,10 +1,17 @@
 import React from 'react'
 import { Row, } from 'reactstrap'
+import { useNavigate } from 'react-router-dom'
 import './DebutEventCards.css'
+import { appRoutes } from '../../Routes/routes'
 export default function DebutEventCards() {
+    const navigate = useNavigate()
+    const debutEventLink = "DebutEventLink"
+
     return (
-        <Row className='debutEventsCardsContainer  p-3'>
-            {/* <Col xs='10' sm='10' md='10' lg='10' xl='10' > */}
+        <Row className='debutEventsCardsContainer  p-3'
+        onClick={() => navigate(`${appRoutes.debutEvents}/${debutEventLink}`)}>
+
+
             <p className='fs-5 fw-bolder' > Debut EventName <small>  event date </small>  </p>
             <p className='fs-6 fw-light' >
                 debut event description description
@@ -23,7 +30,7 @@ export default function DebutEventCards() {
                 </div>
                 <p className=' mx-2' >Name fill</p>
             </div>
-            {/* </Col> */}
+
         </Row>
     )
 }

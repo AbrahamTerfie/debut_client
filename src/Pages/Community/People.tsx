@@ -6,18 +6,16 @@ import './People.css'
 import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 export default function People() {
     return (
-        <div  >
-            <Row>
+
+            <Row className='px-5 d-flex page ' >
                 <Col className='filterContainer m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
                     <FilterPeople />
                 </Col>
-
-                <Col className=' ' xs='10' sm='10' md='8' lg='8' xl='8' >
+                <Col className=' mainPageContainer' xs='10' sm='10' md='8' lg='8' xl='8' >
                     <Row className='searchInput mb-1 mt-4' >
                         <h5> People Directory </h5>
                         <SearchComponent />
                     </Row>
-
                     <Row className='m-3'>
                         <PeopleCards />
                         <PeopleCards />
@@ -31,13 +29,8 @@ export default function People() {
                         <PeopleCards />
                         <PeopleCards />
                         <PeopleCards />
-
                     </Row>
-
-
                 </Col>
             </Row>
-
-        </div>
     )
 }

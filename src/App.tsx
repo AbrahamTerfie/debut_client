@@ -10,6 +10,7 @@ import { appRoutes } from './Routes/routes';
 import DebutEvents from './Pages/DebutEvents/DebutEvents';
 import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
 import NavBarComponent from './Components/NavBar/NavBar';
+import DebutEventPage from './Pages/DebutEvents/DebutEventPage';
 function App() {
 
   const location = useLocation();
@@ -21,20 +22,19 @@ function App() {
         location.pathname === appRoutes.authentication ?
         null : <NavBarComponent />}
 
-        
+
 
       <Routes>
         <Route path={appRoutes.landing} element={<Landing />} />
         <Route path={appRoutes.authentication} element={<Authentication />} />
         <Route path={appRoutes.profile} element={<Profile />} />
-
         <Route path={appRoutes.forum} caseSensitive element={<Forum />} />
-        {/* <Route index element={<Forum />} /> */}
         <Route path={appRoutes.giveGratitude} caseSensitive element={<GiveGratitude />} />
         <Route path={appRoutes.people} caseSensitive element={<People />} />
         <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
         <Route path={appRoutes.venturePage} element={<VenturePage />} />
         <Route path={appRoutes.debutEvents} element={<DebutEvents />} />
+        <Route path={appRoutes.debutEventPage} element={<DebutEventPage />} />
 
 
 

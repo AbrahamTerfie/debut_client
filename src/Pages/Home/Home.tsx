@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
 import NavBarComponent from '../../Components/NavBar/NavBar'
 import { Outlet } from 'react-router-dom'
-import Forum from '../../Pages/Community/Forum'
+
 export default function Home() {
 
     const { isSidebarOpen } = useSelector((store: RootState) => store.sideBarOpen)

@@ -38,7 +38,6 @@ function followers() {
 
 
 
-
 export default function CommunityTab() {
     return (
         <Row>
@@ -51,7 +50,7 @@ export default function CommunityTab() {
             </Col>
 
             <Col>
-                <p className='fs-3 fw-bold text-muted m-3' > folloiwng </p>
+                <p className='fs-3 fw-bold text-muted m-3' > Folloiwng </p>
                 {followers()}
             </Col>
         </Row>
