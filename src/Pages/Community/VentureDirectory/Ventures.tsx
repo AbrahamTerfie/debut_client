@@ -8,8 +8,7 @@ import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { Outlet } from 'react-router-dom'
 export default function Ventures() {
     return (
-        <Row>
-
+        <Row className='px-5 d-flex page  ' >
             <Col className='filterContainer m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
                 <FilterVenture />
             </Col>
@@ -19,7 +18,7 @@ export default function Ventures() {
                     <p className='fw-bolder fs-3'> Venture Directory </p>
                     <SearchComponent />
                 </Row>
-                <Row className='m-3'>
+                <Row className='my-3'>
                     <VentureCards />
                     <VentureCards />
                     <VentureCards />

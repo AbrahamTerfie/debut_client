@@ -9,7 +9,7 @@ import { MdOutlineForum } from 'react-icons/md'
 import { RiChatSmileLine, RiCalendarEventLine } from 'react-icons/ri'
 import { GiReceiveMoney, GiTechnoHeart, GiBrain } from 'react-icons/gi'
 import { appRoutes } from '../../Routes/routes'
-import { Link, Outlet } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 export default function NavBarComponent() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -18,6 +18,7 @@ export default function NavBarComponent() {
         marginLeft: '10px',
         marginRight: '10px',
     }
+    const navigate = useNavigate()
     const linkStyle = { display: 'flex', justifyContent: 'center', background: 'none' }
     return (
 
@@ -34,7 +35,6 @@ export default function NavBarComponent() {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={dropdownOpen} navbar>
                     <Nav className="me-auto dark  m-2" navbar>
-
                         <UncontrolledDropdown dark inNavbar nav    >
                             <DropdownToggle color='dark' nav    >
 
@@ -42,37 +42,29 @@ export default function NavBarComponent() {
                                 Community
                             </DropdownToggle>
                             <DropdownMenu right dark >
-
-                                <Link to={appRoutes.people} style={linkStyle} >
-                                    <DropdownItem >
+                                    <DropdownItem  onClick={ () => navigate(appRoutes.people) }>
                                         <BsPeople size={15} style={navMargins} />
                                         People Directory
                                     </DropdownItem>
-                                </Link>
-                                <Link to={appRoutes.ventures} style={linkStyle} >
-                                    <DropdownItem>
-                                        <FaRegBuilding size={15} className='m-2' style={navMargins} />
-                                        Ventures Directory
-                                    </DropdownItem>
-                                </Link>
-
-                                <Link to={appRoutes.home} style={linkStyle} >
-                                    <DropdownItem>
-                                        <MdOutlineForum size={15} className='m-2' style={navMargins} />
-                                        Forum
-                                    </DropdownItem>
-                                </Link>
+                                <DropdownItem onClick={() => { navigate(appRoutes.ventures) }}>
+                                    <FaRegBuilding size={15} className='m-2' style={navMargins} />
+                                    Ventures Directory
+                                </DropdownItem>
+                                <DropdownItem onClick={() => { navigate(appRoutes.home) }}>
+                                    <MdOutlineForum size={15} className='m-2' style={navMargins} />
+                                    Forum
+                                </DropdownItem>
 
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem>
-                            <NavLink href={appRoutes.debutEvents} >
+                            <NavLink onClick={() => { navigate(appRoutes.debutEvents) }}  >
                                 <GiReceiveMoney size={15} style={navMargins} />
                                 Debut Events
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href={appRoutes.giveGratitude} >
+                            <NavLink onClick={() => { navigate(appRoutes.giveGratitude) }} >
                                 <RiChatSmileLine size={15} style={navMargins} />
                                 Give Gratitude
                             </NavLink>
@@ -85,41 +77,28 @@ export default function NavBarComponent() {
                             nav >
                             <DropdownToggle nav  >
                                 <FaRegBuilding className='mx-2' size={15} />
-
                                 My Debut
                             </DropdownToggle>
                             <DropdownMenu right dark >
+                                <DropdownItem onClick={() => { navigate(appRoutes.myVentures) }}>
+                                    <GiBrain size={15} className='m-2' style={navMargins} />
+                                    My Ventures
+                                </DropdownItem>
+                                <DropdownItem
+                                    onClick={() => { navigate(appRoutes.myEvents) }}>
 
-
-                                <Link to={appRoutes.myVentures} style={linkStyle} >
-                                    <DropdownItem>
-                                        <GiBrain size={15} className='m-2' style={navMargins} />
-                                        My Ventures
-                                    </DropdownItem>
-                                </Link>
-
-
-                                <Link to={appRoutes.myEvents} style={linkStyle} >
-                                    <DropdownItem>
-                                        <RiCalendarEventLine size={15} className='m-2' style={navMargins} />
-                                        Upcomming Events
-                                    </DropdownItem>
-                                </Link>
-
-
+                                    <RiCalendarEventLine size={15} className='m-2' style={navMargins} />
+                                    Upcomming Events
+                                </DropdownItem>
 
                                 <DropdownItem>
                                     <GiTechnoHeart size={15} className='m-2' style={navMargins} />
-
                                     My Community
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
 
                         {/* ================ */}
-
-
-
 
                     </Nav>
                     <NavbarText>

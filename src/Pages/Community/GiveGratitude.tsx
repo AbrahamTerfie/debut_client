@@ -9,6 +9,8 @@ import './GiveGratitude.scss'
 import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 import { IoMdAdd } from 'react-icons/io'
 import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
+import PeopleCards from '../../Components/PeopleCards/PeopleCards';
+import VentureCards from '../../Components/VentureCards/VentureCards';
 export default function GiveGratitude() {
 
     const [activeTab, setActiveTab] = useState('1');
@@ -88,6 +90,7 @@ export default function GiveGratitude() {
                                 <GratitudeCards />
                             </TabPane>
                             <TabPane tabId="2"  >
+<VentureCards />
 
                                 <h4>
                                     you havent sent any gratitude acards yet

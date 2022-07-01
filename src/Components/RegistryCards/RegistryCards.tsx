@@ -42,7 +42,7 @@ export default function RegistryCards() {
             <Collapse isOpen={isOpen}>
                 <Row>
                     <p className='fs-4 fw-light mx-4' >  Registry Items </p>
-                    <Card className='mx-4'>
+                    <Card className=''>
                         <CardBody>
                             <p className='fs-6 fw-light' >
                                 debut event description description
@@ -55,7 +55,7 @@ export default function RegistryCards() {
                             </p>
                         </CardBody>
                     </Card>
-                    
+
 
 
                 </Row>

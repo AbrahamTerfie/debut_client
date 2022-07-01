@@ -15,7 +15,13 @@
     align-items: flex-start;
     height: max-content;
 }
-
+.page{
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    justify-content: center;
+    /* height: 100vh; */
+}
 
 
 .mainPageContainer {
@@ -23,14 +29,11 @@
     flex-direction: column;
     justify-content: flex-start;
     overflow: scroll;
-    /* hide scroll bar  */
     -ms-overflow-style: none;
     scrollbar-width: none;
-
     border-radius: 2%;
     height: 90vh;
-    margin: 2em 3em 1em 3em;
-    padding: 1em;
+
 }
 
 .searchInput input {

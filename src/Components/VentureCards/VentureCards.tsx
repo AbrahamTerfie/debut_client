@@ -13,7 +13,7 @@ export default function VentureCards() {
 
     const itemlink = "itemLInk"
     return (
-        <Link to={`${itemlink}`}>
+        <Link to={`${appRoutes.ventures}/${itemlink}`}>
 
             <Row className='ventureCardsContainer p-3' onClick={toggle} >
                 <Col xs='2' sm='2' md='2' lg='2' xl='2'  >

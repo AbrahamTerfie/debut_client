@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Button, FormGroup, Input } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { appRoutes } from '../../Routes/routes';
 export default function Login() {
 
-
+    const navigate = useNavigate()
     const [loginformData, setLoginformData] = useState({
         email: '',
         password: ''
@@ -35,17 +35,20 @@ export default function Login() {
                     onChange={(e) => setLoginformData({ ...loginformData, password: e.target.value })}
                 />
             </FormGroup>
-            <Link to={appRoutes.home }   >
-                <Button
-                    color='warning'
-                    outline
-                    size='lg'
-                    onClick={() => { console.log(loginformData) }}
-                >login</Button>
 
-            </Link>
+            <Button
+                color='warning'
+                outline
+                size='lg'
+                onClick={() => { navigate(appRoutes.forum) }}>
+
+                login
+
+            </Button>
+
+
         </div>
-        // {/* </Form> */}
+
 
 
     )
