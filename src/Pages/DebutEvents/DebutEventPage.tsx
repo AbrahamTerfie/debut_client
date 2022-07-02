@@ -1,25 +1,38 @@
 import React from 'react'
-import { Row, Col } from 'reactstrap'
-import MyVentureCard from '../../Components/MyVentureCard/MyVentureCard'
+import { Row, Col, } from 'reactstrap'
+import RegistryItemCard from '../../Components/RegistryItemCard/RegistryItemCard'
 import { AiOutlineFacebook, AiOutlineTwitter, AiOutlineInstagram, AiOutlineYoutube } from 'react-icons/ai'
-import { FramerImageSlide } from '../../Components/FramerImageSlide/FramerImageSlide'
 
 
 
-const images = [
-    "https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png",
-    "https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png",
-    "https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png"
-];
+
+function attengingProfile() {
+    return (
+
+        <div className='d-flex flex-row my-1 border border-light' >
+            <div className='profileImage ' >
+                <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                 alt='userprofilephoto' />
+            </div>
+            <div className='py-2 mx-3' >
+                <p className='fs-5 fw-semibold mx-2'> UserName
+                    <p className='text-muted fs-6'> owner ttile  </p>
+                </p>
+            </div>
+        </div>
+
+    )
+}
 
 export default function DebutEventPage() {
+
     return (
         <Row className='w-100 p-5' >
-
-            <Col >
-
-                <p className='fs-1 fw-light' >  debut event name  </p>
-                <p className='fs-5 px-4 fw-light text-muted' >   saturday  december 32 99999   </p>
+            <Col xs='12' sm='12' md='8' lg='8' xl='8'  >
+                <p className='fs-1 fw-light px-4' >  debut event name
+                    <span className='fs-5 fw-light text-muted mx-4'  > owned by this comoany of this company </span>
+                </p>
+                <p className='fs-3 px-4 fw-light text-muted' >   saturday  december 32 99999   </p>
                 <p className='p-4 pb-0 fw-light fs-4' > debut event description </p>
                 <p className='px-4 fw-light fs-5' >
 
@@ -38,10 +51,11 @@ export default function DebutEventPage() {
             </Col>
 
 
-            <Col >
+            <Col xs='12' sm='12' md='3' lg='3' xl='3' className='px-5'    >
                 <div className='d-flex flex-row my-1' >
                     <div className='profileImage ' >
-                        <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' alt='user profile photo' />
+                        <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' 
+                        alt='userprofilephoto' />
                     </div>
                     <div className='mx-3' >
                         <p className='fs-6 fw-light text-muted' >   created by   </p>
@@ -59,16 +73,50 @@ export default function DebutEventPage() {
                     <AiOutlineInstagram className='mx-3' size={20} />
                     <AiOutlineYoutube className='mx-3' size={20} />
                 </p>
-
                 <br />
+                <span className='fs-5 fw-normal text-muted' > invitation link  </span>
+                <br />
+                <a href="#" className="text-decoration-none">This link has its text decoration removed</a>
+            </Col>
 
 
+            <Col xs='12' sm='12' md='3' lg='8' xl='8' className='mt-5'  >
 
-                <FramerImageSlide
-                    images={images}
-                />
+                <p className=' fs-4  border border-light px-5 py-2 w-100' color='light' >
+                    Registry
+                    <span className='mx-4  fs-6 text-muted fw-light'  >
+                        by : james mohammed
+                    </span>
+                </p>
 
 
+                <Row className='d-flex flex-wrap' >
+
+
+                    <RegistryItemCard />
+                    <RegistryItemCard />
+                    <RegistryItemCard />
+                    <RegistryItemCard />
+
+                    <RegistryItemCard />
+                    <RegistryItemCard />
+                    <RegistryItemCard />
+                    <RegistryItemCard />
+                </Row>
+
+            </Col>
+
+
+            <Col xs='12' sm='12' md='3' lg='3' xl='3' className='px-5' >
+
+                <span className='fs-5 fw-normal text-muted' > attending this event  </span>
+                <br />
+                {attengingProfile()}
+                {attengingProfile()}
+                {attengingProfile()}
+
+
+                <p className='fs-5 fw-normal text-muted ' > + 100 more</p>
             </Col>
 
 
@@ -79,15 +127,16 @@ export default function DebutEventPage() {
 
 { /*
 
-input DebutEventInput {
-    createdBy: String   #user who created the debut event
-    belongsTo: String!   # belongsTo is the business id
+    createdBy: UserAccount!
+    belongsTo: Business!
     debutEventName: String!
     debutEventDescription: String!
     debutEventDate: String!
     debutRegestryStatus: Boolean
-    debutRegestry: [String]  # this is the debut regestry id 
-    debutInvitationLink: String
+    debutRegestry: [DebutRegistry]
+    attending: [UserAccount]
+    debutInvitationLink: String  
+}
 }
 type DebutRegistry {
     _id: ID!
