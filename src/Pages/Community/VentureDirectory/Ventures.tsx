@@ -2,13 +2,12 @@ import React from 'react'
 import { Row, Col } from 'reactstrap'
 import VentureCards from '../../../Components/VentureCards/VentureCards'
 import FilterVenture from '../../../Components/FilterVentures/FilterVenture'
-// import './People.css'
+
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 
-import { Outlet } from 'react-router-dom'
 export default function Ventures() {
     return (
-        <Row className='px-5 d-flex page  ' >
+        <Row className='px-5 d-flex page' >
             <Col className='filterContainer m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
                 <FilterVenture />
             </Col>

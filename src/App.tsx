@@ -35,27 +35,15 @@ function App() {
         <Route path={appRoutes.venturePage} element={<VenturePage />} />
         <Route path={appRoutes.debutEvents} element={<DebutEvents />} />
         <Route path={appRoutes.debutEventPage} element={<DebutEventPage />} />
-
-
-
-
         <Route path={appRoutes.myVentures} element={<DebutPages.BusinessPage />} />
+
+
+
+
         <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
         <Route path={appRoutes.myEvents} element={<MyDebutEvents />} />
 
-        {/* </Route> */}
-
-
-
-        {/* <Route path={appRoutes.debut} element={<NavBarElement />} >
-
-        </Route> */}
-        {/* 
-        <Route path={appRoutes.myDebut} element={<NavBarElement />} >
-          <Route path={appRoutes.myDebutHome} element={<MyDebutPages.MyDebutHome />} />
-          <Route path={appRoutes.myDebutBusiness} element={<MyDebutPages.MyBusiness />} />
-          <Route path={appRoutes.myDebutEvents} element={<MyDebutPages.MyDebutEvetnts />} />
-        </Route> */}
+        
       </Routes>
 
     </div>

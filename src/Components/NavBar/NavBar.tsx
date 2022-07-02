@@ -50,7 +50,7 @@ export default function NavBarComponent() {
                                     <FaRegBuilding size={15} className='m-2' style={navMargins} />
                                     Ventures Directory
                                 </DropdownItem>
-                                <DropdownItem onClick={() => { navigate(appRoutes.home) }}>
+                                <DropdownItem onClick={() => { navigate(appRoutes.forum) }}>
                                     <MdOutlineForum size={15} className='m-2' style={navMargins} />
                                     Forum
                                 </DropdownItem>

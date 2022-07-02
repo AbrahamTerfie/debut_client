@@ -9,85 +9,85 @@ import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 export default function Forum() {
     return (
-        <div  >
-            <Row>
-                <Col className='mt-4 m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
-                    <h4> Fellow Forum </h4>
-                    <p>
-                        A place to discuss and share
-                        ideas with fellow members of the
-                        community.
-                    </p>
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                    }} >
-                        <Button
 
-                            outline color='light' className='mt-3 w-100' size='md' >
-                            <IoMdAdd size={30}
-                                style={{
-                                    backgroundColor: 'transparent',
-                                }}
-                                className='mx-1 ' />
-                            New Post
-                        </Button>
+        <Row className='px-5 d-flex page' >
+            <Col className=' mt-4 m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
+                <h4> Fellow Forum </h4>
+                <p>
+                    A place to discuss and share
+                    ideas with fellow members of the
+                    community.
+                </p>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'center',
+                }} >
+                    <Button
+
+                        outline color='light' className='mt-3 w-100' size='md' >
+                        <IoMdAdd size={30}
+                            style={{
+                                backgroundColor: 'transparent',
+                            }}
+                            className='mx-1 ' />
+                        New Post
+                    </Button>
+                </div>
+                <div className='ChanelsContainer w-100 h-25 mt-4' >
+                    <h4 className='mt-4' > Channels</h4>
+                    <div className='channels w-100' >
+                        <h6 color='light' className='w-100 py-2  m-2 ' >
+                            <IoChatbubblesOutline size={15}
+                                style={{ backgroundColor: 'transparent', }}
+                                className='mx-3' />
+                            General
+                        </h6>
+                        <h6 color='light' className='py-2 w-100  m-2 ' >
+                            <FaRegHandPaper size={15}
+                                style={{ backgroundColor: 'transparent', }}
+                                className='mx-3' />
+                            Collabration
+                        </h6>
+                        <h6 color='light' className='py-2 w-100  m-2 ' >
+                            <FaRegHandshake size={15}
+                                style={{ backgroundColor: 'transparent', }}
+                                className='mx-3' />
+                            Community Board
+                        </h6>
                     </div>
-                    <div className='ChanelsContainer w-100 h-25 mt-4' >
-                        <h4 className='mt-4' > Channels</h4>
-                        <div className='channels w-100' >
-                            <h6 color='light' className='w-100 py-2  m-2 ' >
-                                <IoChatbubblesOutline size={15}
-                                    style={{ backgroundColor: 'transparent', }}
-                                    className='mx-3' />
-                                General
-                            </h6>
-                            <h6 color='light' className='py-2 w-100  m-2 ' >
-                                <FaRegHandPaper size={15}
-                                    style={{ backgroundColor: 'transparent', }}
-                                    className='mx-3' />
-                                Collabration
-                            </h6>
-                            <h6 color='light' className='py-2 w-100  m-2 ' >
-                                <FaRegHandshake size={15}
-                                    style={{ backgroundColor: 'transparent', }}
-                                    className='mx-3' />
-                                Community Board
-                            </h6>
-                        </div>
-                    </div>
-                </Col>
+                </div>
+            </Col>
 
-                <Col className=' ' xs='10' sm='10' md='8' lg='8' xl='8' >
-                    <Row className='searchInput mb-1 mt-4' >
-                        <p className='fw-bolder fs-3'> Fellow Forum </p>
+            <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
+                <Row className='searchInput mb-1 mt-4' >
+                    <p className='fw-bolder fs-3'> Fellow Forum </p>
 
-                        <SearchComponent />
-                    </Row>
-                    <Row className='m-3'>
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />  <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
-                        <ForumCards />
+                    <SearchComponent />
+                </Row>
+                <Row className='m-3'>
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />  <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
+                    <ForumCards />
 
 
-                    </Row>
+                </Row>
 
 
-                </Col>
-            </Row>
+            </Col>
+        </Row>
 
-        </div>
+
     )
 }

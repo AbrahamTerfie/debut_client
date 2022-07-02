@@ -7,8 +7,9 @@ export default function DebutEvents() {
     return (
 
         <Row className='p-5 d-flex page ' >
-            <Col className='mt-4 ' xs='12' sm='12' md='2' lg='2' xl='2' >
-                <h4> Debut Events </h4>
+            <Col className=' m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
+
+                <p className='fw-bolder fs-3  mt-3'   > Debut Events </p>
                 <p>
                     Explore the events that are happening in  your community.
                     and join the ones that you like. and show your support.
@@ -16,9 +17,11 @@ export default function DebutEvents() {
 
             </Col>
 
-            <Col className='mainPageContainer ' xs='12' sm='12' md='10' lg='10' xl='10' >
+            <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
+
                 <Row className='searchInput mb-1 mt-4' >
-                    <h5> Debut Events  </h5>
+                    <p className='fw-bolder fs-3'> Debut Events</p>
+
                     <SearchComponent />
                 </Row>
                 <Row className='m-3'>
