@@ -9,9 +9,6 @@ import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 import NewForumPost from './NewForumPost'
 
-
-
-
 export default function Forum() {
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);

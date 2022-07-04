@@ -1,25 +1,36 @@
 
 import React, { useState } from 'react'
 import {
-    Row, Col, Button, TabContent, TabPane, Nav, NavItem, NavLink
+    Row, Col, Button, TabContent, TabPane, Nav, NavItem, NavLink,
+    Offcanvas, OffcanvasBody, OffcanvasHeader
 } from 'reactstrap'
-import GratitudeCards from '../../Components/Gratitudecards/GratitudeCards';
+import GratitudeCards from '../../../Components/Gratitudecards/GratitudeCards';
 import './GiveGratitude.scss'
-import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
+import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { IoMdAdd } from 'react-icons/io'
 import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
-import VentureCards from '../../Components/VentureCards/VentureCards';
+import VentureCards from '../../../Components/VentureCards/VentureCards';
+import NewGratitudeForm from './NewGratitudeForm';
 export default function GiveGratitude() {
-
     const [activeTab, setActiveTab] = useState('1');
-
-    const toggle = (tab: any) => {
-        if (activeTab !== tab) setActiveTab(tab);
-    }
+    const [canvas, setCanvas] = useState(false);
+    const toggle = (tab: any) => { if (activeTab !== tab) setActiveTab(tab) }
+    const toggleCanvas = () => setCanvas(!canvas);
 
     return (
-
         <Row className='px-5 d-flex page mt-3'  >
+            <Offcanvas style={{ width: '50%', top: '40%' }}
+                direction="end"
+                isOpen={canvas}
+                toggle={toggleCanvas}
+                scrollable={true}>
+                <OffcanvasHeader toggle={toggleCanvas}>
+                    <p className='fs-3 mx-3 px-3 fw-light' >Send your Gratitude   </p>
+                </OffcanvasHeader>
+                <OffcanvasBody >
+                    <NewGratitudeForm />
+                </OffcanvasBody>
+            </Offcanvas>
             <Col className=' m-4 ' xs='12' sm='12' md='12' lg='2' xl='2' >
                 <p className='fw-bolder fs-3 my-4'> Give Gratitude </p>
                 <p>
@@ -27,7 +38,8 @@ export default function GiveGratitude() {
                     helped you in your journey.
                 </p>
 
-                <Button outline color='light' className='mt-5 w-100' size='sm' >
+                <Button outline color='light' className='mt-5 w-100' size='sm'
+                    onClick={() => toggleCanvas()} >
                     <IoMdAdd size={20}
                         style={{
                             backgroundColor: 'transparent',
