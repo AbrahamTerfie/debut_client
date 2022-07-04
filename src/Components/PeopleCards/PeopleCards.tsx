@@ -1,15 +1,31 @@
 import React, { useState } from 'react'
-import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 import './Peoplecards.css'
 import MyVentureCard from '../MyVentureCard/MyVentureCard';
 import DebutEventCards from '../DebutEventCards/DebutEventCards';
+import RequestPeopleIntriductionForm from './RequestPeopleIntriductionForm'
 export default function PeopleCards() {
     const [modal, setModal] = useState(false);
+    const [canvas, setCanvas] = useState(false);
 
     const toggle = () => setModal(!modal);
+    const toggleCanvas = () => setCanvas(!canvas);
+
     return (
         <>
 
+            <Offcanvas style={{ width: '50%', top: '10%' }}
+                direction="end"
+                isOpen={canvas}
+                toggle={toggleCanvas}
+                scrollable={true}>
+                <OffcanvasHeader toggle={toggleCanvas}>
+                    <p className='fs-5 mx-3 px-3 fw-light' > Request introduction to Selected user  </p>
+                </OffcanvasHeader>
+                <OffcanvasBody >
+                    <RequestPeopleIntriductionForm />
+                </OffcanvasBody>
+            </Offcanvas>
             <Modal
                 backdrop={false}
                 centered
@@ -71,29 +87,11 @@ export default function PeopleCards() {
                         </Col>
 
                         <Col xs='12' sm='12' md='12' lg='4' xl='4' >
-                            <div className='d-flex'>
-                                <div className='mx-4 d-flex flex-column '  >
-                                    <p className='fs-3 fw-bold text-muted' >9909</p>
-                                    <p className='fs-5 fw-lighter '> following </p>
-                                </div>
-                                <div className='mx-4 d-flex flex-column' >
-                                    <p className='fs-3 fw-bold text-muted'>  9909</p>
-                                    <p className='fs-5 fw-lighter  '> followers </p>
-                                </div>
-                            </div>
-
-                            <br />
-                            <div>
-
-                                <div className='d-flex flex-row'>
-                                    <p className='fs-5 fw-lighter ' >   email : </p>
-                                    <p className='fs-5 text-muted mx-3' >   email@email.com</p>
-                                </div>
-                                <div className='d-flex flex-row'>
-                                    <p className='fs-5 fw-lighter ' >   phone : </p>
-                                    <p className='fs-5 text-muted mx-3' >   +0000000000</p>
-                                </div>
-                            </div>
+                            <Button color='light' className='w-75 m-5' outline size='lg'
+                                onClick={() => toggleCanvas()}
+                            >
+                                Request introductin
+                            </Button>
 
                         </Col>
                     </Row>
