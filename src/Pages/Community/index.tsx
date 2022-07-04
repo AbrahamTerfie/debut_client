@@ -1,4 +1,4 @@
-import Forum from "./Forum";
+import Forum from "./Forum/Forum";
 import People from "./People";
 import GiveGratitude from "./GiveGratitude";
 import Ventures from "./VentureDirectory/Ventures";

@@ -1,16 +1,45 @@
 
-import React from 'react'
-import { Row, Col, Button } from 'reactstrap'
-import ForumCards from '../../Components/ForumCards/ForumCards'
+import React, { useState } from 'react'
+import { Row, Col, Button, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
+import ForumCards from '../../../Components/ForumCards/ForumCards'
 import './Forum.css'
-import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
+import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { IoMdAdd } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
+import NewForumPost from './NewForumPost'
+
+
+
+
 export default function Forum() {
+    const [canvas, setCanvas] = useState(false);
+    const toggle = () => setCanvas(!canvas);
+
     return (
 
         <Row className=' d-flex page' >
+
+            <Offcanvas style={{ width: '50%' }}
+                direction="end"
+                isOpen={canvas}
+                toggle={toggle}
+                scrollable={true}
+            >
+                <OffcanvasHeader toggle={toggle}>
+                    <p className='fs-3 m-3 px-5 fw-light' >
+                        Create New Post
+                    </p>
+
+                    <p className='fs-5 m-3 px-5 fw-light text-muted' >
+                        share your events , ideas , or anything you want to share with the community
+                    </p>
+                </OffcanvasHeader>
+                <OffcanvasBody >
+                    <NewForumPost />
+                </OffcanvasBody>
+            </Offcanvas>
+
             <Col className=' mt-4 m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
                 <h4> Fellow Forum </h4>
                 <p>
@@ -24,6 +53,7 @@ export default function Forum() {
                     alignItems: 'center',
                 }} >
                     <Button
+                        onClick={() => toggle()}
 
                         outline color='light' className='mt-3 w-100' size='sm' >
                         <IoMdAdd size={20}
