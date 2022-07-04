@@ -10,7 +10,7 @@ import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 export default function Forum() {
     return (
 
-        <Row className='px-5 d-flex page' >
+        <Row className=' d-flex page' >
             <Col className=' mt-4 m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
                 <h4> Fellow Forum </h4>
                 <p>
@@ -25,8 +25,8 @@ export default function Forum() {
                 }} >
                     <Button
 
-                        outline color='light' className='mt-3 w-100' size='md' >
-                        <IoMdAdd size={30}
+                        outline color='light' className='mt-3 w-100' size='sm' >
+                        <IoMdAdd size={20}
                             style={{
                                 backgroundColor: 'transparent',
                             }}
