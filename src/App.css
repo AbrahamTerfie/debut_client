@@ -10,6 +10,9 @@
   padding: 0px;
 }
 
+* input {
+  background: #3CBC8D;
+}
 
 .App {
   margin-top: 4em;
@@ -54,11 +57,7 @@
 
 
 
-html,
-* body {
-  /* background-color: #272838ff; */
 
-}
 
 
 @keyframes gradient {

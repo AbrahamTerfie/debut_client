@@ -16,6 +16,7 @@ export const appRoutes = {
     giveGratitude: '/giveGratitude',
     profile: '/profile',
     myVentures: '/myVentures',
+    newVenture: '/newVenture',
     myEvents: '/myEvents',
 
 

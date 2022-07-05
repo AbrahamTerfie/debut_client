@@ -6,6 +6,8 @@ const inputStyles = {
     width: '80%',
     margin: 'auto',
     marginBottom: '10px',
+    backgroundColor: '#28282B',
+    color : '#fff',
 
 }
 

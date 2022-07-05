@@ -36,6 +36,7 @@ function App() {
         <Route path={appRoutes.debutEvents} element={<DebutEvents />} />
         <Route path={appRoutes.debutEventPage} element={<DebutEventPage />} />
         <Route path={appRoutes.myVentures} element={<DebutPages.BusinessPage />} />
+        <Route path={appRoutes.newVenture} element={<DebutPages.NewBusinessVenture />} />
 
 
 
@@ -43,7 +44,7 @@ function App() {
         <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
         <Route path={appRoutes.myEvents} element={<MyDebutEvents />} />
 
-        
+
       </Routes>
 
     </div>
