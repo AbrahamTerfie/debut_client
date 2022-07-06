@@ -20,16 +20,14 @@ export default function Authentication() {
                 debut
             </div>
             <Nav className="tabs"   >
-                <NavItem>
+                <NavItem className='mx-3' >
                     <NavLink
-
                         className={activeTab === "1" ? "activeTab" : "notActiveTab"}
-
                         onClick={() => { toggle('1'); }}>
                         Log-In
                     </NavLink>
                 </NavItem>
-                <NavItem>
+                <NavItem className='mx-3' >
                     <NavLink
                         className={activeTab === "2" ? "activeTab" : "notActiveTab"}
 

@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './Store/Store'
-
+import { ApolloProvider } from '@apollo/client';
+import client from './GraphQl/client';
 
 
 const root = ReactDOM.createRoot(
@@ -15,11 +16,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store} >
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Provider store={store} >
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </ApolloProvider>
   </React.StrictMode>
 );
 
