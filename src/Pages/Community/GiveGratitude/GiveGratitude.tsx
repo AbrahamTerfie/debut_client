@@ -76,10 +76,7 @@ export default function GiveGratitude() {
                         </NavItem>
                         <NavItem>
                             <NavLink
-
-                                className={
-                                    activeTab === "2" ? "activeTab" : "notActiveTab"
-                                }
+                                className={activeTab === "2" ? "activeTab" : "notActiveTab"}
                                 onClick={() => { toggle('2'); }}
                             >
                                 <MdForwardToInbox size={20}

@@ -23,27 +23,7 @@ export default function SignUp() {
     }
     return (
         <div>
-            <Row className='mb-4' >
-                <Col>
-                    <Button color="info"
-                        onClick={() => {
-                            hasBusinessToggler()
-                        }}
-                        outline={signupformData.hasBusiness}
-                    >
-                        supporter
-                    </Button>
-                </Col>
-                <Col>
-                    <Button
-                        onClick={() => { hasBusinessToggler() }}
-                        outline={!signupformData.hasBusiness}
-                        color='warning'
-                    >
-                        business
-                    </Button>
-                </Col>
-            </Row>
+           
             <FormGroup>
                 <Input
 

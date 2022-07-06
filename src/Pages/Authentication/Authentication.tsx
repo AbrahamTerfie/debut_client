@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 
 import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, } from 'reactstrap';
@@ -18,28 +19,27 @@ export default function Authentication() {
             <div className='authHeader' >
                 debut
             </div>
-            <Nav className="tabs" tabs  >
+            <Nav className="tabs"   >
                 <NavItem>
                     <NavLink
 
-                        className={activeTab === "1" ? "activepageTabBlue" : "notactivePageTabBlue"}
+                        className={activeTab === "1" ? "activeTab" : "notActiveTab"}
+
                         onClick={() => { toggle('1'); }}>
                         Log-In
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
+                        className={activeTab === "2" ? "activeTab" : "notActiveTab"}
 
-                        className={
-                            activeTab === "2" ? "activepageTabBlue" : "notactivePageTabBlue"
-                        }
                         onClick={() => { toggle('2'); }}
                     >
                         Sign-Up
                     </NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab} className="authTabcontent" >
+            <TabContent activeTab={activeTab} className="authTabcontent p-5 mt-4" >
                 <TabPane tabId="1">
                     <Row sm="12" >
                         <Login />
