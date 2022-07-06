@@ -42,15 +42,13 @@ export default function Authentication() {
                     <Row sm="12" >
                         <Login />
                     </Row>
-                    <Row>
-                        <div>
-                            <p className='m-4' >
-                                <small className="authText">
-                                    forgot your password?
-                                </small>
-                            </p>
+                   
+                        <div className='my-4 text-muted fs-5 fw-italic  text-center'>
+
+                            forgot your password?
+
                         </div>
-                    </Row>
+
                 </TabPane>
                 <TabPane tabId="2">
                     <Row sm="12" >
@@ -59,22 +57,17 @@ export default function Authentication() {
                 </TabPane>
             </TabContent>
 
-            <div>
-                <p>
-                    <span className='authText'>
-                        or authenticate with
-                    </span>
-                </p>
+            <div className='my-4 text-muted fs-5 fw-italic'>
+                or authenticate with
             </div>
             <div className='authFooter' >
                 <Button color='warning' className='m-4' outline
-                    size='lg'  >
+                    size='sm'  >
                     <ImFacebook />
                 </Button>
                 <Button color='warning' className='m-4' outline
-                    size='lg'  >
+                    size='sm'  >
                     <ImGoogle
-
                     />
                 </Button>
             </div>

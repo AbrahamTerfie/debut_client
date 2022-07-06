@@ -41,7 +41,7 @@ export default function NavBarComponent() {
                                 <BsPeople size={15} className="mx-2" />
                                 Community
                             </DropdownToggle>
-                            <DropdownMenu right dark >
+                            <DropdownMenu end dark >
                                     <DropdownItem  onClick={ () => navigate(appRoutes.people) }>
                                         <BsPeople size={15} style={navMargins} />
                                         People Directory

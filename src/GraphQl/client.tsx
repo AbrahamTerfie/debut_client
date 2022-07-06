@@ -4,9 +4,9 @@ import {
     ApolloProvider, gql, HttpLink
 } from '@apollo/client';
 
+import { apiLink } from '../Constants/apiLink';
 
-
-const link = new HttpLink({ uri: 'http://localhost:4000' })
+const link = new HttpLink({ uri: apiLink });
 const cache = new InMemoryCache()
 
 
@@ -40,7 +40,7 @@ const query = gql`
 }
 }`
 
-client.query({ query }).then(res => console.log(res.data))
+client.query({ query }).then(res => console.log('test query', res.data))
 
 
 
