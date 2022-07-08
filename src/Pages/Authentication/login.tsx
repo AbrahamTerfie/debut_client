@@ -2,8 +2,15 @@ import React, { useState } from 'react'
 import { Button, FormGroup, Input } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { appRoutes } from '../../Routes/routes';
+import { useAuth0 } from '@auth0/auth0-react';
 export default function Login() {
 
+
+
+    const {
+        loginWithRedirect, isLoading, isAuthenticated, user, logout
+    } = useAuth0();
+    console.log("user from auth0", user)
     const navigate = useNavigate()
     const [loginformData, setLoginformData] = useState({
         email: '',
@@ -40,7 +47,14 @@ export default function Login() {
                 color='warning'
                 outline
                 size='lg'
-                onClick={() => { navigate(appRoutes.forum) }}>
+                onClick={() => {
+                    loginWithRedirect(
+                        {
+                            redirectUri: "http://localhost:3000/forum"
+                        }
+                    )
+                    //  navigate(appRoutes.forum)
+                }}>
 
                 login
 

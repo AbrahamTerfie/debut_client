@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
 import {
     Navbar, Collapse, DropdownToggle, Nav, NavbarBrand,
-    NavbarToggler, DropdownMenu, DropdownItem, UncontrolledDropdown, NavbarText, NavItem, NavLink
+    NavbarToggler, DropdownMenu, DropdownItem, UncontrolledDropdown, NavbarText, NavItem, NavLink, Button
 } from 'reactstrap'
 import { BsPeople } from 'react-icons/bs'
 import { FaRegBuilding } from 'react-icons/fa'
-import { MdOutlineForum } from 'react-icons/md'
+import { MdOutlineForum, MdLogout } from 'react-icons/md'
 import { RiChatSmileLine, RiCalendarEventLine } from 'react-icons/ri'
 import { GiReceiveMoney, GiTechnoHeart, GiBrain } from 'react-icons/gi'
 import { appRoutes } from '../../Routes/routes'
-import {  useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react';
+
+
+
 export default function NavBarComponent() {
+    const { isAuthenticated, user, logout } = useAuth0();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const toggle = () => setDropdownOpen(!dropdownOpen);
     const navMargins = {
         backgroundColor: 'transparent',
@@ -19,10 +25,15 @@ export default function NavBarComponent() {
         marginRight: '10px',
     }
     const navigate = useNavigate()
+
+console.log("user from auth0", user)
+
     const linkStyle = { display: 'flex', justifyContent: 'center', background: 'none' }
     return (
 
         <>
+
+
             <Navbar
                 color="dark"
                 dark
@@ -42,10 +53,10 @@ export default function NavBarComponent() {
                                 Community
                             </DropdownToggle>
                             <DropdownMenu end dark >
-                                    <DropdownItem  onClick={ () => navigate(appRoutes.people) }>
-                                        <BsPeople size={15} style={navMargins} />
-                                        People Directory
-                                    </DropdownItem>
+                                <DropdownItem onClick={() => navigate(appRoutes.people)}>
+                                    <BsPeople size={15} style={navMargins} />
+                                    People Directory
+                                </DropdownItem>
                                 <DropdownItem onClick={() => { navigate(appRoutes.ventures) }}>
                                     <FaRegBuilding size={15} className='m-2' style={navMargins} />
                                     Ventures Directory
@@ -102,7 +113,15 @@ export default function NavBarComponent() {
 
                     </Nav>
                     <NavbarText>
-                        Simple Text
+                        <Button outline color='dark' className='d-flex'
+                            onClick={() => { logout() }}>
+
+                            <span
+                                className='text-white mx-2 '
+                            >logout</span>
+                            <MdLogout size={15} className='m-2' style={navMargins} />
+                        </Button>
+
                     </NavbarText>
                 </Collapse>
             </Navbar>

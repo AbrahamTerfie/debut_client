@@ -1,4 +1,6 @@
+
 import React from 'react';
+
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -7,22 +9,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './Store/Store'
-import { ApolloProvider } from '@apollo/client';
-import client from './GraphQl/client';
 
-
+import { Auth0ProviderWithHistory } from './Auth/Auth0Provider';
+import ApolloWrapper from './GraphQl/client';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Provider store={store} >
-          <App />
-        </Provider>
-      </BrowserRouter>
-    </ApolloProvider>
+    <Auth0ProviderWithHistory>
+      <ApolloWrapper>
+        <BrowserRouter>
+          <Provider store={store} >
+            <App />
+          </Provider>
+        </BrowserRouter>
+      </ApolloWrapper>
+    </Auth0ProviderWithHistory>
   </React.StrictMode>
 );
 

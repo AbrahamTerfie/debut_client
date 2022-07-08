@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
     ApolloClient,
     InMemoryCache,
@@ -5,47 +6,57 @@ import {
 } from '@apollo/client';
 
 import { apiLink } from '../Constants/apiLink';
+import { useAuth0 } from '@auth0/auth0-react';
+import { setContext } from '@apollo/client/link/context';
 
-const link = new HttpLink({ uri: apiLink });
-const cache = new InMemoryCache()
-
-
-const client = new ApolloClient({ link, cache });
+function ApolloWrapper({ children }: { children: any }) {
 
 
 
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+    const [bearerToken, setBearerToken] = useState('');
+
+    useEffect(() => {
+        const getToken = async () => {
+            const token = await getAccessTokenSilently();
+            setBearerToken(token);
+        }
+        getToken();
+    }, [isAuthenticated, getAccessTokenSilently]);
 
 
-const query = gql`
-{
-  getAllBusinesses {
-    _id,
-    businessAddress,
-    businessEmail,
-    businessName,
-    businessDescription
-    businessOwner {
-      _id,
-      email,
-      firstName,
-      lastName
-      businesses {
-        _id,
-        businessAddress,
-        businessDescription
-      }
+    const authLink = setContext((request, { headers, ...rest }) => {
 
-    }
-  
+        return {
+            ...rest,
+            headers: {
+                ...headers,
+                authorization: bearerToken ? `Bearer ${bearerToken}` : ''
+            }
+        }
+    })
+
+    console.log("authlink ", authLink)
+
+    console.log("bearerToken", bearerToken)
+
+
+    const link = new HttpLink({ uri: apiLink });
+    const cache = new InMemoryCache()
+
+
+    const client = new ApolloClient({
+        link: authLink.concat(link),
+        cache: cache
+    });
+
+    return (
+        <ApolloProvider client={client}>
+            {children}
+        </ApolloProvider>
+    )
 }
-}`
-
-client.query({ query }).then(res => console.log('test query', res.data))
 
 
 
-
-
-
-
-export default client;
+export default ApolloWrapper;
