@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 
-export const VENTURE_QUERY = gql`
+export const ALL_VENTURES = gql`
     query allVentures {
         getAllBusinesses {
             _id,
@@ -25,5 +25,15 @@ export const VENTURE_QUERY = gql`
    
    `
 
+export const USERS_QUERY = gql`
+    query allUsers {
+      query{
+         getAllUsers {
+       _id,
+        email,
+        experties
+  }
+}
 
+    }`
 
