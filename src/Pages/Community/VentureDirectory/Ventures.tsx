@@ -9,8 +9,10 @@ export default function Ventures() {
 
     const { data, loading, error } = useQuery(VENTURE_QUERY)
 
+
     if (loading) return <div>Loading...</div>
-    if (error) return <div>Error!</div>
+    if (error) return <div  > Error!</div >
+    if (error) console.log("error", error)
     console.log('from use query', data.getAllBusinesses)
     return (
         <Row className=' d-flex page' >
