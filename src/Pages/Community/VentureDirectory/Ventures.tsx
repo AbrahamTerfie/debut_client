@@ -4,21 +4,13 @@ import VentureCards from '../../../Components/VentureCards/VentureCards'
 import FilterVenture from '../../../Components/FilterVentures/FilterVenture'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { useQuery } from '@apollo/client'
-import { ALL_VENTURES } from '../../../GraphQl/Queries/VentureQuries/VentureQuery'
+import { ALL_VENTURES } from '../../../GraphQl/Queries/index'
 import Loader from '../../../Components/Loader/Loader'
 export default function Ventures() {
 
-    //suspence for 10 seconds using loader
-    const [wait, setWait] = useState(true)
-    useEffect(() => {
-        setTimeout(() => {
-            setWait(false)
-        }, 5000)
-    }, [])
     const { data, loading, error } = useQuery(ALL_VENTURES)
 
-
-    if (wait) return <Loader />
+    if (loading) return <Loader />
     if (error) return <div  > Error!</div >
     if (error) console.log("error", error)
     console.log('from use query', data.getAllBusinesses)

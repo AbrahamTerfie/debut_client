@@ -10,7 +10,7 @@ export default function Login() {
     const {
         loginWithRedirect, isLoading, isAuthenticated, user, logout
     } = useAuth0();
-    console.log("user from auth0", user)
+    console.log(" user object form auth0 hook  ", user)
     const navigate = useNavigate()
     const [loginformData, setLoginformData] = useState({
         email: '',

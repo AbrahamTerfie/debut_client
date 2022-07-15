@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Row, Col, Button, TabContent, TabPane, Nav, NavItem, NavLink
 } from 'reactstrap'
@@ -11,14 +11,28 @@ import { FaIndustry, FaGlobe } from 'react-icons/fa'
 import { RiCalendarEventLine } from 'react-icons/ri'
 import RegistryCards from '../../../Components/RegistryCards/RegistryCards'
 import { AboutTab, CommunityTab } from '../../../Components/VenturePageTabs'
-
+import { useQuery } from '@apollo/client';
+import { SINGLE_VENTURE_DETAILS } from '../../../GraphQl/Queries/index'
+import Loader from '../../../Components/Loader/Loader'
 export default function VenturePage() {
     const [activeTab, setActiveTab] = useState('1');
-
+    const [ventureId, setVentireId] = useState('')
     const toggle = (tab: any) => {
         if (activeTab !== tab) setActiveTab(tab);
     }
     const { id } = useParams()
+    console.log("venture id is", id)
+
+
+
+
+    const { loading, error, data } = useQuery(SINGLE_VENTURE_DETAILS, {
+        variables: { businessId: id }
+    });
+
+    if (loading) return <Loader />
+    if (error) console.log("error", error)
+    if (data) console.log('venture data', data)
     return (
 
         <Row className='ventureProfileHeader  '>
@@ -36,7 +50,7 @@ export default function VenturePage() {
             <Row className='mt-5 px-5'  >
                 <Col sm="12" md="6" lg="8" xl="8" className='text-left'>
 
-                    <p className='fs-2 fw-light' >  {id} </p>
+                    <p className='fs-2 fw-light' >  {data.get} </p>
 
                     <p className='fs-4 fw-normal text-muted' >  company description and details here </p>                        <br />
                     <div className='d-flex flex-row' >

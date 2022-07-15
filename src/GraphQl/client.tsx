@@ -11,9 +11,7 @@ import { setContext } from '@apollo/client/link/context';
 
 function ApolloWrapper({ children }: { children: any }) {
 
-
-
-    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+    const { isAuthenticated, getAccessTokenSilently, user  } = useAuth0();
     const [bearerToken, setBearerToken] = useState('');
 
     useEffect(() => {
@@ -22,8 +20,10 @@ function ApolloWrapper({ children }: { children: any }) {
             setBearerToken(token);
         }
         getToken();
+
     }, [isAuthenticated, getAccessTokenSilently]);
 
+console.log(" user object form auth0 hook  ", user)
 
     const authLink = setContext((request, { headers, ...rest }) => {
 
@@ -36,7 +36,7 @@ function ApolloWrapper({ children }: { children: any }) {
         }
     })
 
-    console.log("authlink ", authLink)
+    // console.log("authlink ", authLink)
 
     console.log("bearerToken", bearerToken)
 

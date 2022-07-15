@@ -25,15 +25,5 @@ export const ALL_VENTURES = gql`
    
    `
 
-export const USERS_QUERY = gql`
-    query allUsers {
-      query{
-         getAllUsers {
-       _id,
-        email,
-        experties
-  }
-}
 
-    }`
 
