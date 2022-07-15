@@ -8,12 +8,12 @@ import { ALL_VENTURES } from '../../../GraphQl/Queries/index'
 import Loader from '../../../Components/Loader/Loader'
 export default function Ventures() {
 
-    const { data, loading, error } = useQuery(ALL_VENTURES)
+    // const { data, loading, error } = useQuery(ALL_VENTURES)
 
-    if (loading) return <Loader />
-    if (error) return <div  > Error!</div >
-    if (error) console.log("error", error)
-    console.log('from use query', data.getAllBusinesses)
+    // if (loading) return <Loader />
+    // if (error) return <div  > Error!</div >
+    // if (error) console.log("error", error)
+    // console.log('from use query', data.getAllBusinesses)
     return (
         <Row className=' d-flex page' >
             <Col className='filterContainer m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
@@ -25,7 +25,7 @@ export default function Ventures() {
                     <p className='fw-bolder fs-3'> Venture Directory </p>
                     <SearchComponent />
                 </Row>
-                <Row className='my-3'>
+                {/* <Row className='my-3'>
                     {data.getAllBusinesses.map((venture: any, index: any) => {
                         return <VentureCards
                             ventureName={venture.businessName}
@@ -35,7 +35,7 @@ export default function Ventures() {
                             ventureAdress={venture.businessAddress} />
                     })}
 
-                </Row>
+                </Row> */}
             </Col>
 
         </Row>

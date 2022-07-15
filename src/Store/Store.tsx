@@ -1,24 +1,3 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import sidebarController from "./UI/sidebarController";
-
-// // import { combineReducers } from '@reduxjs/toolkit'
-// // const rootReducer = combineReducers({})
-// // export type RootState = ReturnType<typeof rootReducer>
-
-
-
-// export const store = configureStore({
-//     reducer: {
-//         sidebar: sidebarController
-//     }
-// });
-
-
-// export type RootState = ReturnType<typeof store.getState>
-
-// export default store
-
-
 
 
 
@@ -33,11 +12,6 @@ const store = configureStore({
     reducer: rootReducer
 })
 
-// if (process.env.NODE_ENV === 'development' && module.hot) {
-//   module.hot.accept('./rootReducer', () => {
-
-//   })
-// }
 
 
 const newRootReducer = require('./RootReducer').default

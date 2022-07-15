@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react'
-import { Row, Col, Button, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Input } from 'reactstrap'
 import ForumCards from '../../../Components/ForumCards/ForumCards'
 import './Forum.css'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
@@ -8,14 +8,43 @@ import { IoMdAdd } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 import NewForumPost from './NewForumPost'
-
+import { useMutation } from '@apollo/client'
+import { CHECK_EMAIL_VALIDITY } from '../../../GraphQl/index'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../../Store/RootReducer'
 export default function Forum() {
+    const { user } = useAuth0()
+    const { } = useSelector((store: RootState) => store.auth)
+
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
 
-    return (
+    const [checkIfUserExists, checkEmailResponnce] = useMutation(CHECK_EMAIL_VALIDITY)
 
-        <Row className=' d-flex page' >
+    const [email, setEmail] = useState('')
+    console.log("email input ", email)
+
+    useEffect(() => {
+        user && user.email && setEmail(user.email)
+        checkIfUserExists({ variables: { email } })
+
+    }, [user])
+
+    if (checkEmailResponnce.loading) {
+        console.log("loading ")
+    }
+    if (checkEmailResponnce.data) {
+        console.log("checkEmailResponnce.data", checkEmailResponnce.data)
+    }
+    if (checkEmailResponnce.error) {
+        console.log("checkEmailResponnce.error", checkEmailResponnce.error)
+    }
+
+
+
+    return (
+        <Row className=' d-flex page mt-4' >
 
             <Offcanvas style={{ width: '50%' }}
                 direction="end"
@@ -38,6 +67,7 @@ export default function Forum() {
             </Offcanvas>
 
             <Col className=' mt-4 m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
+
                 <h4> Fellow Forum </h4>
                 <p>
                     A place to discuss and share
