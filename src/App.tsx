@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import "animate.css/animate.min.css";
@@ -11,10 +11,16 @@ import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
 import NavBarComponent from './Components/NavBar/NavBar';
 import DebutEventPage from './Pages/DebutEvents/DebutEventPage';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { useMutation } from '@apollo/client';
+import { CHECK_EMAIL_VALIDITY } from './GraphQl/index';
 function App() {
-  const { isAuthenticated } = useAuth0();
+  // const { user } = useAuth0();
+
+  const { isAuthenticated, user } = useAuth0();
+
+
  
+
   return (
     <div className="App">
 

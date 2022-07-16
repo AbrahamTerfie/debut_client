@@ -15,19 +15,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 export default function Forum() {
     const { user } = useAuth0()
-    const { } = useSelector((store: RootState) => store.auth)
-
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
-
     const [checkIfUserExists, checkEmailResponnce] = useMutation(CHECK_EMAIL_VALIDITY)
-
     const [email, setEmail] = useState('')
     console.log("email input ", email)
 
     useEffect(() => {
         user && user.email && setEmail(user.email)
-        checkIfUserExists({ variables: { email } })
+        checkIfUserExists({ variables: { email: email } })
 
     }, [user])
 
@@ -35,7 +31,10 @@ export default function Forum() {
         console.log("loading ")
     }
     if (checkEmailResponnce.data) {
-        console.log("checkEmailResponnce.data", checkEmailResponnce.data)
+         checkEmailResponnce.data.checkUserExistsByEmail === true ?
+            console.log("user exists so wont create new user") :
+            console.log("setting up new user")
+        
     }
     if (checkEmailResponnce.error) {
         console.log("checkEmailResponnce.error", checkEmailResponnce.error)
