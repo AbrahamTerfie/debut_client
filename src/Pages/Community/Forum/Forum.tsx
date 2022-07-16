@@ -11,8 +11,7 @@ import NewForumPost from './NewForumPost'
 import { useMutation } from '@apollo/client'
 import { CHECK_EMAIL_VALIDITY } from '../../../GraphQl/index'
 import { useAuth0 } from '@auth0/auth0-react'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '../../../Store/RootReducer'
+
 export default function Forum() {
     const { user } = useAuth0()
     const [canvas, setCanvas] = useState(false);
@@ -31,15 +30,14 @@ export default function Forum() {
         console.log("loading ")
     }
     if (checkEmailResponnce.data) {
-         checkEmailResponnce.data.checkUserExistsByEmail === true ?
+        checkEmailResponnce.data.checkUserExistsByEmail === true ?
             console.log("user exists so wont create new user") :
             console.log("setting up new user")
-        
+
     }
     if (checkEmailResponnce.error) {
         console.log("checkEmailResponnce.error", checkEmailResponnce.error)
     }
-
 
 
     return (
