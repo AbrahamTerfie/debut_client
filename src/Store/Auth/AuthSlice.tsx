@@ -10,8 +10,9 @@ const initalState = {
     userEmail: '',
     auth0UserInfo: {
         email: '',
-        firstName: '',
-        nickName: '',
+        name: '',
+        nickname: '',
+
     },
     isCheckingEmailExists: false,
     emailExists: false,
@@ -24,7 +25,12 @@ const authSlice = createSlice({
     initialState: initalState,
     reducers: {
 
-
+        saveAuth0UserInfo: (state, action) => {
+            state.auth0UserInfo = {
+                ...state.auth0UserInfo,
+                ...action.payload
+            }
+        },
 
         setUserEmail: (state, action) => {
             state.userEmail = action.payload;
@@ -33,7 +39,7 @@ const authSlice = createSlice({
 })
 
 
-export const { setUserEmail } = authSlice.actions;
+export const { setUserEmail, saveAuth0UserInfo } = authSlice.actions;
 export default authSlice.reducer;
 
 /*

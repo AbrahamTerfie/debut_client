@@ -11,7 +11,11 @@ import { GiReceiveMoney, GiTechnoHeart, GiBrain } from 'react-icons/gi'
 import { appRoutes } from '../../Routes/routes'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { useMutation, useQuery } from '@apollo/client'
+import {
+    CHECK_EMAIL_VALIDITY, CREATE_DEBUT_USER,
+    GET_DEBUT_USER_WITH_EMAIL, AUTHENTICATED_USER
+} from '../../GraphQl/index'
 
 
 export default function NavBarComponent() {
@@ -26,14 +30,16 @@ export default function NavBarComponent() {
     }
     const navigate = useNavigate()
 
-console.log("user from auth0", user)
+    // console.log("user from auth0", user)
 
-    const linkStyle = { display: 'flex', justifyContent: 'center', background: 'none' }
+
+ 
+
+
+
+
     return (
-
         <>
-
-
             <Navbar
                 color="dark"
                 dark

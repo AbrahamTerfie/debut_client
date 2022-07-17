@@ -8,41 +8,67 @@ import { IoMdAdd } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 import NewForumPost from './NewForumPost'
-import { useMutation } from '@apollo/client'
-import { CHECK_EMAIL_VALIDITY } from '../../../GraphQl/index'
+import { useMutation, useQuery } from '@apollo/client'
+import { CHECK_EMAIL_VALIDITY, CREATE_DEBUT_USER, GET_DEBUT_USER_WITH_EMAIL, AUTHENTICATED_USER } from '../../../GraphQl/index'
 import { useAuth0 } from '@auth0/auth0-react'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../../Store/RootReducer'
+import { setUserEmail, saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
 export default function Forum() {
-    const { user } = useAuth0()
+    const dispatch = useDispatch()
+    const { userEmail, auth0UserInfo } = useSelector((store: RootState) => store.auth)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
+    const { isAuthenticated, user } = useAuth0();
     const [checkIfUserExists, checkEmailResponnce] = useMutation(CHECK_EMAIL_VALIDITY)
-    const [email, setEmail] = useState('')
-    console.log("email input ", email)
+    const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
 
     useEffect(() => {
-        user && user.email && setEmail(user.email)
-        checkIfUserExists({ variables: { email: email } })
-
+        if (user) {
+            dispatch(saveAuth0UserInfo(user))
+        }
     }, [user])
 
-    if (checkEmailResponnce.loading) {
-        console.log("loading ")
-    }
-    if (checkEmailResponnce.data) {
-        checkEmailResponnce.data.checkUserExistsByEmail === true ?
-            console.log("user exists so wont create new user") :
-            console.log("setting up new user")
+    
+    console.log("state from store", auth0UserInfo)
+    // run authenticatedUser() when the component mounts
+    useEffect(() => {
+        authenticatedUser({
+            variables: {
+                userInput: {
+                    email: auth0UserInfo.email,
+                    userName: auth0UserInfo.name,
+                    firstName: auth0UserInfo.nickname,
+                }
+
+            }
+        })
+
+
+    }, [auth0UserInfo.email])
+
+    if (authenticatedUsrRes.data) {
+         console.log(authenticatedUsrRes.data)
 
     }
-    if (checkEmailResponnce.error) {
-        console.log("checkEmailResponnce.error", checkEmailResponnce.error)
+    if (authenticatedUsrRes.error) {
+         console.log(authenticatedUsrRes.error)
+    }
+    if (authenticatedUsrRes.loading) {
+         console.log('getching user......,,,,,')
     }
 
 
     return (
         <Row className=' d-flex page mt-4' >
 
+            <Button color='primary'
+
+            // onClick={() => MyAccount(user)}
+            >
+
+                fetch user shit
+            </Button>
             <Offcanvas style={{ width: '50%' }}
                 direction="end"
                 isOpen={canvas}

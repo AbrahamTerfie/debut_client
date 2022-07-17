@@ -11,14 +11,16 @@ import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
 import NavBarComponent from './Components/NavBar/NavBar';
 import DebutEventPage from './Pages/DebutEvents/DebutEventPage';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useMutation } from '@apollo/client';
+import { AUTHENTICATED_USER } from './GraphQl';
 
 function App() {
 
   const { isAuthenticated } = useAuth0();
 
+
   return (
     <div className="App">
-
       {!isAuthenticated ?
         <Routes>
           <Route path={appRoutes.landing} element={<Landing />} />
@@ -38,21 +40,13 @@ function App() {
             <Route path={appRoutes.debutEventPage} element={<DebutEventPage />} />
             <Route path={appRoutes.myVentures} element={<DebutPages.BusinessPage />} />
             <Route path={appRoutes.newVenture} element={<DebutPages.NewBusinessVenture />} />
-
-
-
-
+            {/* *************** */}
             <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
             <Route path={appRoutes.myEvents} element={<MyDebutEvents />} />
-
-
           </Routes>
         </>
       }
-
-
-
-    </div>
+    </div> 
   );
 }
 
