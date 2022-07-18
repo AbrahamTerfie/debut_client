@@ -5,15 +5,11 @@ import FilterPeople from '../../Components/FilterPeople/FilterPeople'
 import './People.css'
 import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 import { useMutation, useQuery } from '@apollo/client'
-import {
-    CHECK_EMAIL_VALIDITY, CREATE_DEBUT_USER,
-    GET_DEBUT_USER_WITH_EMAIL, AUTHENTICATED_USER
-} from '../../GraphQl/index'
+import { AUTHENTICATED_USER } from '../../GraphQl/index'
 import { useAuth0 } from '@auth0/auth0-react'
 
 export default function People() {
-    const { isAuthenticated, user } = useAuth0();
-
+    const { user } = useAuth0();
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     useEffect(() => {
         authenticatedUser({
@@ -36,18 +32,10 @@ export default function People() {
         if (authenticatedUsrRes.loading) {
             return console.log('getching user......,,,,,')
         }
-
-
-
-
-
-
-
     }, [])
 
 
     return (
-
         <Row className='px-5 d-flex page ' >
             <Col className='filterContainer m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
                 <FilterPeople />

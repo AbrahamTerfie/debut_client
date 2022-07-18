@@ -11,81 +11,70 @@ import { GiReceiveMoney, GiTechnoHeart, GiBrain } from 'react-icons/gi'
 import { appRoutes } from '../../Routes/routes'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';
-import { useMutation, useQuery } from '@apollo/client'
-import {
-    CHECK_EMAIL_VALIDITY, CREATE_DEBUT_USER,
-    GET_DEBUT_USER_WITH_EMAIL, AUTHENTICATED_USER
-} from '../../GraphQl/index'
+
+
 
 
 export default function NavBarComponent() {
-    const { isAuthenticated, user, logout } = useAuth0();
+    const { logout } = useAuth0();
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
     const toggle = () => setDropdownOpen(!dropdownOpen);
-    const navMargins = {
-        backgroundColor: 'transparent',
-        marginLeft: '10px',
-        marginRight: '10px',
-    }
+    const navMargins = { backgroundColor: 'transparent', }
     const navigate = useNavigate()
-
-    // console.log("user from auth0", user)
-
-
- 
-
-
-
-
     return (
         <>
             <Navbar
-                color="dark"
+                className='px-5 mx-md-0  shadow-lg '
                 dark
                 expand="xl"
                 fixed="top"
                 full  >
-                <NavbarBrand href="/"  >
+                <NavbarBrand href="/"
+                    style={{
+                        fontFamily: 'Bungee Shade, cursive',
+                        fontSize: '2.5rem',
+                    }}
+                >
                     debut
                 </NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={dropdownOpen} navbar>
                     <Nav className="me-auto dark  m-2" navbar>
                         <UncontrolledDropdown dark inNavbar nav    >
-                            <DropdownToggle color='dark' nav    >
+                            <DropdownToggle nav    >
 
-                                <BsPeople size={15} className="mx-2" />
+                                <BsPeople size={15} className='mx-3 my-2' />
                                 Community
                             </DropdownToggle>
                             <DropdownMenu end dark >
                                 <DropdownItem onClick={() => navigate(appRoutes.people)}>
-                                    <BsPeople size={15} style={navMargins} />
+                                    <BsPeople size={15} className='mx-3 my-2' style={navMargins} />
                                     People Directory
                                 </DropdownItem>
                                 <DropdownItem onClick={() => { navigate(appRoutes.ventures) }}>
-                                    <FaRegBuilding size={15} className='m-2' style={navMargins} />
+                                    <FaRegBuilding size={15} className='mx-3 my-2' style={navMargins} />
                                     Ventures Directory
                                 </DropdownItem>
                                 <DropdownItem onClick={() => { navigate(appRoutes.forum) }}>
-                                    <MdOutlineForum size={15} className='m-2' style={navMargins} />
+                                    <MdOutlineForum size={15} className='mx-3 my-2' style={navMargins} />
                                     Forum
                                 </DropdownItem>
 
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <NavItem>
+                        <NavItem >
                             <NavLink onClick={() => { navigate(appRoutes.debutEvents) }}  >
-                                <GiReceiveMoney size={15} style={navMargins} />
+                                <GiReceiveMoney size={15} className='mx-3 my-2' style={navMargins} />
                                 Debut Events
                             </NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink onClick={() => { navigate(appRoutes.giveGratitude) }} >
-                                <RiChatSmileLine size={15} style={navMargins} />
+                                <RiChatSmileLine size={15} className='mx-3 my-2' style={navMargins} />
                                 Give Gratitude
                             </NavLink>
                         </NavItem>
+
 
 
                         {/* ====================== */}
@@ -93,24 +82,24 @@ export default function NavBarComponent() {
                             inNavbar
                             nav >
                             <DropdownToggle nav  >
-                                <FaRegBuilding className='mx-2' size={15} />
+                                <FaRegBuilding className='mx-3 my-2' size={15} />
                                 My Debut
                             </DropdownToggle>
                             <DropdownMenu right dark >
-                                <DropdownItem onClick={() => { navigate(appRoutes.myVentures) }}>
-                                    <GiBrain size={15} className='m-2' style={navMargins} />
-                                    My Ventures
+                                <DropdownItem onClick={() => { navigate(appRoutes.myDebutInfo) }}>
+                                    <GiBrain size={15} className='mx-3 my-2' style={navMargins} />
+                                    Me & My Debut
                                 </DropdownItem>
                                 <DropdownItem
                                     onClick={() => { navigate(appRoutes.myEvents) }}>
 
-                                    <RiCalendarEventLine size={15} className='m-2' style={navMargins} />
-                                    Upcomming Events
+                                    <RiCalendarEventLine size={15} className='mx-3 my-2' style={navMargins} />
+                                    MyEvents
                                 </DropdownItem>
 
-                                <DropdownItem>
-                                    <GiTechnoHeart size={15} className='m-2' style={navMargins} />
-                                    My Community
+                                <DropdownItem onClick={() => { logout() }}>
+                                    <MdLogout size={15} className='mx-3 my-2' style={navMargins} />
+                                    logout
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
@@ -118,17 +107,7 @@ export default function NavBarComponent() {
                         {/* ================ */}
 
                     </Nav>
-                    <NavbarText>
-                        <Button outline color='dark' className='d-flex'
-                            onClick={() => { logout() }}>
 
-                            <span
-                                className='text-white mx-2 '
-                            >logout</span>
-                            <MdLogout size={15} className='m-2' style={navMargins} />
-                        </Button>
-
-                    </NavbarText>
                 </Collapse>
             </Navbar>
             {/* <Outlet /> */}
