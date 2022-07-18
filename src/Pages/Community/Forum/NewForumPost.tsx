@@ -3,11 +3,21 @@ import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
 import { useMutation } from '@apollo/client';
-import { CREATE_FORUM_POST } from '../../../GraphQl/index';
+import { CREATE_FORUM_POST, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index';
 import Loader from '../../../Components/Loader/Loader';
 export default function NewForumPost() {
     const { userID } = useSelector((store: RootState) => store.identfiers)
-    const [createNewPost, createNewPostRes] = useMutation(CREATE_FORUM_POST)
+    const [createNewPost, createNewPostRes] = useMutation(CREATE_FORUM_POST,
+        {
+            update(cache, { data: { createForumPost } }) {
+                const { getForumPosts }: any = cache.readQuery({ query: FETCH_ALL_FORUM_POSTS })
+                cache.writeQuery({
+                    query: FETCH_ALL_FORUM_POSTS,
+                    data: { getForumPosts: [createForumPost, ...getForumPosts] }
+                })
+            }
+        }
+    )
     const [newForumPost, setNewForumPost] = useState({
         createdBy: userID,
         channel: 'general',

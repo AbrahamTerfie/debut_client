@@ -3,18 +3,20 @@ import { gql } from 'graphql-tag';
 
 
 export const CREATE_FORUM_POST = gql`
-mutation CreateNewForumPost ($forumPostInput: ForumPostInput){ createForumPost(  forumPostInput: $forumPostInput) {
-   _id
+mutation CreateNewForumPost ($forumPostInput: ForumPostInput){ 
+    createForumPost(  forumPostInput: $forumPostInput) {
+    _id
     channel
-    postComments
+    postContent
     postTitle
-    createdBy {
-      _id
-      firstName
-      email
-    }
     comments {
       _id
+
+    },
+    createdBy {
+      _id,
+      firstName,
+      email
     }
 
 }
@@ -26,15 +28,16 @@ export const FETCH_ALL_FORUM_POSTS = gql`
   getForumPosts {
     _id
     channel
-    postComments
+    postContent
     postTitle
     comments {
       _id
-      comment
+
     },
     createdBy {
       _id,
-      firstName,email
+      firstName,
+      email
     }
   }
 }

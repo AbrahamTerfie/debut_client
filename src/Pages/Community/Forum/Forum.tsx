@@ -6,19 +6,22 @@ import ForumCards from '../../../Components/ForumCards/ForumCards'
 import NewForumPost from './NewForumPost'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import './Forum.css'
+import Loader from '../../../Components/Loader/Loader'
 // icons
 import { IoMdAdd } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 // graphql
 import { useMutation, useQuery } from '@apollo/client'
-import { AUTHENTICATED_USER } from '../../../GraphQl/index'
+import { AUTHENTICATED_USER, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
 // auth and redux
 import { useAuth0 } from '@auth0/auth0-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
 import { setUserID } from '../../../Store/identfiers/identfiers'
+// types
+
 export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
@@ -27,7 +30,7 @@ export default function Forum() {
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
-
+    const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS)
 
     // saves the user information when the user logs in to keep it in sybc with store 
     useEffect(() => {
@@ -63,6 +66,17 @@ export default function Forum() {
     }
     if (authenticatedUsrRes.loading) {
         console.log('loading ')
+    }
+
+
+    if (loading) {
+        return <Loader />
+    }
+    if (error) {
+        return <div>Error!</div>
+    }
+    if (data) {
+        console.log(data)
     }
 
 
@@ -145,20 +159,22 @@ export default function Forum() {
                     <SearchComponent />
                 </Row>
                 <Row className='m-3'>
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />  <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
-                    <ForumCards />
+
+                    {data.getForumPosts.map((post: any) => {
+                        return (
+                            <ForumCards
+                                _id={post._id}
+                                channel={post.channel}
+                                postTitle={post.postTitle}
+                                postContent={post.postContent}
+                                comments={post.comments}
+                                createdBy={post.createdBy}
+                            />
+                        )
+                    })}
+
+                    {/* <ForumCards /> */}
+
 
 
                 </Row>
