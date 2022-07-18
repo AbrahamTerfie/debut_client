@@ -39,5 +39,5 @@ const Id_Identfiers = createSlice({
 
 
 
-export const { setUserID } = Id_Identfiers.actions;
+export const { setUserID, setCompanyID } = Id_Identfiers.actions;
 export default Id_Identfiers.reducer;

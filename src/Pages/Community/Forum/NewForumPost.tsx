@@ -1,35 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../Store/RootReducer';
 export default function NewForumPost() {
+    const { userID } = useSelector((store: RootState) => store.identfiers)
+
+    const [newForumPost, setNewForumPost] = useState({
+        createdBy: userID,
+        channel: 'general',
+        postContent: '',
+        postTitle: '',
+    })
+
+
     return (
-        <Form className='p-5' >
-
-
+        <div className='p-5'>
             <FormGroup>
                 <Label for="exampleSelect">Select channel you want to post to</Label>
-                <Input type="select" name="select" id="exampleSelect">
-                    <option> general  </option>
-                    <option> collabration  </option>
-                    <option> community board  </option>
+                <Input type="select" name="select" id="exampleSelect"
+                    onChange={(e) => setNewForumPost({ ...newForumPost, channel: e.target.value })}>
+
+                    <option value="general" > general  </option>
+                    <option value="collabration"  > collabration  </option>
+                    <option value="community" > community board  </option>
 
                 </Input>
             </FormGroup>
             <FormGroup>
                 <Label for="posttitle">Post Title</Label>
-                <Input type="text" name="PostTitle" id="PostTitle" placeholder="Post Title" />
+                <Input type="text" name="PostTitle" id="PostTitle" placeholder="Post Title"
+                    onChange={(e) => setNewForumPost({ ...newForumPost, postTitle: e.target.value })}
+                />
             </FormGroup>
-
-
             <FormGroup>
                 <Label for="post"> Post   </Label>
-                <Input type="textarea" name="postText" id="postText" />
+                <Input type="textarea" name="postText" id="postText"
+                    onChange={(e) => setNewForumPost({ ...newForumPost, postContent: e.target.value })}
+                />
             </FormGroup>
 
             <Button
-                outline color='light' className='mt-3 w-100' size='md'>
+
+                outline color='light' className='mt-3 w-100' size='md'
+                onClick={() => {
+                    console.log(" newForumPost ", newForumPost)
+                }}
+            >
                 Post
             </Button>
-        </Form>
+        </div  >
     );
 }

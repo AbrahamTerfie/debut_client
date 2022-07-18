@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom'
 
 export default function Home() {
 
-    const { isSidebarOpen } = useSelector((store: RootState) => store.sideBarOpen)
+    // const { isSidebarOpen } = useSelector((store: RootState) => store.sideBarOpen)
     return (
         <>
             <div className='m-5' >

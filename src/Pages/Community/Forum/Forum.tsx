@@ -1,37 +1,44 @@
 
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Input } from 'reactstrap'
+// components
 import ForumCards from '../../../Components/ForumCards/ForumCards'
-import './Forum.css'
+import NewForumPost from './NewForumPost'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
+import './Forum.css'
+// icons
 import { IoMdAdd } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
-import NewForumPost from './NewForumPost'
+// graphql
 import { useMutation, useQuery } from '@apollo/client'
-import { CHECK_EMAIL_VALIDITY, CREATE_DEBUT_USER, GET_DEBUT_USER_WITH_EMAIL, AUTHENTICATED_USER } from '../../../GraphQl/index'
+import { AUTHENTICATED_USER } from '../../../GraphQl/index'
+// auth and redux
 import { useAuth0 } from '@auth0/auth0-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
-import { setUserEmail, saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
+import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
+import { setUserID } from '../../../Store/identfiers/identfiers'
 export default function Forum() {
     const dispatch = useDispatch()
-    const { userEmail, auth0UserInfo } = useSelector((store: RootState) => store.auth)
+    const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
+    const { userID } = useSelector((store: RootState) => store.identfiers)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
-    const { isAuthenticated, user } = useAuth0();
-    const [checkIfUserExists, checkEmailResponnce] = useMutation(CHECK_EMAIL_VALIDITY)
+    const { user } = useAuth0();
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
 
+
+    // saves the user information when the user logs in to keep it in sybc with store 
     useEffect(() => {
         if (user) {
             dispatch(saveAuth0UserInfo(user))
         }
     }, [user])
 
-    
-    console.log("state from store", auth0UserInfo)
-    // run authenticatedUser() when the component mounts
+
+    //gets the user from the server if it exists and if it doesn't it creates a new user
+
     useEffect(() => {
         authenticatedUser({
             variables: {
@@ -48,27 +55,19 @@ export default function Forum() {
     }, [auth0UserInfo.email])
 
     if (authenticatedUsrRes.data) {
-         console.log(authenticatedUsrRes.data)
-
+        // saves user id in steore to be used in other components
+        dispatch(setUserID(authenticatedUsrRes.data.authenticatedUser._id))
     }
     if (authenticatedUsrRes.error) {
-         console.log(authenticatedUsrRes.error)
+        console.log(authenticatedUsrRes.error)
     }
     if (authenticatedUsrRes.loading) {
-         console.log('getching user......,,,,,')
+        console.log('loading ')
     }
 
 
     return (
         <Row className=' d-flex page mt-4' >
-
-            <Button color='primary'
-
-            // onClick={() => MyAccount(user)}
-            >
-
-                fetch user shit
-            </Button>
             <Offcanvas style={{ width: '50%' }}
                 direction="end"
                 isOpen={canvas}
