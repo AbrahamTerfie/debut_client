@@ -3,9 +3,7 @@ import { gql } from 'graphql-tag';
 
 
 export const CREATE_FORUM_POST = gql`
-mutation CreateNewForumPost ($forumPostInput: ForumPostInput)
-{ createForumPost(  forumPostInput: $forumPostInput) {
-{
+mutation CreateNewForumPost ($forumPostInput: ForumPostInput){ createForumPost(  forumPostInput: $forumPostInput) {
    _id
     channel
     postComments
@@ -18,7 +16,7 @@ mutation CreateNewForumPost ($forumPostInput: ForumPostInput)
     comments {
       _id
     }
-  }
+
 }
 
 }`
