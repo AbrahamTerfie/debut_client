@@ -41,5 +41,42 @@ export const FETCH_ALL_FORUM_POSTS = gql`
     }
   }
 }
+`
+
+export const CREATE_FORUM_COMMENT = gql`
+mutation ($postCommentInput: postCommentInput){
+  createPostComment(  postCommentInput: $postCommentInput) {
+    _id
+    comment
+    createdBy {
+      _id,
+      firstName,
+      email
+    },
+    post {
+      _id,
+      postContent
+    }
+  }
+}
+
 
 `
+
+
+export const FETCH_POST_COMMENTS = gql`
+query postComments ($getPostCommentWithPostIdId: ID!){
+  getPostCommentWithPostId(id: $getPostCommentWithPostIdId) {
+    _id
+    comment
+    createdBy {
+      _id,
+      firstName,
+      email
+    },
+    post {
+      _id,
+      postContent
+    }
+  }
+}`

@@ -2,7 +2,9 @@ import React from 'react'
 import { CHECK_EMAIL_VALIDITY } from './EmailValidator/EmailValidator'
 import {CREATE_DEBUT_USER,AUTHENTICATED_USER} from './User/createUser'
 import {GET_DEBUT_USER_WITH_EMAIL} from './User/fetchUser'
-import { FETCH_ALL_FORUM_POSTS ,CREATE_FORUM_POST  } from './PostComment/PostQuery'
+import { FETCH_ALL_FORUM_POSTS ,CREATE_FORUM_POST ,
+    CREATE_FORUM_COMMENT ,FETCH_POST_COMMENTS
+} from './PostComment/PostQuery'
 
 export {
     CHECK_EMAIL_VALIDITY,
@@ -12,7 +14,12 @@ export {
 
     // forum post
     FETCH_ALL_FORUM_POSTS,
-    CREATE_FORUM_POST
+    CREATE_FORUM_POST,
+
+    CREATE_FORUM_COMMENT,
+    FETCH_POST_COMMENTS
+
+
     // DELETE_DEBUT_USER,
     // GET_DEBUT_USER_WITH_EMAIL,
     // GET_DEBUT_USER_WITH_ID,

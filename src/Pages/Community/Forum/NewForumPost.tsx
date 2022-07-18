@@ -7,17 +7,15 @@ import { CREATE_FORUM_POST, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index
 import Loader from '../../../Components/Loader/Loader';
 export default function NewForumPost() {
     const { userID } = useSelector((store: RootState) => store.identfiers)
+
     const [createNewPost, createNewPostRes] = useMutation(CREATE_FORUM_POST,
-        {
-            update(cache, { data: { createForumPost } }) {
+        {update(cache, { data: { createForumPost } }) {
                 const { getForumPosts }: any = cache.readQuery({ query: FETCH_ALL_FORUM_POSTS })
                 cache.writeQuery({
                     query: FETCH_ALL_FORUM_POSTS,
                     data: { getForumPosts: [createForumPost, ...getForumPosts] }
                 })
-            }
-        }
-    )
+            }})
     const [newForumPost, setNewForumPost] = useState({
         createdBy: userID,
         channel: 'general',
