@@ -15,13 +15,13 @@ export default function Ventures() {
     // if (error) console.log("error", error)
     // console.log('from use query', data.getAllBusinesses)
     return (
-        <Row className=' d-flex page' >
-            <Col className='filterContainer m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
+        <Row className=' d-flex page my-5' >
+            <Col className='filterContainer ' xs='10' sm='10' md='8' lg='3' xl='3' >
                 <FilterVenture />
             </Col>
 
             <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
-                <Row className='searchInput mb-1 mt-4' >
+                <Row className='searchInput mb-1 mt-4 w-100' >
                     <p className='fw-bolder fs-3'> Venture Directory </p>
                     <SearchComponent />
                 </Row>

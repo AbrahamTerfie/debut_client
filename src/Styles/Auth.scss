@@ -37,9 +37,10 @@
 .tabs {
 
   display: flex;
-  justify-content: center;
-  padding: 1em;
-  overflow: scroll;
+  justify-content: space-evenly;
+  overflow-x: scroll  ;
+
+;
 
   .nav-item {
     .nav-link {
@@ -51,10 +52,10 @@
         cursor: pointer;
         font-size: 1em;
         border-bottom: 6px solid #7e7f9aff;
-        border-radius: 10%;
+        // border-radius: 10%;
         color: #fff;
         display: inline-flex;
-        transition: 0.3s ease-in-out;
+        transition: 0.6s ease-in-out;
         // background-color: #272838ff;
         font-weight: lighter;
         border-left: none;
@@ -68,11 +69,12 @@
       &.notActiveTab {
         font-size: 1em;
         color: #f9f8f8ff;
-        transition: 0.3s ease-in;
+        transition: 0.6s ease-in-out;
+
         border-left: none;
         border-right: none;
         border-top: none;
-        transition: 0.18s ease-in-out;
+        // transition: 0.18s ease-in-out;
 
       }
 
@@ -82,7 +84,8 @@
         border-left: none;
         border-right: none;
         border-top: none;
-        transition: 0.18s ease-in-out;
+        transition: 0.6s ease-in-out;
+
       }
     }
   }

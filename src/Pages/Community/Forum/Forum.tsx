@@ -130,22 +130,22 @@ export default function Forum() {
                 <div className='ChanelsContainer w-100 h-25 mt-4' >
                     <h4 className='mt-4' > Channels</h4>
                     <div className='channels w-100' >
-                        <h6 color='light' className='w-100 py-2  m-2 ' >
+                        <h6 color='light' className='w-100 py-2  my-2 ' >
                             <IoChatbubblesOutline size={15}
                                 style={{ backgroundColor: 'transparent', }}
-                                className='mx-3' />
+                                className='mx-2' />
                             General
                         </h6>
-                        <h6 color='light' className='py-2 w-100  m-2 ' >
+                        <h6 color='light' className='py-2 w-100  my-2 ' >
                             <FaRegHandPaper size={15}
                                 style={{ backgroundColor: 'transparent', }}
-                                className='mx-3' />
+                                className='mx-2' />
                             Collabration
                         </h6>
-                        <h6 color='light' className='py-2 w-100  m-2 ' >
+                        <h6 color='light' className='py-2 w-100  my-2 ' >
                             <FaRegHandshake size={15}
                                 style={{ backgroundColor: 'transparent', }}
-                                className='mx-3' />
+                                className='mx-2' />
                             Community Board
                         </h6>
                     </div>
