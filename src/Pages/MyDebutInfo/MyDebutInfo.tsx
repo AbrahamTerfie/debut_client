@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
 import Connections from './Connections';
 import ContactInfo from './ContactInfo';
-import Dealings from './Dealings';
+
 import Experiance from './Experiance';
 import PersonalInfo from './PersonalInfo';
 import Sharing from './Sharing';
@@ -16,7 +16,11 @@ export default function MyDebutInfo() {
     }
     return (
         <div className='my-5  mx-5 px-5  w-100 '>
-            <Nav tabs className='tabs' >
+
+            <p className='fs-2  fw-lighter mx-5 '>
+                your information
+            </p>
+            <Nav tabs className='tabs'  >
                 <NavItem >
                     <NavLink
                         className={activeTab === "1" ? "activeTab " : "notActiveTab"}
@@ -43,22 +47,21 @@ export default function MyDebutInfo() {
                 </NavItem>
 
 
+            
                 <NavItem>
                     <NavLink
                         className={
                             activeTab === "4" ? "activeTab" : "notActiveTab"
                         } onClick={() => { toggle('4') }}>
-                        Dealings
+                        Connectoins
                     </NavLink>
                 </NavItem>
-
-
                 <NavItem>
                     <NavLink
                         className={
                             activeTab === "5" ? "activeTab" : "notActiveTab"
                         } onClick={() => { toggle('5') }}>
-                        Connectoins
+                        Sharing
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -66,19 +69,14 @@ export default function MyDebutInfo() {
                         className={
                             activeTab === "6" ? "activeTab" : "notActiveTab"
                         } onClick={() => { toggle('6') }}>
-                        Sharing
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={
-                            activeTab === "7" ? "activeTab" : "notActiveTab"
-                        } onClick={() => { toggle('7') }}>
                         Your Company
                     </NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab} className="my-5 w-100" >
+            <TabContent activeTab={activeTab} className="my-5 w-100" 
+               scrollable={true}
+
+            >
                 <TabPane tabId="1">
                     <Row>
 
@@ -96,22 +94,18 @@ export default function MyDebutInfo() {
                         <Experiance />
                     </Row>
                 </TabPane>
+
                 <TabPane tabId="4">
-                    <Row>
-                        <Dealings />
-                    </Row>
-                </TabPane>
-                <TabPane tabId="5">
                     <Row>
                         <Connections />
                     </Row>
                 </TabPane>
-                <TabPane tabId="6">
+                <TabPane tabId="5">
                     <Row>
                         <Sharing />
                     </Row>
                 </TabPane>
-                <TabPane tabId="7">
+                <TabPane tabId="6">
                     <Row>
                         <YourComapany />
                     </Row>
