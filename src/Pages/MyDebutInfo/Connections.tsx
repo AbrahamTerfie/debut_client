@@ -1,8 +1,15 @@
 import React from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../Store/RootReducer';
+import { setMyDebutTab } from '../../Store/UI/sidebarController';
 
 
 function UserCardPreview() {
+  const { userID } = useSelector((store: RootState) => store.identfiers)
+  const dispatch = useDispatch();
+  const { myDebutTab } = useSelector((store: RootState) => store.uiStore)
+
   return (
 
     <div className="d-flex shadow-lg my-3 px-3 py-3">

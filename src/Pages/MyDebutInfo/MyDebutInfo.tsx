@@ -5,75 +5,74 @@ import ContactInfo from './ContactInfo';
 
 import Experiance from './Experiance';
 import PersonalInfo from './PersonalInfo';
-import Sharing from './Sharing';
+import MyEvents from './MyEvents';
 import YourComapany from './YourComapany';
-
-
+import { RootState } from '../../Store/RootReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { setMyDebutTab } from '../../Store/UI/sidebarController';
 export default function MyDebutInfo() {
-    const [activeTab, setActiveTab] = useState('1');
-    const toggle = (tab: any) => {
-        if (activeTab !== tab) setActiveTab(tab);
-    }
+    const dispatch = useDispatch();
+    const { myDebutTab } = useSelector((store: RootState) => store.uiStore)
+
     return (
         <div className='my-5  mx-5 px-5  w-100 '>
-
             <p className='fs-2  fw-lighter mx-5 '>
                 your information
             </p>
             <Nav tabs className='tabs shadow-lg py-4'  >
                 <NavItem >
                     <NavLink
-                        className={activeTab === "1" ? "activeTab " : "notActiveTab"}
-                        onClick={() => { toggle('1') }}>
+                        className={myDebutTab === "1" ? "activeTab " : "notActiveTab"}
+                        onClick={() => { dispatch(setMyDebutTab('1')); }}>
+
                         Personal info
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
-                        className={
-                            activeTab === "2" ? "activeTab" : "notActiveTab"
-                        } onClick={() => { toggle('2'); }}>
+                        className={myDebutTab === "2" ? "activeTab" : "notActiveTab"}
+                        onClick={() => { dispatch(setMyDebutTab('2')) }}>
                         Contact info
                     </NavLink>
                 </NavItem>
 
                 <NavItem>
                     <NavLink
-                        className={
-                            activeTab === "3" ? "activeTab" : "notActiveTab"
-                        } onClick={() => { toggle('3'); }}>
+                        className={myDebutTab === "3" ? "activeTab" : "notActiveTab"}
+                        onClick={() => { dispatch(setMyDebutTab('3')); }}>
+
                         Experience
                     </NavLink>
                 </NavItem>
 
 
+                {/* <NavItem>
+                    <NavLink
+                        className={myDebutTab === "4" ? "activeTab" : "notActiveTab"}
+                        onClick={() => { dispatch(setMyDebutTab('4')); }}>
+
+                        Connectoins
+                    </NavLink>
+                </NavItem> */}
 
                 <NavItem>
                     <NavLink
-                        className={
-                            activeTab === "4" ? "activeTab" : "notActiveTab"
-                        } onClick={() => { toggle('4') }}>
-                        Connectoins
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={
-                            activeTab === "5" ? "activeTab" : "notActiveTab"
-                        } onClick={() => { toggle('5') }}>
-                        My Events
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={
-                            activeTab === "6" ? "activeTab" : "notActiveTab"
-                        } onClick={() => { toggle('6') }}>
+                        className={myDebutTab === "4" ? "activeTab" : "notActiveTab"}
+                        onClick={() => { dispatch(setMyDebutTab('4')); }}>
+
                         Your Company
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink
+                        className={myDebutTab === "5" ? "activeTab" : "notActiveTab"}
+                        onClick={() => { dispatch(setMyDebutTab('5')); }}>
+
+                        My Events
+                    </NavLink>
+                </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab} className="py-5 px-5 w-100 shadow-lg "
+            <TabContent activeTab={myDebutTab} className="py-5 px-5 w-100 shadow-lg "
                 scrollable={true}
 
             >
@@ -95,21 +94,22 @@ export default function MyDebutInfo() {
                     </Row>
                 </TabPane>
 
-                <TabPane tabId="4">
+                {/* <TabPane tabId="4">
                     <Row>
                         <Connections />
                     </Row>
-                </TabPane>
-                <TabPane tabId="5">
-                    <Row>
-                        <Sharing />
-                    </Row>
-                </TabPane>
-                <TabPane tabId="6">
+                </TabPane> */}
+                <TabPane tabId="4">
                     <Row>
                         <YourComapany />
                     </Row>
                 </TabPane>
+                <TabPane tabId="5">
+                    <Row>
+                        <MyEvents />
+                    </Row>
+                </TabPane>
+
             </TabContent>
         </div>
     );

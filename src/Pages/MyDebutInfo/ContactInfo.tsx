@@ -1,7 +1,14 @@
 import React from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../Store/RootReducer';
+import { setMyDebutTab } from '../../Store/UI/sidebarController';
 
 export default function ContactInfo() {
+    const { userID } = useSelector((store: RootState) => store.identfiers)
+    const dispatch = useDispatch();
+    const { myDebutTab } = useSelector((store: RootState) => store.uiStore)
+
     return (
         <Form>
             <Row form>
@@ -79,15 +86,22 @@ export default function ContactInfo() {
                             placeholder="assistant phone number" />
                     </FormGroup>
                 </Col>
-
             </Row>
-
-
             <Row>
-
-                <Button className='my-5 py-2' outline color="success" >Save and continue</Button>
-
+                <Col md={3}>
+                    <Button className='my-4 py-2 w-100 mx-2' outline color="warning"
+                        onClick={() => { dispatch(setMyDebutTab('1')) }}>
+                        previous
+                    </Button>
+                </Col>
+                <Col md={9}>
+                    <Button className='my-4 py-2 w-100' outline color="success"
+                        onClick={() => { dispatch(setMyDebutTab('3')) }}>
+                        Save and continue
+                    </Button>
+                </Col>
             </Row>
+
         </Form>
     );
 }

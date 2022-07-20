@@ -26,6 +26,7 @@ export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
     const { userID } = useSelector((store: RootState) => store.identfiers)
+
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();

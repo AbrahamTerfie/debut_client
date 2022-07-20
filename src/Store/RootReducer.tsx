@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import sidebarController from "./UI/sidebarController";
+import uiStore from "./UI/sidebarController";
 import authController from "./Auth/AuthSlice";
 import identfiers from "./identfiers/identfiers";
 
 
 const rootReducer = combineReducers({
-    sideBarOpen: sidebarController,
+    uiStore: uiStore,
     identfiers: identfiers,
     auth: authController
 })

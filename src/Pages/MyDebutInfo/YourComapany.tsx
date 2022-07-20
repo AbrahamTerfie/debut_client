@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { MultiSelect } from "react-multi-select-component";
 import { optionOfGeography, optionsOfBusinessCategories, optionsOfAeraasOfImpact } from "./selectInputs";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../Store/RootReducer';
+import { setMyDebutTab } from '../../Store/UI/sidebarController';
+
 
 const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
   const files = Array.from(e.target.files || []);
@@ -10,6 +14,9 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
 
 
 export default function YourComapany() {
+  const { userID } = useSelector((store: RootState) => store.identfiers)
+  const dispatch = useDispatch();
+  const { myDebutTab } = useSelector((store: RootState) => store.uiStore)
 
 
   const [selectedBusinessCategories, setSelectedBusinessCategories] = useState([]);
@@ -157,9 +164,18 @@ export default function YourComapany() {
 
 
       <Row>
-
-        <Button className='my-4 py-2' outline color="success" >Save and continue</Button>
-
+        <Col md={3}>
+          <Button className='my-4 py-2 w-100 mx-2' outline color="warning"
+            onClick={() => { dispatch(setMyDebutTab('3')) }}>
+            previous
+          </Button>
+        </Col>
+        <Col md={9}>
+          <Button className='my-4 py-2 w-100' outline color="success"
+            onClick={() => { dispatch(setMyDebutTab('5')) }}>
+            Save and continue
+          </Button>
+        </Col>
       </Row>
     </Form>
   );
