@@ -20,7 +20,7 @@ export default function MyDebutInfo() {
             <p className='fs-2  fw-lighter mx-5 '>
                 your information
             </p>
-            <Nav tabs className='tabs'  >
+            <Nav tabs className='tabs shadow-lg py-4'  >
                 <NavItem >
                     <NavLink
                         className={activeTab === "1" ? "activeTab " : "notActiveTab"}
@@ -42,7 +42,7 @@ export default function MyDebutInfo() {
                         className={
                             activeTab === "3" ? "activeTab" : "notActiveTab"
                         } onClick={() => { toggle('3'); }}>
-                        Experiance
+                        Experience
                     </NavLink>
                 </NavItem>
 
@@ -73,7 +73,7 @@ export default function MyDebutInfo() {
                     </NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab} className="my-5 w-100" 
+            <TabContent activeTab={activeTab} className="py-5 px-5 w-100 shadow-lg " 
                scrollable={true}
 
             >
