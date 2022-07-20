@@ -1,5 +1,5 @@
 
-export  const optionsOfInterst = [
+export const optionsOfInterst = [
     { label: "board development", value: "board development" },
     { label: "branding", value: "mango" },
     { label: "engineering", value: "branding" },
@@ -33,5 +33,45 @@ export const optionOfGeography = [
     { label: "North America", value: "North America" },
     { label: "Oceania", value: "Oceania" },
     { label: "South America", value: "South America" },
+
+]
+
+
+
+//  business impacts
+export const optionsOfAeraasOfImpact = [
+    { label: "waste treatment ", value: "Waste Treatment" },
+    { label: "Renewable Energy", value: " Renewable Energy" },
+    { label: "Water", value: "Water" },
+    { label: "BioTechnology", value: "BioTechnology" },
+    { label: "Agriculture", value: "Agriculture" },
+    { label: "Cybernetics", value: "Cybernetics" },
+    { label: "Construction", value: "Construction" },
+    { label: "Financial Technology", value: "Financial Technology" },
+    { label: "Health", value: "Health" },
+    { label: "NanoTechnology", value: "NanoTechnology" },
+    { label: "Food Technology", value: "Food Technology" },
+]
+
+
+//primary aeras of impact 
+export const optionsOfBusinessCategories = [
+    { label: "Poverty ", value: "Poverty" },
+    { label: "Climate", value: "Climate" },
+    { label: "Water", value: "Water" },
+    { label: "BioTechnology", value: "BioTechnology" },
+    { label: "Agriculture", value: "Agriculture" },
+    { label: "Gender Equality", value: "Gender Equality" },
+    { label: "Infrastructure", value: "Infrastructure" },
+    { label: "Education", value: "Education" },
+    { label: "Employment", value: "Employment" },
+    { label: "Hunger", value: "Hunger" },
+    { label: "Health", value: "Health" },
+    { label: "Sanitation", value: "Sanitation" },
+
+
+
+
+
 
 ]

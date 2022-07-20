@@ -47,7 +47,7 @@ export default function MyDebutInfo() {
                 </NavItem>
 
 
-            
+
                 <NavItem>
                     <NavLink
                         className={
@@ -61,7 +61,7 @@ export default function MyDebutInfo() {
                         className={
                             activeTab === "5" ? "activeTab" : "notActiveTab"
                         } onClick={() => { toggle('5') }}>
-                        Sharing
+                        My Events
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -73,8 +73,8 @@ export default function MyDebutInfo() {
                     </NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab} className="py-5 px-5 w-100 shadow-lg " 
-               scrollable={true}
+            <TabContent activeTab={activeTab} className="py-5 px-5 w-100 shadow-lg "
+                scrollable={true}
 
             >
                 <TabPane tabId="1">
