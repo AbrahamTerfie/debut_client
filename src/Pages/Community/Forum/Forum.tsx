@@ -26,7 +26,7 @@ export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
     const { userID } = useSelector((store: RootState) => store.identfiers)
-
+console.log(userID)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();
@@ -77,7 +77,7 @@ export default function Forum() {
         return <div>Error!</div>
     }
     if (data) {
-        console.log(data)
+        console.log("data res ", data)
     }
 
 
@@ -93,7 +93,6 @@ export default function Forum() {
                     <p className='fs-3 m-3 px-5 fw-light' >
                         Create New Post
                     </p>
-
                     <p className='fs-5 m-3 px-5 fw-light text-muted' >
                         share your events , ideas , or anything you want to share with the community
                     </p>
@@ -160,10 +159,10 @@ export default function Forum() {
                     <SearchComponent />
                 </Row>
                 <Row className='m-3'>
-
                     {data.getForumPosts.map((post: any) => {
                         return (
                             <ForumCards
+                                key={post._id}
                                 _id={post._id}
                                 channel={post.channel}
                                 postTitle={post.postTitle}
@@ -173,14 +172,7 @@ export default function Forum() {
                             />
                         )
                     })}
-
-                    {/* <ForumCards /> */}
-
-
-
                 </Row>
-
-
             </Col>
         </Row>
 

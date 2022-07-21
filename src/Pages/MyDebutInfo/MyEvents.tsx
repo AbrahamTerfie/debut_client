@@ -11,8 +11,6 @@ export default function MyEvents() {
   return (
     <div>
       <Row>
-
-
         <Button className='my-4 py-2 w-100' outline color="success"
           onClick={() => console.log("savedd")} >
           Save 
