@@ -22,3 +22,10 @@ export const contactInfoInitState = {
     assistantEmail: "",
 
 }
+
+export const experienceInfoInitState = {
+    howyouContribute: "",
+    regions: [],
+    aeraOfExpertise: [],
+    yourBiography: "",
+}

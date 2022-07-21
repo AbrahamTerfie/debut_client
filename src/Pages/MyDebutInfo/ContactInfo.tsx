@@ -10,12 +10,10 @@ import Loader from '../../Components/Loader/Loader';
 export default function ContactInfo() {
     const { userID } = useSelector((store: RootState) => store.identfiers)
     const dispatch = useDispatch();
-    const { myDebutTab } = useSelector((store: RootState) => store.uiStore)
     const { data, loading, error } = useQuery(FETCH_USER_WITH_ID, {
         variables: { getDebutUserWithIdId: userID }
     })
     const [contactInfoForm, setContactInfoForm] = useState(contactInfoInitState)
-    console.log(contactInfoForm)
     useEffect(() => {
         if (data) {
             setContactInfoForm({
@@ -30,9 +28,6 @@ export default function ContactInfo() {
             })
         }
     }, [data])
-
-
-
     const [updateContactInfo, updateContactInfoRes] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
         {
             update(cache, { data: { updateDebutUser } }) {
@@ -60,6 +55,12 @@ export default function ContactInfo() {
             }
         })
         updateContactInfoRes.data && dispatch(setMyDebutTab("3")) && setContactInfoForm(contactInfoInitState)
+    }
+    if (loading) {
+        return <Loader />
+    }
+    if (error) {
+        return <div>Error</div>
     }
     return (
         <Form>
