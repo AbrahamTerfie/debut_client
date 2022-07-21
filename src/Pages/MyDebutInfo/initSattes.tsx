@@ -10,3 +10,15 @@ export const personalInfoInitialState = {
     facebookUrl: "",
     mailingAddress: "",
 }
+
+export const contactInfoInitState = {
+    email: "",
+    mobilePhone: "",
+    officePhone: "",
+    preferedContactMethod: "",
+    hasAssistat: false,
+    assistantName: "",
+    assistantPhone: "",
+    assistantEmail: "",
+
+}
