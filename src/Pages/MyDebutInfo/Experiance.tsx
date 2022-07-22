@@ -16,7 +16,7 @@ export default function Experiance() {
         variables: { getDebutUserWithIdId: userID }
     })
     const [selectedIntrest, setSelectedIntrest] = useState([] as any);
-    const [selectedGeography, setSelectedGeography] = useState([] );
+    const [selectedGeography, setSelectedGeography] = useState([]);
 
     const experienceInfoInitState = {
         howyouContribute: "",

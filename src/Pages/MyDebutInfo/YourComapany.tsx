@@ -5,15 +5,36 @@ import { optionOfGeography, optionsOfBusinessCategories, optionsOfAeraasOfImpact
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/RootReducer';
 import { setMyDebutTab } from '../../Store/UI/sidebarController';
+import Axios from 'axios';
 
 
-const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
-  const files = Array.from(e.target.files || []);
-  console.log("files:", files)
-}
+
+// debutClient 
+
 
 
 export default function YourComapany() {
+
+
+
+  const [imageSelected, setImageSelected] = useState("")
+
+  const handleFileSelected = () => {
+    const formData = new FormData
+    formData.append('file', imageSelected)
+    // file is the file object
+    // first one is the preset and the second one is name  for cloudnary api
+    formData.append('upload_preset', 'debutCompanyProfilePicture')
+    Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+      .then((response) => {
+        console.log(response)
+      }
+      )
+
+
+    // console.log(files[0]);
+
+  }
   const { userID } = useSelector((store: RootState) => store.identfiers)
   const dispatch = useDispatch();
   const { myDebutTab } = useSelector((store: RootState) => store.uiStore)
@@ -56,8 +77,16 @@ export default function YourComapany() {
         <Col md={12}>
           <FormGroup>
             <Label for="pronouns"> upload high resolution image of your logo </Label>
-            <Input onChange={handleFileSelected} type="file" />
+            <Input onChange={(event: any) => {
+              setImageSelected(event.target.files[0])
+
+
+            }} type="file" />
           </FormGroup>
+
+          <Button onClick={handleFileSelected} >
+            upload image
+          </Button>
         </Col>
         {/* <Col md={6} className='py-4' >
           * current company *
