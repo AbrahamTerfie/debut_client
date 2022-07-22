@@ -9,6 +9,7 @@ export const personalInfoInitialState = {
     instagramUrl: "",
     facebookUrl: "",
     mailingAddress: "",
+    profileImage: "",
 }
 
 export const contactInfoInitState = {

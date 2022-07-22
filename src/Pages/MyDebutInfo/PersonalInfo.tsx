@@ -7,9 +7,10 @@ import { FETCH_USER_WITH_ID, UPDATE_DEBUT_USER_WITH_ID } from '../../GraphQl/ind
 import { useMutation, useQuery } from '@apollo/client'
 import { personalInfoInitialState } from './initSattes';
 import Loader from '../../Components/Loader/Loader';
-
+import Axios from 'axios';
 
 export default function PersonalInfo() {
+    const [imageSelected, setImageSelected] = useState("")
     const dispatch = useDispatch();
     const { userID } = useSelector((store: RootState) => store.identfiers)
     const { data, loading, error } = useQuery(FETCH_USER_WITH_ID, {
@@ -20,6 +21,7 @@ export default function PersonalInfo() {
     useEffect(() => {
         if (data) {
             setPersonalInfoForm({
+                ...personalInfoForm,
                 firstName: data.getDebutUserWithId.firstName === null ? '' : data.getDebutUserWithId.firstName,
                 lastName: data.getDebutUserWithId.lastName === null ? '' : data.getDebutUserWithId.lastName,
                 preferredName: data.getDebutUserWithId.preferredName === null ? '' : data.getDebutUserWithId.preferredName,
@@ -53,21 +55,34 @@ export default function PersonalInfo() {
         const { name, value } = e.target;
         setPersonalInfoForm({ ...personalInfoForm, [name]: value })
     }
-
     const handleSubmit = (e: any) => {
-        e.preventDefault();
-        updatePersonalInfo({
-            variables: {
-                userInput: personalInfoForm,
-                updateDebutUserId: userID
-            }
-        })
-        updatePersonalInfoRes.data && dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
+        const formData = new FormData
+        formData.append('file', imageSelected)
+        // file is the file object
+        // first one is the preset and the second one is name  for cloudnary api
+        formData.append('upload_preset', 'debutClient')
+        Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+            .then((response) => {
+                setPersonalInfoForm({ ...personalInfoForm, profileImage: response.data.secure_url })
+            }).then(() => {
+                updatePersonalInfo({
+                    variables: {
+                        userInput: personalInfoForm,
+                        updateDebutUserId: userID
+                    }
+                })
+            }).then((updatePersonalInfoRes) => {
+                dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
+
+            }).catch((error) => {
+                console.log(error)
+            })
+
     }
 
-    if (loading) return <div>   <Loader /> </div>
-    if (error) return <div>Error!</div>
-    console.log(data)
+    if (loading || updatePersonalInfoRes.loading) return <div>   <Loader /> </div>
+    if (error || updatePersonalInfoRes.error) return <div>Error!</div>
+
 
     return (
         <Form>
@@ -128,8 +143,21 @@ export default function PersonalInfo() {
                             onChange={handleChange} />
                     </FormGroup>
                 </Col>
-                <Col md={6} className='py-4' >
+                <Col md={2} className='py-4' >
                     * current company *
+                </Col>
+
+                <Col md={4}>
+                    <FormGroup>
+                        <Label for="companyProfilePhoto"> upload high resolution image of your logo </Label>
+                        <Input onChange={(event: any) => {
+                            setImageSelected(event.target.files[0])
+
+
+                        }} type="file" />
+                    </FormGroup>
+
+
                 </Col>
 
                 <Col md={3}>
