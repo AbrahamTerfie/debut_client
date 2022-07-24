@@ -73,6 +73,7 @@ export default function ContactInfo() {
                             id="FirstName"
                             placeholder={contactInfoForm.email}
                             value={contactInfoForm.email}
+                            onChange={() => { }}
 
                         />
                     </FormGroup>
@@ -170,7 +171,7 @@ export default function ContactInfo() {
                 </Col>
                 <Col md={9}>
                     <Button className='my-4 py-2 w-100' outline color="success"
-                       onClick={(e) => handleSubmit(e)}>
+                        onClick={(e) => handleSubmit(e)}>
                         Save and continue
                     </Button>
                 </Col>

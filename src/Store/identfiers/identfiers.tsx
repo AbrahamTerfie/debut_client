@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initalState = {
     userID: '',
+    hasCompany: false,
     companyID: '',
     debutEventID: '',
     debutRegistryID: '',
@@ -25,6 +26,10 @@ const Id_Identfiers = createSlice({
         setCompanyID: (state, action) => {
             state.companyID = action.payload;
         },
+        togglehasCompany: (state, action) => {
+            state.hasCompany = action.payload;
+        },
+
         setDebutEventID: (state, action) => {
             state.debutEventID = action.payload;
         },
@@ -39,5 +44,5 @@ const Id_Identfiers = createSlice({
 
 
 
-export const { setUserID, setCompanyID } = Id_Identfiers.actions;
+export const { setUserID, setCompanyID, togglehasCompany } = Id_Identfiers.actions;
 export default Id_Identfiers.reducer;

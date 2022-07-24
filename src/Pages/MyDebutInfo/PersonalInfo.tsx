@@ -12,7 +12,7 @@ import Axios from 'axios';
 export default function PersonalInfo() {
     const [imageSelected, setImageSelected] = useState("")
     const dispatch = useDispatch();
-    const { userID } = useSelector((store: RootState) => store.identfiers)
+    const { userID, hasCompany, companyID } = useSelector((store: RootState) => store.identfiers)
     const { data, loading, error } = useQuery(FETCH_USER_WITH_ID, {
         variables: { getDebutUserWithIdId: userID }
     })
@@ -21,7 +21,6 @@ export default function PersonalInfo() {
     useEffect(() => {
         if (data) {
             setPersonalInfoForm({
-                ...personalInfoForm,
                 firstName: data.getDebutUserWithId.firstName === null ? '' : data.getDebutUserWithId.firstName,
                 lastName: data.getDebutUserWithId.lastName === null ? '' : data.getDebutUserWithId.lastName,
                 preferredName: data.getDebutUserWithId.preferredName === null ? '' : data.getDebutUserWithId.preferredName,
@@ -32,6 +31,7 @@ export default function PersonalInfo() {
                 instagramUrl: data.getDebutUserWithId.instagramUrl === null ? '' : data.getDebutUserWithId.instagramUrl,
                 facebookUrl: data.getDebutUserWithId.facebookUrl === null ? '' : data.getDebutUserWithId.facebookUrl,
                 mailingAddress: data.getDebutUserWithId.mailingAddress === null ? '' : data.getDebutUserWithId.mailingAddress,
+                profileImage: data.getDebutUserWithId.profileImage === null ? '' : data.getDebutUserWithId.profileImage,
             })
         }
     }, [data])

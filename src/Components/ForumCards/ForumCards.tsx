@@ -49,7 +49,7 @@ export default function ForumCards(
         variables: { getPostCommentWithPostIdId: _id }
     })
 
-    data && console.log(data)
+    // data && console.log(data)
     if (loading) {
         return <Loader />
     }
@@ -116,7 +116,7 @@ export default function ForumCards(
                     <div>
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-                                <div className='shadow pb-3 rounded' >
+                                <div  key={comment.id}  className='shadow pb-3 rounded' >
                                     <p className='fs-6 m-3 px-5 pt-3 fw-light ' > {comment.comment}</p>
                                     <span className='fs-6 mx-5 px-3  fw-light text-muted text-end ' > by {comment.createdBy.firstName}  </span>
                                     {/* <Button className='btn-sm  ' color='danger' outline size='xs'>x</Button>  
