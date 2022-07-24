@@ -18,7 +18,8 @@ export default function YourComapany() {
   const [selectedBusinessCategories, setSelectedBusinessCategories] = useState([]);
   const [selectedAeraasOfImpact, setSelectedAeraasOfImpact] = useState([]);
   const [selectedGeography, setSelectedGeography] = useState([]);
-  console.log(hasCompany)
+  const [isCreatingAcompany, setIsCreatingAcompany] = useState(false)
+  console.log("hasCompany", isCreatingAcompany)
 
   const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
     variables: { userId: userID }
@@ -54,8 +55,7 @@ export default function YourComapany() {
 
   return (
     <>
-
-      {!hasCompany ?
+      {!hasCompany && !isCreatingAcompany ?
 
         <Row>
           <p className='m-5 text-muted fs-2 fw-light text-center'  >
@@ -65,14 +65,13 @@ export default function YourComapany() {
             size='md'
             outline
             color='light'
-            className='m-5 w-50 mx-auto'
+            className='m-5 w-50 mx-auto shadow'
+            onClick={() => setIsCreatingAcompany(true)}
           >
             Start registering a company
           </Button>
         </Row>
         :
-
-
         <Form>
           <Row form>
             <Col md={12}>
@@ -235,6 +234,7 @@ export default function YourComapany() {
             </Col>
           </Row>
         </Form>
+
       }
     </>
   );
