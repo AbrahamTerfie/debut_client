@@ -17,7 +17,7 @@ export default function PersonalInfo() {
         variables: { getDebutUserWithIdId: userID }
     })
     const [personalInfoForm, setPersonalInfoForm] = useState(personalInfoInitialState)
-
+    console.log(data)
     useEffect(() => {
         if (data) {
             setPersonalInfoForm({
@@ -61,22 +61,24 @@ export default function PersonalInfo() {
         // file is the file object
         // first one is the preset and the second one is name  for cloudnary api
         formData.append('upload_preset', 'debutClient')
-        Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+        imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
             .then((response) => {
                 setPersonalInfoForm({ ...personalInfoForm, profileImage: response.data.secure_url })
-            }).then(() => {
-                updatePersonalInfo({
-                    variables: {
-                        userInput: personalInfoForm,
-                        updateDebutUserId: userID
-                    }
-                })
-            }).then((updatePersonalInfoRes) => {
-                dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
-
             }).catch((error) => {
                 console.log(error)
             })
+        updatePersonalInfo({
+            variables: {
+                userInput: personalInfoForm,
+                updateDebutUserId: userID
+            }
+        })
+
+        dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
+
+
+        console.log(error)
+
 
     }
 

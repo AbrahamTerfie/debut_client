@@ -30,3 +30,28 @@ export const experienceInfoInitState = {
     aeraOfExpertise: [],
     yourBiography: "",
 }
+
+
+export const myComapnyInitialState = {
+    companyName: "",
+    companyMissionStatement: "",
+    companyHeadquarters: "",
+    companyWebsite: "",
+    companyLogo: "",
+    jobBoard: "",
+    linkedInUrl: "",
+    twitterUrl: "",
+    instagramUrl: "",
+    facebookUrl: "",
+    //initialState for majorAchivements with array lengt of 3
+    majorAchivements: ["hello","hello2"] as any,
+    companyDescription: "",
+    // companyServivesGeography: [] as string[],
+    // aeraOfOperation: [] as string[],
+    // companySize: "",
+    // companyCategory: "",
+    // companyOwner: "",
+    // debutedEvents: [],
+    // companyFollowers: [],
+    // companyRegestry: [],
+}
