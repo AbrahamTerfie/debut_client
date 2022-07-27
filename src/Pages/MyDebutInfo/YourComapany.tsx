@@ -87,18 +87,8 @@ export default function YourComapany() {
         instagramUrl: dataCompany.getCompanyWithUserId.instagramUrl === null ? '' : dataCompany.getCompanyWithUserId.instagramUrl,
         majorAchivements: dataCompany.getCompanyWithUserId.majorAchivements === null ? [] : dataCompany.getCompanyWithUserId.majorAchivements,
         companyDescription: dataCompany.getCompanyWithUserId.companyDescription === null ? '' : dataCompany.getCompanyWithUserId.companyDescription,
-        // companyServivesGeography: selectedGeography,
-        // aeraOfOperation: selectedAeraasOfImpact,
-        // companySize: dataCompany.getCompanyWithUserId.companySize === null ? '' : dataCompany.getCompanyWithUserId.companySize,
-        // companyCategory: dataCompany.getCompanyWithUserId.companyCategory === null ? [] : dataCompany.getCompanyWithUserId.companyCategory,
-        // companyOwner: dataCompany.getCompanyWithUserId.companyOwner === null ? '' : dataCompany.getCompanyWithUserId.companyOwner,
-        // debutedEvents: dataCompany.getCompanyWithUserId.debutedEvents === null ? [] : dataCompany.getCompanyWithUserId.debutedEvents,
-        // companyFollowers: dataCompany.getCompanyWithUserId.companyFollowers === null ? [] : dataCompany.getCompanyWithUserId.companyFollowers,
-        // companyRegestry: dataCompany.getCompanyWithUserId.companyRegestry === null ? [] : dataCompany.getCompanyWithUserId.companyRegestry,
-
       })
-      // dataCompany.getCompanyWithUserId.companyServivesGeography && setSelectedGeography(dataCompany.getCompanyWithUserId.companyServivesGeography)
-      // dataCompany.getCompanyWithUserId.aeraOfOperation && setSelectedAeraasOfImpact(dataCompany.getCompanyWithUserId.aeraOfOperation)
+
       dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id))
     }
   }, [dataCompany])
@@ -135,10 +125,10 @@ export default function YourComapany() {
     setAchivement('')
   }
 
-if(createMyCompanyRes.error || updateMyCompanyRes.error){
-  console.log(createMyCompanyRes.error)
-  console.log(updateMyCompanyRes.error)
-}
+  if (createMyCompanyRes.error || updateMyCompanyRes.error) {
+    console.log(createMyCompanyRes.error)
+    console.log(updateMyCompanyRes.error)
+  }
 
   const handleCompanySubimt = () => {
     //check if company is being created or updated 
@@ -160,6 +150,7 @@ if(createMyCompanyRes.error || updateMyCompanyRes.error){
         console.log("createMyCompanyRes.data", createMyCompanyRes.data)
         setIsCreatingAcompany(false)
         setCompanyState(myComapnyInitialState)
+        dispatch(setMyDebutTab('5'))
 
       }
     }
@@ -185,6 +176,7 @@ if(createMyCompanyRes.error || updateMyCompanyRes.error){
         console.log("updateMyCompanyRes.data", updateMyCompanyRes.data)
         setCompanyState(myComapnyInitialState)
         setIsCreatingAcompany(false)
+        dispatch(setMyDebutTab('5'))
       }
       //dispatch to the next tab
 
@@ -425,10 +417,7 @@ if(createMyCompanyRes.error || updateMyCompanyRes.error){
             </Col>
             <Col md={9}>
               <Button className='my-4 py-2 w-100' outline color="success"
-                // onClick={() => { dispatch(setMyDebutTab('5')) }}
-                onClick={handleCompanySubimt}
-
-              >
+                onClick={handleCompanySubimt}>
                 Save and continue
               </Button>
             </Col>

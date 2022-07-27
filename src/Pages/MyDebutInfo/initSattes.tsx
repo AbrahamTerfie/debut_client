@@ -44,14 +44,7 @@ export const myComapnyInitialState = {
     instagramUrl: "",
     facebookUrl: "",
     //initialState for majorAchivements with array lengt of 3
-    majorAchivements: ["hello","hello2"] as any,
+    majorAchivements: [] as any,
     companyDescription: "",
-    // companyServivesGeography: [] as string[],
-    // aeraOfOperation: [] as string[],
-    // companySize: "",
-    // companyCategory: "",
-    // companyOwner: "",
-    // debutedEvents: [],
-    // companyFollowers: [],
-    // companyRegestry: [],
+
 }
