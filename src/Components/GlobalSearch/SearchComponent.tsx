@@ -3,7 +3,7 @@ import { Input } from 'reactstrap'
 export default function SearchComponent() {
     return (
         <div><Input
-            color='primary'
+            // color='primary'
             type="text"
             name="textarea-input"
             placeholder='Search'

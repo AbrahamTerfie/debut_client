@@ -63,14 +63,14 @@ export default function MyDebutInfo() {
                         Your Company
                     </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                     <NavLink
                         className={myDebutTab === "5" ? "activeTab" : "notActiveTab"}
                         onClick={() => { dispatch(setMyDebutTab('5')); }}>
 
                         My Events
                     </NavLink>
-                </NavItem>
+                </NavItem> */}
             </Nav>
             <TabContent activeTab={myDebutTab} className="py-5 px-5 w-100 shadow-lg "
                 scrollable={true}
@@ -104,11 +104,11 @@ export default function MyDebutInfo() {
                         <YourComapany />
                     </Row>
                 </TabPane>
-                <TabPane tabId="5">
+                {/* <TabPane tabId="5">
                     <Row>
                         <MyEvents />
                     </Row>
-                </TabPane>
+                </TabPane> */}
 
             </TabContent>
         </div>

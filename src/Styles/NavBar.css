@@ -18,7 +18,7 @@
 
 
 .dropDownItems {
-    background: #7e7f9aff;
+    background: #1985a1;
 }
 .dropDownMenu{
     display: flex;
@@ -27,6 +27,6 @@
     align-items: flex-start;
     width: 100%;
     height: max-content;
-    background-color: #7e7f9aff;
+    background-color: #1985a1;
     /* margin-bottom: 2em; */
 }

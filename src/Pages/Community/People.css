@@ -39,15 +39,16 @@
 .searchInput input {
     width: 100%;
     border: 1px solid #f9f8f8ff;
-    border-radius: 3em;
+    padding-right: 20px;
+    border-radius: 0.5em;
     /* padding: 0.5em; */
     /* margin: 1em 1em 1em 0; */
     background-attachment: fixed;
-    background-color: #272838ff;
+    background-color: #bfc0c0;
 }
 
 .searchInput input:focus {
-    background-color: #272838ff;
+    background-color: #1985a1;
     color: #f9f8f8ff;
     outline: none;
 

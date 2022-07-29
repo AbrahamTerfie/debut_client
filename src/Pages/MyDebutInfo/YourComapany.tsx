@@ -154,7 +154,7 @@ export default function YourComapany() {
         console.log("createMyCompanyRes.data", createMyCompanyRes.data)
         setIsCreatingAcompany(false)
         setCompanyState(myComapnyInitialState)
-        dispatch(setMyDebutTab('5'))
+        // dispatch(setMyDebutTab('5'))
 
       }
     }
@@ -180,7 +180,7 @@ export default function YourComapany() {
         console.log("updateMyCompanyRes.data", updateMyCompanyRes.data)
         setCompanyState(myComapnyInitialState)
         setIsCreatingAcompany(false)
-        dispatch(setMyDebutTab('5'))
+        // dispatch(setMyDebutTab('5'))
       }
       //dispatch to the next tab
 
@@ -433,7 +433,7 @@ export default function YourComapany() {
             <Col md={9}>
               <Button className='my-4 py-2 w-100' outline color="success"
                 onClick={handleCompanySubimt}>
-                Save and continue
+                Save 
               </Button>
             </Col>
           </Row>
