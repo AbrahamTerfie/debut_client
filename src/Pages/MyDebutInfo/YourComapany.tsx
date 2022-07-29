@@ -112,8 +112,12 @@ export default function YourComapany() {
     formData.append('upload_preset', 'debutCompanyProfilePicture')
     Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
       .then((response) => {
-        console.log(response)
+        setCompanyState({ ...companyState, companyLogo: response.data.secure_url })
       })
+      .catch((error) => {
+        console.log(error)
+      })
+
 
   }
 
@@ -186,14 +190,12 @@ export default function YourComapany() {
 
 
 
-
-
-
   if (loading) {
     return <Loader />
   }
   if (error) {
     console.log(error)
+    // return <div> something went wrong  </div>
   }
   if (data) {
     dispatch(togglehasCompany(data.checkIfUserHasCompany))
@@ -381,8 +383,14 @@ export default function YourComapany() {
 
             <Col md={12} className="my-3" >
               <Label for="geographicalRegion ">
-                select geographical regions that you would like to be involved in or have experience in
+                aera of operations
               </Label>
+
+              <div className='d-flex' >
+                {dataCompany && dataCompany.getCompanyWithUserId.companyCategory.map((savedRegion: String, index: any) => {
+                  return (<p key={index} className='fs-6 text-muted fw-light px-1 py-2'>{savedRegion}, </p>)
+                })}
+              </div>
 
               <MultiSelect
                 hasSelectAll={false}
@@ -395,9 +403,16 @@ export default function YourComapany() {
 
             <Col md={12} className="my-3" >
               <Label for="aera of operations">
-                aera of operations
+                select geographical regions that you would like to be involved in or have experience in
+
               </Label>
 
+
+              <div className='d-flex' >
+                {dataCompany && dataCompany.getCompanyWithUserId.aeraOfOperation.map((aera: String, index: any) => {
+                  return (<p key={index} className='fs-7 text-muted fw-light px-1 py-2'>{aera}, </p>)
+                })}
+              </div>
               <MultiSelect
                 hasSelectAll={false}
                 options={optionOfGeography}

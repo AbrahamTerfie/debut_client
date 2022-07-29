@@ -85,7 +85,7 @@ export default function NavBarComponent() {
                                 <FaRegBuilding className='mx-3 my-2' size={15} />
                                 My Debut
                             </DropdownToggle>
-                            <DropdownMenu right dark >
+                            <DropdownMenu end dark >
                                 <DropdownItem onClick={() => { navigate(appRoutes.myDebutInfo) }}>
                                     <GiBrain size={15} className='mx-3 my-2' style={navMargins} />
                                     Me & My Debut
