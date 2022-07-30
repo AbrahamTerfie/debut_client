@@ -1,8 +1,8 @@
-import MyBusiness from "./MyBusiness/MyBusiness";
-import MyDebutEvetnts from "./MyDebutEvents/MyDebutEvetnts";
+
+import MyEvents from "./MyDebutEvents/MyEvents";
 
 export {
-    MyBusiness,
-    MyDebutEvetnts,
+
+    MyEvents,
 
 }

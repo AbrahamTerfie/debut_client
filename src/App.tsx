@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import "animate.css/animate.min.css";
 import { Authentication, Landing, DebutPages, Profile, MyDebutInfo } from './Pages/inedx';
+import { MyEvents } from './Pages/MyDebut/index';
 import { GiveGratitude, Forum, People, Ventures, VenturePage } from './Pages/Community/index';
 import { Routes, Route } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
@@ -39,7 +40,7 @@ function App() {
             <Route path={appRoutes.myDebutInfo} element={<MyDebutInfo />} />
             {/* *************** */}
             <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
-            <Route path={appRoutes.myEvents} element={<MyDebutEvents />} />
+            <Route path={appRoutes.myEvents} element={<MyEvents />} />
           </Routes>
         </>
       }

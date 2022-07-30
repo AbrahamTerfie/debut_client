@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
-import Connections from './Connections';
 import ContactInfo from './ContactInfo';
-
 import Experiance from './Experiance';
 import PersonalInfo from './PersonalInfo';
-import MyEvents from './MyEvents';
 import YourComapany from './YourComapany';
 import { RootState } from '../../Store/RootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMyDebutTab } from '../../Store/UI/sidebarController';
 export default function MyDebutInfo() {
+    
     const dispatch = useDispatch();
     const { myDebutTab } = useSelector((store: RootState) => store.uiStore)
 
@@ -46,15 +44,6 @@ export default function MyDebutInfo() {
                 </NavItem>
 
 
-                {/* <NavItem>
-                    <NavLink
-                        className={myDebutTab === "4" ? "activeTab" : "notActiveTab"}
-                        onClick={() => { dispatch(setMyDebutTab('4')); }}>
-
-                        Connectoins
-                    </NavLink>
-                </NavItem> */}
-
                 <NavItem>
                     <NavLink
                         className={myDebutTab === "4" ? "activeTab" : "notActiveTab"}
@@ -63,14 +52,7 @@ export default function MyDebutInfo() {
                         Your Company
                     </NavLink>
                 </NavItem>
-                {/* <NavItem>
-                    <NavLink
-                        className={myDebutTab === "5" ? "activeTab" : "notActiveTab"}
-                        onClick={() => { dispatch(setMyDebutTab('5')); }}>
 
-                        My Events
-                    </NavLink>
-                </NavItem> */}
             </Nav>
             <TabContent activeTab={myDebutTab} className="py-5 px-5 w-100 shadow-lg "
                 scrollable={true}
