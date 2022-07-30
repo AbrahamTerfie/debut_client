@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Col, Row } from 'reactstrap'
 import './MyEventCard.css'
+import { useNavigate } from 'react-router-dom'
+import { appRoutes } from '../../Routes/routes'
 export default function MyEventCard() {
+  const navigate = useNavigate()
+  const registryId = "registryId"
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
@@ -100,7 +104,10 @@ export default function MyEventCard() {
               <br />
               <br />
               <p className=' fw-light' > registriry </p>
-              <Row className='border m-2 MyeventCard' >
+              <Row className='border m-2 MyeventCard'
+
+                onClick={() => navigate(`${appRoutes.myEvents}/${registryId}`)}>
+
 
                 <Col md={8}>
                   <small className='text-muted  text-small fw-light' >name</small>

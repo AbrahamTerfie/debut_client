@@ -5,6 +5,7 @@ import "animate.css/animate.min.css";
 import { Authentication, Landing, DebutPages, Profile, MyDebutInfo } from './Pages/inedx';
 import { MyEvents } from './Pages/MyDebut/index';
 import { GiveGratitude, Forum, People, Ventures, VenturePage } from './Pages/Community/index';
+import RegistryPage from './Pages/RegistryPage/RegistryPage';
 import { Routes, Route } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
 import DebutEvents from './Pages/DebutEvents/DebutEvents';
@@ -41,6 +42,7 @@ function App() {
             {/* *************** */}
             <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
             <Route path={appRoutes.myEvents} element={<MyEvents />} />
+            <Route path={appRoutes.registry} element={<RegistryPage />} />
           </Routes>
         </>
       }

@@ -18,6 +18,7 @@ export const appRoutes = {
     myVentures: '/myVentures',
     newVenture: '/newVenture',
     myEvents: '/myEvents',
+    registry: '/myEvents/:id',
     myDebutInfo: '/myDebutInfo',
 
 
