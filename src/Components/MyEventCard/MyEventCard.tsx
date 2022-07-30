@@ -51,7 +51,9 @@ export default function MyEventCard() {
           toggle={toggle}
         >
           <OffcanvasHeader toggle={toggle}>
-            <h3 className='fs-3'>event name</h3>
+            <h3 className='fs-3'>event name
+              <small className='text-success fw-light px-3 fs-6' > open </small>
+            </h3>
           </OffcanvasHeader>
           <OffcanvasBody>
             <Row>
@@ -84,8 +86,35 @@ export default function MyEventCard() {
                 <small className='text-muted  text-small fw-light' > location </small>
                 <p className='fw-light' >  detail location </p>
               </Col>
+              <Col md={12}>
+                <small className='text-muted  text-small fw-light' > event link </small>
+                <p className='fw-light' > https://www.google.com/</p>
+              </Col>
 
+              <Col md={12}>
+                <small className='text-muted  text-small fw-light' > related links </small>
+                <p className='fw-light' >https://www.google.com/</p>
+                <p className='fw-light' >https://www.google.com/</p>
+              </Col>
+              <br />
+              <br />
+              <br />
+              <p className=' fw-light' > registriry </p>
+              <Row className='border m-2 MyeventCard' >
 
+                <Col md={8}>
+                  <small className='text-muted  text-small fw-light' >name</small>
+                  <p className='fw-light' > registry of this  </p>
+                </Col>
+                <Col md={2}>
+                  <small className='text-muted  text-small fw-light' >status</small>
+                  <p className='fw-light' > fullfilled </p>
+                </Col>
+                <Col md={2}>
+                  <small className='text-muted  text-small fw-light' > items </small>
+                  <p className='fw-light' >  898 </p>
+                </Col>
+              </Row>
 
             </Row>
           </OffcanvasBody>
