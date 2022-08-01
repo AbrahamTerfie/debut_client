@@ -131,7 +131,7 @@ export default function ForumCards(
 
                 </OffcanvasBody>
             </Offcanvas>
-            <Row className='forumCardsContainer p-3'
+            <Row className=' forumCardParent shadow-sm rounded p-3 m-2 ' 
                 onClick={() => toggle()}
             >
                 <Col xs='2' sm='2' md='2' lg='1' xl='1' className='profileImage' >

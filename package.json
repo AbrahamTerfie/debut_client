@@ -26,6 +26,7 @@
     "dotenv": "^16.0.1",
     "framer-motion": "^6.3.16",
     "graphql": "^16.5.0",
+    "moment": "^2.29.4",
     "node-sass": "^7.0.1",
     "react": "^18.1.0",
     "react-animation-on-scroll": "^5.1.0",

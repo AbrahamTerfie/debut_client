@@ -3,9 +3,28 @@ import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Col, Row } from 'rea
 import './MyEventCard.css'
 import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'
-export default function MyEventCard() {
+import moment from 'moment'
+export default function MyEventCard(
+  { _id,
+    createdBy,
+    belongsTo,
+    debutEventName,
+    debutEventDescription,
+    debutEventDate,
+    debutEventLocation,
+    debutEventImage,
+    debutEventRegestry,
+    debutEventAttendees,
+    debutInvitationLink,
+    otherRelatedLinks,
+  }: any
+
+) {
+
+  console.log("event name ", debutEventName)
   const navigate = useNavigate()
   const registryId = "shitwtfisthis"
+  // const { debutEventName } = event
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
@@ -20,11 +39,11 @@ export default function MyEventCard() {
           className='w-100 h-100'
           alt='event' />
 
-        <div className='px-4 py-2' >
-          <p className='fs-4' >event Name</p>
-          <span className=' text-muted fw-light' >
-            event date
-          </span>
+        <div className='px-4 py-3' >
+          <p className='fs-5 d-flex justify-content-end ' >  {debutEventName}  </p>
+          <small className=' text-muted fw-light  d-flex justify-content-end ' >
+            {moment(debutEventDate).format('MMMM Do YYYY')}
+          </small>
         </div>
       </div>
       <div>
@@ -37,7 +56,7 @@ export default function MyEventCard() {
           toggle={toggle}
         >
           <OffcanvasHeader toggle={toggle}>
-            <h3 className='fs-3'>event name
+            <h3 className='fs-3 fw-light m-3'>  {debutEventName}
               <small className='text-success fw-light px-3 fs-6' > open </small>
             </h3>
           </OffcanvasHeader>

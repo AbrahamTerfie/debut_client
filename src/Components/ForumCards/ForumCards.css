@@ -1,26 +1,21 @@
-.forumCardsContainer {
+.forumCardParent {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0em 1em 0em 0em;
-    width: 100%;
     max-width: 1200px;
-    border: 1px solid #3e405a;
     height: max-content;
     transition: all 0.2s ease-in-out;
-
+    cursor: pointer;
 
 }
 
-.forumCardsContainer:hover {
-    transition: 0.2s ease-in-out;
-    border-radius: 0px;
-    scale: 1.5;
+.forumCardParent:hover {
+    border-bottom: 0.5px solid #1985a1;
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
 
-    box-shadow: -5px -5px 14px #101016,
-        5px 5px 4px #3e405a;
 }
 
 
