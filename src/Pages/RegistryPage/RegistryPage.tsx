@@ -2,26 +2,49 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Row, Col, Button, FormGroup, Input, Label, Collapse, CardBody, Card } from 'reactstrap'
 
-// input debutRegistryInput {
-//     createdBy: Stri              ng!
-//     belongsTo: String!
-//     debutRegistryName: String!
-//     debutRegistryStatus: Boolean
-//     debutRegistryItems: [String]
-// }
+function RegistryItemCard() {
+    return (
+        <Row className=' m-1 p-3 shadow-sm  ' >
+            <Col md={8}>
+                <Row>
+                    <p className='fw-light fs-4' > Item Name
+                        <small className='mx-2 fs-6 fw-lighter text-success' >fullfilled</small>
+                    </p>
+                </Row>
+                <Row>
+                    <small className='text-muted  text-small fw-light' > item links  </small>
+                    <p className='fw-light link ' >
+                        https://via.placeholder.com/120
+                    </p>
+                </Row>
+                <Row>
+                    <small className='text-muted  text-small fw-light' > description  </small>
+                    <p className='fw-light link ' >
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ducimus itaque nihil. Neque placeat dolore enim est qui modi et quaerat nemo voluptates nisi perferendis iusto maiores, mollitia quod optio.
+                    </p>
 
+                </Row>
+            </Col>
+            <Col md={4} >
+                <Col md={12} className="d-flex justify-content-end ">
+                    <img src='https://via.placeholder.com/120' alt='registry item' className='img-fluid ' />
+                </Col>
+                <Row className='m-3  d-flex justify-content-end text-end'>
+                    <Col md={6}   >
+                        <small className='text-muted  text-small fw-light' > price </small>
+                        <p className='fw-light' > 9999</p>
+                    </Col>
+                    <Col md={6}>
+                        <small className='text-muted  text-small fw-light' > quantity </small>
+                        <p className='fw-light' > 9999</p>
+                    </Col>
+                </Row>
 
-// type RegistryItem {
-//     _id: ID
-//     itemOfRegistry: debutRegistry
-//     registryItemName: String
-//     registryItemDescription: String
-//     registryItemImage: String
-//     registryItemPrice: String
-//     registryItemLink: String
-//     registryItemQuantity: String
-//     registryItemFullfiled: Boolean
-// }
+            </Col>
+        </Row>
+    )
+}
+
 
 export default function RegistryPage() {
 
@@ -53,17 +76,20 @@ export default function RegistryPage() {
 
                 </Row>
                 <Row >
-                    <p className='fs-5  fw-lighter my-5 px-3 '>
+                    <p className='fs-5  fw-lighter mt-5 px-3 '>
                         registriry items
                     </p>
 
+                    <RegistryItemCard />
+                    <RegistryItemCard />
+                    <RegistryItemCard />
                 </Row>
 
 
-                <Row className=' border-top border-white my-5 p-3'  >
-                    <p className='text-small fw-light btn text-success '
-                        onClick={toggle}>
-                        add item </p>
+                <Row className=' border-top border-white mt-5 p-3'  >
+                    <p className='text-small fw-light btn text-success' onClick={toggle}>
+                        {isAddItemOpen ? "cancel" : "add item"}
+                    </p>
                 </Row>
 
                 <Collapse isOpen={isAddItemOpen}>
