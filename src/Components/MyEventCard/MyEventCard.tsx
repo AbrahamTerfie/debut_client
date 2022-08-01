@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'
 export default function MyEventCard() {
   const navigate = useNavigate()
-  const registryId = "registryId"
+  const registryId = "shitwtfisthis"
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
@@ -26,26 +26,8 @@ export default function MyEventCard() {
             event date
           </span>
         </div>
-
-
       </div>
       <div>
-
-        {/* 
-        
-           createdBy: String!
-    belongsTo: String!
-    debutEventName: String!
-    debutEventDescription: String!
-    debutEventDate: String!
-    debutEventLocation: String
-    debutRegistryStatus: Boolean
-    debutEventImage: String
-    debutRegistry: [String] #registry ids here
-    debutEventAttendees: [String] # user id's
-    debutInvitationLink: String
-    otherRelatedLinks: [String]
-        */}
 
         <Offcanvas
           style={{ width: '50%' }}
@@ -63,14 +45,10 @@ export default function MyEventCard() {
             <Row>
 
               <Col md={12}>
-
                 <small className='text-muted  text-small fw-light' > created by  / company name </small>
                 <p className='fw-light' > userfirstname lastname /  company name  </p>
               </Col>
-
-
               <Col md={12}>
-
                 <small className='text-muted fw-light' >  event description </small>
                 <p className='fw-light' >
                   debut event debutEventDescription Lorem,
@@ -78,10 +56,8 @@ export default function MyEventCard() {
                   Laudantium, pariatur enim facere necessitatibus voluptatum
                   velit, doloribus quibusdam accusamus voluptate dolorum atque aperiam
                   ullam quis architecto magni nam repellendus sunt similique!
-
                 </p>
               </Col>
-
               <Col md={6}>
                 <small className='text-muted  text-small fw-light' > date </small>
                 <p className='fw-light' > monday january 1 2020</p>
