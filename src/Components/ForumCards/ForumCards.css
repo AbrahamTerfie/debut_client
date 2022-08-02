@@ -18,6 +18,12 @@
 
 }
 
+.comment:hover {
+    border-bottom: 0.5px solid #1985a1;
+    transform: scale(1.009);
+    transition: all 0.3s ease-in-out;
+
+}
 
 
 .profileImage img {

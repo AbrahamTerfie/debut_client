@@ -116,7 +116,7 @@ export default function ForumCards(
                     <div>
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-                                <div  key={comment.id}  className='shadow pb-3 rounded' >
+                                <div key={comment.id} className='shadow-sm  comment pb-3 rounded' >
                                     <p className='fs-6 m-3 px-5 pt-3 fw-light ' > {comment.comment}</p>
                                     <span className='fs-6 mx-5 px-3  fw-light text-muted text-end ' > by {comment.createdBy.firstName}  </span>
                                     {/* <Button className='btn-sm  ' color='danger' outline size='xs'>x</Button>  
@@ -131,7 +131,7 @@ export default function ForumCards(
 
                 </OffcanvasBody>
             </Offcanvas>
-            <Row className=' forumCardParent shadow-sm rounded p-3 m-2 ' 
+            <Row className=' forumCardParent shadow-sm rounded p-3 m-2 '
                 onClick={() => toggle()}
             >
                 <Col xs='2' sm='2' md='2' lg='1' xl='1' className='profileImage' >
