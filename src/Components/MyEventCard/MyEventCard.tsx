@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
-import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Col, Row } from 'reactstrap'
+import React, { useState, useEffect } from 'react'
+import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Col, Row, FormGroup, Input, Label } from 'reactstrap'
 import './MyEventCard.css'
 import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../Store/RootReducer'
+import { CREATE_DEBUT_REGISTRY } from '../../GraphQl'
+import { useMutation, useQuery } from '@apollo/client'
+
 export default function MyEventCard(
   { _id,
     createdBy,
@@ -21,13 +26,35 @@ export default function MyEventCard(
 
 ) {
 
-  console.log("event name ", debutEventName)
   const navigate = useNavigate()
+  const { userID, hasCompany, companyID } = useSelector((store: RootState) => store.identfiers)
+
   const registryId = "shitwtfisthis"
   // const { debutEventName } = event
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
+  const [newRegistry, setNewRegistry] = useState({
+    debutRegistryName: "",
+    createdBy: createdBy?._id,
+    belongsTo: belongsTo?._id,
+  })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewRegistry({ ...newRegistry, [name]: value })
+  }
+  const [createDebutRegistry, createDebutRegistryRes] = useMutation(CREATE_DEBUT_REGISTRY, {
+    variables: { debutRegistryInput: newRegistry },
+  })
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    createDebutRegistry()
+
+  }
+  if (createDebutRegistryRes.data) {
+    console.log(createDebutRegistryRes.data)
+  }
 
   return (
     <>
@@ -65,44 +92,46 @@ export default function MyEventCard(
 
               <Col md={12}>
                 <small className='text-muted  text-small fw-light' > created by  / company name </small>
-                <p className='fw-light' > userfirstname lastname /  company name  </p>
+                <p className='fw-light' > {createdBy?.firstName} / {belongsTo?.companyName} </p>
               </Col>
               <Col md={12}>
                 <small className='text-muted fw-light' >  event description </small>
                 <p className='fw-light' >
-                  debut event debutEventDescription Lorem,
-                  ipsum dolor sit amet consectetur adipisicing elit.
-                  Laudantium, pariatur enim facere necessitatibus voluptatum
-                  velit, doloribus quibusdam accusamus voluptate dolorum atque aperiam
-                  ullam quis architecto magni nam repellendus sunt similique!
+                  {debutEventDescription}
                 </p>
               </Col>
               <Col md={6}>
                 <small className='text-muted  text-small fw-light' > date </small>
-                <p className='fw-light' > monday january 1 2020</p>
+                <p className='fw-light' > {moment(debutEventDate).format('MMMM Do YYYY')}</p>
               </Col>
               <Col md={6}>
                 <small className='text-muted  text-small fw-light' > location </small>
-                <p className='fw-light' >  detail location </p>
+                <p className='fw-light' >  {debutEventLocation ? debutEventLocation : " - "} </p>
               </Col>
               <Col md={12}>
                 <small className='text-muted  text-small fw-light' > event link </small>
-                <p className='fw-light' > https://www.google.com/</p>
+                <p className='fw-light' >  {debutInvitationLink ? debutInvitationLink : "-"} </p>
               </Col>
 
               <Col md={12}>
                 <small className='text-muted  text-small fw-light' > related links </small>
-                <p className='fw-light' >https://www.google.com/</p>
+
+
+                {otherRelatedLinks?.map((link: any) => {
+
+                  <a className='fw-light' href={link}  > link </a>
+                })}
                 <p className='fw-light' >https://www.google.com/</p>
               </Col>
               <br />
               <br />
               <br />
               <p className=' fw-light' > registriry </p>
-              <Row className='border m-2 MyeventCard'
 
+
+
+              <Row className='shadow-sm  m-2 MyeventCard'
                 onClick={() => navigate(`${appRoutes.myEvents}/${registryId}`)}>
-
 
                 <Col md={8}>
                   <small className='text-muted  text-small fw-light' >name</small>
@@ -117,6 +146,28 @@ export default function MyEventCard(
                   <p className='fw-light' >  898 </p>
                 </Col>
               </Row>
+              <p className=' fw-light my-3' > create new registry </p>
+              <Row >
+                <Col md={12}>
+                  <FormGroup>
+                    <Label for="debutRegistryName"> registry name </Label>
+                    <Input type="text"
+                      name="debutRegistryName"
+                      id="debutRegistryName"
+                      placeholder="registry name"
+                      onChange={handleChange}
+
+                    />
+                  </FormGroup>
+                </Col>
+
+              </Row>
+              <Row className='px-3' >
+                <Button outline color="light"
+                  onClick={(e: any) => handleSubmit(e)}
+                > create </Button>
+              </Row>
+
 
             </Row>
           </OffcanvasBody>
