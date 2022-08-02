@@ -127,7 +127,7 @@ export default function MyEvents() {
       <p className='fs-2  fw-lighter mx-5 '>
         your events
       </p>
-      <div className='d-flex flex-wrap shadow-lg p-4' >
+      <div className='d-flex flex-wrap shadow p-4' >
         {
           data?.getDebutEventsWithUserId?.map((event: any) => {
             return <MyEventCard
