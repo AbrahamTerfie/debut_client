@@ -154,52 +154,52 @@ export default function MyEventCard(
 
 
 
-              {loading ? <Loader /> : data?.getEventRegistriesWithEventId?.map((registry: any) => {
-                return (
+              {loading ? <Loader /> :
+                data?.getEventRegistriesWithEventId?.length === 0 ?
+                  <>
+                    <p className=' fw-light my-3' > create new registry </p>
+                    <Row >
+                      <Col md={12}>
+                        <FormGroup>
+                          <Label for="debutRegistryName"> registry name </Label>
+                          <Input type="text"
+                            name="debutRegistryName"
+                            id="debutRegistryName"
+                            placeholder="registry name"
+                            onChange={handleChange}
+                          />
+                        </FormGroup>
+                      </Col>
 
+                    </Row>
+                    <Row className='px-3' >
+                      <Button outline color="light"
+                        onClick={(e: any) => handleSubmit(e)}
+                      > create </Button>
+                    </Row>
+                  </>
+                  :
+                  data?.getEventRegistriesWithEventId?.map((registry: any) => {
+                    return (
+                      <Row className='shadow-sm  m-2 MyeventCard'
+                        onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}>
 
-                  <Row className='shadow-sm  m-2 MyeventCard'
-                    onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}>
+                        <Col md={8}>
+                          <small className='text-muted  text-small fw-light' >name</small>
+                          <p className='fw-light' > {registry.debutRegistryName}  </p>
+                        </Col>
+                        <Col md={2}>
+                          <small className='text-muted  text-small fw-light' >status</small>
+                          <p className='fw-light' > {registry.debutRegistryStatus.toString()} </p>
+                        </Col>
+                        <Col md={2}>
+                          <small className='text-muted  text-small fw-light' > items </small>
+                          <p className='fw-light' >  {registry.debutRegistryItems.length} </p>
+                        </Col>
+                      </Row>
 
-                    <Col md={8}>
-                      <small className='text-muted  text-small fw-light' >name</small>
-                      <p className='fw-light' > {registry.debutRegistryName}  </p>
-                    </Col>
-                    <Col md={2}>
-                      <small className='text-muted  text-small fw-light' >status</small>
-                      <p className='fw-light' > {registry.debutRegistryStatus.toString()} </p>
-                    </Col>
-                    <Col md={2}>
-                      <small className='text-muted  text-small fw-light' > items </small>
-                      <p className='fw-light' >  {registry.debutRegistryItems.length} </p>
-                    </Col>
-                  </Row>
-
-                )
-              })}
-              <p className=' fw-light my-3' > create new registry </p>
-              <Row >
-                <Col md={12}>
-                  <FormGroup>
-                    <Label for="debutRegistryName"> registry name </Label>
-                    <Input type="text"
-                      name="debutRegistryName"
-                      id="debutRegistryName"
-                      placeholder="registry name"
-                      onChange={handleChange}
-
-                    />
-                  </FormGroup>
-                </Col>
-
-              </Row>
-              <Row className='px-3' >
-                <Button outline color="light"
-                  onClick={(e: any) => handleSubmit(e)}
-                > create </Button>
-              </Row>
-
-
+                    )
+                  })}
             </Row>
           </OffcanvasBody>
         </Offcanvas>
