@@ -18,7 +18,7 @@ export default function MyEventCard(
     debutEventDate,
     debutEventLocation,
     debutEventImage,
-    debutEventRegestry,
+    debutRegistry,
     debutEventAttendees,
     debutInvitationLink,
     otherRelatedLinks,
@@ -36,20 +36,22 @@ export default function MyEventCard(
   const toggle = () => setIsOpen(!isOpen)
   const [newRegistry, setNewRegistry] = useState({
     debutRegistryName: "",
-    createdBy: createdBy?._id,
+    createdBy: userID,
     belongsTo: belongsTo?._id,
+    debutEvent: _id,
+
   })
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewRegistry({ ...newRegistry, [name]: value })
   }
-  const [createDebutRegistry, createDebutRegistryRes] = useMutation(CREATE_DEBUT_REGISTRY, {
-    variables: { debutRegistryInput: newRegistry },
-  })
+  const [createDebutRegistry, createDebutRegistryRes] = useMutation(CREATE_DEBUT_REGISTRY,)
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    createDebutRegistry()
+    createDebutRegistry({
+      variables: { debutRegistryInput: newRegistry },
+    })
 
   }
   if (createDebutRegistryRes.data) {
@@ -128,7 +130,14 @@ export default function MyEventCard(
               <br />
               <p className=' fw-light' > registriry </p>
 
-
+              {/* {debutEventRegestry?.map((registry: any) => {
+                return (
+                  <div className='d-flex justify-content-between'>
+                    <p className='fw-light' > {registry.debutRegistryName} </p>
+                    <Button className='btn-sm btn-success' > join </Button>
+                  </div>
+                )
+              })} */}
 
               <Row className='shadow-sm  m-2 MyeventCard'
                 onClick={() => navigate(`${appRoutes.myEvents}/${registryId}`)}>

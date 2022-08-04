@@ -5,6 +5,9 @@ mutation CreateDebutRegistry($debutRegistryInput: debutRegistryInput) {
   createDebutRegistry(debutRegistryInput: $debutRegistryInput) {
     debutRegistryName
     _id
+    debutEvent {
+      _id
+    }
     belongsTo {
       _id
     }
@@ -13,5 +16,6 @@ mutation CreateDebutRegistry($debutRegistryInput: debutRegistryInput) {
     }
   }
 }
+
 
 `

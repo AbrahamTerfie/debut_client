@@ -132,6 +132,7 @@ export default function MyEvents() {
           data?.getDebutEventsWithUserId?.map((event: any) => {
             return <MyEventCard
               key={event.id}
+              _id={event._id}
               debutEventName={event.debutEventName}
               debutEventDate={event.debutEventDate}
               debutEventDescription={event.debutEventDescription}
@@ -141,6 +142,7 @@ export default function MyEvents() {
               createdBy={event.createdBy}
               belongsTo={event.belongsTo}
               debutInvitationLink={event.debutInvitationLink}
+              debutRegistry={event.debutRegistry}
             />
           })
         }
