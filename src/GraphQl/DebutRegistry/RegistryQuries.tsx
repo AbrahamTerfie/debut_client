@@ -19,3 +19,21 @@ mutation CreateDebutRegistry($debutRegistryInput: debutRegistryInput) {
 
 
 `
+
+export const EVENT_REGISTRIES = gql`
+query EventRegistries($eventId: ID!) {
+  getEventRegistriesWithEventId(eventId: $eventId) {
+    _id
+    belongsTo {
+      _id
+      companyName
+    }
+    debutRegistryItems {
+      _id,
+
+    }
+    debutRegistryName
+    debutRegistryStatus
+  }
+}
+`

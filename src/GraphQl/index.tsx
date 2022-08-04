@@ -20,7 +20,7 @@ import {
 
 import { CREATE_EVENT, MY_DEBUT_EVENTS } from './DebutEvents/eventQuries'
 
-import { CREATE_DEBUT_REGISTRY } from './DebutRegistry/RegistryQuries'
+import { CREATE_DEBUT_REGISTRY, EVENT_REGISTRIES } from './DebutRegistry/RegistryQuries'
 
 export {
     CHECK_EMAIL_VALIDITY, CREATE_DEBUT_USER,
@@ -37,7 +37,8 @@ export {
     CREATE_EVENT, MY_DEBUT_EVENTS,
 
     // registry
-    CREATE_DEBUT_REGISTRY
+    CREATE_DEBUT_REGISTRY,
+    EVENT_REGISTRIES
 
 
 

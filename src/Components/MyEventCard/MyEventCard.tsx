@@ -6,8 +6,9 @@ import { appRoutes } from '../../Routes/routes'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
-import { CREATE_DEBUT_REGISTRY } from '../../GraphQl'
+import { CREATE_DEBUT_REGISTRY, EVENT_REGISTRIES } from '../../GraphQl'
 import { useMutation, useQuery } from '@apollo/client'
+import Loader from '../Loader/Loader'
 
 export default function MyEventCard(
   { _id,
@@ -45,6 +46,12 @@ export default function MyEventCard(
     const { name, value } = e.target;
     setNewRegistry({ ...newRegistry, [name]: value })
   }
+
+  const { data, loading, error } = useQuery(EVENT_REGISTRIES, {
+    variables: { eventId: _id }
+  })
+
+  console.log("event registries", data)
   const [createDebutRegistry, createDebutRegistryRes] = useMutation(CREATE_DEBUT_REGISTRY,)
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -130,31 +137,31 @@ export default function MyEventCard(
               <br />
               <p className=' fw-light' > registriry </p>
 
-              {/* {debutEventRegestry?.map((registry: any) => {
+
+
+              {loading ? <Loader /> : data?.getEventRegistriesWithEventId?.map((registry: any) => {
                 return (
-                  <div className='d-flex justify-content-between'>
-                    <p className='fw-light' > {registry.debutRegistryName} </p>
-                    <Button className='btn-sm btn-success' > join </Button>
-                  </div>
+
+
+                  <Row className='shadow-sm  m-2 MyeventCard'
+                    onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}>
+
+                    <Col md={8}>
+                      <small className='text-muted  text-small fw-light' >name</small>
+                      <p className='fw-light' > {registry.debutRegistryName}  </p>
+                    </Col>
+                    <Col md={2}>
+                      <small className='text-muted  text-small fw-light' >status</small>
+                      <p className='fw-light' > {registry.debutRegistryStatus.toString()} </p>
+                    </Col>
+                    <Col md={2}>
+                      <small className='text-muted  text-small fw-light' > items </small>
+                      <p className='fw-light' >  {registry.debutRegistryItems.length} </p>
+                    </Col>
+                  </Row>
+
                 )
-              })} */}
-
-              <Row className='shadow-sm  m-2 MyeventCard'
-                onClick={() => navigate(`${appRoutes.myEvents}/${registryId}`)}>
-
-                <Col md={8}>
-                  <small className='text-muted  text-small fw-light' >name</small>
-                  <p className='fw-light' > registry of this  </p>
-                </Col>
-                <Col md={2}>
-                  <small className='text-muted  text-small fw-light' >status</small>
-                  <p className='fw-light' > fullfilled </p>
-                </Col>
-                <Col md={2}>
-                  <small className='text-muted  text-small fw-light' > items </small>
-                  <p className='fw-light' >  898 </p>
-                </Col>
-              </Row>
+              })}
               <p className=' fw-light my-3' > create new registry </p>
               <Row >
                 <Col md={12}>

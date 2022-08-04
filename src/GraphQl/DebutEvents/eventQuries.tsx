@@ -16,7 +16,7 @@ mutation CreateDebutEvent ($debutEventInput: debutEventsInput) {
     debutEventDate
     debutEventLocation
     debutEventImage
-    debutEventRegestry {
+    debutRegistry {
       _id
       debutRegistryName
     }
@@ -48,7 +48,7 @@ query MyDebutEvents ($userId: ID!) {
     debutEventDate
     debutEventLocation
     debutEventImage
-    debutEventRegestry {
+    debutRegistry {
       _id
       debutRegistryName
     }
