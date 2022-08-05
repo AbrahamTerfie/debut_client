@@ -61,6 +61,7 @@ console.log(userID)
     if (authenticatedUsrRes.data) {
         // saves user id in steore to be used in other components
         dispatch(setUserID(authenticatedUsrRes.data.authenticatedUser._id))
+        
     }
     if (authenticatedUsrRes.error) {
         console.log(authenticatedUsrRes.error)

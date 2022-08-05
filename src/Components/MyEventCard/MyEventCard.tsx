@@ -186,15 +186,18 @@ export default function MyEventCard(
 
                         <Col md={8}>
                           <small className='text-muted  text-small fw-light' >name</small>
-                          <p className='fw-light' > {registry.debutRegistryName}  </p>
+                          <p className='fw-light' > {registry?.debutRegistryName}  </p>
                         </Col>
                         <Col md={2}>
                           <small className='text-muted  text-small fw-light' >status</small>
-                          <p className='fw-light' > {registry.debutRegistryStatus.toString()} </p>
+                          <p className='fw-light' > {registry.debutRegistryStatus
+                            // stringfy 
+                            ? registry.debutRegistryStatus.toString() : " - "} </p>
+
                         </Col>
                         <Col md={2}>
                           <small className='text-muted  text-small fw-light' > items </small>
-                          <p className='fw-light' >  {registry.debutRegistryItems.length} </p>
+                          <p className='fw-light' >  {registry?.debutRegistryItems.length} </p>
                         </Col>
                       </Row>
 
