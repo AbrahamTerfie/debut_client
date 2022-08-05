@@ -86,7 +86,7 @@ export default function MyEventCard(
         onClick={toggle}
         className='d-flex m-4  h-50 shadow-sm rounded flex-column  align-items-end w-25 MyeventCard ' >
 
-        <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+        <img src={debutEventImage} 
           className='w-100 h-100'
           alt='event' />
 

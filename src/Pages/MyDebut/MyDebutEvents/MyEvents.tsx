@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Col, FormGroup, Input, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Row } from 'reactstrap'
 import MyEventCard from '../../../Components/MyEventCard/MyEventCard'
 import { FaPlus } from 'react-icons/fa'
@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from '../../../Components/Loader/Loader'
+import Axios from 'axios'
 
 
 const initState = {
@@ -34,8 +35,7 @@ function NewEvent() {
   } = useQuery(FETCH_COMPANY, {
     variables: { userId: userID }
   })
-  // console.log("dataCompany", dataCompany)
-  console.log("data", data?.checkIfUserHasCompany)
+
 
   const [createDebutEvent, createDebutEventRes] = useMutation(CREATE_EVENT, {
 
@@ -57,9 +57,8 @@ function NewEvent() {
     const { name, value } = e.target;
     setNewEventData({ ...newEventData, [name]: value })
   }
-  console.log("new event data", newEventData)
+
   const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("new event button clicked")
     e.preventDefault()
     createDebutEvent({
       variables: {
@@ -72,6 +71,25 @@ function NewEvent() {
     })
 
   }
+
+  const handleFileSelected = () => {
+    const formData = new FormData
+    formData.append('file', imageSelected)
+    // file is the file object
+    // first one is the preset and the second one is name  for cloudnary api
+    formData.append('upload_preset', 'debutClient')
+    Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+      .then((response) => {
+        setNewEventData({ ...newEventData, debutEventImage: response.data.secure_url })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  useEffect(() => {
+    handleFileSelected()
+  }, [imageSelected])
 
   const toggle = () => setCanvas(!canvas);
   return (
@@ -231,7 +249,7 @@ export default function MyEvents() {
           })
         }
 
-        <MyEventCard />
+    
 
         <NewEvent />
       </div>
