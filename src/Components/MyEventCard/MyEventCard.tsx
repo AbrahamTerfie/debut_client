@@ -197,7 +197,11 @@ export default function MyEventCard(
                         </Col>
                         <Col md={2}>
                           <small className='text-muted  text-small fw-light' > items </small>
-                          <p className='fw-light' >  {registry?.debutRegistryItems.length} </p>
+                          <p className='fw-light' >  
+                          {/* {registry?.debutRegistryItems.length} */}
+                            
+                            {registry.debutRegistryItems?.length}
+                           </p>
                         </Col>
                       </Row>
 

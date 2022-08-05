@@ -12,13 +12,13 @@ import Loader from '../../../Components/Loader/Loader'
 const initState = {
   debutEventName: "",
   debutEventDescription: "",
-  debutEventDate: "",
+  debutEventDate: Date,
   debutEventLocation: "",
   debutRegistryStatus: false,
   debutEventImage: "",
   debutRegistry: [],
   debutEventAttendees: [],
-  debutInvitationLink: [],
+  debutInvitationLink: "",
   otherRelatedLinks: []
 }
 
@@ -34,8 +34,8 @@ function NewEvent() {
   } = useQuery(FETCH_COMPANY, {
     variables: { userId: userID }
   })
-  console.log("dataCompany", dataCompany)
-  console.log("data", data.checkIfUserHasCompany)
+  // console.log("dataCompany", dataCompany)
+  console.log("data", data?.checkIfUserHasCompany)
 
   const [createDebutEvent, createDebutEventRes] = useMutation(CREATE_EVENT, {
 
@@ -63,9 +63,11 @@ function NewEvent() {
     e.preventDefault()
     createDebutEvent({
       variables: {
-        ...newEventData,
-        createdBy: userID,
-        belongsTo: companyID
+        debutEventInput: {
+          ...newEventData,
+          createdBy: userID,
+          belongsTo: dataCompany?.getCompanyWithUserId._id,
+        }
       }
     })
 
