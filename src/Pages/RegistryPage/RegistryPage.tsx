@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Row, Col, Button, FormGroup, Input, Label, Collapse, CardBody, Card } from 'reactstrap'
 import { GET_REGISTRY_ITEMS_WITH_REGISTRY_ID, CREATE_REGISTRY_ITEM } from '../../GraphQl/index'
@@ -50,7 +50,10 @@ function RegistryItemCard(
                 </Col>
                 <Col md={4} >
                     <Col md={12} className="d-flex justify-content-end ">
-                        <img src='https://via.placeholder.com/120' alt='registry item' className='img-fluid ' />
+                        <img src={registryItemImage ? registryItemImage :
+                            // plaveholder cartoon image
+                            "https://via.placeholder.com/150"
+                        } alt='registry item' className='img-fluid ' />
                     </Col>
                     <Row className='m-3  d-flex justify-content-end text-end'>
                         <Col md={6}   >
@@ -66,23 +69,20 @@ function RegistryItemCard(
                 </Col>
 
                 <Row className=' border-bottom border-white ' >
-                <Col md={5}>
-                    <small className='text-muted  text-small fw-light' > creator </small>
-                    <p className='fw-light' > firstname lastname</p>
-                </Col>
-                <Col md={5}>
-                    <small className='text-muted  text-small fw-light' > company </small>
-                    <p className='fw-light'>  companyname </p>
-                </Col>
-                <Col md={2}>
-                    <small className='text-muted  text-small fw-light' > status </small>
-                    <p className='fw-light' > open</p>
-                </Col>
 
-            </Row>
+                    <Col md={10}>
+                        <small className='text-muted  text-small fw-light' > company </small>
+                        <p className='fw-light'>  {itemOfRegistry.debutRegistryName} </p>
+                    </Col>
+                    <Col md={2}>
+                        <small className='text-muted  text-small fw-light' > status </small>
+                        <p className='fw-light' > open</p>
+                    </Col>
+
+                </Row>
             </Row>
 
-           
+
         </>
     )
 }
@@ -144,6 +144,24 @@ export default function RegistryPage() {
         setNewRegistryItem(initState)
         setIsAddItemOpen(false)
     }
+    const handleFileSelected = () => {
+        const formData = new FormData
+        formData.append('file', imageSelected)
+        // file is the file object
+        // first one is the preset and the second one is name  for cloudnary api
+        formData.append('upload_preset', 'debutClient')
+        Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+            .then((response) => {
+                setNewRegistryItem({ ...newRegistryItem, registryItemImage: response.data.secure_url })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        handleFileSelected()
+    }, [imageSelected])
 
     const toggle = () => setIsAddItemOpen(!isAddItemOpen);
 
