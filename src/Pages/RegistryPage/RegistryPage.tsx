@@ -1,88 +1,193 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Row, Col, Button, FormGroup, Input, Label, Collapse, CardBody, Card } from 'reactstrap'
+import { GET_REGISTRY_ITEMS_WITH_REGISTRY_ID, CREATE_REGISTRY_ITEM } from '../../GraphQl/index'
+import { useMutation, useQuery } from '@apollo/client'
+import Axios from 'axios'
+import Loader from '../../Components/Loader/Loader'
 
-function RegistryItemCard() {
+function RegistryItemCard(
+    { _id,
+        itemOfRegistry,
+        registryItemName,
+        registryItemDescription,
+        registryItemImage,
+        registryItemPrice,
+        registryItemLink,
+        registryItemQuantity,
+        registryItemFullfiled,
+    }: any
+
+) {
     return (
-        <Row className=' m-1 p-3 shadow-sm  ' >
-            <Col md={8}>
-                <Row>
-                    <p className='fw-light fs-4' > Item Name
-                        <small className='mx-2 fs-6 fw-lighter text-success' >fullfilled</small>
-                    </p>
-                </Row>
-                <Row>
-                    <small className='text-muted  text-small fw-light' > item links  </small>
-                    <p className='fw-light link ' >
-                        https://via.placeholder.com/120
-                    </p>
-                </Row>
-                <Row>
-                    <small className='text-muted  text-small fw-light' > description  </small>
-                    <p className='fw-light link ' >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ducimus itaque nihil. Neque placeat dolore enim est qui modi et quaerat nemo voluptates nisi perferendis iusto maiores, mollitia quod optio.
-                    </p>
+        <>
+            <Row className=' m-1 p-3 shadow-sm  MyeventCard' >
+                <Col md={8}>
+                    <Row>
+                        <p className='fw-light fs-4' >  {registryItemName}
+                            <small className='mx-4 fs-4 fw-lighter text-success' >
+                                {registryItemFullfiled ? "✓" : "✗"}
+                            </small>
+                        </p>
+                    </Row>
+                    <Row>
+                        <small className='text-muted  text-small fw-light' > item link  </small>
+                        <p className='fw-light link ' >
+                            {registryItemLink ? <>
+                                <a href={registryItemLink} target="_blank" rel="noopener noreferrer">
+                                    {registryItemLink}
+                                </a>
+                            </> : " - "}
+                        </p>
+                    </Row>
+                    <Row>
+                        <small className='text-muted  text-small fw-light' > description  </small>
+                        <p className='fw-light link ' >
+                            {registryItemDescription ? registryItemDescription : " - "}
+                        </p>
 
-                </Row>
-            </Col>
-            <Col md={4} >
-                <Col md={12} className="d-flex justify-content-end ">
-                    <img src='https://via.placeholder.com/120' alt='registry item' className='img-fluid ' />
+                    </Row>
                 </Col>
-                <Row className='m-3  d-flex justify-content-end text-end'>
-                    <Col md={6}   >
-                        <small className='text-muted  text-small fw-light' > price </small>
-                        <p className='fw-light' > 9999</p>
+                <Col md={4} >
+                    <Col md={12} className="d-flex justify-content-end ">
+                        <img src='https://via.placeholder.com/120' alt='registry item' className='img-fluid ' />
                     </Col>
-                    <Col md={6}>
-                        <small className='text-muted  text-small fw-light' > quantity </small>
-                        <p className='fw-light' > 9999</p>
-                    </Col>
-                </Row>
+                    <Row className='m-3  d-flex justify-content-end text-end'>
+                        <Col md={6}   >
+                            <small className='text-muted  text-small fw-light' > price </small>
+                            <p className='fw-light' >  {registryItemPrice}   </p>
+                        </Col>
+                        <Col md={6}>
+                            <small className='text-muted  text-small fw-light' > quantity </small>
+                            <p className='fw-light' >  {registryItemQuantity}  </p>
+                        </Col>
+                    </Row>
 
-            </Col>
-        </Row>
+                </Col>
+
+                <Row className=' border-bottom border-white ' >
+                <Col md={5}>
+                    <small className='text-muted  text-small fw-light' > creator </small>
+                    <p className='fw-light' > firstname lastname</p>
+                </Col>
+                <Col md={5}>
+                    <small className='text-muted  text-small fw-light' > company </small>
+                    <p className='fw-light'>  companyname </p>
+                </Col>
+                <Col md={2}>
+                    <small className='text-muted  text-small fw-light' > status </small>
+                    <p className='fw-light' > open</p>
+                </Col>
+
+            </Row>
+            </Row>
+
+           
+        </>
     )
 }
 
 
 export default function RegistryPage() {
-
-
     const { id } = useParams()
+    const initState = {
+        itemOfRegistry: id,
+        registryItemName: "",
+        registryItemDescription: "",
+        registryItemImage: "",
+        registryItemPrice: "",
+        registryItemLink: "",
+        registryItemQuantity: "",
+        registryItemFullfiled: false,
+    }
+
+
+
     const [imageSelected, setImageSelected] = useState("")
     const [isAddItemOpen, setIsAddItemOpen] = useState(false);
+    const [newRegistryItem, setNewRegistryItem] = useState(initState)
+    const { data, loading, error } = useQuery(GET_REGISTRY_ITEMS_WITH_REGISTRY_ID, {
+        variables: {
+            registryId: id
+        }
+    })
+    const [createRegistryItem, createRegistryItemRes] = useMutation(CREATE_REGISTRY_ITEM, {
+        update(cache, { data: { createRegistryItem } }) {
+            const { getRegistryItemsWithRegistryId }: any = cache.readQuery({
+                query: GET_REGISTRY_ITEMS_WITH_REGISTRY_ID,
+                variables: {
+                    registryId: id
+                }
+            })
+            cache.writeQuery({
+                query: GET_REGISTRY_ITEMS_WITH_REGISTRY_ID,
+                variables: {
+                    registryId: id
+                },
+                data: {
+                    getRegistryItemsWithRegistryId: [...getRegistryItemsWithRegistryId, createRegistryItem]
+
+                }
+            })
+        }
+    }
+    )
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setNewRegistryItem({ ...newRegistryItem, [name]: value })
+    }
+
+    const handleSubmut = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        createRegistryItem({ variables: { registryItemInput: newRegistryItem } })
+        setNewRegistryItem(initState)
+        setIsAddItemOpen(false)
+    }
 
     const toggle = () => setIsAddItemOpen(!isAddItemOpen);
+
+
+
+    if (loading) return <Loader />
+    if (error) {
+        console.log(error)
+    }
+    if (data) {
+        console.log(data.getRegistryItemsWithRegistryId)
+    }
     return (
         <div className='my-5  mx-5 px-5  w-100 '>
             <p className='fs-2  fw-lighter mx-5 '>
-                registriry name {id}
+
+
+                {id}
             </p>
             <div className='flex-wrap shadow-lg p-4 ' >
-                <Row className=' border-bottom border-white ' >
-                    <Col md={5}>
-                        <small className='text-muted  text-small fw-light' > creator </small>
-                        <p className='fw-light' > firstname lastname</p>
-                    </Col>
-                    <Col md={5}>
-                        <small className='text-muted  text-small fw-light' > company </small>
-                        <p className='fw-light'>  companyname </p>
-                    </Col>
-                    <Col md={2}>
-                        <small className='text-muted  text-small fw-light' > status </small>
-                        <p className='fw-light' > open</p>
-                    </Col>
 
-                </Row>
                 <Row >
                     <p className='fs-5  fw-lighter mt-5 px-3 '>
                         registriry items
                     </p>
 
-                    <RegistryItemCard />
-                    <RegistryItemCard />
-                    <RegistryItemCard />
+                    {data?.getRegistryItemsWithRegistryId?.map((item: any) => {
+                        return <RegistryItemCard
+                            key={item._id}
+                            _id={item._id}
+                            itemOfRegistry={item.itemOfRegistry}
+                            registryItemName={item.registryItemName}
+                            registryItemDescription={item.registryItemDescription}
+                            registryItemImage={item.registryItemImage}
+                            registryItemPrice={item.registryItemPrice}
+                            registryItemLink={item.registryItemLink}
+                            registryItemQuantity={item.registryItemQuantity}
+                            registryItemFullfiled={item.registryItemFullfiled}
+
+
+                        />
+                    }
+                    )}
+
                 </Row>
 
 
@@ -94,7 +199,6 @@ export default function RegistryPage() {
 
                 <Collapse isOpen={isAddItemOpen}>
 
-
                     <Row>
                         <Col md={4}>
                             <FormGroup>
@@ -102,6 +206,8 @@ export default function RegistryPage() {
                                 <Input type="text"
                                     name="registryItemName"
                                     id="registryItemName"
+                                    placeholder='item name'
+                                    onChange={handleChange}
                                 />
                             </FormGroup>
                         </Col>
@@ -112,6 +218,8 @@ export default function RegistryPage() {
                                 <Input type="text"
                                     name="registryItemDescription"
                                     id="registryItemDescription"
+                                    placeholder='item description'
+                                    onChange={handleChange}
                                 />
                             </FormGroup>
                         </Col>
@@ -130,6 +238,8 @@ export default function RegistryPage() {
                                 <Input type="text"
                                     name="registryItemPrice"
                                     id="registryItemPrice"
+                                    placeholder='price'
+                                    onChange={handleChange}
                                 />
                             </FormGroup>
                         </Col>
@@ -139,6 +249,8 @@ export default function RegistryPage() {
                                 <Input type="text"
                                     name="registryItemLink"
                                     id="registryItemLink"
+                                    placeholder='external link'
+                                    onChange={handleChange}
                                 />
                             </FormGroup>
                         </Col>
@@ -148,6 +260,8 @@ export default function RegistryPage() {
                                 <Input type="number"
                                     name="registryItemQuantity"
                                     id="registryItemQuantity"
+                                    placeholder='quantity'
+                                    onChange={handleChange}
                                 />
                             </FormGroup>
                         </Col>
@@ -158,6 +272,7 @@ export default function RegistryPage() {
                             outline
                             color="light"
                             className=' my-3'
+                            onClick={(e: any) => { handleSubmut(e) }}
                         >
                             add item
                         </Button>

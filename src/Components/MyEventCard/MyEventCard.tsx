@@ -28,9 +28,9 @@ export default function MyEventCard(
 ) {
 
   const navigate = useNavigate()
-  const { userID, hasCompany, companyID } = useSelector((store: RootState) => store.identfiers)
+  const { userID } = useSelector((store: RootState) => store.identfiers)
 
-  const registryId = "shitwtfisthis"
+  // const registryId = "shitwtfisthis"
   // const { debutEventName } = event
 
   const [isOpen, setIsOpen] = useState(false)
@@ -51,7 +51,7 @@ export default function MyEventCard(
     variables: { eventId: _id }
   })
 
-  console.log("event registries", data)
+  // console.log("event registries", data)
   const [createDebutRegistry, createDebutRegistryRes] = useMutation(CREATE_DEBUT_REGISTRY,
     {
       update(cache, { data: { createDebutRegistry } }) {
@@ -76,9 +76,9 @@ export default function MyEventCard(
     })
 
   }
-  if (createDebutRegistryRes.data) {
-    console.log(createDebutRegistryRes.data)
-  }
+  // if (createDebutRegistryRes.data) {
+  //   console.log(createDebutRegistryRes.data)
+  // }
 
   return (
     <>
@@ -86,7 +86,7 @@ export default function MyEventCard(
         onClick={toggle}
         className='d-flex m-4  h-50 shadow-sm rounded flex-column  align-items-end w-25 MyeventCard ' >
 
-        <img src={debutEventImage} 
+        <img src={debutEventImage}
           className='w-100 h-100'
           alt='event' />
 
@@ -197,11 +197,11 @@ export default function MyEventCard(
                         </Col>
                         <Col md={2}>
                           <small className='text-muted  text-small fw-light' > items </small>
-                          <p className='fw-light' >  
-                          {/* {registry?.debutRegistryItems.length} */}
-                            
+                          <p className='fw-light' >
+                            {/* {registry?.debutRegistryItems.length} */}
+
                             {registry.debutRegistryItems?.length}
-                           </p>
+                          </p>
                         </Col>
                       </Row>
 
