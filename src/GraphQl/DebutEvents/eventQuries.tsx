@@ -61,3 +61,24 @@ query MyDebutEvents ($userId: ID!) {
 }
 
 `
+
+export const EVENTS_PAGES = gql`
+query AllEventPage {
+  getdebutEvents {
+    _id
+    debutEventName
+    debutEventDate
+    debutEventDescription
+    debutEventImage
+    belongsTo {
+      _id
+      companyName
+    }
+    createdBy {
+      _id
+      firstName
+    }
+  }
+}
+
+`
