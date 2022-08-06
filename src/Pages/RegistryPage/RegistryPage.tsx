@@ -171,22 +171,22 @@ export default function RegistryPage() {
     if (error) {
         console.log(error)
     }
-    if (data) {
-        console.log(data.getRegistryItemsWithRegistryId)
-    }
+    // if (data) {
+    //     console.log(data.getRegistryItemsWithRegistryId)
+    // }
     return (
         <div className='my-5  mx-5 px-5  w-100 '>
             <p className='fs-2  fw-lighter mx-5 '>
+            registriry items
 
 
-                {id}
+                {/* {id} */}
             </p>
             <div className='flex-wrap shadow-lg p-4 ' >
 
                 <Row >
-                    <p className='fs-5  fw-lighter mt-5 px-3 '>
-                        registriry items
-                    </p>
+                    {/* <p className='fs-5  fw-lighter mt-5 px-3 '>
+                    </p> */}
 
                     {data?.getRegistryItemsWithRegistryId?.map((item: any) => {
                         return <RegistryItemCard
