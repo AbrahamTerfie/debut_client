@@ -6,42 +6,38 @@ import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 export default function DebutEvents() {
     return (
 
-        <Row className='p-5 d-flex page ' >
-            <Col className=' m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
+        <div className='my-5  mx-5 px-5  w-100 '>
 
-                <p className='fw-bolder fs-3  mt-3'   > Debut Events </p>
-                <p>
-                    Explore the events that are happening in  your community.
-                    and join the ones that you like. and show your support.
-                </p>
+            <p className='fs-2  fw-lighter mx-5 '>
+                debut events
 
-            </Col>
-
-            <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
-
-                <Row className='searchInput mb-1 mt-4' >
-                    <p className='fw-bolder fs-3'> Debut Events</p>
-
-                    <SearchComponent />
-                </Row>
-                <Row className='m-3'>
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                    <DebutEventCards />
-                </Row>
+            </p>
+            <span className='fs-6 text-muted mx-5 d-flex flex-wrap' >
+                Explore the events that are happening in  your community.
+                and join the ones that you like. and show your support.
+            </span>
+            <div className='mx-4 my-3' >
+                <SearchComponent />
+            </div>
+            <div className='d-flex flex-wrap shadow p-4'>
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+                <DebutEventCards />
+            </div>
 
 
-            </Col>
-        </Row>
+            {/* </Col> */}
+            {/* </Row> */}
+        </div>
 
 
     )

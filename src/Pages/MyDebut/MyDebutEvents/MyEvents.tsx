@@ -248,13 +248,9 @@ export default function MyEvents() {
             />
           })
         }
-
-
-
         <NewEvent />
       </div>
       <div>
-
       </div>
     </div>
 

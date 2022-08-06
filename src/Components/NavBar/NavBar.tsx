@@ -20,6 +20,7 @@ export default function NavBarComponent() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(!dropdownOpen);
     const navMargins = { backgroundColor: 'transparent', }
+    const textColor = { color: "#1985a1" , cursor : "pointer"}
     const navigate = useNavigate()
     return (
         <>
@@ -33,6 +34,7 @@ export default function NavBarComponent() {
                     style={{
                         fontFamily: 'Bungee Shade, cursive',
                         fontSize: '2.5rem',
+                        color: '#1985a1',
                     }}
                 >
                     debut
@@ -40,13 +42,13 @@ export default function NavBarComponent() {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={dropdownOpen} navbar>
                     <Nav className="me-auto dark  m-2" navbar>
-                        <UncontrolledDropdown dark inNavbar nav    >
-                            <DropdownToggle nav    >
+                        <UncontrolledDropdown inNavbar nav    >
+                            <DropdownToggle nav style={textColor}  >
 
                                 <BsPeople size={15} className='mx-3 my-2' />
                                 Community
                             </DropdownToggle>
-                            <DropdownMenu end dark >
+                            <DropdownMenu end   >
                                 <DropdownItem onClick={() => navigate(appRoutes.people)}>
                                     <BsPeople size={15} className='mx-3 my-2' style={navMargins} />
                                     People Directory
@@ -63,13 +65,13 @@ export default function NavBarComponent() {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem >
-                            <NavLink onClick={() => { navigate(appRoutes.debutEvents) }}  >
+                            <NavLink style={textColor} onClick={() => { navigate(appRoutes.debutEvents) }}  >
                                 <GiReceiveMoney size={15} className='mx-3 my-2' style={navMargins} />
                                 Debut Events
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink onClick={() => { navigate(appRoutes.giveGratitude) }} >
+                            <NavLink style={textColor} onClick={() => { navigate(appRoutes.giveGratitude) }} >
                                 <RiChatSmileLine size={15} className='mx-3 my-2' style={navMargins} />
                                 Give Gratitude
                             </NavLink>
@@ -81,11 +83,11 @@ export default function NavBarComponent() {
                         <UncontrolledDropdown dark
                             inNavbar
                             nav >
-                            <DropdownToggle nav  >
+                            <DropdownToggle nav style={textColor} >
                                 <FaRegBuilding className='mx-3 my-2' size={15} />
                                 My Debut
                             </DropdownToggle>
-                            <DropdownMenu end dark >
+                            <DropdownMenu end  >
                                 <DropdownItem onClick={() => { navigate(appRoutes.myDebutInfo) }}>
                                     <GiBrain size={15} className='mx-3 my-2' style={navMargins} />
                                     Me & My Debut

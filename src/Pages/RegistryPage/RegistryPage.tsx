@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Row, Col, Button, FormGroup, Input, Label, Collapse, CardBody, Card } from 'reactstrap'
+import { Row, Col, Button, FormGroup, Input, Label, Collapse } from 'reactstrap'
 import { GET_REGISTRY_ITEMS_WITH_REGISTRY_ID, CREATE_REGISTRY_ITEM } from '../../GraphQl/index'
 import { useMutation, useQuery } from '@apollo/client'
 import Axios from 'axios'
@@ -166,28 +166,19 @@ export default function RegistryPage() {
     const toggle = () => setIsAddItemOpen(!isAddItemOpen);
 
 
-
     if (loading) return <Loader />
     if (error) {
         console.log(error)
     }
-    // if (data) {
-    //     console.log(data.getRegistryItemsWithRegistryId)
-    // }
+
     return (
         <div className='my-5  mx-5 px-5  w-100 '>
             <p className='fs-2  fw-lighter mx-5 '>
-            registriry items
+                registriry items
 
-
-                {/* {id} */}
             </p>
             <div className='flex-wrap shadow-lg p-4 ' >
-
                 <Row >
-                    {/* <p className='fs-5  fw-lighter mt-5 px-3 '>
-                    </p> */}
-
                     {data?.getRegistryItemsWithRegistryId?.map((item: any) => {
                         return <RegistryItemCard
                             key={item._id}
