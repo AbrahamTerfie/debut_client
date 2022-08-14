@@ -12,12 +12,9 @@ export default function DebutEvents() {
 
     console.log("events", data.getdebutEvents)
     return (
-
         <div className='my-5  mx-5 px-5  w-100 '>
-
             <p className='fs-2  fw-lighter mx-5 '>
                 debut events
-
             </p>
             <span className='fs-6 text-muted mx-5 d-flex flex-wrap' >
                 Explore the events that are happening in  your community.
@@ -38,18 +35,10 @@ export default function DebutEvents() {
                             debutEventImage={event.debutEventImage}
                             belongsTo={event.belongsTo}
                             createdBy={event.createdBy}
-
                         />
                     )
-                }
-                )}
+                })}
             </div>
-
-
-            {/* </Col> */}
-            {/* </Row> */}
         </div>
-
-
     )
 }
