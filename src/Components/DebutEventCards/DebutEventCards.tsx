@@ -3,6 +3,7 @@ import { Col, Row, } from 'reactstrap'
 import { useNavigate } from 'react-router-dom'
 import './DebutEventCards.css'
 import { appRoutes } from '../../Routes/routes'
+
 import moment from 'moment'
 export default function DebutEventCards({
     _id,
@@ -14,7 +15,7 @@ export default function DebutEventCards({
     debutEventImage,
 }: any) {
     const navigate = useNavigate()
-    const debutEventLink = "DebutEventLink"
+    const debutEventLink = _id
     return (
         <Row className='d-flex m-4   shadow-sm rounded   align-items-end w-100 MyeventCard '
             onClick={() => navigate(`${appRoutes.debutEvents}/${debutEventLink}`)}>
@@ -30,8 +31,8 @@ export default function DebutEventCards({
 
             </Col>
             <Col md={3}>
-                <img className='  rounded shadow' src={debutEventImage} 
-                style={{height: '150px', width: '200px'}}
+                <img className='  rounded shadow' src={debutEventImage}
+                    style={{ height: '150px', width: '200px' }}
                 />
             </Col>
 

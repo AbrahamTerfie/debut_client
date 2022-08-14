@@ -82,3 +82,62 @@ query AllEventPage {
 }
 
 `
+
+
+export const DEBUT_EVENT_DETAILS = gql`
+query DebutEventDetails($getDebutEventWithIdId: ID!){
+  getDebutEventWithId(id: $getDebutEventWithIdId) {
+    _id,
+    debutEventDate,
+    debutEventDescription,
+    debutEventName,
+    debutEventImage,
+    otherRelatedLinks,
+    debutInvitationLink,
+    belongsTo {
+      _id,
+      companyName,
+    }
+    createdBy {
+      _id,
+      lastName,
+      firstName
+    }
+    debutRegistry {
+      _id,      
+    }
+  
+  }
+}
+`
+
+
+export const EVENT_PAGE_REGISTRY = gql`
+query  EventpageRegistry ($getDebutRegistryWithIdId: ID!){
+  getDebutRegistryWithId(id: $getDebutRegistryWithIdId) {
+    _id,
+    debutRegistryName,
+    debutRegistryStatus,
+    belongsTo {
+      _id,
+      companyName
+    },
+    createdBy {
+      _id,
+      firstName
+    },
+    debutEvent {
+      _id,
+    },
+    debutRegistryItems {
+      _id,
+      registryItemName,
+      registryItemDescription,
+      registryItemPrice,
+      registryItemQuantity,
+      registryItemImage,
+      registryItemLink,
+    }
+    
+  }
+}`
