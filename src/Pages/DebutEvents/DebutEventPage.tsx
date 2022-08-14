@@ -67,39 +67,55 @@ export default function DebutEventPage() {
                 </Col>
                 <Col md={7} className='mx-3 rounded border border-light  border-opacity-25 py-4 shadow' >
                     <p className='fs-6' > registry  <span className='px-2 fs-4 text-muted ' >  {dataRegistry?.getDebutRegistryWithId.debutRegistryName}    </span>   </p>
-                    {dataRegistry?.getDebutRegistryWithId.debutRegistryItems.map((item: any) => {
-                        return (
-                            <Row className='d-flex shadow-sm mx-2 rounded-3 p-2 my-3' >
-                                <Col md={3}>
-                                    <img className=' mx-auto shadow-sm img-fluid '
-                                        src={item.registryItemImage}
-                                    />
-                                </Col>
-                                <Col md={9} >
-                                    <Row>
-                                        <Col md={10} >
-                                            <p className='fs-5 fw-lighter m-0' > {item.registryItemName} </p>
-                                            <p className='text-muted fw-lighter text-wrap' > {item.registryItemDescription} </p>
-                                        </Col>
-                                        <Col md={2} >
-                                            <p className='fs-5 fw-lighter m-0' >  {item.registryItemPrice} $ </p>
-                                            <p className='text-muted fw-lighter text-wrap' > # {item.registryItemQuantity}  </p>
-                                        </Col>
-                                        <Col md={9}   >
-                                            <p className='' > {item.registryItemLink} </p>
-                                        </Col>
-                                        <Col md={3} >
-                                            <Button className='mx-4' color="link" outline size='sm' >
-                                                message
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                        )
-                    })}
+                    {dataRegistry?.getDebutRegistryWithId.debutRegistryItems.length === 0 ?
+
+                        <p className='text-muted fw-lighter' > no items in registry </p> :
+
+                        dataRegistry?.getDebutRegistryWithId.debutRegistryItems.map((item: any) => {
+                            return (
+                                <Row className='d-flex shadow-sm mx-2 rounded-3 p-2 my-3' >
+                                    <Col md={3}>
+                                        <img className=' mx-auto shadow-sm img-fluid '
+                                            src={item.registryItemImage}
+                                        />
+                                    </Col>
+                                    <Col md={9} >
+                                        <Row>
+                                            <Col md={10} >
+                                                <p className='fs-5 fw-lighter m-0' > {item.registryItemName} </p>
+                                                <p className='text-muted fw-lighter text-wrap' > {item.registryItemDescription} </p>
+                                            </Col>
+                                            <Col md={2} >
+                                                <p className='fs-5 fw-lighter m-0' >  {item.registryItemPrice} $ </p>
+                                                <p className='text-muted fw-lighter text-wrap' > # {item.registryItemQuantity}  </p>
+                                            </Col>
+                                            <Col md={9}   >
+                                                <p className='' > {item.registryItemLink} </p>
+                                            </Col>
+                                            <Col md={3} >
+                                                <Button className='mx-4' color="link" outline size='sm' >
+                                                    message
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            )
+                        })
+
+
+
+
+
+                    }
                 </Col>
             </Row>
         </div>
     )
 }
+                // }
+//                 </Col>
+//             </Row>
+//         </div>
+//     )
+// }
