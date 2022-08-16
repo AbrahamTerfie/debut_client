@@ -102,22 +102,25 @@ export default function PeopleCards() {
                 </ModalFooter>
             </Modal>
 
-            <Row className='peopleCardsContainer p-3' onClick={toggle} >
-                <Col xs='2' sm='2' md='2' lg='2' xl='2'  >
-                    <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' alt='user profile photo' />
+            <Row className='shadow-sm  border-info rounded-4 p-3 mx-2 my-2 MyeventCard' onClick={toggle} >
+                <Col md={2}  >
+                    <img
+                        className='rounded w-100'
+                        src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                        alt='user profile photo' />
 
                 </Col>
 
-                <Col xs='10' sm='10' md='10' lg='10' xl='10' >
+                <Col md={10} >
 
-                    <p className='fs-6 fw-semibold' >Name fill</p>
-                    <div>
-                        <div className='fs-6 fw-normal' >
-                            user title , tilte expands and more
-                            <p className='fw-lighter'>  user profile description  </p>
+                    <p className=' fw-bold fs-5 m-0' >Name fill</p>
 
-                        </div>
-                    </div>
+                    <p className='fs-6 fw-lighter m-0' >
+                        user title , tilte expands and more
+
+                    </p>
+                    <p className='fw-lighter'>  user profile description  </p>
+
 
 
                 </Col>

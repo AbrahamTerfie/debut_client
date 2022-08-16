@@ -15,7 +15,6 @@ export default function People() {
         authenticatedUser({
             variables: {
                 userInput: {
-
                     email: user?.email,
                     userName: user?.name,
                     firstName: user?.nickname,
@@ -36,16 +35,13 @@ export default function People() {
 
 
     return (
-        <Row className='px-5 d-flex page ' >
-            <Col className='filterContainer m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
-                <FilterPeople />
-            </Col>
-            <Col className=' mainPageContainer' xs='10' sm='10' md='8' lg='8' xl='8' >
-                <Row className='searchInput mb-1 mt-4' >
-                    <h5> People Directory </h5>
-                    <SearchComponent />
-                </Row>
-                <Row className='m-3'>
+        <div className=' d-flex flex-column w-100 m-4 p-4' >
+
+            <p className='fw-bolder fs-3'> People directory </p>
+
+            <SearchComponent />
+            <Row className='mt-4' >
+                <Col md={6} className="overflow-scroll h-50" >
                     <PeopleCards />
                     <PeopleCards />
                     <PeopleCards />
@@ -53,13 +49,18 @@ export default function People() {
                     <PeopleCards />
                     <PeopleCards />
                     <PeopleCards />
+                    <PeopleCards /> <PeopleCards />
                     <PeopleCards />
                     <PeopleCards />
                     <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
-                </Row>
-            </Col>
-        </Row>
+                </Col>
+                <Col md={6} className='shadow  rounded border border-light my-2' >
+                    people detail
+                </Col>
+            </Row>
+
+
+
+        </div>
     )
 }

@@ -5,10 +5,9 @@
     justify-content: space-between;
     align-items: center;
     margin: 0em 1em 0em 0em;
-    width: 100%;
-    max-width: 1200px;
-    border: 1px solid #3e405a;
-    height: max-content;
+
+    /* border: 1px solid #3e405a; */
+    /* height: max-content; */
 
     transition: all 0.4s ease-in-out;
 
@@ -17,9 +16,9 @@
 .peopleCardsContainer:hover {
     transition: all 0.4s ease-in-out;
     border-radius: 0px;
-    /* background: linear-gradient(315deg, #2a2b3c, #232432); */
-    box-shadow: -5px -10px 14px #101016,
-        15px 15px 14px #3e405a;
+
+    /* box-shadow: -5px -10px 14px #101016,
+        15px 15px 14px #3e405a; */
 }
 
 .peopleCardsContainer img {

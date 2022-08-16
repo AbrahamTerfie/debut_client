@@ -6,14 +6,14 @@
 
 
 .filterContainer {
-    border: 1px solid #3e405a;
-    border-radius: 5px;
-    padding: 10px;
-    padding-top: 3em;
-    display: flex;
+    /* border: 1px solid #3e405a; */
+    /* border-radius: 5px; */
+    /* padding: 10px;
+    padding-top: 3em; */
+    /* display: flex;
     flex-direction: row;
     align-items: flex-start;
-    height: max-content;
+    height: max-content; */
 }
 .page{
     display: flex;
@@ -32,7 +32,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     border-radius: 2%;
-    height: 90vh;
+    /* height: 90vh; */
 
 }
 
