@@ -7,7 +7,7 @@ import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 import { useMutation, useQuery } from '@apollo/client'
 import { AUTHENTICATED_USER } from '../../GraphQl/index'
 import { useAuth0 } from '@auth0/auth0-react'
-
+import PersonDetail from '../../Components/PersonDetail/PersonDetail'
 export default function People() {
     const { user } = useAuth0();
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
@@ -37,7 +37,7 @@ export default function People() {
     return (
         <div className=' d-flex flex-column w-100 m-4 p-4' >
 
-            <p className='fw-bolder fs-3'> People directory </p>
+            <p className='fw-light fs-3  mx-5'> People directory </p>
 
             <SearchComponent />
             <Row className='mt-4' >
@@ -54,8 +54,8 @@ export default function People() {
                     <PeopleCards />
                     <PeopleCards />
                 </Col>
-                <Col md={6} className='shadow  rounded border border-light my-2' >
-                    people detail
+                <Col md={6} className='overflow-scroll' >
+                    <PersonDetail />
                 </Col>
             </Row>
 

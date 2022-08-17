@@ -102,7 +102,7 @@ export default function PeopleCards() {
                 </ModalFooter>
             </Modal>
 
-            <Row className='shadow-sm  border-info rounded-4 p-3 mx-2 my-2 MyeventCard' onClick={toggle} >
+            <Row className='shadow  border-info rounded-4 p-3 mx-2 my-2 MyeventCard' onClick={toggle} >
                 <Col md={2}  >
                     <img
                         className='rounded w-100'
