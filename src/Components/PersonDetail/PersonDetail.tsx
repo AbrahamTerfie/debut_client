@@ -12,44 +12,6 @@ import {
 
 
 } from 'react-icons/fa'
-{/*
- _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    userName: String
-    preferredName: String
-    pronouns: String
-    currentCompany: Company
-    titleAtCompany: String
-    linkedinUrl: String
-    twitterUrl: String
-    instagramUrl: String
-    mailingAddress: String
-    mobilePhone: String
-    officePhone: String
-    preferedContactMethod: String
-    hasAssistat: Boolean
-    assistantName: String
-    assistantPhone: String
-    assistantEmail: String
-    howyouContribute: String
-    aeraOfExpertise: [String]
-    regions: [String]
-    yourBiography: String
-    personalDescription: String
-    profileImage: String
-    role: String
-    company: Company
-    companiesFollowing: [Company]
-    companiesFollowed: [Company]
-    ForumPost: [ForumPost]
-    gratitudes: [Gratitude]
-    eventsToAttend: [debutEvents]
-    eventsAttended: [debutEvents]
-
-
-*/}
 
 export default function PersonDetail() {
     return (
@@ -62,20 +24,16 @@ export default function PersonDetail() {
                 <Col md={8}>
                     <p className='fs-2 fw-lighter m-0'>John Doe
                         <span className='fs-6 fw-bold text-muted mx-2'> they/them</span>
-
                     </p>
                     <p className='fs-6 fw-bold  m-0'>@johndoe  / <span className='text-muted' >nickname</span> </p>
-
                     <p>
                         <FaEnvelope className='text-muted mx-2 my-2' />email</p>
-
                     <div className='d-flex justify-content-start my-2' >
                         <FaLinkedin className='text-muted mx-1' size={20} />
                         <FaGithub className='text-muted mx-2' size={20} />
                         <FaTwitter className='text-muted mx-2' size={20} />
                         <FaFacebook className='text-muted mx-2' size={20} />
                         <FaInstagram className='text-muted mx-2' size={20} />
-
                     </div>
                 </Col>
             </Row>
@@ -138,11 +96,6 @@ export default function PersonDetail() {
                     <p className='m-0'> company website </p>
                 </Col>
             </Row>
-
-
-
-           
-
         </div>
     )
 }
