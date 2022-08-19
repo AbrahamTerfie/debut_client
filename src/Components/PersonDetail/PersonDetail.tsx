@@ -15,7 +15,7 @@ import {
 
 export default function PersonDetail() {
     return (
-        <div className='p-4 shadow h-50 rounded border border-light my-2 overflow-scroll' >
+        <div className='p-4 shadow h-auto rounded border border-light my-2 overflow-scroll' >
             <Row>
                 <Col md={4}>
                     <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
