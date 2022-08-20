@@ -4,33 +4,29 @@ interface AuxProps {
     children: JSX.Element[] | JSX.Element;
 }
 type InitStateType = {
-    peopleDirectorystate: PersonDetail;
-    setPeopleDirectoryState: React.Dispatch<React.SetStateAction<PersonDetail>>;
+    state: PersonDetail;
+    setState: React.Dispatch<React.SetStateAction<PersonDetail>>;
 };
 
 interface PersonDetail {
-
     selectedPersonID: String;
     applyFilter: {}
-
 }
 
 const initState: PersonDetail = {
-
-    selectedPersonID: '',
+    selectedPersonID: 'eeee',
     applyFilter: {}
-
 };
 export const PeopleDirectoryContext = createContext<InitStateType>({
-    peopleDirectorystate: initState,
-    setPeopleDirectoryState: ()=> { }
+    state: initState,
+    setState: (data) => { }
 });
 
 export default function PeopleDirectoryStore({ children }: AuxProps) {
-    const [peopleDirectorystate, setPeopleDirectoryState] = useState(initState);
+    const [state, setState] = useState(initState);
     return (
         <PeopleDirectoryContext.Provider
-            value={{ peopleDirectorystate, setPeopleDirectoryState }}>
+            value={{ state, setState }}>
             {children}
         </PeopleDirectoryContext.Provider>
     );

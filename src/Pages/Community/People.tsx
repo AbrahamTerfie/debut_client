@@ -11,11 +11,13 @@ import PersonDetail from '../../Components/PersonDetail/PersonDetail'
 import PeopleFilterOptions from '../../Components/PeopleFilterOptions/PeopleFilterOptions'
 import { IoMdSettings } from 'react-icons/io'
 //context
-import PeopleDirectoryStore from '../../Context/PeopleDirectoryContext'
-import { PeopleDirectoryContext } from '../../Context/PeopleDirectoryContext'
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../Store/RootReducer'
 export default function People() {
-    const { peopleDirectorystate, setPeopleDirectoryState } = useContext(PeopleDirectoryContext)
+
     const { user } = useAuth0();
+    const { activePersonId } = useSelector((store: RootState) => store.uiStore)
+
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -43,46 +45,46 @@ export default function People() {
 
 
     return (
-        <PeopleDirectoryStore>
-            <div className=' d-flex flex-column w-100 m-4 p-4' >
-                <p className='fw-light fs-3  mx-5'> People directory
-                    {peopleDirectorystate.selectedPersonID}
-                </p>
-                <Row className='mx-4' >
-                    <Col md={11}>
-                        <SearchComponent />
-                    </Col>
-                    <Col md={1}>
-                        <Button onClick={toggle} outline color="light" >
-                            <IoMdSettings className='bg-transparent' />
-                        </Button>
-                    </Col>
-                </Row>
-                <Collapse isOpen={modal} toggle={toggle} >
-                    <Row>
-                        <PeopleFilterOptions />
-                    </Row>
-                </Collapse>
-                <Row className='mt-4' >
-                    <Col md={6} className="overflow-scroll vh-100" >
-                        <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />  <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />
-                        <PeopleCards />
 
-                    </Col>
-                    <Col md={6} className='overflow-scroll' >
-                        <PersonDetail />
-                    </Col>
+        <div className=' d-flex flex-column w-100 m-4 p-4' >
+            <p className='fw-light fs-3  mx-5'> People directory
+                {activePersonId}
+            </p>
+            <Row className='mx-4' >
+                <Col md={11}>
+                    <SearchComponent />
+                </Col>
+                <Col md={1}>
+                    <Button onClick={toggle} outline color="light" >
+                        <IoMdSettings className='bg-transparent' />
+                    </Button>
+                </Col>
+            </Row>
+            <Collapse isOpen={modal} toggle={toggle} >
+                <Row>
+                    <PeopleFilterOptions />
                 </Row>
-            </div>
-        </PeopleDirectoryStore>
+            </Collapse>
+            <Row className='mt-4' >
+                <Col md={6} className="overflow-scroll vh-100" >
+                    <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />  <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />
+                    <PeopleCards />
+
+                </Col>
+                <Col md={6} className='overflow-scroll' >
+                    <PersonDetail />
+                </Col>
+            </Row>
+        </div>
+
     )
 }
