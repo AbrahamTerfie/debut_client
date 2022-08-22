@@ -13,14 +13,19 @@ import { IoMdSettings } from 'react-icons/io'
 //context
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/RootReducer'
+import { All_USERS } from '../../GraphQl/index'
+import Loader from '../../Components/Loader/Loader'
 export default function People() {
 
     const { user } = useAuth0();
     const { activePersonId } = useSelector((store: RootState) => store.uiStore)
-
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const { loading, data, error } = useQuery(All_USERS)
+
+
+
     useEffect(() => {
         authenticatedUser({
             variables: {
@@ -42,7 +47,15 @@ export default function People() {
             return console.log('getching user......,,,,,')
         }
     }, [])
-
+    if (loading) {
+        return <Loader />
+    }
+    if (error) {
+        return <div>Error</div>
+    }
+    if (data) {
+        console.log(data)
+    }
 
     return (
 
@@ -67,17 +80,14 @@ export default function People() {
             </Collapse>
             <Row className='mt-4' >
                 <Col md={6} className="overflow-scroll vh-100" >
-                    <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />  <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
-                    <PeopleCards />
+                    {
+                        data?.getdebutUsers.map((user: any) => {
+                            return <PeopleCards key={user.id}
+                                people={user} />
+
+
+                        })
+                    }
 
                 </Col>
                 <Col md={6} className='overflow-scroll' >
