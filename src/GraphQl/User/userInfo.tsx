@@ -2,7 +2,21 @@ import { gql } from "@apollo/client";
 
 
 
-
+export const All_USERS = gql`
+query DebutUsers{
+  getdebutUsers {
+    _id
+    firstName
+    lastName
+    titleAtCompany
+    profileImage
+    company {
+      _id
+      companyName
+    }
+  }
+}
+`
 
 // const UPDATE_DEBUT_USER = gql``
 

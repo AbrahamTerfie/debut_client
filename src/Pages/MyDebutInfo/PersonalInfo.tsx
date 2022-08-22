@@ -35,6 +35,30 @@ export default function PersonalInfo() {
             })
         }
     }, [data])
+console.log( "profileee", personalInfoForm.profileImage)
+    function UploadImage() {
+
+        const formData = new FormData
+        formData.append('file', imageSelected)
+        // file is the file object
+        // first one is the preset and the second one is name  for cloudnary api
+        formData.append('upload_preset', 'debutClient')
+        imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+            .then((response) => {
+                setPersonalInfoForm({ ...personalInfoForm, profileImage: response.data.secure_url })
+                console.log(response.data.secure_url)
+            }).catch((error) => {
+                console.log(error)
+            })
+
+
+    }
+
+    useEffect(() => {
+        UploadImage()
+
+    }, [imageSelected])
+
 
     const [updatePersonalInfo, updatePersonalInfoRes] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
         {
@@ -56,17 +80,8 @@ export default function PersonalInfo() {
         setPersonalInfoForm({ ...personalInfoForm, [name]: value })
     }
     const handleSubmit = (e: any) => {
-        const formData = new FormData
-        formData.append('file', imageSelected)
-        // file is the file object
-        // first one is the preset and the second one is name  for cloudnary api
-        formData.append('upload_preset', 'debutClient')
-        imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
-            .then((response) => {
-                setPersonalInfoForm({ ...personalInfoForm, profileImage: response.data.secure_url })
-            }).catch((error) => {
-                console.log(error)
-            })
+
+
         updatePersonalInfo({
             variables: {
                 userInput: personalInfoForm,
@@ -76,11 +91,8 @@ export default function PersonalInfo() {
 
         dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
 
-
-        console.log(error)
-
-
     }
+
 
     if (loading || updatePersonalInfoRes.loading) return <div>   <Loader /> </div>
     if (error || updatePersonalInfoRes.error) return <div>Error!</div>
