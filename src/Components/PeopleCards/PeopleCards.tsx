@@ -1,19 +1,21 @@
-import React, { useState, useContext } from 'react'
-import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
+import React from 'react'
+import { Row, Col, } from 'reactstrap'
 import './Peoplecards.css'
 import { setActivePersonId } from '../../Store/UI/sidebarController'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/RootReducer';
 export default function PeopleCards({ people }: any) {
-    // console.log("people", people.company[0]?.companyName)
-
-    const { activePersonId } = useSelector((store: RootState) => store.uiStore)
     const dispatch = useDispatch()
+    const { activePersonId } = useSelector((store: RootState) => store.uiStore)
+
     function updatePeopleDirectoryState(newname: string) {
         dispatch(setActivePersonId(newname))
     }
     return (
-        <Row className='shadow  border-info rounded-4 p-3 mx-2 my-2 MyeventCard'
+        <Row 
+        className={activePersonId === people.userName ?
+            'shadow-sm  border-info rounded-4 p-3 mx-2 my-2 MyeventCard '
+            : 'shadow  border-info rounded-4 p-3 mx-2 my-2 MyeventCard'}
             onClick={() => updatePeopleDirectoryState(people._id)}>
             <Col md={2}  >
                 <img
@@ -27,9 +29,7 @@ export default function PeopleCards({ people }: any) {
                     {people.titleAtCompany}
                 </p>
                 <p className='fw-lighter'>
-
                     {people.company[0]?.companyName}
-
                 </p>
             </Col>
         </ Row >

@@ -55,6 +55,7 @@ export {
     CREATE_REGISTRY_ITEM,
 
     //perope 
-    All_USERS, GET_DEBUT_USER_WITH_ID
+    All_USERS, 
+    // GET_DEBUT_USER_WITH_ID
 
 }

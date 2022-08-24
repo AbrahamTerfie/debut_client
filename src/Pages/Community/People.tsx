@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { Row, Col, Button, Collapse, FormGroup, Label, Input } from 'reactstrap'
+import React, { useEffect, useState } from 'react'
+import { Row, Col, Button, Collapse } from 'reactstrap'
 import PeopleCards from '../../Components/PeopleCards/PeopleCards'
-import FilterPeople from '../../Components/FilterPeople/FilterPeople'
 import './People.css'
 import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
 import { useMutation, useQuery } from '@apollo/client'
@@ -80,15 +79,10 @@ export default function People() {
             </Collapse>
             <Row className='mt-4' >
                 <Col md={6} className="overflow-scroll vh-100" >
-                    {
-                        data?.getdebutUsers.map((user: any) => {
-                            return <PeopleCards key={user.id}
-                                people={user} />
-
-
-                        })
-                    }
-
+                    {data?.getdebutUsers.map((user: any) => {
+                        return <PeopleCards key={user.id}
+                            people={user} />
+                    })}
                 </Col>
                 <Col md={6} className='overflow-scroll' >
                     <PersonDetail />

@@ -18,7 +18,7 @@ export default function DebutEventCards({
     const debutEventLink = _id
     return (
         <Row className='d-flex m-4   shadow-sm rounded   align-items-end w-100 MyeventCard '
-            onClick={() => navigate(`${appRoutes.debutEvents}/${debutEventLink}`)}>
+            onClick={() => navigate(`${appRoutes.debutEvents}/${_id}`)}>
 
             <Col md={9}>
                 <p className='fs-4 fw-light' > {debutEventName}

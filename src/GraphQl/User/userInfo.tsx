@@ -18,10 +18,6 @@ query DebutUsers{
 }
 `
 
-// const UPDATE_DEBUT_USER = gql``
-
-// const DELETE_DEBUT_USER = gql``
-
 
 export const GET_DEBUT_USER_WITH_ID = gql`
 query  DebutUserDetail($getDebutUserWithIdId: ID!) {

@@ -94,6 +94,10 @@ query getDebutUserWithId($getDebutUserWithIdId: ID!) {
     role
     company {
       _id
+       companyName,
+       companyWebsite,
+       companyHeadquarters,
+       companyLogo
     }
     companiesFollowing {
       _id
@@ -101,9 +105,9 @@ query getDebutUserWithId($getDebutUserWithIdId: ID!) {
     companiesFollowed {
       _id
     }
-    ForumPost {
-      _id
-    }
+    # ForumPost {
+    #   _id
+    # }
     gratitudes {
       _id
     }

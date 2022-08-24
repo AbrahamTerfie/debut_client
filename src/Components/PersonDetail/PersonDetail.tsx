@@ -1,46 +1,88 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-// linked in , github , twitter , facebook , instagram ,Email , phone number ,
 import {
     FaLinkedin,
-    FaGithub,
     FaTwitter,
     FaFacebook,
     FaInstagram,
     FaEnvelope,
-    FaPhone,
-
-
 } from 'react-icons/fa'
-
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../Store/RootReducer';
+import { useQuery } from '@apollo/client';
+import { FETCH_USER_WITH_ID } from '../../GraphQl/index'
+import Loader from '../Loader/Loader';
 export default function PersonDetail() {
+    const { activePersonId } = useSelector((store: RootState) => store.uiStore)
+    const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, {
+        variables: {
+            getDebutUserWithIdId: activePersonId
+        }
+    })
+    if (loading) {
+        <Loader />
+    }
+    console.log(data)
+    if (activePersonId === "") {
+        return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > select user </p>
+    }
+
+    if (error) {
+        return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p>
+    }
+
     return (
         <div className='p-4 shadow h-auto rounded border border-light my-2 overflow-scroll' >
             <Row>
                 <Col md={4}>
-                    <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                    <img src={data?.getDebutUserWithId.profileImage}
                         alt="profile" className="img-fluid rounded shadow" />
                 </Col>
                 <Col md={8}>
-                    <p className='fs-2 fw-lighter m-0'>John Doe
-                        <span className='fs-6 fw-bold text-muted mx-2'> they/them</span>
+                    <p className='fs-2 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}
+                        <span className='fs-6 fw-bold text-muted mx-2'>
+                            {data?.getDebutUserWithId.pronouns}
+                        </span>
                     </p>
-                    <p className='fs-6 fw-bold  m-0'>@johndoe  / <span className='text-muted' >nickname</span> </p>
+                    <p className='fs-6 fw-bold  m-0'>
+                        {data?.getDebutUserWithId.userName}
+                        / <span className='text-muted' >
+                            {data?.getDebutUserWithId.preferredName}
+                        </span>
+                    </p>
                     <p>
-                        <FaEnvelope className='text-muted mx-2 my-2' />email</p>
+                        <FaEnvelope className='text-muted mx-2 my-2' />
+                        {data?.getDebutUserWithId.email}
+                    </p>
                     <div className='d-flex justify-content-start my-2' >
-                        <FaLinkedin className='text-muted mx-1' size={20} />
-                        <FaGithub className='text-muted mx-2' size={20} />
-                        <FaTwitter className='text-muted mx-2' size={20} />
-                        <FaFacebook className='text-muted mx-2' size={20} />
-                        <FaInstagram className='text-muted mx-2' size={20} />
+                        {data?.getDebutUserWithId.linkedinUrl ? <a href={data?.getDebutUserWithId.linkedinUrl}>
+                            <FaLinkedin className='text-muted mx-1' size={20} />
+                        </a> : null}
+                        {data?.getDebutUserWithId.twitterUrl ? <a href={data?.getDebutUserWithId.twitterUrl}>
+                            <FaTwitter className='text-muted mx-2' size={20} />
+
+                        </a> : null}
+                        {data?.getDebutUserWithId.facebookUrl ? <a href={data?.getDebutUserWithId.facebookUrl}>
+                            <FaFacebook className='text-muted mx-2' size={20} />
+                        </a> : null}
+                        {data?.getDebutUserWithId.instagramUrl ? <a href={data?.getDebutUserWithId.instagramUrl}>
+                            <FaInstagram className='text-muted mx-2' size={20} />
+                        </a> : null}
                     </div>
                 </Col>
             </Row>
             <Row className='mt-4 '>
                 <Col md={12}>
                     <p className='fs-5 fw-light m-0'>
-                        <span className='text-muted'>Title</span> at <span className='text-muted'>Company</span>
+                        <span >
+                            {data?.getDebutUserWithId.titleAtCompany}
+                        </span>
+                        <span className='text-muted mx-2'>
+                            at
+                        </span>
+                        <span >
+                            {data?.getDebutUserWithId.company[0]?.companyName}
+                        </span>
                     </p>
                 </Col>
 
@@ -48,7 +90,7 @@ export default function PersonDetail() {
                     <p className="mt-4 mb-0 " > biography</p>
                     <p className=' fw-light m-0'>
                         <span className='text-muted'>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam ea cum, natus doloribus eligendi dolore alias enim eius dolorem non ullam tenetur omnis quasi asperiores dicta dignissimos expedita quidem ducimus?
+                            {data?.getDebutUserWithId.yourBiography}
                         </span>
                     </p>
                 </Col>
@@ -57,7 +99,7 @@ export default function PersonDetail() {
                     <p className="mt-4 mb-0 " > your contribution</p>
                     <p className=' fw-light m-0'>
                         <span className='text-muted'>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam ea cum, natus doloribus eligendi dolore alias enim eius dolorem non ullam tenetur omnis quasi asperiores dicta dignissimos expedita quidem ducimus?
+                            {data?.getDebutUserWithId.howyouContribute}
                         </span>
                     </p>
                 </Col>
@@ -66,9 +108,9 @@ export default function PersonDetail() {
                     <p className="mt-4 mb-0 ">
                         Area of Expertise
                         <div>
-                            <span className='text-muted mx-2'>this </span>
-                            <span className='text-muted mx-2'>this </span>
-                            <span className='text-muted mx-2'>this </span>
+                            {data?.getDebutUserWithId.aeraOfExpertise.map((item: any) => {
+                                return <span className='text-muted mx-1'> {item}, </span>
+                            })}
                         </div>
                     </p>
                 </Col>
@@ -76,9 +118,9 @@ export default function PersonDetail() {
                     <p className="mt-4 mb-0 ">
                         Regions
                         <div>
-                            <span className='text-muted mx-2'> region 1  </span>
-                            <span className='text-muted mx-2'> region 2  </span>
-                            <span className='text-muted mx-2'> region 3  </span>
+                            {data?.getDebutUserWithId.regions.map((item: any) => {
+                                return <span className='text-muted mx-1'> {item}, </span>
+                            })}
                         </div>
                     </p>
                 </Col>
@@ -86,14 +128,18 @@ export default function PersonDetail() {
                     <p className="mt-4 mb-0 ">company</p>
                 </Col>
                 <Col md={2} className="my-2" >
-                    <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                    <img src={data?.getDebutUserWithId.company[0]?.companyLogo}
                         alt="profile" className="img-fluid rounded shadow" />
                 </Col>
                 <Col md={10}>
-                    <p className='m-0 fs-4 fw-lighter' > company name
-                        <span className='m-0 text-muted mx-3 fs-6 fw-light'> company location </span>
+                    <p className='m-0 fs-4 fw-lighter' > {data?.getDebutUserWithId.company[0]?.companyName}
+                        <span className='m-0 text-muted mx-3 fs-6 fw-light'>
+                            {data?.getDebutUserWithId.company[0]?.companyHeadquarters}
+                        </span>
                     </p>
-                    <p className='m-0'> company website </p>
+                    <p className='m-0'>
+                        {data?.getDebutUserWithId.company[0]?.companyWebsite}
+                    </p>
                 </Col>
             </Row>
         </div>

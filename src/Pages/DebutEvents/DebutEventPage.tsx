@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col, Button } from 'reactstrap'
-import { useQuery } from '@apollo/client'
+import { useQuery, useLazyQuery } from '@apollo/client'
 import Loader from '../../Components/Loader/Loader'
 import { useParams } from 'react-router-dom'
 import {
@@ -13,12 +13,17 @@ export default function DebutEventPage() {
     const { data, loading, error } = useQuery(DEBUT_EVENT_DETAILS, {
         variables: { getDebutEventWithIdId: id }
     })
-    const { data: dataRegistry, loading: loadingRegistry, error: errorRegistry } = useQuery(EVENT_PAGE_REGISTRY, {
-        variables: {
-            getDebutRegistryWithIdId: data?.getDebutEventWithId.debutRegistry[0]._id
+    const [loadPage, { data: dataRegistry, loading: loadingRegistry, error: errorRegistry }] = useLazyQuery(EVENT_PAGE_REGISTRY)
+    useEffect(() => {
+        if (data) {
+            loadPage({
+                variables: { getDebutRegistryWithIdId: data.getDebutEventWithId.debutRegistry[0]._id }
+            })
         }
-    })
+    }, [data])
+
     if (loading || loadingRegistry) return <Loader />
+    if (error || errorRegistry) { console.log("error", error) }
     return (
         <div>
             <Row >
@@ -34,7 +39,7 @@ export default function DebutEventPage() {
                             {data?.getDebutEventWithId.debutEventName}
                         </span>
                         <span className='fs-6 fw-light'>
-                            {data?.getDebutEventWithId.belongsTo.companyName}
+                            {data?.getDebutEventWithId.belongsTo?.companyName || '-'}
                         </span>
                     </div>
                     <div>
@@ -51,7 +56,10 @@ export default function DebutEventPage() {
                     <p className='fs-4' > details</p>
                     <div className='d-flex flex-column' >
                         <p className='text-muted my-1  fw-lighter ' >created by  <span className='px-2 ' >  {data?.getDebutEventWithId.createdBy.firstName}  </span>  </p>
-                        <p className='text-muted my-1 fw-lighter' >  company  <span className='px-2 '>   {data?.getDebutEventWithId.belongsTo.companyName}  </span>  </p>
+                        <p className='text-muted my-1 fw-lighter' >  company  <span className='px-2 '>
+                            {data?.getDebutEventWithId.belongsTo?.companyName || '-'}
+
+                        </span>  </p>
                         <p className='text-muted my-1 fw-lighter' >  invitation link  <span className='px-2 '>
                             {data?.getDebutEventWithId.debutInvitationLink}
                         </span>  </p>
