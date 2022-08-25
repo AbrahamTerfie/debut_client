@@ -9,6 +9,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 import PersonDetail from '../../Components/PersonDetail/PersonDetail'
 import PeopleFilterOptions from '../../Components/PeopleFilterOptions/PeopleFilterOptions'
 import { IoMdSettings } from 'react-icons/io'
+import { FaSearch } from 'react-icons/fa'
+
 //context
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/RootReducer'
@@ -59,12 +61,15 @@ export default function People() {
     return (
 
         <div className=' d-flex flex-column w-100 m-4 p-4' >
-            <p className='fw-light fs-3  mx-5'> People directory
-                {activePersonId}
-            </p>
+            <p className='fw-light fs-3  mx-5'> People directory</p>
             <Row className='mx-4' >
-                <Col md={11}>
+                <Col md={10}>
                     <SearchComponent />
+                </Col>
+                <Col md={1}>
+                    <Button outline color="light" >
+                        <FaSearch className='bg-transparent' />
+                    </Button>
                 </Col>
                 <Col md={1}>
                     <Button onClick={toggle} outline color="light" >
