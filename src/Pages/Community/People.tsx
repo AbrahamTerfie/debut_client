@@ -84,36 +84,22 @@ export default function People() {
             </Collapse>
             <Row className='mt-4' >
                 <Col md={6} className="overflow-scroll vh-100" >
-                    {
-
-
-                        data?.getdebutUsers.map((user: any) => {
-                            if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
-                                return <PeopleCards key={user._id}
-                                    people={user} />
-                            }
-                            // comapre  user.aeraOfExpertise array with peopleExpertiseFilter array and if they match return only those users
-                            if (peopleExpertiseFilter.length !== 0 && user.aeraOfExpertise.some((expertise: any) => peopleExpertiseFilter.includes(expertise))) {
-                                return <PeopleCards key={user._id}
-                                    people={user} />
-                            }
-                            // comapre  user.regions  array with peopleRegionsFilter array and if they match return only those users
-                            if (peopleRegionFilter.length !== 0 && user.regions.some((region: any) => peopleRegionFilter.includes(region))) {
-                                return <PeopleCards key={user._id}
-                                    people={user} />
-                            }
-
-
-
-
-                            // if peopleExpertiseFilter array  and peopleRegionsFilter array are empty return all users
-
-
-
-                        })
-
-
-                    }
+                    {data?.getdebutUsers.map((user: any) => {
+                        if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
+                            return <PeopleCards key={user._id}
+                                people={user} />
+                        }
+                        // comapre  user.aeraOfExpertise array with peopleExpertiseFilter array and if they match return only those users
+                        if (peopleExpertiseFilter.length !== 0 && user.aeraOfExpertise.some((expertise: any) => peopleExpertiseFilter.includes(expertise))) {
+                            return <PeopleCards key={user._id}
+                                people={user} />
+                        }
+                        // comapre  user.regions  array with peopleRegionsFilter array and if they match return only those users
+                        if (peopleRegionFilter.length !== 0 && user.regions.some((region: any) => peopleRegionFilter.includes(region))) {
+                            return <PeopleCards key={user._id}
+                                people={user} />
+                        }
+                    })}
                 </Col>
                 <Col md={6} className='overflow-scroll' >
                     <PersonDetail />
