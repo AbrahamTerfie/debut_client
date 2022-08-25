@@ -19,7 +19,7 @@ import Loader from '../../Components/Loader/Loader'
 export default function People() {
 
     const { user } = useAuth0();
-    const { activePersonId } = useSelector((store: RootState) => store.uiStore)
+    const { peopleExpertiseFilter, peopleRegionFilter } = useSelector((store: RootState) => store.uiStore)
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -84,10 +84,36 @@ export default function People() {
             </Collapse>
             <Row className='mt-4' >
                 <Col md={6} className="overflow-scroll vh-100" >
-                    {data?.getdebutUsers.map((user: any) => {
-                        return <PeopleCards key={user.id}
-                            people={user} />
-                    })}
+                    {
+
+
+                        data?.getdebutUsers.map((user: any) => {
+                            if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
+                                return <PeopleCards key={user._id}
+                                    people={user} />
+                            }
+                            // comapre  user.aeraOfExpertise array with peopleExpertiseFilter array and if they match return only those users
+                            if (peopleExpertiseFilter.length !== 0 && user.aeraOfExpertise.some((expertise: any) => peopleExpertiseFilter.includes(expertise))) {
+                                return <PeopleCards key={user._id}
+                                    people={user} />
+                            }
+                            // comapre  user.regions  array with peopleRegionsFilter array and if they match return only those users
+                            if (peopleRegionFilter.length !== 0 && user.regions.some((region: any) => peopleRegionFilter.includes(region))) {
+                                return <PeopleCards key={user._id}
+                                    people={user} />
+                            }
+
+
+
+
+                            // if peopleExpertiseFilter array  and peopleRegionsFilter array are empty return all users
+
+
+
+                        })
+
+
+                    }
                 </Col>
                 <Col md={6} className='overflow-scroll' >
                     <PersonDetail />

@@ -12,7 +12,6 @@ export default function PeopleFilterOptions() {
     const handleRegion = (e: any) => {
         dispatch(peopleRegionFilterHandler(e.target.name))
     }
-
     return (
         <Row className="shadow-sm border-light m-4 ">
             <Col md={4} className="mx-5" >
@@ -52,6 +51,24 @@ export default function PeopleFilterOptions() {
                             checked={peopleExpertiseFilter.includes('mentoring')}
                             onChange={handleExpertise} />
                         Coaching/Mentoring
+                    </FormGroup>
+                </div>
+                <div className=' d-flex justify-content-between ' >
+                    <FormGroup check className='fs-6 fw-light' >
+                        <Input type="checkbox"
+                            name="advertizing"
+                            id="advertizing"
+                            checked={peopleExpertiseFilter.includes('advertizing')}
+                            onChange={handleExpertise} />
+                        advertizing
+                    </FormGroup>
+                    <FormGroup check className='fs-6 fw-light mx-5' >
+                        <Input type="checkbox"
+                            name="agriculture"
+                            id="agriculture"
+                            checked={peopleExpertiseFilter.includes('agriculture')}
+                            onChange={handleExpertise} />
+                        agriculture
                     </FormGroup>
                 </div>
             </Col>
@@ -97,20 +114,31 @@ export default function PeopleFilterOptions() {
                 <div className=' d-flex justify-content-between' >
                     <FormGroup check className='fs-6 fw-light' >
                         <Input type="checkbox"
-                            name="africa"
-                            id="africa"
-                            checked={peopleRegionFilter.includes('africa')}
+                            name="Africa"
+                            id="Africa"
+                            checked={peopleRegionFilter.includes('Africa')}
                             onChange={handleRegion} />
                         Africa
                     </FormGroup>
                     <FormGroup check className='fs-6 fw-light' >
                         <Input type="checkbox"
-                            name="europe"
-                            id="europe"
-                            checked={peopleRegionFilter.includes('europe')}
+                            name="Europe"
+                            id="Europe"
+                            checked={peopleRegionFilter.includes('Europe')}
                             onChange={handleRegion} />
                         Europe
                     </FormGroup>
+                </div>
+                <div className=' d-flex justify-content-between' >
+                    <FormGroup check className='fs-6 fw-light' >
+                        <Input type="checkbox"
+                            name="Oceania"
+                            id="Oceania"
+                            checked={peopleRegionFilter.includes('Oceania')}
+                            onChange={handleRegion} />
+                        Oceania
+                    </FormGroup>
+
                 </div>
             </Col>
             <Col md={12} className="my-3 text-center">

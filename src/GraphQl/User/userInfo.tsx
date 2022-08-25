@@ -10,6 +10,8 @@ query DebutUsers{
     lastName
     titleAtCompany
     profileImage
+    aeraOfExpertise
+    regions
     company {
       _id
       companyName
