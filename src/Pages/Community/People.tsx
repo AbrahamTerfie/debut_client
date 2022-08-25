@@ -54,9 +54,9 @@ export default function People() {
     if (error) {
         return <div>Error</div>
     }
-    if (data) {
-        console.log(data)
-    }
+    // if (data) {
+    //     console.log(data)
+    // }
 
     return (
 
@@ -90,12 +90,12 @@ export default function People() {
                                 people={user} />
                         }
                         // comapre  user.aeraOfExpertise array with peopleExpertiseFilter array and if they match return only those users
-                        if (peopleExpertiseFilter.length !== 0 && user.aeraOfExpertise.some((expertise: any) => peopleExpertiseFilter.includes(expertise))) {
+                        if (peopleExpertiseFilter.length !== 0 && user.aeraOfExpertise.some((expertise: String) => peopleExpertiseFilter.includes(expertise))) {
                             return <PeopleCards key={user._id}
                                 people={user} />
                         }
                         // comapre  user.regions  array with peopleRegionsFilter array and if they match return only those users
-                        if (peopleRegionFilter.length !== 0 && user.regions.some((region: any) => peopleRegionFilter.includes(region))) {
+                        if (peopleRegionFilter.length !== 0 && user.regions.some((region: String) => peopleRegionFilter.includes(region))) {
                             return <PeopleCards key={user._id}
                                 people={user} />
                         }
