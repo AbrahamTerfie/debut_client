@@ -15,28 +15,39 @@ export default function Ventures() {
     // if (error) console.log("error", error)
     // console.log('from use query', data.getAllBusinesses)
     return (
-        <Row className=' d-flex page my-5' >
-            <Col className='filterContainer ' xs='10' sm='10' md='8' lg='3' xl='3' >
-                <FilterVenture />
-            </Col>
+        <Row
+            className=' d-flex page m-5'
+        >
 
-            <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
-                <Row className='searchInput mb-1 mt-4 w-100' >
-                    <p className='fw-bolder fs-3'> Venture Directory </p>
-                    <SearchComponent />
-                </Row>
-                {/* <Row className='my-3'>
-                    {data.getAllBusinesses.map((venture: any, index: any) => {
-                        return <VentureCards
-                            ventureName={venture.businessName}
-                            ventureDescription={venture.businessDescription}
-                            ventureId={venture._id}
-                            ventureOwner={venture.businessOwner.firstName}
-                            ventureAdress={venture.businessAddress} />
-                    })}
+            {/* <FilterVenture /> */}
 
-                </Row> */}
-            </Col>
+            <p className='fw-bolder fs-3'> Venture Directory  </p>
+            <SearchComponent />
+
+
+
+            <VentureCards
+                ventureName="{venture.businessName}"
+                ventureDescription="{venture.businessDescription}"
+                ventureId="{venture._id}"
+                ventureOwner="{venture.businessOwner.firstName}"
+                ventureAdress="{venture.businessAddress} "
+            />
+            <VentureCards
+                ventureName="{venture.businessName}"
+                ventureDescription="{venture.businessDescription}"
+                ventureId="{venture._id}"
+                ventureOwner="{venture.businessOwner.firstName}"
+                ventureAdress="{venture.businessAddress} "
+            />
+            <VentureCards
+                ventureName="{venture.businessName}"
+                ventureDescription="{venture.businessDescription}"
+                ventureId="{venture._id}"
+                ventureOwner="{venture.businessOwner.firstName}"
+                ventureAdress="{venture.businessAddress} "
+            />
+
 
         </Row>
     )

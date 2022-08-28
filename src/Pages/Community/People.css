@@ -6,21 +6,11 @@
 
 
 .filterContainer {
-    /* border: 1px solid #3e405a; */
-    /* border-radius: 5px; */
-    /* padding: 10px;
-    padding-top: 3em; */
-    /* display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    height: max-content; */
+
 }
 .page{
     display: flex;
-    /* flex-direction: column; */
-    /* align-items: center; */
     justify-content: center;
-    /* height: 100vh; */
 }
 
 
@@ -32,8 +22,6 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     border-radius: 2%;
-    /* height: 90vh; */
-
 }
 
 .searchInput input {
@@ -41,8 +29,6 @@
     border: 1px solid #f9f8f8ff;
     padding-right: 20px;
     border-radius: 0.5em;
-    /* padding: 0.5em; */
-    /* margin: 1em 1em 1em 0; */
     background-attachment: fixed;
     background-color: #bfc0c0;
 }
