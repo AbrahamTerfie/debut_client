@@ -13,11 +13,15 @@ import {
     FaInstagram,
     FaEnvelope,
 } from 'react-icons/fa'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { faPhone } from '@fortawesome/free-solid-svg-icons'
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
-import { faGlobe } from '@fortawesome/free-solid-svg-icons'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+
+
+// 4
+// 9
+// 9
+// 3
+// 2
+// 10
+// 14
 
 export default function VentureCards(
     { ventureName,
@@ -81,33 +85,21 @@ export default function VentureCards(
                 className="offcanvas-style"
                 style={{ width: '75%' }}
             >
-                <OffcanvasHeader
-                    onClick={toggle}
-                >
+                <OffcanvasHeader onClick={toggle}  className="px-5 py-5" >
+                    <p className='fs-6 fw-light text-muted  m-0'> Name </p>
                     <h3 className="text-center">{ventureName}</h3>
                 </OffcanvasHeader>
-                <OffcanvasBody>
+                <OffcanvasBody className='p-5 pt-1' >
                     <Row>
-                        <Col md={8}>
-                            <p>{ventureDescription}</p>
-                            <p>{ventureOwner}</p>
+                        <Col md={7}>
+                            <small className='fs-6 fw-light text-muted  m-0'> Description </small>
+                            <p className='fs-5 fw-light mb-3' >{ventureDescription}</p>
+                            <small className=' fw-light text-muted  m-0'> Company owner </small>
+
+                            <p className='fs-5 fw-light mb-3' >{ventureOwner}</p>
                             <p>{ventureAdress}</p>
                             <p>  venture website  </p>
-                            <div className="d-flex justify-content-start my-3">
-                                <a href="https://www.linkedin.com/in/joseph-mwaura-b8a8a817b/">
-                                    <FaLinkedin className='mx-3' size={30} />
-                                </a>
-                                <a href="https://twitter.com/josephmwaura">
-                                    <FaTwitter size={30} className='mx-3' />
-                                </a>
-                                <a href="https://www.facebook.com/josephmwaura">
-                                    <FaFacebook className='mx-3' size={30} />
-                                </a>
-                                <a href="https://www.instagram.com/josephmwaura/">
-                                    <FaInstagram className='mx-3' size={30} />
-                                </a>
 
-                            </div>
                             <p>majorAchivements</p>
                             <p>companyDescription</p>
                             <p>companyServivesGeography</p>
@@ -122,38 +114,47 @@ export default function VentureCards(
 
 
                         </Col>
-                        <Col md={4}
+                        <Col md={5}
                         >
                             <img
                                 className="w-100 shadow"
                                 src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="" />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={8}>
+                            <div className="d-flex justify-content-around mb-5 mt-3">
+                                <a href="https://www.linkedin.com/in/joseph-mwaura-b8a8a817b/">
+                                    <FaLinkedin className='mx-3' size={25} />
+                                </a>
+                                <a href="https://twitter.com/josephmwaura">
+                                    <FaTwitter size={25} className='mx-3' />
+                                </a>
+                                <a href="https://www.facebook.com/josephmwaura">
+                                    <FaFacebook className='mx-3' size={25} />
+                                </a>
+                                <a href="https://www.instagram.com/josephmwaura/">
+                                    <FaInstagram className='mx-3' size={25} />
+                                </a>
 
-                        </Col>
+                            </div>
+                            <small className=' fw-light text-muted ' >aera of operations </small>
 
-                        <Col md={4}>
-                            <div className="text-center d-flex  flex-wrap justify-content-center ">
+                            <div className="text-center d-flex  flex-wrap justify-content-start ">
                                 <p className='mx-3'>one</p>
                                 <p className='mx-3' >two</p>
                                 <p className='mx-3' >three</p>
 
                             </div>
-                            <div
-                                className="text-center d-flex  flex-wrap justify-content-center "
-
-                            >
-
+                            <small className=' fw-light text-muted ' >regions </small>
+                            <div className="text-center d-flex  flex-wrap justify-content-start ">
                                 <p className='mx-3'>region </p>
                                 <p className='mx-3' >region </p>
                                 <p className='mx-3' >region</p>
                             </div>
 
-                        </Col>
 
+
+
+                        </Col>
                     </Row>
+
                 </OffcanvasBody>
             </Offcanvas>
 
