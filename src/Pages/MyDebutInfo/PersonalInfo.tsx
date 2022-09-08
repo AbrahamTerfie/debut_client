@@ -32,10 +32,17 @@ export default function PersonalInfo() {
                 facebookUrl: data.getDebutUserWithId.facebookUrl === null ? '' : data.getDebutUserWithId.facebookUrl,
                 mailingAddress: data.getDebutUserWithId.mailingAddress === null ? '' : data.getDebutUserWithId.mailingAddress,
                 profileImage: data.getDebutUserWithId.profileImage === null ? '' : data.getDebutUserWithId.profileImage,
+                // ForumPost: data.getDebutUserWithId.ForumPost ? data.getDebutUserWithId.ForumPost : [],
+                // companiesFollowed: data.getDebutUserWithId.companiesFollowed ? data.getDebutUserWithId.companiesFollowed : [],
+                // companiesFollowing: data.getDebutUserWithId.companiesFollowing ? data.getDebutUserWithId.companiesFollowing : [],
+                // eventsAttended: data.getDebutUserWithId.eventsAttended ? data.getDebutUserWithId.eventsAttended : [],
+                // eventsToAttend: data.getDebutUserWithId.eventsToAttend ? data.getDebutUserWithId.eventsToAttend : [],
+                // gratitides: data.getDebutUserWithId.gratitudes ? data.getDebutUserWithId.gratitudes : [],
+                // comments: data.getDebutUserWithId.comments ? data.getDebutUserWithId.comments : [],
             })
         }
     }, [data])
-console.log( "profileee", personalInfoForm.profileImage)
+    console.log("profileee", personalInfoForm.profileImage)
     function UploadImage() {
 
         const formData = new FormData

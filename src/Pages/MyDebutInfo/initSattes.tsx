@@ -10,6 +10,13 @@ export const personalInfoInitialState = {
     facebookUrl: "",
     mailingAddress: "",
     profileImage: "",
+    // ForumPost: [],
+    // companiesFollowing: [],
+    // companiesFollowed: [],
+    // comments : [],
+    // gratitides: [],
+    // eventsToAttend: [],
+    // eventsAttended: [],
 }
 
 export const contactInfoInitState = {

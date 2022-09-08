@@ -15,14 +15,6 @@ import {
 } from 'react-icons/fa'
 
 
-// 4
-// 9
-// 9
-// 3
-// 2
-// 10
-// 14
-
 export default function VentureCards(
     { ventureName,
         ventureDescription,
@@ -71,12 +63,7 @@ export default function VentureCards(
     const itemlink = "fromVenturepagewithid"
     return (
         // <Link to={`${appRoutes.ventures}/${itemlink}`}>
-
         <>
-
-
-
-
             <Offcanvas
                 direction="end"
                 scrollable
@@ -85,32 +72,49 @@ export default function VentureCards(
                 className="offcanvas-style"
                 style={{ width: '75%' }}
             >
-                <OffcanvasHeader onClick={toggle}  className="px-5 py-5" >
+                <OffcanvasHeader onClick={toggle} className="px-5 py-5" >
                     <p className='fs-6 fw-light text-muted  m-0'> Name </p>
                     <h3 className="text-center">{ventureName}</h3>
+                    <h6 className="text-start text-muted"   >  www,websiteofthis </h6>
+
+
+
+
                 </OffcanvasHeader>
                 <OffcanvasBody className='p-5 pt-1' >
                     <Row>
                         <Col md={7}>
+
+                            <small className=' fw-light text-muted  m-0'> category </small>
+                            <p>companyCategory</p>
+                            <small className=' fw-light text-muted  m-0'> owner </small>
+                            <p>firstName lastName</p>
                             <small className='fs-6 fw-light text-muted  m-0'> Description </small>
                             <p className='fs-5 fw-light mb-3' >{ventureDescription}</p>
                             <small className=' fw-light text-muted  m-0'> Company owner </small>
 
                             <p className='fs-5 fw-light mb-3' >{ventureOwner}</p>
-                            <p>{ventureAdress}</p>
-                            <p>  venture website  </p>
 
-                            <p>majorAchivements</p>
-                            <p>companyDescription</p>
-                            <p>companyServivesGeography</p>
-                            <p>aeraOfOperation</p>
-                            <p>companySize</p>
+                            <small className=' fw-light text-muted  m-0'> company achivements </small>
+                            <div className='d-flex flex-wrap' >
+                                <p className='m-2'  >this achivements achivements achivements ,</p>
+                                <p className='m-2' >this also svhivement ,</p>
+                                <p className='m-2'>this achivements,</p>
+                                <p className='m-2'> this also svhivement,</p>
+                                <p className='m-2'>this achivements,</p>
+                                <p className='m-2'>this also svhivement,</p>
+                            </div>
 
-                            <p>companyCategory</p>
-                            <p>companyOwner</p>
+
+                            <small className=' fw-light text-muted  m-0'> company achivements </small>
+                            <p>comapny size</p>
+
+
+                            <small className=' fw-light text-muted  m-0'> debut events  </small>
+
                             <p>debutEvents</p>
-                            <p>companyFollowers</p>
-                            <p>companyRegestry</p>
+                            {/* <p>companyFollowers</p>
+                            <p>companyRegestry</p> */}
 
 
                         </Col>
@@ -118,7 +122,8 @@ export default function VentureCards(
                         >
                             <img
                                 className="w-100 shadow"
-                                src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="" />
+                                src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                                alt="" />
                             <div className="d-flex justify-content-around mb-5 mt-3">
                                 <a href="https://www.linkedin.com/in/joseph-mwaura-b8a8a817b/">
                                     <FaLinkedin className='mx-3' size={25} />
@@ -135,24 +140,34 @@ export default function VentureCards(
 
                             </div>
                             <small className=' fw-light text-muted ' >aera of operations </small>
-
-                            <div className="text-center d-flex  flex-wrap justify-content-start ">
-                                <p className='mx-3'>one</p>
-                                <p className='mx-3' >two</p>
-                                <p className='mx-3' >three</p>
-
-                            </div>
-                            <small className=' fw-light text-muted ' >regions </small>
-                            <div className="text-center d-flex  flex-wrap justify-content-start ">
-                                <p className='mx-3'>region </p>
-                                <p className='mx-3' >region </p>
-                                <p className='mx-3' >region</p>
+                            <div className='d-flex flex-wrap' >
+                                <p className='m-2' >africa</p>
+                                <p className='m-2' >europe</p>
+                                <p className='m-2' >asia</p>
+                                <p className='m-2' >north america</p>
+                                <p className='m-2' >south america </p>
+                                <p className='m-2' >austrilia</p>
                             </div>
 
+                            <small className=' fw-light text-muted  m-0'>  active on regions </small>
+                            <div className='d-flex flex-wrap' >
+                                <p className='m-2' >africa</p>
+                                <p className='m-2' >europe</p>
+                                <p className='m-2' >asia</p>
+                                <p className='m-2' >north america</p>
+                                <p className='m-2' >south america </p>
+                                <p className='m-2' >austrilia</p>
+                            </div>
 
 
 
                         </Col>
+                    </Row>
+                    <Row className='border border-light' >
+
+                        <p> company events </p>
+                        {/* <p>companyFollowers</p>
+            <p>companyRegestry</p> */}
                     </Row>
 
                 </OffcanvasBody>
@@ -186,6 +201,8 @@ export default function VentureCards(
                 </Col>
 
             </Row>
+
+
         </>
 
 

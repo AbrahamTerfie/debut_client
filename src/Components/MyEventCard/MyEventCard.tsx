@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Col, Row, FormGroup, Input, Label } from 'reactstrap'
 import './MyEventCard.css'
 import { useNavigate } from 'react-router-dom'
@@ -24,15 +24,9 @@ export default function MyEventCard(
     debutInvitationLink,
     otherRelatedLinks,
   }: any
-
 ) {
-
   const navigate = useNavigate()
   const { userID } = useSelector((store: RootState) => store.identfiers)
-
-  // const registryId = "shitwtfisthis"
-  // const { debutEventName } = event
-
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
   const [newRegistry, setNewRegistry] = useState({
@@ -68,6 +62,7 @@ export default function MyEventCard(
     }
 
   )
+  console.log("createDebutRegistryRes", createDebutRegistryRes)
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -85,11 +80,9 @@ export default function MyEventCard(
       <div
         onClick={toggle}
         className='d-flex m-4  h-50 shadow-sm rounded flex-column  align-items-end w-25 MyeventCard ' >
-
         <img src={debutEventImage}
           className='w-100 h-100'
           alt='event' />
-
         <div className='px-4 py-3' >
           <p className='fs-5 d-flex justify-content-end ' >  {debutEventName}  </p>
           <small className=' text-muted fw-light  d-flex justify-content-end ' >
@@ -98,7 +91,6 @@ export default function MyEventCard(
         </div>
       </div>
       <div>
-
         <Offcanvas
           style={{ width: '50%' }}
           isOpen={isOpen}
@@ -113,13 +105,12 @@ export default function MyEventCard(
           </OffcanvasHeader>
           <OffcanvasBody>
             <Row>
-
               <Col md={12}>
                 <small className='text-muted  text-small fw-light' > created by  / company name </small>
                 <p className='fw-light' > {createdBy?.firstName} / {belongsTo?.companyName} </p>
               </Col>
               <Col md={12}>
-                <small className='text-muted fw-light' >  event description </small>
+                <small className='text-muted fw-light'>event description </small>
                 <p className='fw-light' >
                   {debutEventDescription}
                 </p>
@@ -136,54 +127,44 @@ export default function MyEventCard(
                 <small className='text-muted  text-small fw-light' > event link </small>
                 <p className='fw-light' >  {debutInvitationLink ? debutInvitationLink : "-"} </p>
               </Col>
-
               <Col md={12}>
                 <small className='text-muted  text-small fw-light' > related links </small>
-
-
                 {otherRelatedLinks?.map((link: any) => {
-
                   <a className='fw-light' href={link}  > link </a>
                 })}
-                <p className='fw-light' >https://www.google.com/</p>
+                <p className='fw-light' >
+                  add link resolver abraham
+                </p>
               </Col>
               <br />
               <br />
               <br />
               <p className=' fw-light' > registriry </p>
-
-
-
               {loading ? <Loader /> :
-                data?.getEventRegistriesWithEventId?.length === 0 ?
-                  <>
-                    <p className=' fw-light my-3' > create new registry </p>
-                    <Row >
-                      <Col md={12}>
-                        <FormGroup>
-                          <Label for="debutRegistryName"> registry name </Label>
-                          <Input type="text"
-                            name="debutRegistryName"
-                            id="debutRegistryName"
-                            placeholder="registry name"
-                            onChange={handleChange}
-                          />
-                        </FormGroup>
-                      </Col>
-
-                    </Row>
-                    <Row className='px-3' >
-                      <Button outline color="light"
-                        onClick={(e: any) => handleSubmit(e)}
-                      > create </Button>
-                    </Row>
-                  </>
-                  :
-                  data?.getEventRegistriesWithEventId?.map((registry: any) => {
+                <>
+                  <p className=' fw-light my-3' > create new registry boyy </p>
+                  <Row >
+                    <Col md={12}>
+                      <FormGroup>
+                        <Label for="debutRegistryName"> registry name </Label>
+                        <Input type="text"
+                          name="debutRegistryName"
+                          id="debutRegistryName"
+                          placeholder="registry name"
+                          onChange={handleChange} />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row className='px-3' >
+                    <Button outline color="light"
+                      onClick={(e: any) => handleSubmit(e)}>
+                      create
+                    </Button>
+                  </Row>
+                  {data.getEventRegistriesWithEventId?.map((registry: any) => {
                     return (
                       <Row className='shadow-sm  m-2 MyeventCard'
                         onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}>
-
                         <Col md={8}>
                           <small className='text-muted  text-small fw-light' >name</small>
                           <p className='fw-light' > {registry?.debutRegistryName}  </p>
@@ -191,9 +172,7 @@ export default function MyEventCard(
                         <Col md={2}>
                           <small className='text-muted  text-small fw-light' >status</small>
                           <p className='fw-light' > {registry.debutRegistryStatus
-                            // stringfy 
                             ? registry.debutRegistryStatus.toString() : " - "} </p>
-
                         </Col>
                         <Col md={2}>
                           <small className='text-muted  text-small fw-light' > items </small>
@@ -204,9 +183,10 @@ export default function MyEventCard(
                           </p>
                         </Col>
                       </Row>
-
                     )
                   })}
+                </>
+              }
             </Row>
           </OffcanvasBody>
         </Offcanvas>

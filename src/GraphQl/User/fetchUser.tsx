@@ -18,6 +18,7 @@ mutation updateDebutUser  ($updateDebutUserId: ID!, $userInput: UserInput){
     linkedinUrl
     twitterUrl
     instagramUrl
+    facebookUrl
     mailingAddress
     mobilePhone
     officePhone
@@ -42,9 +43,9 @@ mutation updateDebutUser  ($updateDebutUserId: ID!, $userInput: UserInput){
     companiesFollowed {
       _id
     }
-    ForumPost {
-      _id
-    }
+    # ForumPost {
+    #   _id
+    # }
     gratitudes {
       _id
     }
@@ -77,6 +78,7 @@ query getDebutUserWithId($getDebutUserWithIdId: ID!) {
     linkedinUrl
     twitterUrl
     instagramUrl
+    facebookUrl
     mailingAddress
     mobilePhone
     officePhone
@@ -140,6 +142,7 @@ query getDebutUserWithEmail ($email: String!) {
     linkedinUrl,
     twitterUrl,
     instagramUrl,
+    facebookUrl,
     mailingAddress,
     mobilePhone,
     officePhone,
