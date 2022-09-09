@@ -17,13 +17,13 @@ export default function DebutEventCards({
     const navigate = useNavigate()
     const debutEventLink = _id
     return (
-        <Row className='d-flex m-4   shadow-sm rounded   align-items-end w-100 MyeventCard '
+        <Row className='d-flex m-1  p-2 border border-light shadow-sm rounded   w-100 MyeventCard '
             onClick={() => navigate(`${appRoutes.debutEvents}/${_id}`)}>
 
             <Col md={9}>
                 <p className='fs-4 fw-light' > {debutEventName}
                     <small className='text-muted fw-light mx-3'>
-                        {moment(debutEventDate).format('MMMM Do YYYY')}
+                        {debutEventDate ? moment(parseInt(debutEventDate)).format("MMM Do YY") : ''}
                     </small>  </p>
                 <p className='fs-6 fw-light' >
                     {debutEventDescription}
@@ -31,17 +31,18 @@ export default function DebutEventCards({
 
             </Col>
             <Col md={3}>
-                <img className='  rounded shadow' src={debutEventImage}
-                    style={{ height: '150px', width: '200px' }}
+                <img className=' d-flex rounded shadow my-1' src={debutEventImage}
+                    style={{ height: '100px', width: '150px' }}
                 />
+                <div className='eventOwner d-flex flex-row align-items-center m-3  '>
+                    <p className='fs-6 fw-bolder' > {belongsTo?.companyName}  </p>
+                    <p className='mx-3' > by</p>
+
+                    <p className=' mx-2' > {createdBy?.firstName} {createdBy?.lastName}  </p>
+                </div>
             </Col>
 
-            <div className='eventOwner pt-3 pb-0 '>
-                <p className='fs-6 fw-bolder' > {belongsTo?.companyName}  </p>
-                <p className='mx-3' > by</p>
 
-                <p className=' mx-2' > {createdBy?.firstName}  </p>
-            </div>
 
         </Row>
     )

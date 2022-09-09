@@ -24,21 +24,3 @@
     height: 100%;
     object-fit: cover;
 }
-
-
-
-.eventOwner {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.eventOwner img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    padding-bottom: 2px;
-
-}

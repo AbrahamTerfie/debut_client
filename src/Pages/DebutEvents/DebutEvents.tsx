@@ -23,7 +23,7 @@ export default function DebutEvents() {
             <div className='mx-4 my-3' >
                 <SearchComponent />
             </div>
-            <div className='d-flex flex-wrap shadow p-4'>
+            <div className='d-flex flex-wrap '>
                 {data?.getdebutEvents.map((event: any) => {
                     return (
                         <DebutEventCards
