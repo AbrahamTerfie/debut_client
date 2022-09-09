@@ -4,9 +4,7 @@ import { gql } from "@apollo/client"
 export const CHECK_IF_USER_HAS_COMPANY = gql`
 query  hasComapny ($userId: ID!) {
   checkIfUserHasCompany(userId: $userId)
-}
-`
-
+}`
 
 export const CREATE_COMPANY = gql`
 mutation  createDebutCompany ($companyInput: CompanyInput) {
@@ -33,10 +31,10 @@ mutation  createDebutCompany ($companyInput: CompanyInput) {
       firstName
       email
     }
-    debutedEvents {
-      _id
-      debutEventName
-    }
+    # debutedEvents {
+    #   _id
+    #   debutEventName
+    # }
     companyFollowers {
       _id
       firstName
@@ -52,8 +50,6 @@ mutation  createDebutCompany ($companyInput: CompanyInput) {
     }
   }
 }
-
-
 `
 
 export const FETCH_COMPANY = gql`
@@ -81,10 +77,10 @@ query  fetchMyCompany($userId: ID!){
       firstName
       email
     }
-    debutedEvents {
-      _id
-      debutEventName
-    }
+    # debutedEvents {
+    #   _id
+    #   debutEventName
+    # }
     companyFollowers {
       _id
       firstName
@@ -128,10 +124,10 @@ mutation updateDebutCompany ($updateDebutCompanyId: ID!, $companyInput: CompanyI
       firstName
       email
     }
-    debutedEvents {
-      _id
-      debutEventName
-    }
+    # debutedEvents {
+    #   _id
+    #   debutEventName
+    # }
     companyFollowers {
       _id
       firstName
@@ -147,7 +143,54 @@ mutation updateDebutCompany ($updateDebutCompanyId: ID!, $companyInput: CompanyI
     }
   }
 }
+`
 
+export const GET_ALL_VENTURES = gql`
+query AllVentures {
+  getdebutCompanies {
+  _id,
+    companyName,
+    companyMissionStatement,
+    companyHeadquarters,
+    companyWebsite,
+    companyLogo,
+    jobBoard,
+    linkedInUrl,
+    twitterUrl,
+    instagramUrl,
+    facebookUrl,
+    majorAchivements,
+    companyDescription,
+    companyServivesGeography,
+    aeraOfOperation,
+    companySize,
+    companyCategory,
+    companyOwner{
+      _id,
+      firstName,
+      lastName,
+      profileImage
+    },
+    debutEvents{
+      _id,
+      debutEventName,
+      debutEventImage,
+      debutEventDescription,
+      debutEventDate,
+      belongsTo {
+        _id,
+        companyName
+
+      }
+      createdBy {
+        _id,
+        firstName,
+        lastName
+      }
+    },
+
+  }
+}
 `
 
 

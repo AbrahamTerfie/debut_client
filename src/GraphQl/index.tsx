@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { CHECK_EMAIL_VALIDITY } from './EmailValidator/EmailValidator'
 import { CREATE_DEBUT_USER, AUTHENTICATED_USER } from './User/createUser'
 import {
@@ -11,7 +11,7 @@ import {
 } from './PostComment/PostQuery'
 import {
     CHECK_IF_USER_HAS_COMPANY,
-    CREATE_COMPANY, FETCH_COMPANY, UPDATE_COMPANY
+    CREATE_COMPANY, FETCH_COMPANY, UPDATE_COMPANY, GET_ALL_VENTURES
 } from './Company/companyQueries'
 import {
     CREATE_EVENT, MY_DEBUT_EVENTS, EVENTS_PAGES,
@@ -39,23 +39,21 @@ export {
     CREATE_COMPANY,
     FETCH_COMPANY,
     UPDATE_COMPANY,
+    GET_ALL_VENTURES,
     // debut events 
     CREATE_EVENT,
     MY_DEBUT_EVENTS,
     EVENTS_PAGES,
-
     // registry
     CREATE_DEBUT_REGISTRY,
     EVENT_REGISTRIES,
     DEBUT_EVENT_DETAILS,
     EVENT_PAGE_REGISTRY,
-
     //registry item
     GET_REGISTRY_ITEMS_WITH_REGISTRY_ID,
     CREATE_REGISTRY_ITEM,
-
     //perope 
-    All_USERS, 
+    All_USERS,
     // GET_DEBUT_USER_WITH_ID
 
 }

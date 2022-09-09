@@ -24,8 +24,6 @@ export default function VenturePage() {
     console.log("venture id is", id)
 
 
-
-
     const { loading, error, data } = useQuery(SINGLE_VENTURE_DETAILS, {
         variables: { businessId: id }
     });

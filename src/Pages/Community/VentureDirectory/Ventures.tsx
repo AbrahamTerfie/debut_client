@@ -4,49 +4,57 @@ import VentureCards from '../../../Components/VentureCards/VentureCards'
 import FilterVenture from '../../../Components/FilterVentures/FilterVenture'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { useQuery } from '@apollo/client'
-import { ALL_VENTURES } from '../../../GraphQl/Queries/index'
+import { GET_ALL_VENTURES } from '../../../GraphQl/index'
 import Loader from '../../../Components/Loader/Loader'
 export default function Ventures() {
 
-    // const { data, loading, error } = useQuery(ALL_VENTURES)
+    const { loading, error, data } = useQuery(GET_ALL_VENTURES)
+    if (loading) return <Loader />
 
-    // if (loading) return <Loader />
-    // if (error) return <div  > Error!</div >
-    // if (error) console.log("error", error)
-    // console.log('from use query', data.getAllBusinesses)
+    if (data) console.log('venture data', data.getdebutCompanies)
+
     return (
-        <Row
-            className=' d-flex page m-5'
-        >
+        <Row className=' d-flex page m-5'>
 
             {/* <FilterVenture /> */}
 
-            <p className='fw-bolder fs-3'> Venture Directory  </p>
+            <p className='fw-bolder fs-3'>   </p>
             <SearchComponent />
 
+            {data && data.getdebutCompanies.map((item: any) => {
+                return (
+
+                    <VentureCards
+                        key={item._id}
+                        _id={item._id}
+                        companyName={item.companyName}
+                        companyMissionStatement={item.companyMissionStatement}
+                        companyHeadquarters={item.companyHeadquarters}
+                        companyWebsite={item.companyWebsite}
+                        companyLogo={item.companyLogo}
+                        jobBoard={item.jobBoard}
+                        linkedInUrl={item.linkedInUrl}
+                        twitterUrl={item.twitterUrl}
+                        instagramUrl={item.instagramUrl}
+                        facebookUrl={item.facebookUrl}
+                        majorAchivements={item.majorAchivements}
+                        companyDescription={item.companyDescription}
+                        companyServivesGeography={item.companyServivesGeography}
+                        aeraOfOperation={item.aeraOfOperation}
+                        companySize={item.companySize}
+                        companyCategory={item.companyCategory}
+                        companyOwner={item.companyOwner}
+                        debutEvents={item.debutEvents}
 
 
-            <VentureCards
-                ventureName="{venture.businessName}"
-                ventureDescription="{venture.businessDescription}"
-                ventureId="{venture._id}"
-                ventureOwner="{venture.businessOwner.firstName}"
-                ventureAdress="{venture.businessAddress} "
-            />
-            <VentureCards
-                ventureName="{venture.businessName}"
-                ventureDescription="{venture.businessDescription}"
-                ventureId="{venture._id}"
-                ventureOwner="{venture.businessOwner.firstName}"
-                ventureAdress="{venture.businessAddress} "
-            />
-            <VentureCards
-                ventureName="{venture.businessName}"
-                ventureDescription="{venture.businessDescription}"
-                ventureId="{venture._id}"
-                ventureOwner="{venture.businessOwner.firstName}"
-                ventureAdress="{venture.businessAddress} "
-            />
+
+                    />
+
+                )
+
+            }
+            )}
+
 
 
         </Row>

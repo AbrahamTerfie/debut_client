@@ -1,61 +1,42 @@
 
 import React, { useState } from 'react'
-import { Row, Col, Button, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
+import { Row, Col, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 import './VentureCards.css'
 import { useNavigate } from 'react-router-dom'
-import { appRoutes } from '../../Routes/routes'
-// instagram , facebook . twitter , linked in , indeed icons 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import DebutEventCards from '../DebutEventCards/DebutEventCards'
 import {
     FaLinkedin,
     FaTwitter,
     FaFacebook,
     FaInstagram,
-    FaEnvelope,
 } from 'react-icons/fa'
 
 
 export default function VentureCards(
-    { ventureName,
-        ventureDescription,
-        ventureId,
-        ventureOwner,
-        ventureAdress }: {
-            ventureName: any,
-            ventureDescription: any,
-            ventureId: any,
-            ventureOwner: any,
-            ventureAdress: any
-        }
+    {
+        _id,
+        companyName,
+        companyMissionStatement,
+        companyHeadquarters,
+        companyWebsite,
+        companyLogo,
+        jobBoard,
+        linkedInUrl,
+        twitterUrl,
+        instagramUrl,
+        facebookUrl,
+        majorAchivements,
+        companyDescription,
+        companyServivesGeography,
+        aeraOfOperation,
+        companySize,
+        companyCategory,
+        companyOwner,
+        debutEvents,
+
+    }: any
 
 ) {
-
-
-    /*{
-
- _id: ID
-    companyName: String
-    companyMissionStatement: String
-    companyHeadquarters: String
-    companyWebsite: String
-    companyLogo: String
-    jobBoard: String
-    linkedInUrl: String
-    twitterUrl: String
-    instagramUrl: String
-    facebookUrl: String
-    majorAchivements: [String]
-    companyDescription: String
-    companyServivesGeography: [String]
-    aeraOfOperation: [String]
-    companySize: String
-    companyCategory: [String]
-    companyOwner: User
-    debutedEvents: [debutEvents]
-    companyFollowers: [User]
-    companyRegestry: [debutRegistry]˝
-
-    }*/
 
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
@@ -74,137 +55,100 @@ export default function VentureCards(
             >
                 <OffcanvasHeader onClick={toggle} className="px-5 py-5" >
                     <p className='fs-6 fw-light text-muted  m-0'> Name </p>
-                    <h3 className="text-center">{ventureName}</h3>
-                    <h6 className="text-start text-muted"   >  www,websiteofthis </h6>
-
-
-
+                    <h3 className="text-center">{companyName}</h3>
+                    <h6 className="text-start text-muted"   >  {companyWebsite} </h6>
 
                 </OffcanvasHeader>
                 <OffcanvasBody className='p-5 pt-1' >
                     <Row>
                         <Col md={7}>
-
-                            <small className=' fw-light text-muted  m-0'> category </small>
-                            <p>companyCategory</p>
-                            <small className=' fw-light text-muted  m-0'> owner </small>
-                            <p>firstName lastName</p>
+                            <small className=' fw-light text-muted  m-0'> mission statemeny </small>
+                            <p> {companyMissionStatement} </p>
                             <small className='fs-6 fw-light text-muted  m-0'> Description </small>
-                            <p className='fs-5 fw-light mb-3' >{ventureDescription}</p>
+                            <p className='fs-5 fw-light mb-3' >{companyDescription}</p>
                             <small className=' fw-light text-muted  m-0'> Company owner </small>
-
-                            <p className='fs-5 fw-light mb-3' >{ventureOwner}</p>
-
+                            <p className='fs-5 fw-light mb-3' > company owner  </p>
                             <small className=' fw-light text-muted  m-0'> company achivements </small>
                             <div className='d-flex flex-wrap' >
-                                <p className='m-2'  >this achivements achivements achivements ,</p>
-                                <p className='m-2' >this also svhivement ,</p>
-                                <p className='m-2'>this achivements,</p>
-                                <p className='m-2'> this also svhivement,</p>
-                                <p className='m-2'>this achivements,</p>
-                                <p className='m-2'>this also svhivement,</p>
+                                {majorAchivements?.map((item: any) => (
+                                    <p className='m-2'
+                                        key={item.index}
+                                    >{item}</p>
+                                ))}
+
                             </div>
-
-
-                            <small className=' fw-light text-muted  m-0'> company achivements </small>
-                            <p>comapny size</p>
-
-
-                            <small className=' fw-light text-muted  m-0'> debut events  </small>
-
-                            <p>debutEvents</p>
-                            {/* <p>companyFollowers</p>
-                            <p>companyRegestry</p> */}
-
-
                         </Col>
-                        <Col md={5}
-                        >
+                        <Col md={5}>
                             <img
-                                className="w-100 shadow"
-                                src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                                className="w-75 shadow-sm p-4 rounded"
+                                src={companyLogo}
                                 alt="" />
                             <div className="d-flex justify-content-around mb-5 mt-3">
-                                <a href="https://www.linkedin.com/in/joseph-mwaura-b8a8a817b/">
+                                <a href={linkedInUrl ? linkedInUrl : ""}>
                                     <FaLinkedin className='mx-3' size={25} />
                                 </a>
-                                <a href="https://twitter.com/josephmwaura">
+                                <a href={twitterUrl ? twitterUrl : ""}>
                                     <FaTwitter size={25} className='mx-3' />
                                 </a>
-                                <a href="https://www.facebook.com/josephmwaura">
+                                <a href={facebookUrl ? facebookUrl : ""} >
                                     <FaFacebook className='mx-3' size={25} />
                                 </a>
-                                <a href="https://www.instagram.com/josephmwaura/">
+                                <a href={instagramUrl ? instagramUrl : ""}>
                                     <FaInstagram className='mx-3' size={25} />
                                 </a>
 
                             </div>
                             <small className=' fw-light text-muted ' >aera of operations </small>
                             <div className='d-flex flex-wrap' >
-                                <p className='m-2' >africa</p>
-                                <p className='m-2' >europe</p>
-                                <p className='m-2' >asia</p>
-                                <p className='m-2' >north america</p>
-                                <p className='m-2' >south america </p>
-                                <p className='m-2' >austrilia</p>
+                                {aeraOfOperation?.map((item: any) => (
+                                    <p className='m-2' >{item}</p>
+                                ))}
                             </div>
-
                             <small className=' fw-light text-muted  m-0'>  active on regions </small>
                             <div className='d-flex flex-wrap' >
-                                <p className='m-2' >africa</p>
-                                <p className='m-2' >europe</p>
-                                <p className='m-2' >asia</p>
-                                <p className='m-2' >north america</p>
-                                <p className='m-2' >south america </p>
-                                <p className='m-2' >austrilia</p>
+                                {companyCategory?.map((item: any) => (
+                                    <p className='m-2' >{item}</p>
+                                ))}
                             </div>
-
-
-
                         </Col>
                     </Row>
-                    <Row className='border border-light' >
-
-                        <p> company events </p>
-                        {/* <p>companyFollowers</p>
-            <p>companyRegestry</p> */}
+                    <Row  >
+                        {debutEvents?.map((item: any) => (
+                            <DebutEventCards
+                                _id={item._id}
+                                createdBy={item.createdBy}
+                                belongsTo={item.belongsTo}
+                                debutEventName={item.debutEventName}
+                                debutEventDescription={item.debutEventDescription}
+                                debutEventDate={item.debutEventDate}
+                                debutEventImage={item.debutEventImage}
+                            />
+                        ))}
                     </Row>
-
                 </OffcanvasBody>
             </Offcanvas>
 
             <Row className=' d-flex my-2 py-3 flex-wrap justify-content-between rounded-5 shadow-sm  companyCard'
-                onClick={toggle}
-            >
+                onClick={toggle}>
                 <Col md={2}  >
                     <img
-                        className='w-100'
-                        src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                        className='w-50'
+                        src={companyLogo}
                         alt='user profile photo' />
                 </Col>
                 <Col md={10}>
-                    <p className='fw-bolder fs-6 ' > {ventureName} </p>
-                    <p className='fs-light' >
-                        {ventureDescription} <small className='text-muted'>  {ventureAdress} </small>
-                    </p>
+                    <p className='fw-bolder fs-3 m-2' > {companyName} </p>
+                    <p className='fs-light m-2' >{companyDescription} </p>
+                    <p className='text-muted m-2'>  {companyHeadquarters} </p>
                     <div className='ventureOwner d-flex'>
-                        {/* user name and photo */}
+                        <img src={companyOwner?.profileImage}
+                            alt='user profile photo'
 
-                        <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
-                            alt='user profile photo' />
-
-
-                        <p className='mx-2  fs-6 text-muted fw-normal' > {ventureOwner} </p>
-
-
+                        />
+                        <p className='mx-2  fs-6 text-muted fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
                     </div>
                 </Col>
-
             </Row>
-
-
         </>
-
-
     )
 }
