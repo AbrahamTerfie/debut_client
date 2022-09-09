@@ -112,7 +112,7 @@ export default function VentureCards(
                             </div>
                         </Col>
                     </Row>
-                    <Row  >
+
                         {debutEvents?.map((item: any) => (
                             <DebutEventCards
                                 _id={item._id}
@@ -124,7 +124,7 @@ export default function VentureCards(
                                 debutEventImage={item.debutEventImage}
                             />
                         ))}
-                    </Row>
+
                 </OffcanvasBody>
             </Offcanvas>
 
