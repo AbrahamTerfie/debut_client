@@ -67,12 +67,12 @@ export default function People() {
                     <SearchComponent />
                 </Col>
                 <Col md={1}>
-                    <Button outline color="light" >
+                    <Button outline color="light" className='px-4'  >
                         <FaSearch className='bg-transparent' />
                     </Button>
                 </Col>
                 <Col md={1}>
-                    <Button onClick={toggle} outline color="light" >
+                    <Button onClick={toggle} outline color="light" className='px-5' >
                         <IoMdSettings className='bg-transparent' />
                     </Button>
                 </Col>
