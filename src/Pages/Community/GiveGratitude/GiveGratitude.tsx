@@ -94,6 +94,8 @@ export default function GiveGratitude() {
                         </TabPane>
                         <TabPane tabId="2"  >
                             {/* <VentureCards /> */}
+                            <GratitudeCards />
+                            <GratitudeCards />
 
                             <h4>
                                 you havent sent any gratitude acards yet

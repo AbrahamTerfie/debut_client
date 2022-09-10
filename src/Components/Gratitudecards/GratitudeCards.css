@@ -17,7 +17,7 @@
 .gratitudeCardContainer:hover {
     transition: 0.2s ease-in-out;
     border-radius: 0px;
-    scale: 1.5;
+    /* scale: 1.1; */
     /* background: linear-gradient(315deg, #2a2b3c, #232432); */
     box-shadow: -5px -5px 14px #101016,
         5px 5px 4px #3e405a;
