@@ -11,6 +11,7 @@ import { IoMdAdd } from 'react-icons/io'
 import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
 import VentureCards from '../../../Components/VentureCards/VentureCards';
 import NewGratitudeForm from './NewGratitudeForm';
+import findUsers from '../../../Helpers/findUsers'
 export default function GiveGratitude() {
     const [activeTab, setActiveTab] = useState('1');
     const [canvas, setCanvas] = useState(false);
@@ -19,7 +20,8 @@ export default function GiveGratitude() {
 
     return (
         <Row className='px-5 d-flex page mt-3'  >
-            <Offcanvas style={{ width: '50%', top: '40%' }}
+            <Offcanvas
+                style={{ width: '50%' }}
                 direction="end"
                 isOpen={canvas}
                 toggle={toggleCanvas}
@@ -35,7 +37,7 @@ export default function GiveGratitude() {
                 <p className='fw-bolder fs-3 my-4'> Give Gratitude </p>
                 <p>
                     Give gratitude to the people who have
-                    helped you in your journey.
+                    helped you in your journey. and
                 </p>
 
                 <Button outline color='light' className='mt-5 w-100' size='sm'
@@ -46,6 +48,11 @@ export default function GiveGratitude() {
                         }}
                         className='mx-1 ' />
                     New Gratitude Post
+                </Button>
+                <Button
+                    onClick={findUsers}
+                >
+                    this is a button
                 </Button>
 
 

@@ -21,6 +21,8 @@ import { CREATE_DEBUT_REGISTRY, EVENT_REGISTRIES } from './DebutRegistry/Registr
 import { GET_REGISTRY_ITEMS_WITH_REGISTRY_ID, CREATE_REGISTRY_ITEM } from './RegistryItem/RegistryItemQuries'
 import { All_USERS, GET_DEBUT_USER_WITH_ID } from './User/userInfo'
 
+import { GRATITUDE_TO_USER } from './Gratitude/GratitudeTosend'
+
 
 export {
     CHECK_EMAIL_VALIDITY,
@@ -54,6 +56,7 @@ export {
     CREATE_REGISTRY_ITEM,
     //perope 
     All_USERS,
-    // GET_DEBUT_USER_WITH_ID
+    //gratitude
+    GRATITUDE_TO_USER
 
 }

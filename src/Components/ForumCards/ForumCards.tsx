@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './ForumCards.css'
-import { Row, Col, Offcanvas, OffcanvasBody, OffcanvasHeader, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader, FormGroup, Input, Label, Button } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { useMutation, useQuery } from '@apollo/client'
 import { RootState } from '../../Store/RootReducer';
@@ -12,7 +12,7 @@ export default function ForumCards(
         _id: String,
         createdBy: {
             _id: String,
-            firstName: String,
+            firstName: String, 
             email: String,
         },
         channel: String,
@@ -76,28 +76,18 @@ export default function ForumCards(
                 scrollable={true}
             >
                 <OffcanvasHeader toggle={toggle}>
-                    <p className='fs-3 m-3 px-5 fw-light' >
-                        {postTitle}
-                    </p>
+                    <p className='fs-3 m-3 px-5 fw-light' > {postTitle} </p>
                     <span className='fs-6 m-3 px-5 fw-light text-muted' >
                         channel - #{channel}
                     </span>
-
-                    <p className='fs-6 m-3 px-5 fw-light' >
-                    </p>
                 </OffcanvasHeader>
                 <OffcanvasBody >
                     <p className='fs-4 mb-3 px-5 fw-light '
                         style={{
                             paddingBottom: '40px',
                             borderBottom: '1px solid #ccc',
-                        }}>
-                        {postContent}
-                    </p>
-
-
+                        }}> {postContent} </p>
                     <Label className='m-5 mb-2' >discussion </Label>
-
                     <FormGroup className='mx-5 ' size='xs' >
                         <Input
                             height={12}
@@ -106,44 +96,27 @@ export default function ForumCards(
                             onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
                         />
                     </FormGroup>
-
                     <Button className='btn-sm  m-2 mx-5' color='light' outline size='xs'
                         onClick={() => PostCommentHandler(newComment)}>
-
                         comment
                     </Button>
-
                     <div>
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
                                 <div key={comment.id} className='shadow-sm  comment pb-3 rounded' >
                                     <p className='fs-6 m-3 px-5 pt-3 fw-light ' > {comment.comment}</p>
                                     <span className='fs-6 mx-5 px-3  fw-light text-muted text-end ' > by {comment.createdBy.firstName}  </span>
-                                    {/* <Button className='btn-sm  ' color='danger' outline size='xs'>x</Button>  
-                                    delete for future 
-                                    */}
                                 </div>
                             )
-                        }
-                        )}
+                        })}
                     </div>
-
 
                 </OffcanvasBody>
             </Offcanvas>
-            <Row className=' forumCardParent shadow-sm rounded p-3 m-2 '
-                onClick={() => toggle()}
-            >
-                <Col xs='2' sm='2' md='2' lg='1' xl='1' className='profileImage' >
-                    <img src='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' alt='user profile photo' />
-                </Col>
-                <Col className='mx-1' xs='10' sm='10' md='10' lg='10' xl='10' >
-                    <p className='fw-bolder fs-5 ' > {postTitle} </p>
-                    <p className='fs-6 text-muted' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
-                    <p className='fw-light' >
-                        {postContent}
-                    </p>
-                </Col>
+            <Row className=' forumCardParent shadow-sm rounded p-3 m-2 ' onClick={() => toggle()}>
+                <p className='fw-light fs-5 m-1 ' > {postTitle} </p>
+                <p className=' fw-lighter text-muted m-0' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
+                <p className='fw-light m-0' > {postContent} </p>
             </Row>
         </>
     )

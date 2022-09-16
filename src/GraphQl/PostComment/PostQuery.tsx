@@ -18,10 +18,10 @@ mutation CreateNewForumPost ($forumPostInput: ForumPostInput){
       firstName,
       email
     }
-
 }
-
 }`
+
+
 
 export const FETCH_ALL_FORUM_POSTS = gql`
    query FetchAllForumPosts {
