@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText, Row, Col } from 'reactstrap';
 import { GRATITUDE_TO_USER } from '../../../GraphQl/index';
 import { useQuery, useMutation } from '@apollo/client';
@@ -18,14 +18,31 @@ export default function NewGratitudeForm() {
     // user filtering state
     const { data, loading, error } = useQuery(GRATITUDE_TO_USER);
 
-    if (loading) {
-        console.log('loading.........')
-    } if (data) {
-        console.log('data....', data.getdebutUsers)
+    // if (loading) {
+    //     console.log('loading.........')
+    // } if (data) {
+    //     console.log('data....', data.getdebutUsers)
+    // }
+    // if (error) {
+    //     console.log('error.....', error)
+    // }
+    const [filteredUsers, setFilteredUsers] = useState([])
+    const [selectedUser, setSelectedUser] = useState({})
+    console.log('selectedUser', selectedUser)
+
+    // filter objects by name value 
+    const filterByName = (name) => {
+        const filtered = data.getdebutUsers.filter((user) => {
+            return (
+                user.firstName?.toLowerCase().includes(name.toLowerCase())
+                ||
+                user.lastName?.toLowerCase().includes(name.toLowerCase())
+            )
+        })
+        return setFilteredUsers(filtered)
     }
-    if (error) {
-        console.log('error.....', error)
-    }
+
+
 
     return (
         <Form className='mx-4 px-3' >
@@ -40,17 +57,17 @@ export default function NewGratitudeForm() {
                     name="gratitudeTo"
                     id="gratitudeTo"
                     placeholder="search for a person to thank"
-                    // is active when lookingForUser is true
+                    onChange={(e) => filterByName(e.target.value)}
                     onFocus={onFocus} onBlur={onBlur}
                 />
             </FormGroup>
 
             <Row className='d-flex justify-content-between ' md={12} >
-                {data?.getdebutUsers.map((user) => {
+                {filteredUsers ? filteredUsers.map((user) => {
                     return (
                         <Col
                             className='shadow-sm  p-1 px-3 my-2 forumCardParent' md={6} >
-                            <div className='d-flex  flex-row'>
+                            <div className='d-flex  flex-row' onClick={() => setSelectedUser(user)}>
                                 <img
                                     src={user.profileImage} alt="user" className='w-25 h-25' />
                                 <div className='mx-3' >
@@ -62,7 +79,11 @@ export default function NewGratitudeForm() {
                             </div>
                         </Col>
                     )
-                })}
+                })
+                    : <div>
+                        <h1>no users</h1>
+                    </div>
+                }
             </Row>
 
 
