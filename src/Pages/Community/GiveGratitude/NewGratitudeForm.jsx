@@ -10,25 +10,23 @@ const inputStyles = {
 }
 export default function NewGratitudeForm() {
     //input on active state
-    const [focused, setFocused] = useState(true)
+    const [focused, setFocused] = useState(false)
     const onFocus = () => setFocused(true)
     const onBlur = () => setFocused(false)
-    console.log('focused', focused)
+    // console.log('focused', focused)
 
     // user filtering state
     const { data, loading, error } = useQuery(GRATITUDE_TO_USER);
 
-    // if (loading) {
-    //     console.log('loading.........')
-    // } if (data) {
-    //     console.log('data....', data.getdebutUsers)
-    // }
-    // if (error) {
-    //     console.log('error.....', error)
-    // }
+    if (error) {
+        console.log('error.....', error)
+    }
     const [filteredUsers, setFilteredUsers] = useState([])
     const [selectedUser, setSelectedUser] = useState({})
-    console.log('selectedUser', selectedUser)
+    const [searchInput, setSearchInput] = useState('')
+    // console.log('selectedUser', selectedUser)
+
+
 
     // filter objects by name value 
     const filterByName = (name) => {
@@ -41,7 +39,12 @@ export default function NewGratitudeForm() {
         })
         return setFilteredUsers(filtered)
     }
+    useEffect(() => {
+        if (searchInput.length > 0) {
+            filterByName(searchInput)
+        }
 
+    }, [searchInput])
 
 
     return (
@@ -56,18 +59,22 @@ export default function NewGratitudeForm() {
                     type="text"
                     name="gratitudeTo"
                     id="gratitudeTo"
-                    placeholder="search for a person to thank"
-                    onChange={(e) => filterByName(e.target.value)}
-                    onFocus={onFocus} onBlur={onBlur}
+                    placeholder={selectedUser?.firstName ? `${selectedUser.firstName} ${selectedUser.lastName}` : 'Search for a user'}
+                    value={selectedUser?.firstName ? `${selectedUser.firstName} ${selectedUser.lastName}` : searchInput}
+                    onChange={(e) => {
+                        setSelectedUser({})
+                        setSearchInput(e.target.value)
+                    }}
+                    onFocus={onFocus}
                 />
             </FormGroup>
 
             <Row className='d-flex justify-content-between ' md={12} >
-                {filteredUsers ? filteredUsers.map((user) => {
+                {focused && filteredUsers.map((user) => {
                     return (
                         <Col
                             className='shadow-sm  p-1 px-3 my-2 forumCardParent' md={6} >
-                            <div className='d-flex  flex-row' onClick={() => setSelectedUser(user)}>
+                            <div className='d-flex  flex-row' onClick={() => { setSelectedUser(user); onBlur() }}>
                                 <img
                                     src={user.profileImage} alt="user" className='w-25 h-25' />
                                 <div className='mx-3' >
@@ -79,11 +86,7 @@ export default function NewGratitudeForm() {
                             </div>
                         </Col>
                     )
-                })
-                    : <div>
-                        <h1>no users</h1>
-                    </div>
-                }
+                })}
             </Row>
 
 

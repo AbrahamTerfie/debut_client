@@ -47,13 +47,11 @@ export default function GiveGratitude() {
                             backgroundColor: 'transparent',
                         }}
                         className='mx-1 ' />
+                    <small>
                     New Gratitude Post
+                    </small>
                 </Button>
-                <Button
-                    onClick={findUsers}
-                >
-                    this is a button
-                </Button>
+
 
 
             </Col>
