@@ -19,14 +19,14 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
-import { setUserID } from '../../../Store/identfiers/identfiers'
+import { setUserID, setUserEmail } from '../../../Store/identfiers/identfiers'
 // types
 
 export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    const { userID } = useSelector((store: RootState) => store.identfiers)
-console.log(userID)
+    const { userID ,userEmail} = useSelector((store: RootState) => store.identfiers)
+    // console.log(userID , userEmail)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();
@@ -61,7 +61,8 @@ console.log(userID)
     if (authenticatedUsrRes.data) {
         // saves user id in steore to be used in other components
         dispatch(setUserID(authenticatedUsrRes.data.authenticatedUser._id))
-        
+        dispatch(setUserEmail(authenticatedUsrRes.data.authenticatedUser.email))
+
     }
     if (authenticatedUsrRes.error) {
         console.log(authenticatedUsrRes.error)

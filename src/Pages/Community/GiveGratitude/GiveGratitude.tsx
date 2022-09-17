@@ -11,7 +11,7 @@ import { IoMdAdd } from 'react-icons/io'
 import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
 import VentureCards from '../../../Components/VentureCards/VentureCards';
 import NewGratitudeForm from './NewGratitudeForm';
-import findUsers from '../../../Helpers/findUsers'
+
 export default function GiveGratitude() {
     const [activeTab, setActiveTab] = useState('1');
     const [canvas, setCanvas] = useState(false);

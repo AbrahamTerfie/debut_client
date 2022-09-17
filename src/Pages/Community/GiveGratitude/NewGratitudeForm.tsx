@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText, Row, Col } from 'reactstrap';
 import { GRATITUDE_TO_USER } from '../../../GraphQl/index';
 import { useQuery, useMutation } from '@apollo/client';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../Store/RootReducer';
 const inputStyles = {
     width: '80%',
     margin: 'auto',
@@ -9,6 +11,8 @@ const inputStyles = {
 
 }
 export default function NewGratitudeForm() {
+    const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
+
     //input on active state
     const [focused, setFocused] = useState(false)
     const onFocus = () => setFocused(true)
@@ -22,15 +26,15 @@ export default function NewGratitudeForm() {
         console.log('error.....', error)
     }
     const [filteredUsers, setFilteredUsers] = useState([])
-    const [selectedUser, setSelectedUser] = useState({})
+    const [selectedUser, setSelectedUser] = useState({} as any)
     const [searchInput, setSearchInput] = useState('')
     // console.log('selectedUser', selectedUser)
 
 
 
     // filter objects by name value 
-    const filterByName = (name) => {
-        const filtered = data.getdebutUsers.filter((user) => {
+    const filterByName = (name: String) => {
+        const filtered = data.getdebutUsers.filter((user: any) => {
             return (
                 user.firstName?.toLowerCase().includes(name.toLowerCase())
                 ||
@@ -51,7 +55,8 @@ export default function NewGratitudeForm() {
         <Form className='mx-4 px-3' >
             <FormGroup className='d-flex ' >
                 <Label className='mx-3' for="gratitudeFrom">From : </Label>
-                <Input style={inputStyles} type="text" name="gratitudeFrom" id="gratitudeFrom" disabled placeholder=" userName" value="usename" />
+                <Input style={inputStyles} type="text" name="gratitudeFrom" id="gratitudeFrom" disabled placeholder=" userName"
+                    value={"you: " + userEmail} />
             </FormGroup>
             <FormGroup className='d-flex ' >
                 <Label className='mx-4' for="gratitudeTo">To : </Label>
@@ -70,7 +75,7 @@ export default function NewGratitudeForm() {
             </FormGroup>
 
             <Row className='d-flex justify-content-between ' md={12} >
-                {focused && filteredUsers.map((user) => {
+                {focused && filteredUsers.map((user: any) => {
                     return (
                         <Col
                             className='shadow-sm  p-1 px-3 my-2 forumCardParent' md={6} >
