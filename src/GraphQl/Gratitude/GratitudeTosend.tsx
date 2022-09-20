@@ -25,6 +25,7 @@ query($userId: ID!) {
     _id
     message
     subject
+    createdAt
     createdBy {
       firstName
       lastName
@@ -61,6 +62,7 @@ query sentGratitude($userId: ID!) {
     _id
     message
     subject
+    createdAt
     createdBy {
       firstName
       lastName

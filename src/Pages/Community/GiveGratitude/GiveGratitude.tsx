@@ -103,17 +103,17 @@ export default function GiveGratitude() {
                             </NavLink>
                         </NavItem>
                     </Nav>
-                    <TabContent activeTab={activeTab}  >
+                    <TabContent activeTab={activeTab} className="overflow-auto" >
                         <TabPane tabId="1" className='overflow-auto h-100'>
                             {
                                 recGraData?.getReceivedGratitudes.map((item: any) => {
                                     return <GratitudeCards
-                                    // key={item.id}
-                                    // title={item.title}
-                                    // description={item.description}
-                                    // date={item.createdAt}
-                                    // sender={item.sender}
-                                    // receiver={item.receiver}
+                                        key={item._id}
+                                        createdBy={item.createdBy}
+                                        createdAt={item.createdAt}
+                                        message={item.message}
+                                        sentTo={item.sentTo}
+                                        subject={item.subject}
                                     />
                                 })
                             }
@@ -123,12 +123,12 @@ export default function GiveGratitude() {
                             {sentGraData?.getSentGratitudes.map((item: any) => {
                                 return (
                                     <GratitudeCards
-                                    // key={item.id}
-                                    // title={item.title}
-                                    // description={item.description}
-                                    // date={item.createdAt}
-                                    // sender={item.sender}
-                                    // receiver={item.receiver}
+                                        key={item._id}
+                                        createdBy={item.createdBy}
+                                        createdAt={item.createdAt}
+                                        message={item.message}
+                                        sentTo={item.sentTo}
+                                        subject={item.subject}
                                     />
                                 )
                             })}

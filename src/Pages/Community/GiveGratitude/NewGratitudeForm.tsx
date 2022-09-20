@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
-import { GRATITUDE_TO_USER, CREATE_GRATITUDE } from '../../../GraphQl/index';
+import { GRATITUDE_TO_USER, CREATE_GRATITUDE, SENT_GRATITUDE } from '../../../GraphQl/index';
 import { useQuery, useMutation } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
@@ -49,7 +49,24 @@ export default function NewGratitudeForm() {
         data: gratitudeToUserData,
         loading: gratitudeToUserLoading,
         error: gratitudeToUserError
-    }] = useMutation(CREATE_GRATITUDE)
+    }] = useMutation(CREATE_GRATITUDE,
+        {
+            update(cache, { data: { createGratitude } }) {
+                const { getSentGratitudes }: any = cache.readQuery({
+                    query: SENT_GRATITUDE,
+                    variables: { userId: userID }
+                })
+                cache.writeQuery({
+                    query: SENT_GRATITUDE,
+                    variables: { userId: userID },
+                    data: { getSentGratitudes: [createGratitude, ...getSentGratitudes] }
+                })
+            }
+        }
+    )
+
+
+
     // if (gratitudeToUserData) {
     //     console.log('gratitudeToUserData', gratitudeToUserData)
     // }
