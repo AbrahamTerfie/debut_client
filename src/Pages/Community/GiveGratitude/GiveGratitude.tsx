@@ -105,7 +105,7 @@ export default function GiveGratitude() {
                     </Nav>
                     <TabContent activeTab={activeTab} className="overflow-auto" >
                         <TabPane tabId="1" className='overflow-auto h-100'>
-                            {
+                            {recGraData?.getReceivedGratitudes.length > 0 ?
                                 recGraData?.getReceivedGratitudes.map((item: any) => {
                                     return <GratitudeCards
                                         key={item._id}
@@ -116,26 +116,32 @@ export default function GiveGratitude() {
                                         subject={item.subject}
                                     />
                                 })
+                                :
+                                <p className='text-muted text-center ' >
+                                    nothing to see here
+                                </p>
                             }
                         </TabPane>
                         <TabPane tabId="2" className='overflow-auto h-100'  >
 
-                            {sentGraData?.getSentGratitudes.map((item: any) => {
-                                return (
-                                    <GratitudeCards
-                                        key={item._id}
-                                        createdBy={item.createdBy}
-                                        createdAt={item.createdAt}
-                                        message={item.message}
-                                        sentTo={item.sentTo}
-                                        subject={item.subject}
-                                    />
-                                )
-                            })}
-
-                            <h4>
-                                you havent sent any gratitude acards yet
-                            </h4>
+                            {sentGraData?.getSentGratitudes.length > 0 ?
+                                sentGraData?.getSentGratitudes.map((item: any) => {
+                                    return (
+                                        <GratitudeCards
+                                            key={item._id}
+                                            createdBy={item.createdBy}
+                                            createdAt={item.createdAt}
+                                            message={item.message}
+                                            sentTo={item.sentTo}
+                                            subject={item.subject}
+                                        />
+                                    )
+                                })
+                                :
+                                <p className='text-muted text-center ' >
+                                    nothing to see here
+                                </p>
+                            }
 
                         </TabPane>
                     </TabContent>
