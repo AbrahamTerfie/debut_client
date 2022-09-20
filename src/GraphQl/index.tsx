@@ -21,7 +21,7 @@ import { CREATE_DEBUT_REGISTRY, EVENT_REGISTRIES } from './DebutRegistry/Registr
 import { GET_REGISTRY_ITEMS_WITH_REGISTRY_ID, CREATE_REGISTRY_ITEM } from './RegistryItem/RegistryItemQuries'
 import { All_USERS, GET_DEBUT_USER_WITH_ID } from './User/userInfo'
 
-import { GRATITUDE_TO_USER, CREATE_GRATITUDE } from './Gratitude/GratitudeTosend'
+import { GRATITUDE_TO_USER, CREATE_GRATITUDE, RECIVED_GRATITUDE, SENT_GRATITUDE } from './Gratitude/GratitudeTosend'
 
 
 export {
@@ -58,6 +58,8 @@ export {
     All_USERS,
     //gratitude
     GRATITUDE_TO_USER,
-    CREATE_GRATITUDE
+    CREATE_GRATITUDE,
+    RECIVED_GRATITUDE,
+    SENT_GRATITUDE
 
 }

@@ -18,6 +18,8 @@ export default function NewGratitudeForm() {
         subject: '',
         message: '',
     } as any)
+    // console.log('newGratitudeForm', newGratitudeForm)
+
     const [filteredUsers, setFilteredUsers] = useState([])
     const [selectedUser, setSelectedUser] = useState({} as any)
     const [searchInput, setSearchInput] = useState('')
@@ -87,7 +89,6 @@ export default function NewGratitudeForm() {
 
 
 
-    console.log('newGratitudeForm', newGratitudeForm)
     return (
         <Form className='mx-4 px-3' >
             <FormGroup className='d-flex ' >

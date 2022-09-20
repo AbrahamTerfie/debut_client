@@ -9,17 +9,33 @@ import './GiveGratitude.scss'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { IoMdAdd } from 'react-icons/io'
 import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
-import VentureCards from '../../../Components/VentureCards/VentureCards';
 import NewGratitudeForm from './NewGratitudeForm';
-
+import Loader from '../../../Components/Loader/Loader';
+import { RECIVED_GRATITUDE, SENT_GRATITUDE } from '../../../GraphQl/index';
+import { useQuery } from '@apollo/client';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../Store/RootReducer';
 export default function GiveGratitude() {
+    const { userID } = useSelector((store: RootState) => store.identfiers)
     const [activeTab, setActiveTab] = useState('1');
     const [canvas, setCanvas] = useState(false);
     const toggle = (tab: any) => { if (activeTab !== tab) setActiveTab(tab) }
     const toggleCanvas = () => setCanvas(!canvas);
 
+    const { data: recGraData, loading: recGraLoading, error: recGraError } = useQuery(RECIVED_GRATITUDE, {
+        variables: { userId: userID }
+    })
+    const { data: sentGraData, loading: sentGraLoading, error: sentGraError } = useQuery(SENT_GRATITUDE, {
+        variables: { userId: userID }
+    })
+
+
+    console.log("recGraData", recGraData)
+    console.log("sentGraData", sentGraData)
+
+    if (recGraLoading || sentGraLoading) { return <Loader /> }
     return (
-        <Row className='px-5 d-flex page mt-3'  >
+        <Row className='px-5 d-flex page mt-3' >
             <Offcanvas
                 style={{ width: '50%' }}
                 direction="end"
@@ -48,7 +64,7 @@ export default function GiveGratitude() {
                         }}
                         className='mx-1 ' />
                     <small>
-                    New Gratitude Post
+                        New Gratitude Post
                     </small>
                 </Button>
 
@@ -63,8 +79,6 @@ export default function GiveGratitude() {
                     <SearchComponent />
                 </Row>
                 <Row className=''>
-
-
                     <Nav className="tabs" tabs  >
                         <NavItem>
                             <NavLink
@@ -72,9 +86,7 @@ export default function GiveGratitude() {
                                 className={activeTab === "1" ? "activeTab" : "notActiveTab"}
                                 onClick={() => { toggle('1'); }}>
                                 <MdMailOutline size={20}
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                    }}
+                                    style={{ backgroundColor: 'transparent' }}
                                     className='mx-3 ' />
                                 Inbox
                             </NavLink>
@@ -85,22 +97,41 @@ export default function GiveGratitude() {
                                 onClick={() => { toggle('2'); }}
                             >
                                 <MdForwardToInbox size={20}
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                    }}
+                                    style={{ backgroundColor: 'transparent' }}
                                     className='mx-3 ' />
                                 Sent
                             </NavLink>
                         </NavItem>
                     </Nav>
                     <TabContent activeTab={activeTab}  >
-                        <TabPane tabId="1">
-                            <GratitudeCards />
+                        <TabPane tabId="1" className='overflow-auto h-100'>
+                            {
+                                recGraData?.getReceivedGratitudes.map((item: any) => {
+                                    return <GratitudeCards
+                                    // key={item.id}
+                                    // title={item.title}
+                                    // description={item.description}
+                                    // date={item.createdAt}
+                                    // sender={item.sender}
+                                    // receiver={item.receiver}
+                                    />
+                                })
+                            }
                         </TabPane>
-                        <TabPane tabId="2"  >
-                            {/* <VentureCards /> */}
-                            <GratitudeCards />
-                            <GratitudeCards />
+                        <TabPane tabId="2" className='overflow-auto h-100'  >
+
+                            {sentGraData?.getSentGratitudes.map((item: any) => {
+                                return (
+                                    <GratitudeCards
+                                    // key={item.id}
+                                    // title={item.title}
+                                    // description={item.description}
+                                    // date={item.createdAt}
+                                    // sender={item.sender}
+                                    // receiver={item.receiver}
+                                    />
+                                )
+                            })}
 
                             <h4>
                                 you havent sent any gratitude acards yet
@@ -110,7 +141,7 @@ export default function GiveGratitude() {
                     </TabContent>
                 </Row>
             </Col>
-        </Row>
+        </Row >
 
 
     )
