@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText, Row, Col } from 'reactstrap';
-import { GRATITUDE_TO_USER } from '../../../GraphQl/index';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
+import { GRATITUDE_TO_USER, CREATE_GRATITUDE } from '../../../GraphQl/index';
 import { useQuery, useMutation } from '@apollo/client';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
 const inputStyles = {
     width: '80%',
@@ -12,7 +12,29 @@ const inputStyles = {
 }
 export default function NewGratitudeForm() {
     const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
+    const [newGratitudeForm, setNewGratitudeForm] = useState({
+        createdBy: userID,
+        sentTo: '',
+        subject: '',
+        message: '',
+    } as any)
+    const [filteredUsers, setFilteredUsers] = useState([])
+    const [selectedUser, setSelectedUser] = useState({} as any)
+    const [searchInput, setSearchInput] = useState('')
+    // console.log('selectedUser', selectedUser)
+    useEffect(() => {
+        setNewGratitudeForm({
+            ...newGratitudeForm,
+            sentTo: selectedUser._id
+        })
+    }, [selectedUser])
 
+    const handleInput = (e: any) => {
+        setNewGratitudeForm({
+            ...newGratitudeForm,
+            [e.target.name]: e.target.value
+        })
+    }
     //input on active state
     const [focused, setFocused] = useState(false)
     const onFocus = () => setFocused(true)
@@ -21,36 +43,51 @@ export default function NewGratitudeForm() {
 
     // user filtering state
     const { data, loading, error } = useQuery(GRATITUDE_TO_USER);
+    const [gratitudeToUser, {
+        data: gratitudeToUserData,
+        loading: gratitudeToUserLoading,
+        error: gratitudeToUserError
+    }] = useMutation(CREATE_GRATITUDE)
+    // if (gratitudeToUserData) {
+    //     console.log('gratitudeToUserData', gratitudeToUserData)
+    // }
+    // if (gratitudeToUserLoading) {
+    //     console.log('gratitudeToUserLoading', gratitudeToUserLoading)
+    // }
+    // if (gratitudeToUserError) {
+    //     console.log('gratitudeToUserError', gratitudeToUserError)
+    // }
+    const onSubmitHandler = (e: any) => {
+        e.preventDefault()
+        gratitudeToUser({
+            variables: {
+                gratitudeInput: {
+                    ...newGratitudeForm
+                }
+            }
+        })
+    }
 
     if (error) {
         console.log('error.....', error)
     }
-    const [filteredUsers, setFilteredUsers] = useState([])
-    const [selectedUser, setSelectedUser] = useState({} as any)
-    const [searchInput, setSearchInput] = useState('')
-    // console.log('selectedUser', selectedUser)
-
-
 
     // filter objects by name value 
     const filterByName = (name: String) => {
         const filtered = data.getdebutUsers.filter((user: any) => {
-            return (
-                user.firstName?.toLowerCase().includes(name.toLowerCase())
-                ||
-                user.lastName?.toLowerCase().includes(name.toLowerCase())
+            return (user.firstName?.toLowerCase().includes(name.toLowerCase())
+                || user.lastName?.toLowerCase().includes(name.toLowerCase())
             )
         })
         return setFilteredUsers(filtered)
     }
     useEffect(() => {
-        if (searchInput.length > 0) {
-            filterByName(searchInput)
-        }
-
+        if (searchInput.length > 0) { filterByName(searchInput) }
     }, [searchInput])
 
 
+
+    console.log('newGratitudeForm', newGratitudeForm)
     return (
         <Form className='mx-4 px-3' >
             <FormGroup className='d-flex ' >
@@ -97,21 +134,43 @@ export default function NewGratitudeForm() {
 
             <FormGroup className='d-flex ' >
                 <Label className='mx-2' for="gratitudeSubject">Subject :  </Label>
-                <Input style={inputStyles} type="text" name="gratitudeSubject" id="gratitudeSubject" placeholder="subject" />
+                <Input style={inputStyles} type="text"
+                    name="subject"
+                    id="gratitudeSubject"
+                    placeholder="subject"
+                    value={newGratitudeForm.subject}
+                    onChange={handleInput}
+                />
             </FormGroup>
 
             <FormGroup className='d-flex ' >
                 <Label for="gratitudeMessage">Message : </Label>
-                <Input style={inputStyles} type="textarea" name="gratitudeMessage" id="gratitudeMessage"
+                <Input style={inputStyles}
+                    type="textarea"
+                    name="message"
+                    id="gratitudeMessage"
                     placeholder="message"
+                    value={newGratitudeForm.message}
+                    onChange={handleInput}
                     rows="3" />
 
             </FormGroup>
 
 
             <Button
-                className='mx-auto mt-5' outline color="light" size="lg" block>
-                Send Gratitude</Button>
+                className='mx-auto mt-5' outline
+                color={gratitudeToUserData ? 'success' : userID === selectedUser._id ? 'danger ' : 'light'}
+                size="lg" block
+                onClick={gratitudeToUserData ? () => { } : onSubmitHandler}
+                disabled={gratitudeToUserData || userID === selectedUser._id ? true : false}
+            >
+
+                {gratitudeToUserData ? 'Gratitude Sent'
+                    : userID === selectedUser._id ? "you can't send gratitude to yourself "
+                        : 'Send Gratitude'
+                }
+
+            </Button>
         </Form>
     );
 }
