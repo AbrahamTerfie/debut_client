@@ -10,7 +10,7 @@
 .headerText {
     /* font-size: 10rem; */
     min-height: 10rem;
-    font-size: calc(3rem + 2vmin);
+    font-size: 10em;
     color: skyblue;
     /* display: flex; */
     text-align: center;
@@ -22,7 +22,7 @@
 /* header text hover */
 .headerText:hover {
     color: #ffc107;
-    font-size: calc(4rem + 2vmin);
+    font-size: 11em;
 
     transition: all 0.5s ease-in-out;
 }
@@ -60,9 +60,10 @@
 
 
 }
-.linkContainer  a{
-text-decoration: none;
-color: #ffffff;
+
+.linkContainer a {
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .getStartedButton:hover {
