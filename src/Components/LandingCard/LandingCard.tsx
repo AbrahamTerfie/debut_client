@@ -6,12 +6,24 @@ import { FaHandsHelping } from 'react-icons/fa'
 export default function LandingCard({ icon, title }:
     { icon: any, title: string }) {
     return (
-        <div className="landingCard"    >
-            <div>
+        <div className=" border 
+            d-flex justify-content-center align-items-center
+            flex-column p-3 mx-2 my-5
+            shadow-sm rounded
+            w-25 h-50
+        "    >
+            <div
+                className='my-4'
+            >
                 {icon}
             </div>
-            <div className='landing-card-title' >
-                {title}
+            <div className=' 
+                d-flex justify-content-center align-items-center
+            ' >
+
+                <p className='fs-5 fw-lighter text-center'>
+                    {title}
+                </p>
             </div>
         </div>
 

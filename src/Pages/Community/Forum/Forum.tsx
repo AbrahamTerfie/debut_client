@@ -25,7 +25,7 @@ import { setUserID, setUserEmail } from '../../../Store/identfiers/identfiers'
 export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    const { userID ,userEmail} = useSelector((store: RootState) => store.identfiers)
+    const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
     // console.log(userID , userEmail)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
@@ -40,7 +40,6 @@ export default function Forum() {
         }
     }, [user])
 
-
     //gets the user from the server if it exists and if it doesn't it creates a new user
 
     useEffect(() => {
@@ -51,11 +50,8 @@ export default function Forum() {
                     userName: auth0UserInfo.name,
                     firstName: auth0UserInfo.nickname,
                 }
-
             }
         })
-
-
     }, [auth0UserInfo.email])
 
     if (authenticatedUsrRes.data) {
