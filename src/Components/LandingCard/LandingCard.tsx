@@ -12,19 +12,14 @@ export default function LandingCard({ icon, title }:
             shadow-sm rounded
             w-25 h-50
         "
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
         >
-            <div
-                className='my-4'
-            >
+            <div className='my-4' >
                 {icon}
             </div>
-            <div className=' 
-                d-flex justify-content-center align-items-center
-            ' >
-
-                <p className='fs-5 fw-lighter text-center'>
+            <div className='d-flex justify-content-center align-items-center' >
+                <p className='fs-5 fw-lighter text-center  text-light'>
                     {title}
                 </p>
             </div>
