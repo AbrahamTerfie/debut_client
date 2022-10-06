@@ -1,6 +1,7 @@
 export const cardDataDetails = [
     {
-        titile: "soponcer saas tools ",
+        id: 1,
+        title: "sponser saas tools ",
         icon: {
             name: "MdLiveHelp",
             color: "green",
@@ -24,7 +25,8 @@ export const cardDataDetails = [
         ]
     },
     {
-        titile: "volunteer time",
+        id: 2,
+        title: "volunteer time",
         icon: {
             name: "MdLiveHelp",
             color: "green",
@@ -47,7 +49,8 @@ export const cardDataDetails = [
         ]
     },
     {
-        titile: "introduction",
+        id: 3,
+        title: "introduction",
         icon: {
             name: "MdLiveHelp",
             color: "green",
@@ -68,10 +71,9 @@ export const cardDataDetails = [
             }
         ]
     },
-
-
     {
-        titile: "recognise help and share lessons ",
+        id: 4,
+        title: "recognise help and share lessons ",
         icon: {
             name: "MdLiveHelp",
             color: "green",
@@ -79,7 +81,8 @@ export const cardDataDetails = [
         cardDescriptions: []
     },
     {
-        titile: "automated ststem to remove friction",
+        id: 5,
+        title: "automated ststem to remove friction",
         icon: {
             name: "MdLiveHelp",
             color: "green",
@@ -100,5 +103,28 @@ export const cardDataDetails = [
             }
         ]
     },
+    // {
+    //     id: 6,
+    //     title: "automated ststem to remove friction",
+    //     icon: {
+    //         name: "MdLiveHelp",
+    //         color: "green",
+    //     },
+    //     cardDescriptions: [
+    //         {
+    //             id: 1,
+    //             description: "asking for help"
+    //         },
+    //         {
+    //             id: 2,
+    //             description: "helping the helper"
+
+    //         },
+    //         {
+    //             id: 3,
+    //             description: "tnanking the helper"
+    //         }
+    //     ]
+    // },
 
 ]

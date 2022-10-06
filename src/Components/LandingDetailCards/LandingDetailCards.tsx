@@ -14,7 +14,13 @@ import { cardDataDetails } from './landingCarddata'
  */
 
 
+type CardProps = {
+    title: string,
+    icon: any,
+    id: number,
+    cardDescriptions: any
 
+}
 
 
 export default function LandingDetailCards() {
@@ -29,34 +35,58 @@ export default function LandingDetailCards() {
             flex-row 
             "
                 layout initial={{ borderRadius: 25 }}>
-                {items.map(item => (
-                    <Item key={item} />
+                {cardDataDetails.map(item => (
+                    <Item key={item.id}
+                        title={item.title}
+                        icon={item.icon}
+                        id={item.id}
+                        cardDescriptions={item.cardDescriptions}
+
+                    />
                 ))}
             </motion.ul>
         </AnimateSharedLayout>
     );
 }
 
-function Item() {
+function Item(
+    {
+        title,
+        icon,
+        id,
+        cardDescriptions
+
+    }: CardProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
     return (
         <motion.li
-            className="w-25 h-75 p-3   mx-3
-        d-flex justify-content-start align-items-center
-        "
+            className="w-25 h-75 p-3   mx-3 d-flex justify-content-center align-items-center"
             layout onClick={toggleOpen} initial={{ borderRadius: 10 }}>
             {/* <motion.div className="circleShimmer" layout > */}
-            {!isOpen && <p> some title</p>}
+            {!isOpen && <p
+                className="fs-5 fw-light text-center  text-light"
+            >  {title}  </p>}
             {/* </motion.div> */}
-            <AnimatePresence>{isOpen && <Content />}</AnimatePresence>
+            <AnimatePresence>{isOpen && <Content
+                title={title}
+                icon={icon}
+                id={id}
+                cardDescriptions={cardDescriptions}
+            />}</AnimatePresence>
         </motion.li>
     );
 }
 
-function Content() {
+function Content(
+    {
+        title,
+        icon,
+        id,
+        cardDescriptions
+    }: CardProps) {
     return (
         <motion.div
             layout
@@ -65,9 +95,21 @@ function Content() {
             exit={{ opacity: 0 }}
         >
             <div>
-                this is content
-                <p>hello</p>
-                and another ocntent
+                {cardDescriptions?.map((item: any) => (
+                    <div key={item.id} className=" flex-column" >
+
+                        {/* <p className=" fw-bolder text-center  text-light">  {title}  </p> */}
+                        <div className="d-flex justify-content-start  align-items-center"  >
+                            {/* <div className='' > {item.icon} </div> */}
+                            <div className='d-flex justify-content-center align-items-center' >
+                                <p className=' fw-lighter text-center  text-light'>
+                                    - {item.description}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                ))}
             </div>
         </motion.div>
     );
