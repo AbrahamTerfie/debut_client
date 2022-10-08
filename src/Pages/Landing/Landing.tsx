@@ -7,22 +7,20 @@ import { FaHandsHelping, FaHandPointUp, FaHandHoldingHeart } from 'react-icons/f
 import { VscDebugStart } from 'react-icons/vsc'
 import { Link } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'
-import LandingScroll from '../../animations/Framer/LandingScroll'
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
 import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
+import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccordion'
+
+
 const iconProperties = {
     size: 40,
     color: 'white'
 
 }
 
-
 export default function Landing() {
 
-
-
-    const [selectedId, setSelectedId] = useState(null)
     return (
         <Container fluid className="p-4" >
             <Parallax pages={2} style={{ top: '0', left: '0', }}>
@@ -38,11 +36,12 @@ export default function Landing() {
                     <p className='text-muted m-0' > to learn more </p>
                 </ParallaxLayer>
                 <ParallaxLayer
-                    offset={0.8}
+                    offset={0.5}
                     speed={0.5}
                     style={{
                         backgroundColor: '#1985a1',
                         color: 'lightblue',
+                        height: "max-content",
                     }}>
                     <Row className='d-flex justify-content-center align-items-center pt-5'>
                         <Col md={5} className="shadow-sm  p-5 rounded mx-2 border border-light" >
@@ -91,29 +90,23 @@ export default function Landing() {
                                     {...iconProperties} />} />
                         </div>
                     </Row>
-
-                    <Row className='d-flex justify-content-center align-items-center pt-5'>
-                        <p
-                            className='fs-6 fw-lighter text-center text-light '
-                        >
+                    <Row>
+                        <p className='fs-4 fw-lighter text-center text-light '>
                             mobilize your cimmunity to help with the launch of your idea
                         </p>
-
-
-
                         <LandingDetailCards />
                     </Row>
-                   
+
 
                 </ParallaxLayer>
 
                 <ParallaxLayer
                     offset={1}
-                    speed={1.6}
+                    speed={2}
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignItems: 'start',
                         color: 'lightblue',
                         backgroundImage: `url(${waveSvg})`,
                         backgroundSize: 'cover',
@@ -121,33 +114,36 @@ export default function Landing() {
                         backgroundRepeat: 'no-repeat',
                         backgroundBlendMode: 'multiply',
                     }}>
-                    <div className='landing-container' >
-                        <LandingCard
-                            title='ask for help'
-                            icon={<FaHandsHelping
-                                color="white"
-                            />} />
-                        <LandingCard
-                            title='frictionless help'
-                            icon={<FaHandPointUp size={iconProperties.size}
-                                color={iconProperties.color} />} />
-                        <LandingCard
-                            title='follow up with gratitude'
-                            icon={<FaHandHoldingHeart size={iconProperties.size}
-                                color={iconProperties.color} />} />
-                    </div>
 
-                    <p>Scroll up</p>
+                    <Row>
+
+                        <Col md={6} >
+                            <p className='fs-2 px-5 fw-light text-center  '>
+                                our soluton for goal managemnt
+                            </p>
+
+                            <div>
+                                <LandingAccordion />
+                            </div>
+
+
+                        </Col>
+                        <Col md={6} >
+                            <p className='fs-4 fw-lighter text-center text-dark '>
+                                Debut is a digital platform aimed at helping founders mobilize
+                                their village (family, friends and extended network) to help launch their startup or project.
+                            </p>
+                        </Col>
+                    </Row>
+
+
+                    <p className=' p-3 fw-lighter  text-light fixed-bottom text-center' >
+                        @ debut 2022
+                    </p>
+
                 </ParallaxLayer>
 
-
-
-
             </Parallax>
-
-
-
-
         </Container>
     )
 }

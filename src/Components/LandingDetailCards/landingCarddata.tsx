@@ -50,7 +50,7 @@ export const cardDataDetails = [
     },
     {
         id: 3,
-        title: "introduction",
+        title: "introduction to ",
         icon: {
             name: "MdLiveHelp",
             color: "green",
