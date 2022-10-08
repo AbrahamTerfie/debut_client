@@ -102,8 +102,6 @@ export default function Landing() {
                         </p>
                         <LandingDetailCards />
                     </Row>
-
-
                 </ParallaxLayer>
                 <ParallaxLayer
                     offset={1.3}
@@ -113,13 +111,9 @@ export default function Landing() {
                         backgroundColor: '#1985a1',
                         color: 'lightblue',
                         backgroundSize: 'cover',
-                        height:"100vh"
-                        // height: "max-content",
+                        height: "100vh"
                     }}>
-
-                    <p
-                        className='fs-1 text-center text-light fw-lighter my-5 py-5'
-                    >
+                    <p className='fs-1 text-center text-light fw-lighter my-5 py-5'>
                         our solutoin for mobilizing your village
                     </p>
                     <Row  >
@@ -127,13 +121,11 @@ export default function Landing() {
                         d-flex justify-content-evenly flex-wrap flex-row
                          align-items-center mt-3 pt-3 my-5 py-5
                         " >
-
                             <LandingCard2
                                 number={1}
                                 title='set start up goals '
                                 text="define your professional goal with guidance from our AI system.                                "
                             />
-
                             <LandingCard2
                                 number={2}
                                 title='set timeline '
@@ -144,14 +136,12 @@ export default function Landing() {
                                 title='small commitments'
                                 text="Debut breaks the goal to incremental “small offers"
                             />
-
                         </div>
                     </Row>
                     <Row  >
                         <div className="
                         d-flex justify-content-evenly flex-wrap flex-row
-                         align-items-center my-3
-                        " >
+                         align-items-center my-3" >
 
                             <LandingCard3
                                 number={3.1}
@@ -164,7 +154,6 @@ export default function Landing() {
                                 title='follow up and reward'
                                 text="Consistently follow up and reward your community with gratitude, shares, and other creative ways. "
                             />
-
                             <LandingCard3
                                 number={3.3}
                                 title='rrevise targets'
@@ -173,10 +162,6 @@ export default function Landing() {
                         </div>
                     </Row>
                 </ParallaxLayer>
-
-
-
-
 
                 <ParallaxLayer
                     offset={1.9}
@@ -188,28 +173,15 @@ export default function Landing() {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'start',
-
-
                         backgroundImage: `url(${waveSvg})`,
                         backgroundSize: 'cover',
                         height: "160vh",
-
-                        // place it at the ned of th epage 
-
                     }}>
-
-
-
                     <Row>
-
                         <Col md={6} >
                             <h1 className=' px-5 fw-light text-center  '>
                                 our soluton for goal managemnt
                             </h1>
-
-
-
-
                         </Col>
                         <Col md={6} >
                             <div className='px-5' >
@@ -217,12 +189,9 @@ export default function Landing() {
                             </div>
                         </Col>
                     </Row>
-
-
                     <p className=' pb-5  mb-5 fw-lighter  text-light fixed-bottom text-center' >
                         @ debut 2022
                     </p>
-
                 </ParallaxLayer>
 
             </Parallax>
