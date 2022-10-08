@@ -12,6 +12,7 @@ import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
 import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccordion'
 import blobs from '../../Svg/blobs.svg'
+import { LandingCard2, LandingCard3 } from '../../Components/LandingCard2/LandingCard2'
 
 const iconProperties = {
     size: 40,
@@ -23,7 +24,7 @@ export default function Landing() {
 
     return (
         <Container fluid className="p-4" >
-            <Parallax pages={2} style={{
+            <Parallax pages={3} style={{
                 top: '0', left: '0',
 
             }}>
@@ -45,7 +46,9 @@ export default function Landing() {
                         backgroundColor: '#1985a1',
                         color: 'lightblue',
                         height: "max-content",
-                    }}>
+                    }}
+                    className="mb-5"
+                >
                     <Row className='d-flex justify-content-center align-items-center pt-5'>
                         <Col md={5} className="shadow-sm  p-5 rounded mx-2 border border-light" >
                             <p
@@ -103,19 +106,71 @@ export default function Landing() {
 
                 </ParallaxLayer>
                 <ParallaxLayer
-                    offset={1}
-                    speed={0.5}
-                    factor={0.75}
+                    offset={1.3}
+                    speed={1}
+                    factor={1.5}
                     style={{
-                        backgroundColor: 'gray',
+                        backgroundColor: '#1985a1',
                         color: 'lightblue',
                         backgroundSize: 'cover',
-                        height: "max-content",
+                        height:"100vh"
+                        // height: "max-content",
                     }}>
-                    <Row>
-                        and some other text
-                        <LandingAccordion />
 
+                    <p
+                        className='fs-1 text-center text-light fw-lighter my-5 py-5'
+                    >
+                        our solutoin for mobilizing your village
+                    </p>
+                    <Row  >
+                        <div className="
+                        d-flex justify-content-evenly flex-wrap flex-row
+                         align-items-center mt-3 pt-3 my-5 py-5
+                        " >
+
+                            <LandingCard2
+                                number={1}
+                                title='set start up goals '
+                                text="define your professional goal with guidance from our AI system.                                "
+                            />
+
+                            <LandingCard2
+                                number={2}
+                                title='set timeline '
+                                text="define timeline of your goals "
+                            />
+                            <LandingCard2
+                                number={3}
+                                title='small commitments'
+                                text="Debut breaks the goal to incremental “small offers"
+                            />
+
+                        </div>
+                    </Row>
+                    <Row  >
+                        <div className="
+                        d-flex justify-content-evenly flex-wrap flex-row
+                         align-items-center my-3
+                        " >
+
+                            <LandingCard3
+                                number={3.1}
+                                title="recomendations"
+                                text="Debut will make bespoke recommendations to utilize your community and remove the friction in: asking for help, getting help and giving gratitude. "
+                            />
+
+                            <LandingCard3
+                                number={3.2}
+                                title='follow up and reward'
+                                text="Consistently follow up and reward your community with gratitude, shares, and other creative ways. "
+                            />
+
+                            <LandingCard3
+                                number={3.3}
+                                title='rrevise targets'
+                                text="customize the plan"
+                            />
+                        </div>
                     </Row>
                 </ParallaxLayer>
 
@@ -124,23 +179,23 @@ export default function Landing() {
 
 
                 <ParallaxLayer
-                    offset={1.1}
-                    speed={2}
-                    // factor={0.75}
+                    offset={1.9}
+                    speed={0.5}
+                    factor={1.4}
 
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'start',
-                        // color: 'lightblue',
+
+
                         backgroundImage: `url(${waveSvg})`,
                         backgroundSize: 'cover',
-                        // backgroundPosition: 'center',
+                        height: "160vh",
 
+                        // place it at the ned of th epage 
 
-                        // backgroundRepeat: 'no-repeat',
-                        // backgroundBlendMode: 'multiply',
                     }}>
 
 
