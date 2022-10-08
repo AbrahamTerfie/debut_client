@@ -11,7 +11,7 @@ import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
 import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
 import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccordion'
-
+import blobs from '../../Svg/blobs.svg'
 
 const iconProperties = {
     size: 40,
@@ -23,7 +23,10 @@ export default function Landing() {
 
     return (
         <Container fluid className="p-4" >
-            <Parallax pages={2} style={{ top: '0', left: '0', }}>
+            <Parallax pages={2} style={{
+                top: '0', left: '0',
+
+            }}>
                 <ParallaxLayer
                     offset={0}
                     speed={1.5}
@@ -99,45 +102,69 @@ export default function Landing() {
 
 
                 </ParallaxLayer>
-
                 <ParallaxLayer
                     offset={1}
+                    speed={0.5}
+                    factor={0.75}
+                    style={{
+                        backgroundColor: 'gray',
+                        color: 'lightblue',
+                        backgroundSize: 'cover',
+                        height: "max-content",
+                    }}>
+                    <Row>
+                        and some other text
+                        <LandingAccordion />
+
+                    </Row>
+                </ParallaxLayer>
+
+
+
+
+
+                <ParallaxLayer
+                    offset={1.1}
                     speed={2}
+                    // factor={0.75}
+
                     style={{
                         display: 'flex',
+                        flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'start',
-                        color: 'lightblue',
+                        // color: 'lightblue',
                         backgroundImage: `url(${waveSvg})`,
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundBlendMode: 'multiply',
+                        // backgroundPosition: 'center',
+
+
+                        // backgroundRepeat: 'no-repeat',
+                        // backgroundBlendMode: 'multiply',
                     }}>
+
+
 
                     <Row>
 
                         <Col md={6} >
-                            <p className='fs-2 px-5 fw-light text-center  '>
+                            <h1 className=' px-5 fw-light text-center  '>
                                 our soluton for goal managemnt
-                            </p>
+                            </h1>
 
-                            <div>
-                                <LandingAccordion />
-                            </div>
+
 
 
                         </Col>
                         <Col md={6} >
-                            <p className='fs-4 fw-lighter text-center text-dark '>
-                                Debut is a digital platform aimed at helping founders mobilize
-                                their village (family, friends and extended network) to help launch their startup or project.
-                            </p>
+                            <div className='px-5' >
+                                <LandingAccordion />
+                            </div>
                         </Col>
                     </Row>
 
 
-                    <p className=' p-3 fw-lighter  text-light fixed-bottom text-center' >
+                    <p className=' pb-5  mb-5 fw-lighter  text-light fixed-bottom text-center' >
                         @ debut 2022
                     </p>
 
