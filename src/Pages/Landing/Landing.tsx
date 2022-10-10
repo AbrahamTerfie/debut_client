@@ -11,7 +11,6 @@ import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
 import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
 import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccordion'
-import blobs from '../../Svg/blobs.svg'
 import { LandingCard2, LandingCard3 } from '../../Components/LandingCard2/LandingCard2'
 
 const iconProperties = {
@@ -104,16 +103,16 @@ export default function Landing() {
                     </Row>
                 </ParallaxLayer>
                 <ParallaxLayer
-                    offset={1.3}
+                    offset={1}
                     speed={1}
-                    factor={1.5}
+                    // factor={1.5}
                     style={{
                         backgroundColor: '#1985a1',
                         color: 'lightblue',
                         backgroundSize: 'cover',
                         height: "100vh"
                     }}>
-                    <p className='fs-1 text-center text-light fw-lighter my-5 py-5'>
+                    <p className=' text-center text-light fw-lighter my-5 py-5'>
                         our solutoin for mobilizing your village
                     </p>
                     <Row  >
@@ -164,9 +163,9 @@ export default function Landing() {
                 </ParallaxLayer>
 
                 <ParallaxLayer
-                    offset={1.9}
+                    offset={1.5}
                     speed={0.5}
-                    factor={1.4}
+                    factor={2}
 
                     style={{
                         display: 'flex',
@@ -179,7 +178,7 @@ export default function Landing() {
                     }}>
                     <Row>
                         <Col md={6} >
-                            <h1 className=' px-5 fw-light text-center  '>
+                            <h1 className=' fs-0 px-5 fw-bold text-center  '>
                                 our soluton for goal managemnt
                             </h1>
                         </Col>
