@@ -36,12 +36,7 @@ const Accordion = ({ i, expanded, setExpanded,
     i: number, expanded: any, setExpanded: any,
     title: string, titleDescription: string, descriprion: string
 }) => {
-
-
     const isOpen = i === expanded;
-
-    // By using `AnimatePresence` to mount and unmount the contents, we can animate
-    // them in and out while also only rendering the contents of open accordions
     return (
         <>
             <motion.header
@@ -51,11 +46,10 @@ const Accordion = ({ i, expanded, setExpanded,
                     color: isOpen ? "white" : "black",
                     height: "5em",
                     borderRadius: isOpen ? "1rem" : "0.5rem",
-
                 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="d-flex justify-content-center align-items-start px-5 flex-column shadow"
+                className="d-flex justify-content-center align-items-start px-5 flex-column shado w-100"
                 onClick={() => setExpanded(isOpen ? false : i)}>
                 <p className="fs-3 fw-bold text-center  text-light m-0 mx-3">
                     {isOpen ? "👇" : "👉"}  {"   "}  {title}
@@ -69,7 +63,7 @@ const Accordion = ({ i, expanded, setExpanded,
                 {isOpen && (
 
                     <motion.section
-                transition={{ type: "spring", stiffness: 400, damping: 70, }}
+                        transition={{ type: "spring", stiffness: 400, damping: 70, }}
 
                         key="content"
                         initial="collapsed"
@@ -78,13 +72,10 @@ const Accordion = ({ i, expanded, setExpanded,
                         variants={{
                             open: { opacity: 1, height: "auto" },
                             collapsed: { opacity: 0, height: 0 }
-                        }}
-                        // transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
-                    >
+                        }}>
 
-                        <p
-                            style={{ color: "#1985a1" }}
-                            className="  fs-5 px-4" >
+                        <p style={{ color: "#1985a1" }}
+                            className="d-flex justify-content-center align-items-start px-5 flex-column shado w-100">
                             {descriprion}
                         </p>
                     </motion.section>

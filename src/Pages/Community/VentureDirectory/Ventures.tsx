@@ -18,7 +18,7 @@ export default function Ventures() {
 
             {/* <FilterVenture /> */}
 
-
+            <p className='fs-2 fw-lighter mx-5 px-5 '>  discover ventures</p>
             <SearchComponent />
 
             {data && data.getdebutCompanies.map((item: any) => {

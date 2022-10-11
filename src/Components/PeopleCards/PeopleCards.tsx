@@ -11,11 +11,16 @@ export default function PeopleCards({ people }: any) {
     function updatePeopleDirectoryState(newname: string) {
         dispatch(setActivePersonId(newname))
     }
+
+
+    console.log('people', people)
+    console.log('activePersonId', activePersonId)
+
     return (
-        <Row 
-        className={activePersonId === people.userName ?
-            'shadow-sm  border-info rounded-4 p-3 mx-2 my-2 MyeventCard '
-            : 'shadow  border-info rounded-4 p-3 mx-2 my-2 MyeventCard'}
+        <Row
+            className={activePersonId === people._id ?
+                '  shadow  border-info rounded-4 p-3 mx-2 my-2 MyeventCard '
+                : '  shadow-sm  border-info  rounded-4 p-3 mx-2 my-2 MyeventCard'}
             onClick={() => updatePeopleDirectoryState(people._id)}>
             <Col md={2}  >
                 <img

@@ -25,10 +25,7 @@ function App() {
           <Route path={appRoutes.authentication} element={<Authentication />} />
         </Routes>
         :
-        <div
-          // style={{ backgroundColor: '#f2f2f2' }}
-
-        >
+        <div>
           <NavBarComponent />
           <Routes>
             <Route path={appRoutes.profile} element={<Profile />} />

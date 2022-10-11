@@ -177,12 +177,12 @@ export default function Landing() {
                         height: "160vh",
                     }}>
                     <Row>
-                        <Col md={6} >
+                        <Col md={4} >
                             <h1 className=' fs-0 px-5 fw-bold text-center  '>
                                 our soluton for goal managemnt
                             </h1>
                         </Col>
-                        <Col md={6} >
+                        <Col md={8} >
                             <div className='px-5' >
                                 <LandingAccordion />
                             </div>
