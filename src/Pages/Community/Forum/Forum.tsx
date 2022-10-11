@@ -109,9 +109,7 @@ export default function Forum() {
                     <NewForumPost />
                 </OffcanvasBody>
             </Offcanvas>
-
             <Col className=' mt-4 m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
-
                 <h4> Fellow Forum </h4>
                 <p>
                     A place to discuss and share
@@ -137,7 +135,6 @@ export default function Forum() {
                     <div className='channels w-100' >
                         <p role="button" color='light'
                             className={`w-100 py-2  my-2 MyeventCard ${channelFilter === channelNames.general ? 'shadow-sm border-bottom border-5  border-info  p-2' : ''}`}
-
                             onClick={() => setChannelFilter(channelNames.general)}  >
                             <IoChatbubblesOutline size={15}
                                 style={{ backgroundColor: 'transparent', }}
@@ -158,7 +155,7 @@ export default function Forum() {
                             <FaRegHandshake size={15}
                                 style={{ backgroundColor: 'transparent', }}
                                 className='mx-2' />
-                            Community 
+                            Community
                         </p>
                         <span role="button" color='light' className='py-2 w-100 text-muted px-5  my-2  MyeventCard'
                             onClick={() => setChannelFilter('')} >
@@ -171,12 +168,10 @@ export default function Forum() {
             <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
                 <Row className='searchInput mb-1 mt-4' >
                     <p className='fw-bolder fs-3'> Fellow Forum </p>
-
                     <SearchComponent />
                 </Row>
                 <Row className='m-3'>
                     {data.getForumPosts.map((post: any) => {
-
                         if (channelFilter === '') {
                             return (
                                 <ForumCards
@@ -191,10 +186,8 @@ export default function Forum() {
                             )
                         }
                         if (channelFilter === post.channel) {
-                            // display only the posts that match the channel filter
                             return (
                                 <ForumCards
-
                                     key={post._id}
                                     _id={post._id}
                                     channel={post.channel}
@@ -205,8 +198,6 @@ export default function Forum() {
                                 />
                             )
                         }
-
-
                     })}
                 </Row>
             </Col>

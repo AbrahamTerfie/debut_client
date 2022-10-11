@@ -12,7 +12,7 @@ export default function ForumCards(
         _id: String,
         createdBy: {
             _id: String,
-            firstName: String, 
+            firstName: String,
             email: String,
         },
         channel: String,
@@ -76,34 +76,35 @@ export default function ForumCards(
                 scrollable={true}
             >
                 <OffcanvasHeader toggle={toggle}>
-                    <p className='fs-3 m-3 px-5 fw-light' > {postTitle} </p>
-                    <span className='fs-6 m-3 px-5 fw-light text-muted' >
-                        channel - #{channel}
-                    </span>
+                    <span className="text-start fw-light m-0 fs-6 text-muted">title</span>
+                    <p className='fs-2  fw-light m-0  ' > {postTitle} </p>
+                    <br />
+                    <p className='fs-6  px-2 fw-light text-muted' >
+                        channel - <span className='fw-bold' >#{channel}</span>
+                    </p>
                 </OffcanvasHeader>
                 <OffcanvasBody >
-                    <p className='fs-4 mb-3 px-5 fw-light '
-                        style={{
-                            paddingBottom: '40px',
-                            borderBottom: '1px solid #ccc',
-                        }}> {postContent} </p>
-                    <Label className='m-5 mb-2' >discussion </Label>
-                    <FormGroup className='mx-5 ' size='xs' >
-                        <Input
+                    <p className='fs-4  px-5 fw-light border border-1 border-light shadow-sm p-3 mb-5 bg-body rounded'
+
+
+                    > {postContent} </p>
+                    <Label className=' mb-2' >discussion </Label>
+                    <FormGroup className='mx-2 ' size='xs' >
+                        <input
                             height={12}
                             type="text" name="comment" id="comment" placeholder=" comment on post "
-                            className='form-control input-sm mb-2'
+                            className='form-control input-md mb-2'
                             onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
-                        />
+                        ></input>
                     </FormGroup>
-                    <Button className='btn-sm  m-2 mx-5' color='light' outline size='xs'
+                    <Button className=' border-success  m-2  px-5 py-2 shadow-sm MyeventCard   ' color='light ' outline 
                         onClick={() => PostCommentHandler(newComment)}>
-                        comment
+                        <p className='m-0' >post </p>
                     </Button>
                     <div>
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-                                <div key={comment.id} className='shadow-sm  comment pb-3 rounded' >
+                                <div key={comment.id} className='shadow-sm MyeventCard  pb-3 rounded' >
                                     <p className='fs-6 m-3 px-5 pt-3 fw-light ' > {comment.comment}</p>
                                     <span className='fs-6 mx-5 px-3  fw-light text-muted text-end ' > by {comment.createdBy.firstName}  </span>
                                 </div>
