@@ -113,7 +113,7 @@ export default function ForumCards(
 
                 </OffcanvasBody>
             </Offcanvas>
-            <Row className=' forumCardParent shadow-sm rounded p-3 m-2 ' onClick={() => toggle()}>
+            <Row className=' forumCardParent  shadow-sm rounded p-3 m-2  my-3' onClick={() => toggle()}>
                 <p className='fw-light fs-5 m-1 ' > {postTitle} </p>
                 <p className=' fw-lighter text-muted m-0' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
                 <p className='fw-light m-0' > {postContent} </p>

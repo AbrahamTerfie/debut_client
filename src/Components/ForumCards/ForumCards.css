@@ -12,7 +12,7 @@
 }
 
 .forumCardParent:hover {
-    border-bottom: 0.5px solid #1985a1;
+    border-bottom: 5px solid #1985a1;
     transform: scale(1.01);
     transition: all 0.2s ease-in-out;
 
