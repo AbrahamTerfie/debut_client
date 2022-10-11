@@ -25,7 +25,7 @@ export default function NavBarComponent() {
     return (
         <>
             <Navbar
-                className='px-5 mx-md-0  shadow-lg '
+                className='px-5 mx-md-0  shadow-lg  bg-light'
                 dark
                 expand="xl"
                 fixed="top"

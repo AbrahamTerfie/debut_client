@@ -7,9 +7,11 @@
 
 
 *  {
-  /* background-color: #e1e1e1; */
+  /* background-color: #f2f2f2; */
   margin: 0px;
   padding: 0px;
+  color: #1985a1;
+
 }
 
 /* inpit feilds properties  */
@@ -60,7 +62,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {

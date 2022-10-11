@@ -19,7 +19,7 @@ const spring = {
 export default function LandingDetailCards() {
     return (
         <AnimateSharedLayout>
-            <motion.ul className="d-flex justify-content-center align-items-center  flex-wrap flex-row "
+            <motion.div className="d-flex justify-content-center LandingDetailCards  align-items-center  flex-wrap flex-row "
                 layout initial={{ borderRadius: 25 }}>
                 {cardDataDetails.map(item => (
                     <Item key={item.id}
@@ -29,7 +29,7 @@ export default function LandingDetailCards() {
                         cardDescriptions={item.cardDescriptions}
                     />
                 ))}
-            </motion.ul>
+            </motion.div>
         </AnimateSharedLayout>
     );
 }
@@ -42,13 +42,13 @@ function Item(
         cardDescriptions
 
     }: CardProps) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
     return (
-        <motion.li
-            className="w-10 p-3   mx-3 "
+        <motion.div 
+            className="w-10 p-3  itemList  mx-3 "
             layout
             onClick={toggleOpen}
             initial={{ borderRadius: 10 }}
@@ -65,7 +65,7 @@ function Item(
                 id={id}
                 cardDescriptions={cardDescriptions}
             />}</AnimatePresence>
-        </motion.li>
+        </motion.div>
     );
 }
 

@@ -30,7 +30,7 @@ export default function Landing() {
                 <ParallaxLayer
                     offset={0}
                     speed={1.5}
-                    className='d-flex justify-content-start align-items-center
+                    className='d-flex justify-content-start align-items-center 
                         flex-column p-3 mx-2 my-5'>
                     <Row className='headerText'  >
                         <p>Debut</p>

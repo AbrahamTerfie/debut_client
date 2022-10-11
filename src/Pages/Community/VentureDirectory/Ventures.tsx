@@ -14,11 +14,11 @@ export default function Ventures() {
     if (data) console.log('venture data', data.getdebutCompanies)
 
     return (
-        <Row className=' d-flex page m-5'>
+        <Row className=' d-flex page m-5  '>
 
             {/* <FilterVenture /> */}
 
-            <p className='fw-bolder fs-3'>   </p>
+
             <SearchComponent />
 
             {data && data.getdebutCompanies.map((item: any) => {

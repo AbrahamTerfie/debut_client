@@ -25,7 +25,10 @@ function App() {
           <Route path={appRoutes.authentication} element={<Authentication />} />
         </Routes>
         :
-        <>
+        <div
+          // style={{ backgroundColor: '#f2f2f2' }}
+
+        >
           <NavBarComponent />
           <Routes>
             <Route path={appRoutes.profile} element={<Profile />} />
@@ -44,7 +47,7 @@ function App() {
             <Route path={appRoutes.myEvents} element={<MyEvents />} />
             <Route path={appRoutes.registry} element={<RegistryPage />} />
           </Routes>
-        </>
+        </div>
       }
     </div>
   );
