@@ -1,9 +1,10 @@
 .MyeventCard{
-    transition: all 0.2s ease-in-out;
+    /* transition: all 0.2s ease-in-out; */
 }
 
 .MyeventCard:hover{
     transition: all 0.2s ease-in-out;
-    border-bottom: 5px solid #1985a1;
+    border-bottom: 3px solid #1985a1;
     transform: scale(1.01);
+
 }

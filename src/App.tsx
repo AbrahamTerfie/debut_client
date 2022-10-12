@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import "animate.css/animate.min.css";
-import { Authentication, Landing, DebutPages, Profile, MyDebutInfo } from './Pages/inedx';
+import { Authentication, Landing, DebutPages, Profile, MyDebutInfo, Dashboard } from './Pages/inedx';
 import { MyEvents } from './Pages/MyDebut/index';
 import { GiveGratitude, Forum, People, Ventures, VenturePage } from './Pages/Community/index';
 import RegistryPage from './Pages/RegistryPage/RegistryPage';
@@ -43,6 +43,7 @@ function App() {
             <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
             <Route path={appRoutes.myEvents} element={<MyEvents />} />
             <Route path={appRoutes.registry} element={<RegistryPage />} />
+            <Route path={appRoutes.dashboard} element={<Dashboard />} />
           </Routes>
         </div>
       }

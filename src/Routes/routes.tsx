@@ -20,6 +20,7 @@ export const appRoutes = {
     myEvents: '/myEvents',
     registry: '/myEvents/:id',
     myDebutInfo: '/myDebutInfo',
+    dashboard: '/dashboard',
 
 
 

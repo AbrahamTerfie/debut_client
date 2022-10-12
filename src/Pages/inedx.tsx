@@ -5,6 +5,7 @@ import * as DebutPages from './Debut/index';
 import * as MyDebutPages from './MyDebut/index';
 import Home from "./Home/Home";
 import MyDebutInfo from "./MyDebutInfo/MyDebutInfo";
+import Dashboard from "./DashBoard/Dashboard";
 export {
     Authentication,
     Landing,
@@ -12,6 +13,8 @@ export {
     DebutPages,
     MyDebutPages,
     Home,
-    MyDebutInfo
+    MyDebutInfo,
+    Dashboard
+
 }
 
