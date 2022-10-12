@@ -1,10 +1,21 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { Button } from 'reactstrap';
+import SideBar from './DashBoardSidebar/SideBar'
 export default function Dashboard() {
+    const [sidebarIsOpen, setSidebarOpen] = useState(true);
+    const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
     return (
-        <div
+        <div>
+            <div className=" wrapper">
+                <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
 
-            className='m-5 p-5' >
-            this is debit dash board </div>
+                {/* <Content toggleSidebar={toggleSidebar} sidebarIsOpen={sidebarIsOpen} /> */}
+            </div>
+            <Button
+            onClick={toggleSidebar}
+            >
+                Button
+            </Button>
+        </div>
     )
 }
