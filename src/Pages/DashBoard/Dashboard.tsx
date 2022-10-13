@@ -11,11 +11,11 @@ export default function Dashboard() {
     return (
         <div className="App ">
             <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
-            <Container fluid
-                className={classNames("content", { "is-open": sidebarIsOpen })}>
+            <div
+                className={classNames("content overflow-auto ", { "is-open": sidebarIsOpen })}>
                 <Topbar toggleSidebar={toggleSidebar} />
                 <Outlet />
-            </Container>
+            </div>
         </div>
 
 
