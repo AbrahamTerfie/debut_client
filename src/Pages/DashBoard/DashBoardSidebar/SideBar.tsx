@@ -14,7 +14,7 @@ export default function SideBar({ isOpen, toggle }: {
 }) {
 
     const navigate = useNavigate();
-    const textColor = { color: "#1985a1", cursor: "pointer" }
+    const textColor = { color: "#1985a1", cursor: "default" }
     return (
         <div className={classNames(" sidebar shadow   ", { "is-open": isOpen })}>
             <div className="sidebar-header">
@@ -24,7 +24,7 @@ export default function SideBar({ isOpen, toggle }: {
             </div>
             <div className="side-menu">
                 <Nav vertical className=" p-3">
-                    <p className="text-muted fs-4 my-4 mx-5"
+                    <p className="text-muted fs-4 mt-4 mb-1 mx-3"
                         onClick={() => navigate(appRoutes.dashboard)}>
                         dashboard
                     </p>
