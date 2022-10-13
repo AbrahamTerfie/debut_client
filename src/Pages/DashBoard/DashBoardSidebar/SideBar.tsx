@@ -25,6 +25,7 @@ export default function SideBar({ isOpen, toggle }: {
             <div className="side-menu">
                 <Nav vertical className=" p-3">
                     <p className="text-muted fs-4 mt-4 mb-1 mx-3"
+                        style={textColor}
                         onClick={() => navigate(appRoutes.dashboard)}>
                         dashboard
                     </p>
