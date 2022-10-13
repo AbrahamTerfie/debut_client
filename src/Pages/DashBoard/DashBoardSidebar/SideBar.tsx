@@ -1,18 +1,11 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faHome,
-    faBriefcase,
-    faPaperPlane,
-    faQuestion,
-    faImage,
-    faCopy,
-} from "@fortawesome/free-solid-svg-icons";
+import { MdOutlineEvent } from 'react-icons/md'
+import { FiTarget } from 'react-icons/fi'
+import { BsBuilding, BsPerson } from 'react-icons/bs'
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { appRoutes } from "../../../Routes/routes";
-import SubMenu from "./SubMenu";
 import "./styles.css"
 
 export default function SideBar({ isOpen, toggle }: {
@@ -20,41 +13,44 @@ export default function SideBar({ isOpen, toggle }: {
     toggle: any
 }) {
     return (
-        <div className={classNames("sidebar", { "is-open": isOpen })}>
+        <div className={classNames(" shadow mt-auto  ", { "is-open": isOpen })}
+            style={{ height: "100vh" }}
+        >
 
             <div className="sidebar-header">
                 <span color="info" onClick={toggle} style={{ color: "#fff" }}>
-                    &times;
                 </span>
 
             </div>
             <div className="side-menu">
-                <Nav vertical className="list-unstyled pb-3">
-                    <p>Dummy Heading</p>
+                <Nav vertical className=" p-3">
+                    <p className="text-muted fs-4 my-4 mx-5">
+                        dashboard
+                    </p>
                     {/* <SubMenu title="Home" icon={faHome} items={submenus[0]} /> */}
-                    <NavItem>
+                    <NavItem className="MyeventCard my-2" >
                         <NavLink tag={Link} to={appRoutes.dashboard}>
-                            <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
-                            About
+                            <MdOutlineEvent className="mx-2" />
+                            events
                         </NavLink>
                     </NavItem>
                     {/* <SubMenu title="Pages" icon={faCopy} items={submenus[1]} /> */}
-                    <NavItem>
+                    <NavItem className="MyeventCard" >
                         <NavLink tag={Link} to={appRoutes.dashboard}>
-                            <FontAwesomeIcon icon={faImage} className="mr-2" />
-                            Portfolio
+                            <FiTarget className="mx-2" />
+                            goals
                         </NavLink>
                     </NavItem>
-                    <NavItem>
+                    <NavItem className="MyeventCard">
                         <NavLink tag={Link} to={appRoutes.dashboard}>
-                            <FontAwesomeIcon icon={faQuestion} className="mr-2" />
-                            FAQ
+                            <BsBuilding className="mx-2" />
+                            your company
                         </NavLink>
                     </NavItem>
-                    <NavItem>
+                    <NavItem className="MyeventCard">
                         <NavLink tag={Link} to={appRoutes.dashboard}>
-                            <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
-                            Contact
+                            <BsPerson className="mx-2" />
+                            your profile
                         </NavLink>
                     </NavItem>
                 </Nav>
