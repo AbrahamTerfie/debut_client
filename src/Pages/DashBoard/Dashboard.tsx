@@ -12,7 +12,7 @@ export default function Dashboard() {
         <div className="d-flex   ">
             <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
             <div
-                className={classNames("content  Page  ", { "is-open   ": sidebarIsOpen })}
+                className={classNames("content  Page overflow-scroll ", { "is-open overflow-scroll  ": sidebarIsOpen })}
                 style={sidebarIsOpen ? { width: window.innerWidth * 0.8 } : { width: window.innerWidth }}
 
 

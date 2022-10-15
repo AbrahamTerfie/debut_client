@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
 import { motion } from "framer-motion";
-// plus icon 
+import classNames from "classnames";
 import { FaPlus } from 'react-icons/fa';
 export default function NewGoalMilestone() {
     return (
@@ -68,9 +68,13 @@ export default function NewGoalMilestone() {
                 </Col>
             </Row>
             <Row className='d-flex justify-content-center align-items-center' >
-                <motion.div whileHover={{ scale: 1.01 }}
+                <motion.div whileHover={{
+                    scale: 1.01
+                }}
+
                     transition={{ type: "spring", stiffness: 400, damping: 30 }} color="light"
-                    className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success rounded-pill   "
+
+                    className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success rounded-pill "
                     style={{ cursor: 'default' }}>
 
                     <p className=' text-light m-2 fs-5' > save milestone </p>
@@ -78,6 +82,6 @@ export default function NewGoalMilestone() {
 
             </Row>
 
-        </Form>
+        </Form >
     )
 }
