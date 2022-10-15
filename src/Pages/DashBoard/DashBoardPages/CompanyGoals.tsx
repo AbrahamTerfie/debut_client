@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 import GoalsAccordion from '../../../Components/DashBoard/GoalsAccordion/GoalsAccordion';
 import NewGoalForm from '../../../Components/DashBoard/NewGoalForm/NewGoalForm';
-
-
+import { BsTrash } from 'react-icons/bs'
+import { motion } from "framer-motion";
 
 export const accordionData = [
   {
@@ -48,22 +48,26 @@ export const accordionData = [
 function AccordionBody() {
   return (
     <Col md={5} className=" shadow-sm p-4 m-3  MyeventCard">
-      <p className='fw-bolder' >  this is a milestone tilte </p>
+      <div className='d-flex justify-content-between align-items-start my-2'>
+        <p className='fw-bolder' >  this is a milestone tilte </p>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}>
+          <BsTrash
+            className='text-danger  '
+            color='red'
+            size={20}
+          />
+        </motion.div>
+
+
+
+      </div>
       <p className='text-muted fw-light' > this is a milestone description Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis obcaecati debitis necessitatibus ratione reprehenderit assumenda quo ipsa dolor, blanditiis repellat perspiciatis impedit? Suscipit porro ut, explicabo dolorum cum adipisci qui.</p>
-      {/* pills  */}
+
       <p className='m-2'> need help with </p>
       <div className="d-flex justify-content-start flex-wrap ">
-
         <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-        <p className="text-muted mx-2"> some text </p>
-
       </div>
 
       {/* checkbox and a button to mark item completed  */}
@@ -76,8 +80,6 @@ function AccordionBody() {
         </div>
         <Button color="success" size="sm" outline className='px-4' > save </Button>
       </div>
-
-
     </Col>
   )
 }
@@ -91,8 +93,8 @@ export default function CompanyGolas(props: any) {
   const toggle = () => setModal(!modal);
 
   return (
-    <div>
-      <div className='d-flex justify-content-between align-items-center'>
+    <Row   className="page">
+      <div className='d-flex justify-content-between align-items-center page'>
         <div className='mx-5'>
           <p className=' fs-1 fw-light mt-4 mb-1 mx-3' > company goals </p>
           <p className='text-muted fs-6 mt-0 mb-2 mx-3'>  once  your complete  it will be marked as achivement </p>
@@ -125,7 +127,7 @@ export default function CompanyGolas(props: any) {
         <GoalsAccordion accordionData={accordionData}
         />
       </div>
-    </div>
+    </Row>
   );
 }
 

@@ -20,8 +20,10 @@ export default function TopBar({ toggleSidebar }: any) {
             color="light"
             light
             className="navbar shadow-sm p-3 mb-5 mt-0 bg-white rounded h-10  "
-            expand="lg"
-            style={{ width: "150vh" }}>
+            expand="xl"
+            md="12"
+            // style={{ width: "150vh" }}
+            >
             <Button color="info" onClick={toggleSidebar}>
                 <FontAwesomeIcon icon={faAlignLeft} />
             </Button>
