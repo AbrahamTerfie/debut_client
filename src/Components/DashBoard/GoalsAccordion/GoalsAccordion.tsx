@@ -51,7 +51,7 @@ export default function GoalsAccordion(
                                         create new milestone for this goal
                                     </p>
                                 </OffcanvasHeader>
-                                <OffcanvasBody>
+                                <OffcanvasBody className='p-5' >
                                     {/* new milestone form  */}
                                     <NewGoalMilestone />
                                 </OffcanvasBody>
