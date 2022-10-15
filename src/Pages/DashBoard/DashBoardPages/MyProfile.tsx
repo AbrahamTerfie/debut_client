@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
-import { setMyDebutTab } from '../../../Store/UI/sidebarController';
+// import { setMyDebutTab } from '../../../Store/UI/sidebarController';
 import { FETCH_USER_WITH_ID, UPDATE_DEBUT_USER_WITH_ID } from '../../../GraphQl/index'
 import { useMutation, useQuery } from '@apollo/client'
 import { personalInfoInitialState } from '../../MyDebutInfo/initSattes'
 import Loader from '../../../Components/Loader/Loader';
 import Axios from 'axios';
+import { motion } from 'framer-motion';
 
 export default function MyProfile() {
   const [imageSelected, setImageSelected] = useState("")
-  const dispatch = useDispatch();
-  const { userID, hasCompany, companyID } = useSelector((store: RootState) => store.identfiers)
+  // const dispatch = useDispatch();
+  const { userID } = useSelector((store: RootState) => store.identfiers)
   const { data, loading, error } = useQuery(FETCH_USER_WITH_ID, {
     variables: { getDebutUserWithIdId: userID }
   })
@@ -71,14 +72,12 @@ export default function MyProfile() {
 
   useEffect(() => {
     UploadImage()
-
   }, [imageSelected])
-
 
   const [updatePersonalInfo, updatePersonalInfoRes] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
     {
       update(cache, { data: { updateDebutUser } }) {
-        const { getDebutUserWithId }: any = cache.readQuery({
+        const { ...getDebutUserWithId }: any = cache.readQuery({
           query: FETCH_USER_WITH_ID,
           variables: { getDebutUserWithIdId: userID }
         })
@@ -94,24 +93,20 @@ export default function MyProfile() {
     const { name, value } = e.target;
     setPersonalInfoForm({ ...personalInfoForm, [name]: value })
   }
+
   const handleSubmit = (e: any) => {
-
-
+    e.preventDefault();
     updatePersonalInfo({
       variables: {
         userInput: personalInfoForm,
         updateDebutUserId: userID
       }
     })
-
-    // dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
-
   }
 
 
   if (loading || updatePersonalInfoRes.loading) return <div>   <Loader /> </div>
-  if (error || updatePersonalInfoRes.error) return <div>Error!</div>
-
+  if (error || updatePersonalInfoRes.error) console.log(error || updatePersonalInfoRes.error)
 
   return (
     <Form className='px-1' >
@@ -179,7 +174,7 @@ export default function MyProfile() {
                   onChange={handleChange} />
               </FormGroup>
             </Col>
-            
+
 
 
 
@@ -341,9 +336,6 @@ export default function MyProfile() {
               </FormGroup>
             </Col>
 
-
-
-
           </Row>
         </Col>
 
@@ -369,14 +361,14 @@ export default function MyProfile() {
 
 
 
-
-      <Row>
-
-        <Button className='my-4 py-2' outline color="success"
-          onClick={(e) => handleSubmit(e)}>
-          Save and continue
-        </Button>
-
+      <Row className='d-flex justify-content-center align-items-center mx-5 my-5'
+        onClick={(e) => handleSubmit(e)}>
+        <motion.div whileHover={{ scale: 1.01 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill  border border-success "
+          style={{ cursor: 'default' }}>
+          <p className=' text-success m-2 fs-5 fw-bold' > save  </p>
+        </motion.div>
       </Row>
     </Form>
   );
