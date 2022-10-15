@@ -1,3 +1,20 @@
+export const dummyState = {
+    firstName: "",
+    lastName: "",
+    preferredName: "",
+    pronouns: "",
+    titleAtCompany: "",
+    linkedinUrl: "",
+    twitterUrl: "",
+    instagramUrl: "",
+    facebookUrl: "",
+    mailingAddress: "",
+    profileImage: "",
+
+
+}
+
+
 export const personalInfoInitialState = {
     firstName: "",
     lastName: "",
@@ -10,6 +27,17 @@ export const personalInfoInitialState = {
     facebookUrl: "",
     mailingAddress: "",
     profileImage: "",
+
+
+
+    email: "",
+    mobilePhone: "",
+    officePhone: "",
+    preferedContactMethod: "",
+    hasAssistat: false,
+    assistantName: "",
+    assistantPhone: "",
+    assistantEmail: "",
     // ForumPost: [],
     // companiesFollowing: [],
     // companiesFollowed: [],

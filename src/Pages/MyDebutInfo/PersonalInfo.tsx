@@ -5,7 +5,7 @@ import { RootState } from '../../Store/RootReducer';
 import { setMyDebutTab } from '../../Store/UI/sidebarController';
 import { FETCH_USER_WITH_ID, UPDATE_DEBUT_USER_WITH_ID } from '../../GraphQl/index'
 import { useMutation, useQuery } from '@apollo/client'
-import { personalInfoInitialState } from './initSattes';
+import { dummyState } from './initSattes';
 import Loader from '../../Components/Loader/Loader';
 import Axios from 'axios';
 
@@ -16,7 +16,7 @@ export default function PersonalInfo() {
     const { data, loading, error } = useQuery(FETCH_USER_WITH_ID, {
         variables: { getDebutUserWithIdId: userID }
     })
-    const [personalInfoForm, setPersonalInfoForm] = useState(personalInfoInitialState)
+    const [personalInfoForm, setPersonalInfoForm] = useState(dummyState)
     console.log(data)
     useEffect(() => {
         if (data) {
@@ -96,7 +96,7 @@ export default function PersonalInfo() {
             }
         })
 
-        dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
+        dispatch(setMyDebutTab("2")) && setPersonalInfoForm(dummyState)
 
     }
 

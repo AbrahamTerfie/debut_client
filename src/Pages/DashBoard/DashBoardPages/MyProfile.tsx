@@ -32,6 +32,14 @@ export default function MyProfile() {
         facebookUrl: data.getDebutUserWithId.facebookUrl === null ? '' : data.getDebutUserWithId.facebookUrl,
         mailingAddress: data.getDebutUserWithId.mailingAddress === null ? '' : data.getDebutUserWithId.mailingAddress,
         profileImage: data.getDebutUserWithId.profileImage === null ? '' : data.getDebutUserWithId.profileImage,
+        email: data.getDebutUserWithId.email === null ? '' : data.getDebutUserWithId.email,
+        mobilePhone: data.getDebutUserWithId.mobilePhone === null ? '' : data.getDebutUserWithId.mobilePhone,
+        officePhone: data.getDebutUserWithId.officePhone === null ? '' : data.getDebutUserWithId.officePhone,
+        preferedContactMethod: data.getDebutUserWithId.preferedContactMethod === null ? '' : data.getDebutUserWithId.preferedContactMethod,
+        hasAssistat: data.getDebutUserWithId.hasAssistat === null ? true : data.getDebutUserWithId.hasAssistat,
+        assistantName: data.getDebutUserWithId.assistantName === null ? '' : data.getDebutUserWithId.assistantName,
+        assistantEmail: data.getDebutUserWithId.assistantEmail === null ? '' : data.getDebutUserWithId.assistantEmail,
+        assistantPhone: data.getDebutUserWithId.assistantPhone === null ? '' : data.getDebutUserWithId.assistantPhone,
         // ForumPost: data.getDebutUserWithId.ForumPost ? data.getDebutUserWithId.ForumPost : [],
         // companiesFollowed: data.getDebutUserWithId.companiesFollowed ? data.getDebutUserWithId.companiesFollowed : [],
         // companiesFollowing: data.getDebutUserWithId.companiesFollowing ? data.getDebutUserWithId.companiesFollowing : [],
@@ -96,7 +104,7 @@ export default function MyProfile() {
       }
     })
 
-    dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
+    // dispatch(setMyDebutTab("2")) && setPersonalInfoForm(personalInfoInitialState)
 
   }
 
@@ -160,7 +168,7 @@ export default function MyProfile() {
                   onChange={handleChange} />
               </FormGroup>
             </Col>
-            <Col md={6}>
+            <Col md={8}>
               <FormGroup>
                 <Label for="titleAtCompany"> title at your company </Label>
                 <Input type="text"
@@ -171,9 +179,7 @@ export default function MyProfile() {
                   onChange={handleChange} />
               </FormGroup>
             </Col>
-            <Col md={2} className='py-4' >
-              * current company *
-            </Col>
+            
 
 
 
@@ -235,12 +241,120 @@ export default function MyProfile() {
 
               </FormGroup>
             </Col>
+
+
+
+            <Col md={6}>
+              <FormGroup>
+                <Label for="email"> email </Label>
+                <Input type="email"
+                  name="firstName"
+                  id="FirstName"
+                  placeholder={personalInfoForm.email}
+                  value={personalInfoForm.email}
+                  onChange={() => { }}
+
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="mobilePhone "> mobile phone </Label>
+                <Input type="number"
+                  name="mobilePhone"
+                  id="mobilePhone"
+                  placeholder={personalInfoForm.mobilePhone}
+                  value={personalInfoForm.mobilePhone}
+                  onChange={handleChange}
+
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="officePhone "> office phone </Label>
+                <Input type="number"
+                  name="officePhone"
+                  id="officePhone"
+                  placeholder={personalInfoForm.officePhone}
+                  value={personalInfoForm.officePhone}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="preferedContactMethod"> prefred contact method</Label>
+                <Input type="select" name="preferedContactMethod" id="preferedContactMethod"
+                  value={personalInfoForm.preferedContactMethod}
+                  onChange={handleChange}
+
+                >
+                  <option value="email" > email  </option>
+                  <option value="mobile "  > phone  </option>
+                  <option value="office phone" > office phone  </option>
+
+                </Input>
+              </FormGroup>
+            </Col>
+
+
+            <p className='fs-6 fw-lighter text-muted mt-5' >
+              if you have an assistant and wish to be contacted through them , please enter their information below
+            </p>
+
+
+            <Col md={4}>
+              <FormGroup>
+                <Label for="assistantName ">  Assistant full name   </Label>
+                <Input type="text"
+                  name="assistantName"
+                  id="assistantName"
+                  placeholder={personalInfoForm.assistantName}
+                  value={personalInfoForm.assistantName}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="assistantEmail "> Assistant Email </Label>
+                <Input type="email"
+                  name="assistantEmail"
+                  id="assistantEmail"
+                  placeholder={personalInfoForm.assistantEmail}
+                  value={personalInfoForm.assistantEmail}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="assistantPhone "> Assistants phone number </Label>
+                <Input type="number"
+                  name="assistantPhone"
+                  id="assistantPhone"
+                  placeholder={personalInfoForm.assistantPhone}
+                  value={personalInfoForm.assistantPhone}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
+
+
+
+
           </Row>
         </Col>
 
-        <Col md={3} className="px-4  d-flex  flex-column justify-content-around align-items-center" >
-          <img src={personalInfoForm?.profileImage} className='img-fluid h-75 w-75 ' />
-          <FormGroup>
+        <Col md={3} className="px-4 mx-4 d-flex  flex-column justify-content-around align-items-center"
+          style={{
+            width: '20em',
+            height: '25em',
+          }}
+        >
+          <img src={personalInfoForm?.profileImage} className='img-fluid  my-5 ' />
+          <FormGroup className='my-3' >
             <Label for="companyProfilePhoto">  choose new phopto
             </Label>
             <Input onChange={(event: any) => {
@@ -250,6 +364,12 @@ export default function MyProfile() {
           </FormGroup>
         </Col>
       </Row>
+
+
+
+
+
+
       <Row>
 
         <Button className='my-4 py-2' outline color="success"
