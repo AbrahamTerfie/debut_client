@@ -135,9 +135,8 @@ export default function YourComapany() {
     console.log(updateMyCompanyRes.error)
   }
 
-  const handleCompanySubimt = () => {
-    //check if company is being created or updated 
-
+  const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (isCreatingAcompany) {
       imageSelected && handleFileSelected()
       createMyCompany({
@@ -206,8 +205,6 @@ export default function YourComapany() {
 
   return (
     <>
-
-
       <div className='m-5'>
         <p className=' fs-1 fw-light mt-4 mb-1 mx-3' > your company  </p>
         <p className='text-muted fs-6 mt-0 mb-2 mx-3'>
@@ -446,7 +443,7 @@ export default function YourComapany() {
 
 
           <Row className='d-flex justify-content-center align-items-center mx-5 my-5'
-            onClick={handleCompanySubimt}>
+            onClick={(e) => handleCompanySubimt}>
             <motion.div whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
               className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill  border border-success "
@@ -454,23 +451,7 @@ export default function YourComapany() {
               <p className=' text-success m-2 fs-5 fw-bold' > save  </p>
             </motion.div>
           </Row>
-
-          {/* <Row>
-            <Col md={3}>
-              <Button className='my-4 py-2 w-100 mx-2' outline color="warning"
-                onClick={() => { dispatch(setMyDebutTab('3')) }}>
-                previous
-              </Button>
-            </Col>
-            <Col md={9}>
-              <Button className='my-4 py-2 w-100' outline color="success"
-              >
-                Save
-              </Button>
-            </Col>
-          </Row> */}
         </Form>
-
       }
     </>
   );
