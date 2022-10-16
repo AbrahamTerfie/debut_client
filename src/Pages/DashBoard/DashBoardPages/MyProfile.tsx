@@ -9,7 +9,7 @@ import { personalInfoInitialState } from '../../MyDebutInfo/initSattes'
 import Loader from '../../../Components/Loader/Loader';
 import Axios from 'axios';
 import { motion } from 'framer-motion';
-
+import DashboardExperiance from "./DashboardExperiance"
 
 
 export default function MyProfile() {
@@ -358,20 +358,33 @@ export default function MyProfile() {
           </FormGroup>
         </Col>
       </Row>
-
-
-
-
-
-      <Row className='d-flex justify-content-center align-items-center mx-5 my-5'
+      <Row className='d-flex justify-content-center align-items-center mx-5 my-2'
         onClick={(e) => handleSubmit(e)}>
         <motion.div whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
           className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill  border border-success "
           style={{ cursor: 'default' }}>
-          <p className=' text-success m-2 fs-5 fw-bold' > save  </p>
+          <p className=' text-success m-2 fs-5 fw-bold' > save personal info   </p>
         </motion.div>
       </Row>
+
+      <Row>
+
+        <div className='m-5'>
+          <p className=' fs-1 fw-light mt-4 mb-1 mx-3' > professional Experiance </p>
+          <p className='text-muted fs-6 mt-0 mb-2 mx-3'>
+            identfy your personal and professional expertise
+          </p>
+        </div>
+      </Row>
+
+
+
+      <Row>
+        <DashboardExperiance />
+      </Row>
+
+
     </Form>
   );
 }
