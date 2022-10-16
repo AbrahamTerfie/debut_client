@@ -365,7 +365,7 @@ export default function MyProfile() {
 
       <Row className='d-flex justify-content-center align-items-center mx-5 my-5'
         onClick={(e) => handleSubmit(e)}>
-        <motion.div whileHover={{ scale: 1.01 }}
+        <motion.div whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
           className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill  border border-success "
           style={{ cursor: 'default' }}>
