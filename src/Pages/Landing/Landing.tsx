@@ -22,9 +22,9 @@ const iconProperties = {
 export default function Landing() {
 
     return (
-        <Container fluid className="p-4" >
-            <Parallax pages={3} style={{
-                top: '0', left: '0',
+        <Container fluid className="" >
+            <Parallax pages={2.5} style={{
+                top: '0', left: '0', bottom: '0', right: '0', position: 'absolute',
 
             }}>
                 <ParallaxLayer
@@ -110,7 +110,7 @@ export default function Landing() {
                         backgroundColor: '#1985a1',
                         color: 'lightblue',
                         backgroundSize: 'cover',
-                        height: "100vh"
+                        // height: "100vh"
                     }}>
                     <p className=' text-center text-light fw-lighter my-5 py-5'>
                         our solutoin for mobilizing your village
@@ -163,7 +163,7 @@ export default function Landing() {
                 </ParallaxLayer>
 
                 <ParallaxLayer
-                    offset={1.5}
+                    offset={1.2}
                     speed={0.5}
                     factor={2}
 
@@ -171,22 +171,26 @@ export default function Landing() {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        alignItems: 'start',
+                        alignItems: 'center',
                         backgroundImage: `url(${waveSvg})`,
+                        // position image at bottom
+                        backgroundPosition: 'bottom',
                         backgroundSize: 'cover',
-                        height: "160vh",
+                        backgroundRepeat: 'no-repeat',
+                        // height: "100vh"
                     }}>
-                    <Row>
-                        <Col md={4} >
-                            <h1 className=' fs-0 px-5 fw-bold text-center  '>
-                                our soluton for goal managemnt
-                            </h1>
+                    <Row className='d-flex justify-content-center   align-items-center  px-5 ' >
+
+
+                        <Col md={6} >
+                            <h1 className='  px-5 fw-bold   '> our soluton for goal managemnt</h1>
                         </Col>
-                        <Col md={8} >
+                        <Col md={6} >
                             <div className='px-5' >
                                 <LandingAccordion />
                             </div>
                         </Col>
+
                     </Row>
                     <p className=' pb-5  mb-5 fw-lighter  text-light fixed-bottom text-center' >
                         @ debut 2022

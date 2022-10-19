@@ -6,6 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./styles.css";
 
 
+const textStyles: {} = {
+    color: "#1985a1",
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: "1rem 0",
+    margin: "0",
+    lineHeight: "1.5",
+    textTransform: "uppercase",
+    letterSpacing: "0.1rem",
+
+
+}
+
 const accordoindata = [
     {
         id: 1,
@@ -45,11 +59,12 @@ const Accordion = ({ i, expanded, setExpanded,
                     backgroundColor: isOpen ? "#1985a1" : "darkgray",
                     color: isOpen ? "white" : "black",
                     height: "5em",
-                    borderRadius: isOpen ? "1rem" : "0.5rem",
+                    borderRadius: isOpen ? "1.5rem" : "0.5rem",
                 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="d-flex justify-content-center align-items-start px-5 flex-column shado w-100"
+                style={textStyles}
+                className="d-flex justify-content-evenly align-items-start px-5 my-5 flex-column shadow w-100"
                 onClick={() => setExpanded(isOpen ? false : i)}>
                 <p className="fs-3 fw-bold text-center  text-light m-0 mx-3">
                     {isOpen ? "👇" : "👉"}  {"   "}  {title}
@@ -70,12 +85,16 @@ const Accordion = ({ i, expanded, setExpanded,
                         animate="open"
                         exit="collapsed"
                         variants={{
-                            open: { opacity: 1, height: "auto" },
+                            open: {
+                                opacity: 1, height: "auto",
+
+                            },
                             collapsed: { opacity: 0, height: 0 }
                         }}>
 
-                        <p style={{ color: "#1985a1" }}
-                            className="d-flex justify-content-center align-items-start px-5 flex-column shado w-100">
+                        <p style={textStyles} className="text-center">
+
+
                             {descriprion}
                         </p>
                     </motion.section>
@@ -91,7 +110,7 @@ export function LandingAccordion() {
     const [expanded, setExpanded] = useState<false | number>(0);
 
     return (
-        <>
+        <div>
             {accordoindata.map((item: any) => (
                 <Accordion i={item.id}
                     expanded={expanded}
@@ -103,9 +122,8 @@ export function LandingAccordion() {
                 />
             ))
             }
-        </>
+        </div>
 
     )
 };
 
-const accordionIds = [0, 1, 2, 3];
