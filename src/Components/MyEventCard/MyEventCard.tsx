@@ -6,7 +6,7 @@ import { appRoutes } from '../../Routes/routes'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
-import { CREATE_DEBUT_REGISTRY, EVENT_REGISTRIES, MY_DEBUT_EVENTS } from '../../GraphQl'
+import { CREATE_DEBUT_REGISTRY, EVENT_REGISTRIES } from '../../GraphQl'
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from '../Loader/Loader'
 
@@ -62,7 +62,7 @@ export default function MyEventCard(
     }
 
   )
-  console.log("createDebutRegistryRes", createDebutRegistryRes)
+  // console.log("createDebutRegistryRes", createDebutRegistryRes)
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()

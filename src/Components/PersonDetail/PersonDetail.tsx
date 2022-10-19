@@ -22,7 +22,7 @@ export default function PersonDetail() {
     if (loading) {
         <Loader />
     }
-    console.log(data)
+    // console.log(data)
     if (activePersonId === "") {
         return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > select user </p>
     }

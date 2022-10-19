@@ -1,9 +1,4 @@
 
-
-
-
-
-
 import React, { useState, useEffect } from 'react'
 import { Button, Col, FormGroup, Input, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Row } from 'reactstrap'
 import MyEventCard from '../../../Components/MyEventCard/MyEventCard'
@@ -34,7 +29,7 @@ function NewEvent() {
   const [canvas, setCanvas] = useState(false);
   const [imageSelected, setImageSelected] = useState("")
   const [newEventData, setNewEventData] = useState(initState)
-  const { userID, hasCompany, companyID } = useSelector((store: RootState) => store.identfiers)
+  const { userID } = useSelector((store: RootState) => store.identfiers)
   const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
     variables: { userId: userID }
   })
@@ -80,7 +75,7 @@ function NewEvent() {
   }
 
   const handleFileSelected = () => {
-    const formData = new FormData
+    const formData = new FormData()
     formData.append('file', imageSelected)
     // file is the file object
     // first one is the preset and the second one is name  for cloudnary api
@@ -99,6 +94,10 @@ function NewEvent() {
   }, [imageSelected])
 
   const toggle = () => setCanvas(!canvas);
+
+  if (loading || loadingCompany) return <Loader />
+  if (error || errorCompany) return <p>error</p>
+
   return (
     <>
       <motion.button
@@ -109,7 +108,7 @@ function NewEvent() {
         onClick={toggle}
         disabled={data?.checkIfUserHasCompany ? false : true}
       >
-        {data?.checkIfUserHasCompany == true ? <>
+        {data?.checkIfUserHasCompany === true ? <>
           <FaPlus className='mx-3' size={20} style={{ backgroundColor: 'transparent', }} />
           add new event
         </> :
@@ -217,7 +216,7 @@ function NewEvent() {
 }
 
 export default function CompanyEvents() {
-  const { userID, hasCompany, companyID } = useSelector((store: RootState) => store.identfiers)
+  const { userID } = useSelector((store: RootState) => store.identfiers)
 
   const { data, loading, error } = useQuery(MY_DEBUT_EVENTS, {
     variables: {

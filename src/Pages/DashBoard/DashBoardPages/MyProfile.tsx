@@ -56,7 +56,7 @@ export default function MyProfile() {
   console.log("profileee", personalInfoForm.profileImage)
   function UploadImage() {
 
-    const formData = new FormData
+    const formData = new FormData()
     formData.append('file', imageSelected)
     // file is the file object
     // first one is the preset and the second one is name  for cloudnary api
@@ -347,7 +347,8 @@ export default function MyProfile() {
             height: '25em',
           }}
         >
-          <img src={personalInfoForm?.profileImage} className='img-fluid  my-5 ' />
+          <img src={personalInfoForm?.profileImage} className='img-fluid  my-5 ' alt='personal profile ' />
+
           <FormGroup className='my-3' >
             <Label for="companyProfilePhoto">  choose new phopto
             </Label>

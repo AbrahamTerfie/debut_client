@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { MultiSelect } from "react-multi-select-component";
-import { optionOfGeography, optionsOfBusinessCategories, optionsOfAeraasOfImpact } from "../../MyDebutInfo/selectInputs";
+import { optionOfGeography, optionsOfAeraasOfImpact } from "../../MyDebutInfo/selectInputs";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
-import { setMyDebutTab } from '../../../Store/UI/sidebarController';
+// import { setMyDebutTab } from '../../../Store/UI/sidebarController';
 import { setCompanyID } from '../../../Store/identfiers/identfiers'
 import Axios from 'axios';
 import { useMutation, useQuery } from '@apollo/client'
@@ -106,7 +106,7 @@ export default function YourComapany() {
 
 
   const handleFileSelected = () => {
-    const formData = new FormData
+    const formData = new FormData();
     formData.append('file', imageSelected)
     // file is the file object
     // first one is the preset and the second one is name  for cloudnary api
@@ -190,10 +190,10 @@ export default function YourComapany() {
 
 
 
-  if (loading) {
+  if (loading || loadingCompany) {
     return <Loader />
   }
-  if (error) {
+  if (error || errorCompany) {
     console.log(error)
     // return <div> something went wrong  </div>
   }

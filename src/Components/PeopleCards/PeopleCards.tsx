@@ -13,8 +13,8 @@ export default function PeopleCards({ people }: any) {
     }
 
 
-    console.log('people', people)
-    console.log('activePersonId', activePersonId)
+    // console.log('people', people)
+    // console.log('activePersonId', activePersonId)
 
     return (
         <Row
