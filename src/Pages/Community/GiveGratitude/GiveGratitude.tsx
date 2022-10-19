@@ -70,6 +70,7 @@ export default function GiveGratitude() {
 
 
 
+
             </Col>
 
             <Col className='mainPageContainer ' xs='12' sm='12' md='12' lg='8' xl='8' >
