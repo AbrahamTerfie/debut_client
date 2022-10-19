@@ -48,26 +48,26 @@ export default function Landing() {
                     }}
                     className="mb-5"
                 >
-                    <Row className='d-flex justify-content-center align-items-center pt-5'>
-                        <Col md={5} className="shadow-sm  p-5 rounded mx-2 border border-light" >
+                    <Row className='d-flex justify-content-center align-items-center pt-5  '>
+                        <Col md={5} className="shadow-sm  p-4 rounded mx-2 border border-light" >
                             <p
-                                className='fs-6 fw-lighter text-start text-light '>
+                                className='fs-4 fw-lighter text-start text-light '>
                                 Debut is a digital platform aimed at helping founders mobilize
                                 their village (family, friends and extended network) to help launch their startup or project.
                                 Think “baby-shower for your startup”.
                             </p>
 
                         </Col>
-                        <Col md={5} className="shadow-sm  p-5 rounded  forumCardParent  border-light border-5 mx-2" >
+                        <Col md={5} className="shadow-lg p-5 rounded  forumCardParent   border-light border-5 mx-2" >
                             <Link to={appRoutes.authentication}>
-                                <div className=" p-4 d-flex justify-content-center align-items-center ">
+                                <div className=" d-flex justify-content-center align-items-center ">
                                     <VscDebugStart
                                         className='mx-3'
-                                        size={30}
+                                        size={100}
                                         color="#ffffff"
                                     />
                                     <div>
-                                        <p className='m-0 fs-3 text-light' >get started </p>
+                                        <p className='m-0 fs-1 text-light' >get started </p>
                                         <span className='text-light' >
                                             sign up or login
                                         </span>

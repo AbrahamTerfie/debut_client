@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
-import { GRATITUDE_TO_USER, CREATE_GRATITUDE, SENT_GRATITUDE } from '../../../GraphQl/index';
+import { GRATITUDE_TO_USER, CREATE_GRATITUDE, SENT_GRATITUDE } from '../../GraphQl/index';
 import { useQuery, useMutation } from '@apollo/client';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../Store/RootReducer';
+import { RootState } from '../../Store/RootReducer';
 const inputStyles = {
     width: '80%',
     margin: 'auto',

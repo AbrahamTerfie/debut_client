@@ -1,10 +1,11 @@
 import React from "react";
 import { MdOutlineEvent } from 'react-icons/md'
 import { FiTarget } from 'react-icons/fi'
+import { FaPrayingHands, FaRegHandSpock } from 'react-icons/fa'
 import { BsBuilding, BsPerson } from 'react-icons/bs'
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { appRoutes } from "../../../Routes/routes";
 import "./styles.css"
 
@@ -14,7 +15,9 @@ export default function SideBar({ isOpen, toggle }: {
 }) {
 
     const navigate = useNavigate();
-    const textColor = { color: "#1985a1", cursor: "default" }
+    const textColor = {
+        color: "#1985a1", cursor: "default",
+    }
     return (
         <div className={classNames(" sidebar shadow   ", { "is-open": isOpen })}>
             <div className="sidebar-header">
@@ -24,41 +27,54 @@ export default function SideBar({ isOpen, toggle }: {
             </div>
             <div className="side-menu">
                 <Nav vertical className=" p-3">
-                    <p className="text-muted fs-4 mt-4 mb-1 mx-3"
+                    <p className="text-muted fs-2 mt-4 mb-1 mx-2"
                         style={textColor}
                         onClick={() => navigate(appRoutes.dashboard)}>
-                        dashboard
+                        Dashboard
                     </p>
-                    <NavItem className="MyeventCard my-2" >
+                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
                         <NavLink
                             onClick={() => navigate(appRoutes.events)}
                             style={textColor}>
-                            <MdOutlineEvent className="mx-2" />
-                            events
+                            <MdOutlineEvent
+                                className="mx-2" />
+                            Events
                         </NavLink>
                     </NavItem>
-                    <NavItem className="MyeventCard" >
+                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
+
                         <NavLink
                             onClick={() => navigate(appRoutes.goals)}
                             style={textColor}>
                             <FiTarget className="mx-2" />
-                            goals
+                            Goals
                         </NavLink>
                     </NavItem>
-                    <NavItem className="MyeventCard">
+                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
+
+                        <NavLink
+                            onClick={() => navigate(appRoutes.gratitudes)}
+                            style={textColor}>
+                            <FaRegHandSpock className="mx-2" />
+                            Gratitudes
+                        </NavLink>
+                    </NavItem>
+                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
+
                         <NavLink
                             onClick={() => navigate(appRoutes.myCompany)}
                             style={textColor}>
                             <BsBuilding className="mx-2" />
-                            your company
+                            Your Company
                         </NavLink>
                     </NavItem>
-                    <NavItem className="MyeventCard">
+                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
+
                         <NavLink
                             onClick={() => navigate(appRoutes.myProfile)}
                             style={textColor}>
                             <BsPerson className="mx-2" />
-                            your profile
+                            Profile
                         </NavLink>
                     </NavItem>
                 </Nav>

@@ -9,7 +9,7 @@ import './GiveGratitude.scss'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { IoMdAdd } from 'react-icons/io'
 import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
-import NewGratitudeForm from './NewGratitudeForm';
+import NewGratitudeForm from '../../../Components/NewGratitudeForm/NewGratitudeForm';
 import Loader from '../../../Components/Loader/Loader';
 import { RECIVED_GRATITUDE, SENT_GRATITUDE } from '../../../GraphQl/index';
 import { useQuery } from '@apollo/client';

@@ -26,7 +26,7 @@ export default function GratitudeCards(
     }, [createdBy, sentTo, userID])
 
     return (
-        <Row className='  p-3 shadow-sm border border-light m-2'>
+        <Row className='  p-3 shadow-sm  m-2  MyeventCard '>
             <p className=' fw-light m-0'>
                 <small className='text-muted text-light' >
                     {isAdressedToMe ? 'From: ' : 'To: '}

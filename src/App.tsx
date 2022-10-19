@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import './App.css';
 import "animate.css/animate.min.css";
 import { Authentication, Landing, DebutPages, Profile, MyDebutInfo, Dashboard, DashBoardPages } from './Pages/inedx';
@@ -48,6 +47,7 @@ function App() {
               <Route path={appRoutes.myCompany} element={<DashBoardPages.MyCompany />} />
               <Route path={appRoutes.goals} element={<DashBoardPages.CompanyGoals />} />
               <Route path={appRoutes.events} element={<DashBoardPages.CompanyEvents />} />
+              <Route path={appRoutes.gratitudes} element={<DashBoardPages.GratitudePage />} />
             </Route>
           </Routes>
         </div>
