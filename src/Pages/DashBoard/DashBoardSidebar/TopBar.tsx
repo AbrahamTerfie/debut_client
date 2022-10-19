@@ -19,13 +19,14 @@ export default function TopBar({ toggleSidebar }: any) {
         <Navbar
             color="light"
             light
-            className="navbar shadow p-3 mb-5  bg-white rounded h-10  "
+            className="navbar shadow p-3 my-5  bg-white rounded h-10  "
             expand="xl"
             md="12"
             sticky="top"
-            // style={{ width: "150vh" }}
-            >
-            <Button color="info" onClick={toggleSidebar}>
+        // style={{ width: "150vh" }}
+        >
+            <Button color="success" outline onClick={toggleSidebar}  className="bg-success bg-opacity-25">
+
                 <FontAwesomeIcon icon={faAlignLeft} />
             </Button>
             <NavbarToggler onClick={toggleTopbar} />
