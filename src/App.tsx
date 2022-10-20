@@ -12,7 +12,7 @@ import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
 import NavBarComponent from './Components/NavBar/NavBar';
 import DebutEventPage from './Pages/DebutEvents/DebutEventPage';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { Toaster } from 'react-hot-toast';
 function App() {
   const { isAuthenticated } = useAuth0();
 

@@ -43,3 +43,9 @@ mutation createCompanyGoal($companyGoalInput: CompanyGoalInput) {
 }
 
 `
+
+export const DELETE_COMPANY_GOAL = gql`
+mutation deleteCompanyGoal($deleteCompanyGoalId: ID!) {
+  deleteCompanyGoal(id: $deleteCompanyGoalId)
+}
+`

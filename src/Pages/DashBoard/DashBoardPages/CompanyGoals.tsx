@@ -13,16 +13,18 @@ import { Toaster } from 'react-hot-toast';
 import { notifySuccess, notifyError, notifyLoading } from '../../../Components/Notification/Toast'
 
 
+
 export default function CompanyGolas(props: any) {
 
   const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
-  const [newGoal, setNewGoal] = useState({
+  const initState = {
     createdBy: userID,
     belongsTo: companyID,
     goalTitle: "",
     goalDescription: "",
 
-  })
+  }
+  const [newGoal, setNewGoal] = useState(initState)
   const inputHndler = (e: any) => {
     const { name, value } = e.target;
     setNewGoal({ ...newGoal, [name]: value })
@@ -59,7 +61,7 @@ export default function CompanyGolas(props: any) {
     if (loading || createCompanyGoalLoading) {
       return notifyLoading('Loading ...........')
     }
-
+    setNewGoal(initState)
   }
 
 
