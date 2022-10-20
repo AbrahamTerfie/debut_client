@@ -8,7 +8,7 @@ import './GoalsAccordion.css'
 import { motion } from "framer-motion";
 import NewGoalMilestone from '../NewGoalMilestone/NewGoalMilestone';
 import { BsThreeDotsVertical, BsTrash, BsPen } from 'react-icons/bs';
-import { DELETE_COMPANY_GOAL, FETCH_COMPANY_GOALS_WITH_COMPANY_ID } from '../../../GraphQl/Goals/goals';
+import { DELETE_COMPANY_GOAL, FETCH_COMPANY_GOALS_WITH_COMPANY_ID, UPDATE_COMPANY_GOAL } from '../../../GraphQl/Goals/goals';
 import { useMutation, useQuery } from '@apollo/client';
 import { RootState } from '../../../Store/RootReducer';
 import { useSelector } from 'react-redux';
@@ -24,6 +24,9 @@ export default function GoalsAccordion(
     const [deleteCompanyGoal, { data: deleteCompanyGoalData, loading: deleteCompanyGoalLoading, error: deleteCompanyGoalError }] = useMutation(DELETE_COMPANY_GOAL, {
         refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }]
     })
+    const [updateCompanyGoal, { data: updateCompanyGoalData, loading: updateCompanyGoalLoading, error: updateCompanyGoalError }] = useMutation(UPDATE_COMPANY_GOAL, {
+        refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }]
+    })
     const initState = {
         createdBy: userID,
         belongsTo: companyID,
@@ -36,6 +39,9 @@ export default function GoalsAccordion(
         const { name, value } = e.target;
         setEditGoal({ ...editGoal, [name]: value })
     }
+
+
+
     const [open, setOpen] = useState('');
     const [offCanvas, setOffCanvas] = useState(false);
     const toggleCanvas = () => { setOffCanvas(!offCanvas); }
@@ -46,7 +52,6 @@ export default function GoalsAccordion(
     const toggleEditModal = () => setEditModal(!editModal);
     const deleteModal = () => { setConfirmDelete(!confirmDelete) }
     const deleteHandler = (e: any) => {
-
         deleteCompanyGoal({
             variables: {
                 deleteCompanyGoalId: _id
@@ -54,6 +59,17 @@ export default function GoalsAccordion(
         })
         deleteModal()
     }
+
+    const editHandler = (e: any) => {
+        updateCompanyGoal({
+            variables: {
+                updateCompanyGoalId: _id,
+                companyGoalInput: editGoal
+            }
+        })
+        toggleEditModal()
+    }
+
     useEffect(() => {
         if (deleteCompanyGoalData) {
             notifySuccess('Goal deleted successfully')
@@ -64,10 +80,24 @@ export default function GoalsAccordion(
         if (deleteCompanyGoalLoading) {
             notifyLoading('Deleting goal ........')
         }
+        if (updateCompanyGoalData) {
+            notifySuccess('Goal updated successfully')
+        }
+        if (updateCompanyGoalError) {
+            notifyError("Error updating goal")
+        }
+        if (updateCompanyGoalLoading) {
+            notifyLoading('Updating goal ........')
+        }
 
     }, [deleteCompanyGoalData,
         deleteCompanyGoalError,
-        deleteCompanyGoalLoading])
+        deleteCompanyGoalLoading,
+        updateCompanyGoalData,
+        updateCompanyGoalError,
+        updateCompanyGoalLoading])
+
+
 
 
     return (
@@ -197,9 +227,7 @@ export default function GoalsAccordion(
                                             Cancel
                                         </Button>
                                         <Button size="sm" color="success" outline className='px-4'
-
-                                        // onClick={submitHandler}
-                                        >
+                                            onClick={editHandler}>
                                             update
                                         </Button>{' '}
 
