@@ -4,8 +4,9 @@ import { Button, Col, FormGroup, Input, Label, Offcanvas, OffcanvasBody, Offcanv
 import MyEventCard from '../../../Components/MyEventCard/MyEventCard'
 import { FaPlus } from 'react-icons/fa'
 import { MY_DEBUT_EVENTS, CREATE_EVENT, CHECK_IF_USER_HAS_COMPANY, FETCH_COMPANY } from '../../../GraphQl/index'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
+import { setCompanyID } from '../../../Store/identfiers/identfiers'
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from '../../../Components/Loader/Loader'
 import Axios from 'axios'
@@ -26,6 +27,7 @@ const initState = {
 }
 
 function NewEvent() {
+  const dispatch = useDispatch()
   const [canvas, setCanvas] = useState(false);
   const [imageSelected, setImageSelected] = useState("")
   const [newEventData, setNewEventData] = useState(initState)

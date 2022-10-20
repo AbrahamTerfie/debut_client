@@ -31,6 +31,9 @@ const Id_Identfiers = createSlice({
         setUserEmail: (state, action) => {
             state.userEmail = action.payload;
         },
+        setHasCompany: (state, action) => {
+            state.hasCompany = action.payload;
+        },
         setCompanyID: (state, action) => {
             state.companyID = action.payload;
         },
@@ -52,5 +55,11 @@ const Id_Identfiers = createSlice({
 
 
 
-export const { setUserID, setCompanyID, togglehasCompany, setUserFullName, setUserEmail } = Id_Identfiers.actions;
+export const {
+    setUserID,
+    setCompanyID,
+    togglehasCompany,
+    setUserFullName,
+    setUserEmail,
+    setHasCompany } = Id_Identfiers.actions;
 export default Id_Identfiers.reducer;

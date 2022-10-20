@@ -112,7 +112,9 @@ export function LandingAccordion() {
     return (
         <div>
             {accordoindata.map((item: any) => (
-                <Accordion i={item.id}
+                <Accordion
+                    key={item.id}
+                    i={item.id}
                     expanded={expanded}
                     setExpanded={setExpanded}
                     title={item.title}

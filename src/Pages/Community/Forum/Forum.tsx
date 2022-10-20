@@ -42,7 +42,7 @@ export default function Forum() {
     const [channelFilter, setChannelFilter] = useState('')
 
 
-    console.log("channelFilter", channelFilter)
+    // console.log("channelFilter", channelFilter)
     // saves the user information when the user logs in to keep it in sybc with store 
     useEffect(() => {
         if (user) {
@@ -73,12 +73,12 @@ export default function Forum() {
     if (authenticatedUsrRes.error) {
         console.log(authenticatedUsrRes.error)
     }
-    if (authenticatedUsrRes.loading) {
-        console.log('loading ')
-    }
+    // if (authenticatedUsrRes.loading) {
+    //     console.log('loading ')
+    // }
 
 
-    if (loading) {
+    if (loading || authenticatedUsrRes.loading) {
         return <Loader />
     }
     if (error) {
