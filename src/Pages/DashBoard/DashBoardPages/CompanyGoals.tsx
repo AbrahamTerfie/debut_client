@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import Loader from '../../../Components/Loader/Loader';
 import { Toaster } from 'react-hot-toast';
-import { notifySuccess, notifyError } from '../../../Components/Notification/Toast'
+import { notifySuccess, notifyError, notifyLoading } from '../../../Components/Notification/Toast'
 
 
 export default function CompanyGolas(props: any) {
@@ -53,15 +53,16 @@ export default function CompanyGolas(props: any) {
       console.log(createCompanyGoalData)
       // setModal(false)
     }
+    if (createCompanyGoalError) {
+      notifyError(createCompanyGoalError.toString())
+    }
+    if (loading || createCompanyGoalLoading) {
+      return notifyLoading('Loading ...........')
+    }
 
   }
 
-  if (createCompanyGoalError) {
-    notifyError('Something went wrong')
-  }
-  if (loading || createCompanyGoalLoading) {
-    return <Loader />
-  }
+
 
 
   return (
