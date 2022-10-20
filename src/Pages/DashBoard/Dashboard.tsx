@@ -55,8 +55,10 @@ export default function Dashboard() {
                 <Topbar toggleSidebar={toggleSidebar} />
 
                 {location.pathname === "/dashboard" ?
-                    <p>
+                    <p> 
                         this is dashboard item d
+
+                        {data && data.checkIfUserHasCompany === true ? <p>you have a company</p> : <p>you dont have a company</p>}
                     </p> :
                     <Outlet />}
             </div>

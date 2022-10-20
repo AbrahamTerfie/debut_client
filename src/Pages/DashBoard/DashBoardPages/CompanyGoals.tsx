@@ -17,6 +17,13 @@ import { notifySuccess, notifyError, notifyLoading } from '../../../Components/N
 export default function CompanyGolas(props: any) {
 
   const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
+  const { data, loading, error } = useQuery(FETCH_COMPANY_GOALS_WITH_COMPANY_ID, {
+    variables: { companyId: companyID }
+  })
+
+  const [createCompanyGoal, { data: createCompanyGoalData, loading: createCompanyGoalLoading, error: createCompanyGoalError }] = useMutation(CREATE_COMPANY_GOAL, {
+    refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }]
+  })
   const initState = {
     createdBy: userID,
     belongsTo: companyID,
@@ -32,23 +39,16 @@ export default function CompanyGolas(props: any) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const { data, loading, error } = useQuery(FETCH_COMPANY_GOALS_WITH_COMPANY_ID, {
-    variables: { companyId: companyID }
-  })
 
-  const [createCompanyGoal, { data: createCompanyGoalData, loading: createCompanyGoalLoading, error: createCompanyGoalError }] = useMutation(CREATE_COMPANY_GOAL, {
-    refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }]
-  })
 
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    createCompanyGoal(
-      {
-        variables: {
-          companyGoalInput: newGoal
-        }
-      })
+    createCompanyGoal({
+      variables: {
+        companyGoalInput: newGoal
+      }
+    })
     toggle()
     if (createCompanyGoalData) {
       notifySuccess('Goal created successfully')
@@ -65,7 +65,7 @@ export default function CompanyGolas(props: any) {
   }
 
 
-
+  console.log("error", error)
 
   return (
     <Row className="page">
@@ -126,31 +126,28 @@ export default function CompanyGolas(props: any) {
               onClick={submitHandler}>
               create
             </Button>{' '}
-
           </ModalFooter>
-
         </Modal>
       </div>
 
       <div className='mx-3 p-3' >
 
-        {
-          data.getCompanyGoalWithCompanyId?.length === 0 ?
-            <div className='m-5'>
-              <p className='text-muted text-center fs-4 '>  you have no goals yet </p>
-              <p className=' text-center fs-6 '>  click on the button above to create one </p>
-            </div> :
+        {data?.getCompanyGoalWithCompanyId?.length === 0 ?
+          <div className='m-5'>
+            <p className='text-muted text-center fs-4 '>  you have no goals yet </p>
+            <p className=' text-center fs-6 '>  click on the button above to create one </p>
+          </div> :
 
-            data.getCompanyGoalWithCompanyId?.map((goal: any) => {
-              return <GoalsAccordion
-                key={goal.id}
-                _id={goal._id}
-                goalTitle={goal.goalTitle}
-                goalDescription={goal.goalDescription}
-                mileStones={goal.mileStones}
-                goalStatus={goal.goalStatus}
-              />
-            })
+          data?.getCompanyGoalWithCompanyId?.map((goal: any) => {
+            return <GoalsAccordion
+              key={goal.id}
+              _id={goal._id}
+              goalTitle={goal.goalTitle}
+              goalDescription={goal.goalDescription}
+              mileStones={goal.mileStones}
+              goalStatus={goal.goalStatus}
+            />
+          })
         }
       </div>
       <Toaster />

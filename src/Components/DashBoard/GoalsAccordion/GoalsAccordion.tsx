@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {
     AccordionBody, AccordionHeader, AccordionItem, Button, Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
-    Modal, ModalBody, ModalFooter, ModalHeader, Offcanvas, OffcanvasBody, OffcanvasHeader, Row, UncontrolledAccordion,
+    FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Offcanvas, OffcanvasBody, OffcanvasHeader, Row,
+    UncontrolledAccordion,
 } from 'reactstrap';
 import './GoalsAccordion.css'
 import { motion } from "framer-motion";
 import NewGoalMilestone from '../NewGoalMilestone/NewGoalMilestone';
-import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs';
+import { BsThreeDotsVertical, BsTrash, BsPen } from 'react-icons/bs';
 import { DELETE_COMPANY_GOAL, FETCH_COMPANY_GOALS_WITH_COMPANY_ID } from '../../../GraphQl/Goals/goals';
 import { useMutation, useQuery } from '@apollo/client';
 import { RootState } from '../../../Store/RootReducer';
@@ -18,16 +19,31 @@ export default function GoalsAccordion(
         _id: String, goalTitle: String, goalDescription: String, mileStones: [], goalStatus: Boolean
     }
 ) {
-    const { companyID } = useSelector((store: RootState) => store.identfiers)
+
+    const { companyID, userID } = useSelector((store: RootState) => store.identfiers)
     const [deleteCompanyGoal, { data: deleteCompanyGoalData, loading: deleteCompanyGoalLoading, error: deleteCompanyGoalError }] = useMutation(DELETE_COMPANY_GOAL, {
         refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }]
     })
+    const initState = {
+        createdBy: userID,
+        belongsTo: companyID,
+        goalTitle: goalTitle,
+        goalDescription: goalDescription,
+
+    }
+    const [editGoal, setEditGoal] = useState(initState)
+    const inputHndler = (e: any) => {
+        const { name, value } = e.target;
+        setEditGoal({ ...editGoal, [name]: value })
+    }
     const [open, setOpen] = useState('');
     const [offCanvas, setOffCanvas] = useState(false);
     const toggleCanvas = () => { setOffCanvas(!offCanvas); }
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen((prevState) => !prevState);
     const [confirmDelete, setConfirmDelete] = useState(false)
+    const [editModal, setEditModal] = useState(false);
+    const toggleEditModal = () => setEditModal(!editModal);
     const deleteModal = () => { setConfirmDelete(!confirmDelete) }
     const deleteHandler = (e: any) => {
 
@@ -49,7 +65,9 @@ export default function GoalsAccordion(
             notifyLoading('Deleting goal ........')
         }
 
-    }, [deleteCompanyGoalData, deleteCompanyGoalError, deleteCompanyGoalLoading])
+    }, [deleteCompanyGoalData,
+        deleteCompanyGoalError,
+        deleteCompanyGoalLoading])
 
 
     return (
@@ -105,9 +123,13 @@ export default function GoalsAccordion(
                                         <BsThreeDotsVertical />
                                     </DropdownToggle>
                                     <DropdownMenu >
+                                        <DropdownItem onClick={toggleEditModal}  >
+                                            <BsPen className='mx-2 text-warning' /> <span className='text-warning' >edit  goal </span>
+                                        </DropdownItem>
                                         <DropdownItem onClick={deleteModal}  >
                                             <BsTrash className='mx-2 text-danger' /> <span className='text-danger' >delete goal </span>
                                         </DropdownItem>
+
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Modal isOpen={confirmDelete} toggle={deleteModal} size="lg" >
@@ -130,6 +152,59 @@ export default function GoalsAccordion(
                                             yes delete
                                         </Button>{' '}
                                     </ModalFooter>
+                                </Modal>
+                                <Modal isOpen={editModal} toggle={toggleEditModal} size="lg"  >
+
+                                    <ModalHeader toggle={toggleEditModal}>
+                                        <p className="fw-light m-0 fs-3">
+                                            edit goal
+                                        </p>
+                                    </ModalHeader>
+                                    <ModalBody>
+
+                                        <Row className='App' >
+                                            <Col md={12} >
+                                                <FormGroup>
+                                                    <Label for="goalTitle">  title </Label>
+                                                    <Input
+                                                        required
+                                                        value={editGoal.goalTitle.toString()}
+                                                        onChange={inputHndler}
+                                                        type="text"
+                                                        name="goalTitle"
+                                                        id="goalTitle"
+                                                        placeholder=" name your goal" />
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={12} >
+                                                <FormGroup>
+                                                    <Label for="goalDescription">  description </Label>
+                                                    <Input
+                                                        required
+                                                        type="textarea"
+                                                        rows={10}
+                                                        value={editGoal.goalDescription.toString()}
+                                                        onChange={inputHndler}
+                                                        name="goalDescription"
+                                                        id="goalDescription"
+                                                        placeholder=" describe your goal in deatil" />
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button size="sm" color="secondary" outline className='px-4' onClick={() => { toggleEditModal() }}>
+                                            Cancel
+                                        </Button>
+                                        <Button size="sm" color="success" outline className='px-4'
+
+                                        // onClick={submitHandler}
+                                        >
+                                            update
+                                        </Button>{' '}
+
+                                    </ModalFooter>
+
                                 </Modal>
                             </Col>
 

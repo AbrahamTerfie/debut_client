@@ -20,6 +20,7 @@ query getCompanyGoalWithCompanyId($companyId: ID!) {
     }
   }
 }
+
 `
 
 export const CREATE_COMPANY_GOAL = gql`
