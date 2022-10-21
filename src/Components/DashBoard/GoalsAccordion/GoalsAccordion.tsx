@@ -9,11 +9,11 @@ import { motion } from "framer-motion";
 import NewGoalMilestone from '../NewGoalMilestone/NewGoalMilestone';
 import { BsThreeDotsVertical, BsTrash, BsPen } from 'react-icons/bs';
 import { DELETE_COMPANY_GOAL, FETCH_COMPANY_GOALS_WITH_COMPANY_ID, UPDATE_COMPANY_GOAL } from '../../../GraphQl/Goals/goals';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, } from '@apollo/client';
 import { RootState } from '../../../Store/RootReducer';
 import { useSelector } from 'react-redux';
 import { notifyError, notifyLoading, notifySuccess } from '../../../Components/Notification/Toast';
-// import { Toaster } from 'react-hot-toast';
+
 export default function GoalsAccordion(
     { _id, goalTitle, goalDescription, mileStones, goalStatus }: {
         _id: String, goalTitle: String, goalDescription: String, mileStones: [], goalStatus: Boolean
@@ -96,9 +96,6 @@ export default function GoalsAccordion(
         updateCompanyGoalData,
         updateCompanyGoalError,
         updateCompanyGoalLoading])
-
-
-
 
     return (
         <div>
