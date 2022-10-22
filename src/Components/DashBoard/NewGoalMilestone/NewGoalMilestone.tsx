@@ -8,7 +8,7 @@ import { RootState } from '../../../Store/RootReducer'
 import { BsTrash } from "react-icons/bs";
 import { useMutation, useQuery } from '@apollo/client';
 import { notifyError, notifyLoading, notifySuccess, notifyWarning } from '../../Notification/Toast';
-
+import { CREATE_NEW_MILESTONE, FETCH_COMPANY_GOALS_WITH_COMPANY_ID } from '../../../GraphQl/index'
 
 interface mileSoneform {
     createdBy: string,
@@ -29,7 +29,8 @@ export default function NewGoalMilestone(
 ) {
     const { companyID, userID } = useSelector((store: RootState) => store.identfiers)
 
-    const [newMileStone, setNewMileStone] = useState({
+
+    const initState: mileSoneform = {
         createdBy: userID,
         belongsTo: companyID,
         mileStoneTitle: "",
@@ -37,15 +38,17 @@ export default function NewGoalMilestone(
         milestoneDueDate: "",
         milestoneCompleted: false,
         milestoneCompletedDate: "",
-        underGoal: goalID,
+        underGoal: goalID.toString(),
         needHelpWith: [],
         additionalLinks: [],
-    } as mileSoneform)
+    }
+
+    const [newMileStone, setNewMileStone] = useState(initState)
 
     const [helpWith, setNeedHelpWith] = useState("")
     const [additionalLink, setAdditionalLink] = useState("")
 
-    console.log("newMileStone", newMileStone)
+    console.log("newMileStone", goalID.toString())
 
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewMileStone({
@@ -54,27 +57,58 @@ export default function NewGoalMilestone(
         })
     }
     const addToNeedHelpWith = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
         setNewMileStone({ ...newMileStone, needHelpWith: [...newMileStone.needHelpWith, helpWith] })
         setNeedHelpWith("")
     }
     const removeFromNeedHelpWith = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-        // remove item ftpm array
+        e.preventDefault()
         const newNeedHelpWith = newMileStone.needHelpWith.filter((item, i) => i !== index)
         setNewMileStone({ ...newMileStone, needHelpWith: newNeedHelpWith })
 
     }
     const addToAdditionalLinks = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
         setNewMileStone({ ...newMileStone, additionalLinks: [...newMileStone.additionalLinks, additionalLink] })
         setAdditionalLink("")
     }
     const removeFromAdditionalLinks = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-
+        e.preventDefault()
         const newAdditionalLinks = newMileStone.additionalLinks.filter((item, i) => i !== index)
         setNewMileStone({ ...newMileStone, additionalLinks: newAdditionalLinks })
-
-
     }
 
+
+    const [createNewMileStone, { loading, error, data }] = useMutation(CREATE_NEW_MILESTONE, {
+
+        onCompleted: (data) => {
+            notifySuccess("Milestone Created")
+            setNewMileStone(initState)
+            console.log("data", data)
+        },
+        onError: (error) => {
+            notifyError("Error Creating Milestone")
+            console.log("error", error)
+        },
+        refetchQueries: [{
+            query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID,
+            variables: {
+                companyId: companyID
+            }
+        }
+        ],
+
+
+    })
+
+    const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        createNewMileStone({
+            variables: {
+                companyMilestoneInput: newMileStone
+            }
+        })
+    }
 
     return (
         <Form>
@@ -214,6 +248,7 @@ export default function NewGoalMilestone(
             </Row>
             <Row className='d-flex justify-content-center align-items-center' >
                 <motion.div
+                    onClick={(e: any) => submitHandler(e)}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }} color="light"

@@ -16,7 +16,7 @@ import { notifyError, notifyLoading, notifySuccess } from '../../../Components/N
 
 export default function GoalsAccordion(
     { _id, goalTitle, goalDescription, mileStones, goalStatus }: {
-        _id: String, goalTitle: String, goalDescription: String, mileStones: [], goalStatus: Boolean
+        _id: string, goalTitle: String, goalDescription: String, mileStones: [], goalStatus: Boolean
     }
 ) {
 
@@ -121,7 +121,7 @@ export default function GoalsAccordion(
                         <OffcanvasBody className='p-5' >
                             {/* new milestone form  */}
                             <NewGoalMilestone
-                                goalID={_id.toString()}
+                                goalID={_id}
                             />
                         </OffcanvasBody>
                     </Offcanvas>
