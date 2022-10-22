@@ -1,7 +1,9 @@
-import React from 'react'
+import { gql } from "@apollo/client";
 
-export default function milestones() {
-  return (
-    <div>milestones</div>
-  )
+export const CREATE_NEW_MILESTONE = gql`
+mutation createCompanyMilestone($companyMilestoneInput: GoalMilestoneInput) {
+  createCompanyMilestone(companyMilestoneInput: $companyMilestoneInput) {
+    _id
+  }
 }
+`

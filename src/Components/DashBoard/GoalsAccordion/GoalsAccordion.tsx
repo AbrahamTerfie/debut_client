@@ -120,7 +120,9 @@ export default function GoalsAccordion(
                         </OffcanvasHeader>
                         <OffcanvasBody className='p-5' >
                             {/* new milestone form  */}
-                            <NewGoalMilestone />
+                            <NewGoalMilestone
+                                goalID={_id.toString()}
+                            />
                         </OffcanvasBody>
                     </Offcanvas>
                     <motion.div
