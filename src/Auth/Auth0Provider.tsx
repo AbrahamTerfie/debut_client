@@ -15,6 +15,7 @@ export const Auth0ProviderWithHistory = ({ children }:
         clientId={clientId}
         redirectUri={window.location.origin}
         audience={audience}
+
     >
         {children}
     </Auth0Provider >

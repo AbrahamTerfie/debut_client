@@ -79,7 +79,7 @@ export default function NewGoalMilestone(
     }
 
 
-    const [createNewMileStone, { loading, error, data }] = useMutation(CREATE_NEW_MILESTONE, {
+    const [createNewMileStone] = useMutation(CREATE_NEW_MILESTONE, {
 
         onCompleted: (data) => {
             notifySuccess("Milestone Created")

@@ -13,7 +13,7 @@ import { useMutation, } from '@apollo/client';
 import { RootState } from '../../../Store/RootReducer';
 import { useSelector } from 'react-redux';
 import { notifyError, notifyLoading, notifySuccess } from '../../../Components/Notification/Toast';
-
+import MileStoneCard from '../../../Components/DashBoard/MileStoneCard/MileStoneCard';
 export default function GoalsAccordion(
     { _id, goalTitle, goalDescription, mileStones, goalStatus }: {
         _id: string, goalTitle: String, goalDescription: String, mileStones: [], goalStatus: Boolean
@@ -242,12 +242,14 @@ export default function GoalsAccordion(
                                     <p className='text-muted text-center fs-4' > no milestones yet </p>
                                     <p className='text-muted text-center' > start by adding  new milestone </p>
                                 </div> : mileStones?.map((mileStone: any) => {
-                                    return <Col md={6} className='d-flex justify-content-center align-items-center' >
-                                        <div className='milestoneCard p-2 my-2' >
-                                            <p className='fw-light fs-4' >{mileStone.mileStoneTitle}
-                                            </p>
-                                        </div>
-                                    </Col>
+                                    return (
+                                        <MileStoneCard
+
+                                            key={mileStone._id}
+                                            {...mileStone}
+
+                                        />
+                                    )
                                 })}
 
                         </Row>
