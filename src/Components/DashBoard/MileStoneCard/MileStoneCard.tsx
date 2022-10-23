@@ -1,12 +1,13 @@
 import { motion } from "framer-motion"
 import { BsThreeDotsVertical, BsTrash, BsPen } from 'react-icons/bs';
 import { DELETE_COMPANY_MILESTONE, FETCH_COMPANY_GOALS_WITH_COMPANY_ID } from '../../../GraphQl/index'
-import { Button, Col } from "reactstrap"
+import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import moment from "moment"
 import { useMutation, useQuery } from "@apollo/client"
 import { notifyError, notifyLoading, notifySuccess } from "../../../Components/Notification/Toast"
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
+import { useState } from "react";
 
 interface mileSoneform {
     _id: string
@@ -52,13 +53,40 @@ export default function MileStoneCard(
         })
     }
 
+    const [deleteModal, setDeleteModal] = useState(false)
+    const toggleDeleteModal = () => setDeleteModal(!deleteModal)
+
 
     return (
         <Col md={5} className=" shadow-sm p-4 m-3  MyeventCard" >
             <div className='d-flex justify-content-between align-items-start my-2'>
+                <Modal isOpen={deleteModal} toggle={toggleDeleteModal} size="lg" >
+                    <ModalHeader toggle={toggleDeleteModal}>
+                        <p className='text-danger' > delete prompt </p>
+                    </ModalHeader>
+                    <ModalBody className='p-5' >
+                        <p className='text-danger fw-light fs-5' >
+                            Are you sure you want to delete <span className='fw-bold'>
+                                {mileStoneTitle}
+                            </span> ?
+                        </p>
+                        <span className='text-warning' > note: this action is irreversible </span>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="warning" outline onClick={toggleDeleteModal}>
+                            Cancel
+                        </Button>
+                        <Button color="danger" outline
+                            onClick={(e) => deleteHandler(e)}
+
+                        >
+                            yes delete
+                        </Button>{' '}
+                    </ModalFooter>
+                </Modal>
                 <p className='fw-bolder m-0' >  {mileStoneTitle}  </p>
                 <motion.div
-                    onClick={(e) => deleteHandler(e)}
+                    onClick={toggleDeleteModal}
                     whileHover={{ scale: 1.1 }}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}>
                     <BsTrash
