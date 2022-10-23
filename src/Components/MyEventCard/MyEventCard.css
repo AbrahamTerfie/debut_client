@@ -1,5 +1,8 @@
-.MyeventCard{
-    /* transition: all 0.2s ease-in-out; */
+.MyeventCardActive{
+    transition: all 0.2s ease-in-out;
+    border-bottom: 3px solid #1985a1;
+    transform: scale(1.01);
+
 }
 
 .MyeventCard:hover{

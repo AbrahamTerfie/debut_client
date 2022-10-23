@@ -5,7 +5,7 @@ import { FaPrayingHands, FaRegHandSpock } from 'react-icons/fa'
 import { BsBuilding, BsPerson } from 'react-icons/bs'
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { appRoutes } from "../../../Routes/routes";
 import "./styles.css"
 
@@ -13,7 +13,7 @@ export default function SideBar({ isOpen, toggle }: {
     isOpen: any;
     toggle: any
 }) {
-
+    const location = useLocation()
     const navigate = useNavigate();
     const textColor = {
         color: "#1985a1", cursor: "default",
@@ -32,7 +32,7 @@ export default function SideBar({ isOpen, toggle }: {
                         onClick={() => navigate(appRoutes.dashboard)}>
                         Dashboard
                     </p>
-                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.events ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
                         <NavLink
                             onClick={() => navigate(appRoutes.events)}
                             style={textColor}>
@@ -41,8 +41,8 @@ export default function SideBar({ isOpen, toggle }: {
                             Events
                         </NavLink>
                     </NavItem>
-                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
-
+                    <NavItem
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.goals ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
                         <NavLink
                             onClick={() => navigate(appRoutes.goals)}
                             style={textColor}>
@@ -50,8 +50,8 @@ export default function SideBar({ isOpen, toggle }: {
                             Goals
                         </NavLink>
                     </NavItem>
-                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
-
+                    <NavItem
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.gratitudes ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
                         <NavLink
                             onClick={() => navigate(appRoutes.gratitudes)}
                             style={textColor}>
@@ -59,7 +59,9 @@ export default function SideBar({ isOpen, toggle }: {
                             Gratitudes
                         </NavLink>
                     </NavItem>
-                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
+                    <NavItem
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myCompany ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+
 
                         <NavLink
                             onClick={() => navigate(appRoutes.myCompany)}
@@ -68,8 +70,8 @@ export default function SideBar({ isOpen, toggle }: {
                             Your Company
                         </NavLink>
                     </NavItem>
-                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
-
+                    <NavItem
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
                         <NavLink
                             onClick={() => navigate(appRoutes.myProfile)}
                             style={textColor}>

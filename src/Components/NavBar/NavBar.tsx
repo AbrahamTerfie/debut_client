@@ -6,10 +6,11 @@ import { MdOutlineForum, MdLogout, MdOutlineSpaceDashboard } from 'react-icons/m
 import { appRoutes } from '../../Routes/routes'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { useLocation } from 'react-router-dom'
 
 
 export default function NavBarComponent() {
+    const location = useLocation()
     const { logout } = useAuth0();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -32,31 +33,33 @@ export default function NavBarComponent() {
                 <Nav className="me-auto dark  m-2" navbar>
 
                     <NavItem >
-                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.people) }} className="MyeventCard"  >
+                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.people) }} className={location.pathname === appRoutes.people ? "MyeventCardActive" : "MyeventCard"}  >
                             <BsPeople size={15} className='mx-3 my-1' />
                             People Directory
                         </NavLink>
                     </NavItem>
                     <NavItem >
-                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.forum) }} className="MyeventCard"  >
+                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.forum) }} className={location.pathname === appRoutes.forum ? "MyeventCardActive mx-3" : "MyeventCard"}  >
                             <MdOutlineForum size={15} className='mx-3 my-1' />
                             Forum
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.ventures) }} className="MyeventCard">
+                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.ventures) }} className={location.pathname === appRoutes.ventures ? "MyeventCardActive mx-3" : "MyeventCard"}  >
+
                             <FaRegBuilding size={15} className='mx-3 my-1' />
                             Ventures Directory
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.dashboard) }} className="MyeventCard" >
+                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.dashboard) }}
+                            className={location.pathname === appRoutes.dashboard ? "MyeventCardActive mx-3" : "MyeventCard"}  >
                             <MdOutlineSpaceDashboard size={15} className='mx-2 my-1' />
                             My Debut
                         </NavLink>
                     </NavItem>
                     <NavItem
-                    className='justify-content-end align-self-end'
+                        className='justify-content-end align-self-end'
                     >
                         <NavLink style={textColor} onClick={() => { logout() }} className="MyeventCard" >
                             <MdLogout size={15} className='mx-3 my-2' />
@@ -67,6 +70,6 @@ export default function NavBarComponent() {
                 </Nav>
 
             </Collapse>
-        </Navbar>
+        </Navbar >
     )
 }
