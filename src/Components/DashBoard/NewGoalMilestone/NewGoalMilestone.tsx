@@ -25,7 +25,7 @@ interface mileSoneform {
 
 
 export default function NewGoalMilestone(
-    { goalID }: { goalID: string }
+    { goalID, cnavasOpen }: { goalID: string, cnavasOpen: any }
 ) {
     const { companyID, userID } = useSelector((store: RootState) => store.identfiers)
 
@@ -48,7 +48,7 @@ export default function NewGoalMilestone(
     const [helpWith, setNeedHelpWith] = useState("")
     const [additionalLink, setAdditionalLink] = useState("")
 
-    console.log("newMileStone", goalID.toString())
+
 
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewMileStone({
@@ -84,7 +84,8 @@ export default function NewGoalMilestone(
         onCompleted: (data) => {
             notifySuccess("Milestone Created")
             setNewMileStone(initState)
-            console.log("data", data)
+            cnavasOpen()
+            // console.log("data", data)
         },
         onError: (error) => {
             notifyError("Error Creating Milestone")
@@ -101,13 +102,25 @@ export default function NewGoalMilestone(
 
     })
 
+
+    function checkInput() {
+        if (newMileStone.mileStoneTitle === "" || newMileStone.mileStoneDescription === "" || newMileStone.milestoneDueDate === ""
+            || newMileStone.needHelpWith.length === 0 || newMileStone.additionalLinks.length === 0) {
+
+            notifyWarning("Please fill all the fields")
+            return false
+        }
+        return true
+    }
+
     const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        createNewMileStone({
+        checkInput() && createNewMileStone({
             variables: {
                 companyMilestoneInput: newMileStone
             }
         })
+
     }
 
     return (

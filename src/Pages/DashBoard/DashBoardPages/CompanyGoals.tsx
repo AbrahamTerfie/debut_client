@@ -40,11 +40,18 @@ export default function CompanyGolas(props: any) {
   const toggle = () => setModal(!modal);
 
 
+  function checkInput() {
+    if (newGoal.goalTitle === "" || newGoal.goalDescription === "") {
+      notifyError("Please fill all the fields")
+      return false
+    }
+    return true
+  }
 
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    createCompanyGoal({
+    checkInput() && createCompanyGoal({
       variables: {
         companyGoalInput: newGoal
       }
@@ -52,7 +59,7 @@ export default function CompanyGolas(props: any) {
     toggle()
     if (createCompanyGoalData) {
       notifySuccess('Goal created successfully')
-      console.log(createCompanyGoalData)
+      // console.log(createCompanyGoalData)
       // setModal(false)
     }
     if (createCompanyGoalError) {
