@@ -1,10 +1,10 @@
 import { motion } from "framer-motion"
 import { BsThreeDotsVertical, BsTrash, BsPen } from 'react-icons/bs';
-import { DELETE_COMPANY_MILESTONE, FETCH_COMPANY_GOALS_WITH_COMPANY_ID } from '../../../GraphQl/index'
+import { DELETE_COMPANY_MILESTONE, FETCH_COMPANY_GOALS_WITH_COMPANY_ID, TOGGLE_MILESTONE_STATUS } from '../../../GraphQl/index'
 import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import moment from "moment"
 import { useMutation, useQuery } from "@apollo/client"
-import { notifyError, notifyLoading, notifySuccess } from "../../../Components/Notification/Toast"
+import { notifyError, notifyLoading, notifySuccess, notifyWarning } from "../../../Components/Notification/Toast"
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { useState } from "react";
@@ -43,6 +43,30 @@ export default function MileStoneCard(
         }
 
     })
+
+    const [toggleMilestoneStatus, { data: toggleMilestoneStatusData, loading: toggleMilestoneStatusLoading, error: toggleMilestoneStatusError }] = useMutation(TOGGLE_MILESTONE_STATUS, {
+        refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }],
+        onCompleted: (toggleMilestoneStatusData) => {
+            console.log(toggleMilestoneStatusData)
+            toggleMilestoneStatusData && !milestoneCompleted ?
+                notifySuccess('Milestone status changed to completed ') :
+                notifyWarning(' status changed to pending ')
+        },
+        onError: (toggleMilestoneStatusError) => {
+            console.log(toggleMilestoneStatusError)
+            notifyError(toggleMilestoneStatusError.toString())
+        }
+    })
+
+
+    const markAsComplete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        toggleMilestoneStatus({
+            variables: {
+                toggleMilestoneCompletedId: _id
+            }
+        })
+    }
 
     const deleteHandler = (e: any) => {
         e.preventDefault()
@@ -84,7 +108,13 @@ export default function MileStoneCard(
                         </Button>{' '}
                     </ModalFooter>
                 </Modal>
-                <p className='fw-bolder m-0' >  {mileStoneTitle}  </p>
+                <p className='fw-bolder m-0' >  {mileStoneTitle}
+
+
+                    {milestoneCompleted ? <span className="mx-2 bg-success rounded-pill px-2 py-1 bg-opacity-10 text-success" > completed </span> :
+                        <span className="mx-2 bg-warning rounded-pill px-2 py-1 bg-opacity-10 text-warning" > pending </span>}
+
+                </p>
                 <motion.div
                     onClick={toggleDeleteModal}
                     whileHover={{ scale: 1.1 }}
@@ -140,16 +170,13 @@ export default function MileStoneCard(
 
 
             {/* checkbox and a button to mark item completed  */}
-            <div className="d-flex justify-content-between align-items-center" >
-                <div className="form-check">
-                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label className="form-check-label" htmlFor="flexCheckDefault"
-                        defaultChecked={milestoneCompleted}
-                    >
-                        mark as achived
-                    </label>
-                </div>
-                <Button color="success" size="sm" outline className='px-4' > save </Button>
+            <div className="d-flex justify-content-between align-items-center my-3" >
+                <Button color="success" size="sm" outline className='px-4'
+                    onClick={(e) => markAsComplete(e)}>
+
+                    {milestoneCompleted ? 'mark as pending' : 'mark as completed'}
+
+                </Button>
             </div >
         </Col >
     )

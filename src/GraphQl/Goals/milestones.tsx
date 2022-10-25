@@ -12,4 +12,14 @@ mutation createCompanyMilestone($companyMilestoneInput: GoalMilestoneInput) {
 export const DELETE_COMPANY_MILESTONE = gql`
 mutation deleteCompanyMilestone($deleteCompanyMilestoneId: ID!){
   deleteCompanyMilestone(id: $deleteCompanyMilestoneId)
-}`    
+}`
+
+
+export const TOGGLE_MILESTONE_STATUS = gql`
+mutation toggleMilestoneCompleted($toggleMilestoneCompletedId: ID!){
+  toggleMilestoneCompleted(id: $toggleMilestoneCompletedId) {
+    _id
+  }
+}
+
+`
