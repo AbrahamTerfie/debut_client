@@ -6,7 +6,7 @@ import { RootState } from '../../../Store/RootReducer'
 import { setCompanyID } from '../../../Store/identfiers/identfiers'
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from '../../../Components/Loader/Loader'
-
+import { Outlet } from 'react-router-dom'
 import NewEvent from '../../../Components/DashBoard/NewEvent'
 
 export default function CompanyEvents() {
@@ -37,6 +37,7 @@ export default function CompanyEvents() {
         </div>
         <NewEvent />
       </div>
+
       <div className='d-flex flex-row flex-wrap' >
         {
           data?.getDebutEventsWithUserId?.map((event: any) => {
@@ -58,6 +59,7 @@ export default function CompanyEvents() {
         }
 
       </div>
+      <Outlet />
 
     </div>
   )

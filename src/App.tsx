@@ -8,9 +8,9 @@ import RegistryPage from './Pages/RegistryPage/RegistryPage';
 import { Routes, Route } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
 import DebutEvents from './Pages/DebutEvents/DebutEvents';
-import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
+// import MyDebutEvents from './Pages/Debut/MyDebutEvents/MyDebutEvents';
 import NavBarComponent from './Components/NavBar/NavBar';
-import DebutEventPage from './Pages/DebutEvents/DebutEventPage';
+// import DebutEventPage from './Pages/DebutEvents/DebutEventPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Toaster } from 'react-hot-toast';
 function App() {
@@ -34,7 +34,7 @@ function App() {
             <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
             <Route path={appRoutes.venturePage} element={<VenturePage />} />
             <Route path={appRoutes.debutEvents} element={<DebutEvents />} />
-            <Route path={appRoutes.debutEventPage} element={<DebutEventPage />} />
+            {/* <Route path={appRoutes.debutEventPage} element={<DebutEventPage />} /> */}
             <Route path={appRoutes.myVentures} element={<DebutPages.BusinessPage />} />
             <Route path={appRoutes.newVenture} element={<DebutPages.NewBusinessVenture />} />
             <Route path={appRoutes.myDebutInfo} element={<MyDebutInfo />} />
@@ -47,6 +47,8 @@ function App() {
               <Route path={appRoutes.myCompany} element={<DashBoardPages.MyCompany />} />
               <Route path={appRoutes.goals} element={<DashBoardPages.CompanyGoals />} />
               <Route path={appRoutes.events} element={<DashBoardPages.CompanyEvents />} />
+              <Route path={appRoutes.eventDetails} element={<DashBoardPages.DebutEventPage />} />
+
               <Route path={appRoutes.gratitudes} element={<DashBoardPages.GratitudePage />} />
             </Route>
           </Routes>

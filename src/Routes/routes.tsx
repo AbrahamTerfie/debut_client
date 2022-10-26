@@ -26,6 +26,7 @@ export const appRoutes = {
     myCompany: 'myCompany',
     goals: 'goals',
     events: 'events',
+    eventDetails: 'events/:id',
     gratitudes: 'gratitudes',
 
 

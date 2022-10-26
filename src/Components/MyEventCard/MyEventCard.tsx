@@ -72,18 +72,16 @@ export default function MyEventCard(
     })
 
   }
-  // if (createDebutRegistryRes.data) {
-  //   console.log(createDebutRegistryRes.data)
-  // }
+
 
   return (
     <>
       <motion.div
         whileTap={{ scale: 0.9 }}
         whileHover={{ scale: 1.08 }}
-        transition={{type: "spring", stiffness: 300, damping: 40 }}
+        transition={{ type: "spring", stiffness: 300, damping: 40 }}
 
-        onClick={toggle}
+        onClick={() => navigate(_id.toString())}
         className='d-flex m-3 h-50 shadow rounded flex-column  align-items-end w-25  ' >
         <img src={debutEventImage}
           style={{ maxHeight: "200px" }}
