@@ -74,7 +74,15 @@ export default function NewEvent() {
 
 
     const [createDebutEvent, createDebutEventRes] = useMutation(CREATE_EVENT, {
-        refetchQueries: [{ query: MY_DEBUT_EVENTS, variables: { userId: userID } }]
+        refetchQueries: [{ query: MY_DEBUT_EVENTS, variables: { userId: userID } }],
+        onCompleted: () => {
+            notifySuccess(" New Event Created")
+            setCanvas(false)
+        },
+        onError: (err) => {
+            notifyError(err.message)
+        },
+
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,11 +104,12 @@ export default function NewEvent() {
 
     const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        inputChecker() && createDebutEvent({
+        !createDebutEventRes.loading && inputChecker() && createDebutEvent({
             variables: {
                 debutEventInput: newEventData
             }
         })
+        setNewEventData(initState)
 
     }
 

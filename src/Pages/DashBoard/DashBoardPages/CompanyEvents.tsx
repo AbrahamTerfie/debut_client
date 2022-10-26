@@ -21,9 +21,9 @@ export default function CompanyEvents() {
   if (error) {
     console.log(error)
   }
-  if (data) {
-    console.log(data.getDebutEventsWithUserId)
-  }
+  // if (data) {
+  // console.log(data.getDebutEventsWithUserId)
+  // }
 
 
   return (
