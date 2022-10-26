@@ -9,6 +9,7 @@ import { RootState } from '../../Store/RootReducer'
 import { CREATE_DEBUT_REGISTRY, EVENT_REGISTRIES } from '../../GraphQl'
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from '../Loader/Loader'
+import { motion } from 'framer-motion'
 
 export default function MyEventCard(
   { _id,
@@ -77,19 +78,24 @@ export default function MyEventCard(
 
   return (
     <>
-      <div
+      <motion.div
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.08 }}
+        transition={{type: "spring", stiffness: 300, damping: 40 }}
+
         onClick={toggle}
-        className='d-flex m-4  h-50 shadow-sm rounded flex-column  align-items-end w-25 MyeventCard ' >
+        className='d-flex m-3 h-50 shadow rounded flex-column  align-items-end w-25  ' >
         <img src={debutEventImage}
-          className='w-100 h-100'
-          alt='event' />
+          style={{ maxHeight: "200px" }}
+          className='w-100 h-50 rounded-top' />
+
         <div className='px-4 py-3' >
           <p className='fs-5 d-flex justify-content-end ' >  {debutEventName}  </p>
           <small className=' text-muted fw-light  d-flex justify-content-end ' >
             {moment(debutEventDate).format('MMMM Do YYYY')}
           </small>
         </div>
-      </div>
+      </motion.div>
       <div>
         <Offcanvas
           style={{ width: '50%' }}

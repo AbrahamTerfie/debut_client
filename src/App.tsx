@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import "animate.css/animate.min.css";
 import { Authentication, Landing, DebutPages, Profile, MyDebutInfo, Dashboard, DashBoardPages } from './Pages/inedx';
-import { MyEvents } from './Pages/MyDebut/index';
+// import { MyEvents } from './Pages/MyDebut/index';
 import { GiveGratitude, Forum, People, Ventures, VenturePage } from './Pages/Community/index';
 import RegistryPage from './Pages/RegistryPage/RegistryPage';
 import { Routes, Route } from "react-router-dom";
@@ -40,7 +40,7 @@ function App() {
             <Route path={appRoutes.myDebutInfo} element={<MyDebutInfo />} />
             {/* *************** */}
             <Route path={appRoutes.debutRegistry} element={<DebutPages.Registry />} />
-            <Route path={appRoutes.myEvents} element={<MyEvents />} />
+            {/* <Route path={appRoutes.myEvents} element={<MyEvents />} /> */}
             <Route path={appRoutes.registry} element={<RegistryPage />} />
             <Route path={appRoutes.dashboard} element={<Dashboard />} >
               <Route path={appRoutes.myProfile} element={<DashBoardPages.MyProfile />} />
@@ -50,6 +50,7 @@ function App() {
               <Route path={appRoutes.gratitudes} element={<DashBoardPages.GratitudePage />} />
             </Route>
           </Routes>
+          <Toaster />
         </div>
       }
     </div>

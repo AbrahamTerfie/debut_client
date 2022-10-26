@@ -50,7 +50,6 @@ export default function DebutEventPage() {
 
                 </div>
             </Row>
-
             <Row className=' my-1 p-5 pt-0' >
                 <Col md={4} className='mx-3 rounded border border-light  border-opacity-25 py-4 shadow' >
                     <p className='fs-4' > details</p>
