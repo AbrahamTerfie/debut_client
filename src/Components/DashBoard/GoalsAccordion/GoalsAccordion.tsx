@@ -120,9 +120,9 @@ export default function GoalsAccordion(
                         </OffcanvasHeader>
                         <OffcanvasBody className='p-5' >
                             {/* new milestone form  */}
-                            <NewGoalMilestone goalID={_id}
-
-                                cnavasOpen={toggleCanvas}
+                            <NewGoalMilestone goalID={_id} 
+                            
+                            cnavasOpen={toggleCanvas}
                             />
                         </OffcanvasBody>
                     </Offcanvas>

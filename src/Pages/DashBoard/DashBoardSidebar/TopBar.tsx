@@ -10,6 +10,7 @@ import {
 
 } from "reactstrap";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function TopBar({ toggleSidebar }: any) {
     const [topbarIsOpen, setTopbarOpen] = useState(true);
@@ -25,10 +26,16 @@ export default function TopBar({ toggleSidebar }: any) {
             sticky="top"
         // style={{ width: "150vh" }}
         >
-            <Button color="success" outline onClick={toggleSidebar}  className="bg-success bg-opacity-25">
+            <motion.div 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{type: "spring", stiffness: 300 , duration: 0.5}}
+            color="light" onClick={toggleSidebar} className=" btn outline bg-success bg-opacity-25">
 
-                <FontAwesomeIcon icon={faAlignLeft} />
-            </Button>
+                <FontAwesomeIcon icon={faAlignLeft}
+                    color="green"
+                />
+            </motion.div>
             <NavbarToggler onClick={toggleTopbar} />
             <Collapse isOpen={topbarIsOpen} navbar
                 className="w-auto justify-content-start">
