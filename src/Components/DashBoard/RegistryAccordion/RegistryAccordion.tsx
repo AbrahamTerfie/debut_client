@@ -84,6 +84,8 @@ export default function RegistryAccordion(
         if (inputChecker()) {
             newRegistryItemMutation({ variables: { registryItemInput: newRegistryItem } })
             setNewRegistryItem(itemState)
+            setPreviewImage("")
+            setImageSelected(undefined)
             setModal(false)
             notifySuccess("New Registry Item created")
         }
