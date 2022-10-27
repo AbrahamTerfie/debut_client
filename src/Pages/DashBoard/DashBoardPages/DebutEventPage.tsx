@@ -14,13 +14,9 @@ export default function DebutEventPage() {
 
 
     const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
-
-
     const [modal, setModal] = useState(false);
-
     const toggle = () => setModal(!modal);
     const { id } = useParams<{ id: string }>()
-
     const newRegisstryState = {
         createdBy: userID,
         belongsTo: companyID,
@@ -68,11 +64,7 @@ export default function DebutEventPage() {
     const submitHandler = (e: any) => {
         e.preventDefault()
         if (checkInput()) {
-            createDebutRegistry({
-                variables: {
-                    debutRegistryInput: newRegistry
-                }
-            })
+            createDebutRegistry({ variables: { debutRegistryInput: newRegistry } })
             setNewRegistry(newRegisstryState)
             toggle()
         }
@@ -162,23 +154,25 @@ export default function DebutEventPage() {
                     </motion.div>
                 </div>
 
-                {data?.getDebutEventWithId?.debutRegistry.map((registry: any, index: number) => {
-                    return (
-                        <RegistryAccordion
-                            key={index}
-                            _id={registry._id}
-                            debutRegistryName={registry.debutRegistryName}
-                            debutRegistryStatus={registry.debutRegistryStatus}
-                            debutRegistryItems={registry.debutRegistryItems}
+                {data?.getDebutEventWithId?.debutRegistry.length === 0 ?
+                    <div className='d-flex flex-column  justify-content-center align-items-center' >
+                        <p className='fs-3 fw-light m-0' > no registries yet </p>
+                        <p className='text-muted' > start by creating a registry  </p>
 
-                        />
-                    )
-                }
-                )}
+                    </div>
+                    : data?.getDebutEventWithId?.debutRegistry.map((registry: any, index: number) => {
+                        return (
+                            <RegistryAccordion
+                                key={index}
+                                _id={registry._id}
+                                debutRegistryName={registry.debutRegistryName}
+                                debutRegistryStatus={registry.debutRegistryStatus}
+                                debutRegistryItems={registry.debutRegistryItems}
 
-                {/* <RegistryAccordion
-                    eventRegistry={data?.getDebutEventWithId?.debutRegistry}
-                /> */}
+                            />
+                        )
+                    }
+                    )}
             </Row>
         </div >
     )
