@@ -1,9 +1,25 @@
 import react from 'react';
 import { motion } from 'framer-motion';
-import {  Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
+
+interface registryItem {
+    itemOfRegistry: string
+    registryItemName: string
+    registryItemDescription: string
+    registryItemImage: string
+    registryItemPrice: string
+    registryItemLink: string
+    registryItemQuantity: string
+    registryItemFullfiled: Boolean
+}
 
 
-export default function RegistryItem() {
+export default function RegistryItem(
+    {
+        itemOfRegistry, registryItemName, registryItemDescription, registryItemImage,
+        registryItemPrice, registryItemLink, registryItemQuantity, registryItemFullfiled
+    }: registryItem) {
+
     return (
         <Col md={6}>
             <motion.div
@@ -15,15 +31,15 @@ export default function RegistryItem() {
                 className=' shadow-sm rounded rounded-5   pt-0   m-2 me-2'>
                 <Row>
                     {/* placeholder image  */}
-                    <img src='https://images.unsplash.com/photo-1664574653790-cee0e10a4242?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-                        alt="registry item" className='img-fluid rounded-5' style={{ height: '200px' }} />
+                    <img src={registryItemImage} alt="registryItemImage" className='rounded rounded-5 img-fluid'
+                        style={{ height: '200px' }} />
                 </Row>
 
                 <Row className='p-4 '>
                     <Col md={8}>
-                        <p className='fs-5 fw-light m-0' > registry item name </p>
-                        <p className='text-muted text-wrap' > registry item description </p>
-                        <p className='text-muted text-wrap' > item Linkkkkkkk </p>
+                        <p className='fs-5 fw-light m-0' > {registryItemName} </p>
+                        <p className='text-muted text-wrap' > {registryItemDescription} </p>
+                        <p className='text-muted text-wrap' >  {registryItemLink}  </p>
 
                     </Col>
                     <Col md={4}>

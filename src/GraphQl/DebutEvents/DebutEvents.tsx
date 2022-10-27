@@ -44,3 +44,12 @@ mutation createDebutRegistry($debutRegistryInput: debutRegistryInput){
   }
 }
 `
+
+
+export const NEW_REGISTRY_ITEM = gql`
+mutation createRegistryItem($registryItemInput: RegistryItemInput) {
+  createRegistryItem(registryItemInput: $registryItemInput) {
+    _id
+  }
+}
+`

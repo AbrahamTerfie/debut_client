@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { motion } from 'framer-motion'
 import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Row, Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label } from 'reactstrap'
-
+import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, MY_DEBUT_EVENTS, } from '../../../GraphQl/index'
+import { useMutation, useQuery } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { notifyError, notifySuccess } from '../../Notification/Toast'
+import { useParams } from 'react-router-dom'
 
 
 interface registryItem {
@@ -29,11 +31,10 @@ interface debutRegistryInterface {
 
 
 export default function RegistryAccordion(
-    {
-        _id, debutRegistryName, debutRegistryStatus, debutRegistryItems
+    { _id, debutRegistryName, debutRegistryStatus, debutRegistryItems
     }: debutRegistryInterface) {
     const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
-
+    const { id } = useParams<{ id: string }>()
     const itemState: registryItem = {
         itemOfRegistry: _id,
         registryItemName: "",
@@ -55,6 +56,40 @@ export default function RegistryAccordion(
     const [previewImage, setPreviewImage] = useState("")
 
 
+    const [newRegistryItemMutation, newRegistryItemMutationRes] = useMutation(NEW_REGISTRY_ITEM, {
+        refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
+        onCompleted: (data) => {
+            notifySuccess("New Registry Item created")
+        },
+        onError: (error) => {
+            notifyError(error.toString())
+        }
+    })
+
+    const inputChecker = () => {
+        if (newRegistryItem.registryItemName === "" ||
+            newRegistryItem.registryItemDescription === "" ||
+            newRegistryItem.registryItemPrice === "" ||
+            newRegistryItem.registryItemQuantity === "" ||
+            newRegistryItem.registryItemLink === "" ||
+            imageSelected === undefined) {
+            notifyError("Please fill all the fields")
+            return false
+        }
+        return true
+    }
+
+    const submitHandler = (e: any) => {
+        e.preventDefault()
+        if (inputChecker()) {
+            newRegistryItemMutation({ variables: { registryItemInput: newRegistryItem } })
+            setNewRegistryItem(itemState)
+            setModal(false)
+            notifySuccess("New Registry Item created")
+        }
+    }
+
+
     //create preview image string 
     useEffect(() => {
         if (!imageSelected) {
@@ -73,8 +108,6 @@ export default function RegistryAccordion(
         }
     }
 
-
-
     const handleFileSelected = () => {
         const formData = new FormData()
         formData.append('file', imageSelected)
@@ -91,10 +124,6 @@ export default function RegistryAccordion(
                 console.log(error)
             })
     }
-
-    // useEffect(() => {
-    //     handleFileSelected()
-    // }, [imageSelected])
     const saveImage = (e: any) => {
         e.preventDefault()
         handleFileSelected()
@@ -127,7 +156,7 @@ export default function RegistryAccordion(
                             <Col md={4} >
                                 <FormGroup>
                                     <Label for="registryItemQuantity"> quantity</Label>
-                                    <Input type="text" name="registryItemQuantity"
+                                    <Input type="number" name="registryItemQuantity"
                                         id="registryItemQuantity"
                                         onChange={inputHandler}
                                         placeholder="quantity" />
@@ -155,7 +184,7 @@ export default function RegistryAccordion(
                             <Col md={4}>
                                 <FormGroup>
                                     <Label for="registryItemPrice">Item price</Label>
-                                    <Input type="text"
+                                    <Input type="number"
                                         onChange={inputHandler}
                                         name="registryItemPrice"
                                         id="registryItemPrice" placeholder=" item price"
@@ -201,7 +230,7 @@ export default function RegistryAccordion(
                     <Button color="warning" outline size='sm' onClick={toggle}>
                         Cancel
                     </Button>
-                    <Button color="success" outline size='sm' className='px-5' onClick={toggle}>
+                    <Button color="success" outline size='sm' className='px-5' onClick={(e: any) => submitHandler(e)}>
                         add item
                     </Button>{' '}
 
@@ -247,10 +276,33 @@ export default function RegistryAccordion(
                             add item
                         </motion.div>
                         <Row className="px-4" >
+
+
+                            {
+                                debutRegistryItems.length === 0 ?
+                                    <div className="text-center text-muted">
+                                        No items added yet
+                                    </div> :
+
+                                    debutRegistryItems?.map((item: any) => (
+
+                                        <RegistryItem
+                                            key={item._id}
+                                            itemOfRegistry={item.itemOfRegistry}
+                                            registryItemName={item.registryItemName}
+                                            registryItemDescription={item.registryItemDescription}
+                                            registryItemImage={item.registryItemImage}
+                                            registryItemPrice={item.registryItemPrice}
+                                            registryItemLink={item.registryItemLink}
+                                            registryItemQuantity={item.registryItemQuantity}
+                                            registryItemFullfiled={item.registryItemFullfiled}
+                                        />
+                                    )
+                                    )}
+                            {/* <RegistryItem />
                             <RegistryItem />
                             <RegistryItem />
-                            <RegistryItem />
-                            <RegistryItem />
+                            <RegistryItem /> */}
                         </Row>
 
                     </AccordionBody>

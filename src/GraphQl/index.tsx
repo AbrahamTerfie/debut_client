@@ -17,7 +17,7 @@ import {
     CREATE_EVENT, MY_DEBUT_EVENTS, EVENTS_PAGES,
     DEBUT_EVENT_DETAILS, EVENT_PAGE_REGISTRY
 } from './DebutEvents/eventQuries'
-import {  EVENT_REGISTRIES } from './DebutRegistry/RegistryQuries'
+import { EVENT_REGISTRIES } from './DebutRegistry/RegistryQuries'
 import { GET_REGISTRY_ITEMS_WITH_REGISTRY_ID, CREATE_REGISTRY_ITEM } from './RegistryItem/RegistryItemQuries'
 import { All_USERS, GET_DEBUT_USER_WITH_ID } from './User/userInfo'
 
@@ -25,7 +25,7 @@ import { GRATITUDE_TO_USER, CREATE_GRATITUDE, RECIVED_GRATITUDE, SENT_GRATITUDE 
 
 import { FETCH_COMPANY_GOALS_WITH_COMPANY_ID, CREATE_COMPANY_GOAL, DELETE_COMPANY_GOAL, UPDATE_COMPANY_GOAL } from './Goals/goals'
 import { CREATE_NEW_MILESTONE, DELETE_COMPANY_MILESTONE, TOGGLE_MILESTONE_STATUS } from './Goals/milestones'
-import { GET_EVENT_WITH_ID , CREATE_DEBUT_REGISTRY} from './DebutEvents/DebutEvents'
+import { GET_EVENT_WITH_ID, CREATE_DEBUT_REGISTRY, NEW_REGISTRY_ITEM } from './DebutEvents/DebutEvents'
 export {
     CHECK_EMAIL_VALIDITY,
     CREATE_DEBUT_USER,
@@ -49,7 +49,7 @@ export {
     MY_DEBUT_EVENTS,
     EVENTS_PAGES,
     // registry
-
+    CREATE_DEBUT_REGISTRY,
     EVENT_REGISTRIES,
     DEBUT_EVENT_DETAILS,
     EVENT_PAGE_REGISTRY,
@@ -76,6 +76,6 @@ export {
 
     // debut events (new queries)
     GET_EVENT_WITH_ID,
-    CREATE_DEBUT_REGISTRY
+    NEW_REGISTRY_ITEM
 
 }
