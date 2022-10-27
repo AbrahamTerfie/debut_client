@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { motion } from 'framer-motion'
 import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Row, Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label } from 'reactstrap'
-import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, MY_DEBUT_EVENTS, } from '../../../GraphQl/index'
+import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, MY_DEBUT_EVENTS, DELETE_DEBUT_REGISTRY } from '../../../GraphQl/index'
 import { useMutation, useQuery } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { notifyError, notifySuccess } from '../../Notification/Toast'
 import { useParams } from 'react-router-dom'
+import { BsTrash } from 'react-icons/bs'
 
 
 interface registryItem {
@@ -50,8 +51,10 @@ export default function RegistryAccordion(
 
     const [open, setOpen] = useState('');
     const [modal, setModal] = useState(false);
-    const [imageSelected, setImageSelected] = useState() as any
     const toggle = () => setModal(!modal);
+    const [deleteRegistryModal, setDeleteRegistryModal] = useState(false);
+    const toggleDeleteRegistryModal = () => setDeleteRegistryModal(!deleteRegistryModal);
+    const [imageSelected, setImageSelected] = useState() as any
     const [newRegistryItem, setNewRegistryItem] = useState(itemState)
     const [previewImage, setPreviewImage] = useState("")
 
@@ -65,6 +68,23 @@ export default function RegistryAccordion(
             notifyError(error.toString())
         }
     })
+
+    const [deleteRegistry] = useMutation(DELETE_DEBUT_REGISTRY, {
+        refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
+        onCompleted: (data) => {
+            notifySuccess("Registry Deleted")
+        },
+        onError: (error) => {
+            notifyError(error.toString())
+        }
+    })
+
+    const handleDeleteRegistry = (e: any) => {
+        deleteRegistry({ variables: { deleteDebutRegistryId: _id } })
+        toggleDeleteRegistryModal()
+    }
+
+
 
     const inputChecker = () => {
         if (newRegistryItem.registryItemName === "" ||
@@ -145,52 +165,38 @@ export default function RegistryAccordion(
                         <Row className='App px-3'>
                             <Col md={8}>
                                 <FormGroup>
-                                    <Label
-                                        for="registryItemName">  name </Label>
+                                    <Label for="registryItemName">  name </Label>
                                     <Input
-                                        type="text"
-                                        name="registryItemName"
-                                        id="registryItemName"
-                                        onChange={inputHandler}
+                                        type="text" name="registryItemName" id="registryItemName" onChange={inputHandler}
                                         placeholder=" name your registry item" />
                                 </FormGroup>
                             </Col>
                             <Col md={4} >
                                 <FormGroup>
                                     <Label for="registryItemQuantity"> quantity</Label>
-                                    <Input type="number" name="registryItemQuantity"
-                                        id="registryItemQuantity"
-                                        onChange={inputHandler}
-                                        placeholder="quantity" />
+                                    <Input type="number" name="registryItemQuantity" id="registryItemQuantity"
+                                        onChange={inputHandler} placeholder="quantity" />
                                 </FormGroup>
                             </Col>
                             <Col md={12}>
                                 <FormGroup>
                                     <Label for="registryItemDescription">Item Description</Label>
-                                    <Input type="textarea"
-                                        name="registryItemDescription"
-                                        onChange={inputHandler}
-                                        id="registryItemDescription"
-                                        placeholder=" item description" />
+                                    <Input type="textarea" name="registryItemDescription" onChange={inputHandler}
+                                        id="registryItemDescription" placeholder=" item description" />
                                 </FormGroup>
                             </Col>
                             <Col md={8}>
                                 <FormGroup>
                                     <Label for="registryItemLink">Item link</Label>
-                                    <Input type="text" name="registryItemLink"
-                                        onChange={inputHandler}
-                                        id="registryItemLink"
-                                        placeholder=" item link" />
+                                    <Input type="text" name="registryItemLink" onChange={inputHandler}
+                                        id="registryItemLink" placeholder=" item link" />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
                                     <Label for="registryItemPrice">Item price</Label>
-                                    <Input type="number"
-                                        onChange={inputHandler}
-                                        name="registryItemPrice"
-                                        id="registryItemPrice" placeholder=" item price"
-                                    />
+                                    <Input type="number" onChange={inputHandler} name="registryItemPrice"
+                                        id="registryItemPrice" placeholder=" item price" />
                                 </FormGroup>
                             </Col>
                             <Col md={6} >
@@ -200,17 +206,11 @@ export default function RegistryAccordion(
                                 </FormGroup>
                             </Col>
                             <Col md={6} className="mt-4" >
-                                <img
-                                    src={previewImage}
-                                    alt="event image"
-                                    className='img-fluid'
-                                    style={{ height: '200px', width: '200px' }}
-                                />
+                                <img src={previewImage} alt="event image" className='img-fluid'
+                                    style={{ height: '200px', width: '200px' }} />
                                 <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 1.01 }}
-                                    transition={{ type: 'spring', stiffness: 300, damping: 10 }}
-                                    onClick={(e: any) => saveImage(e)}
+                                    whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.01 }}
+                                    transition={{ type: 'spring', stiffness: 300, damping: 10 }} onClick={(e: any) => saveImage(e)}
                                     className="mt-2 text-center bg-success text-success p-2 rounded bg-opacity-10">
                                     save image
                                 </motion.div>
@@ -219,29 +219,39 @@ export default function RegistryAccordion(
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="warning" outline size='sm' onClick={toggle}>
-                        Cancel
-                    </Button>
-                    <Button color="success" outline size='sm' className='px-5' onClick={(e: any) => submitHandler(e)}>
-                        add item
-                    </Button>{' '}
+                    <Button color="warning" outline size='sm' onClick={toggle}>Cancel</Button>
+                    <Button color="success" outline size='sm' className='px-5' onClick={(e: any) => submitHandler(e)}>add item</Button>{' '}
                 </ModalFooter>
             </Modal>
-            <UncontrolledAccordion
-                open={open}
-                flush
-                stayOpen>
+
+
+            <Modal isOpen={deleteRegistryModal} toggle={toggleDeleteRegistryModal} centered size='lg' >
+                <ModalHeader toggle={toggleDeleteRegistryModal}>  Delete Registy </ModalHeader>
+                <ModalBody className='px-5' >
+                    <p className=' text-danger fw-light  fs-4 m-0'> Are you sure you want to delete this registry item? </p>
+                    <p className='text-danger fw-light m-0 fs-1' > {debutRegistryName} </p>
+                    <p className=' text-warning' > This action cannot be undone </p>
+
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="warning" outline size="sm" onClick={toggleDeleteRegistryModal}>
+                        cancel
+                    </Button>{' '}
+                    <Button color="danger" outline size="sm" className='px-5' onClick={(e: any) => handleDeleteRegistry(e)}>
+                        yes delete
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
+            <UncontrolledAccordion open={open} flush stayOpen>
                 <AccordionItem>
                     <motion.div
-                        whileHover={{ scale: 1.008 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        initial={{ opacity: 0, y: 100 }}
-                        animate={{ opacity: 1, y: 0 }}>
+                        whileHover={{ scale: 1.008 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }}>
                         <AccordionHeader
                             className=' accordionHeader fw-light shadow-sm my-2  '
                             targetId={_id.toString()} >
                             {debutRegistryName}
-
                             {debutRegistryStatus ? <span className="badge bg-success bg-opacity-10 text-success mx-4">Active</span> :
                                 <span className="badge bg-danger mx-4 bg-danger bg-opacity-10 text-danger">Inactive</span>}
 
@@ -249,17 +259,33 @@ export default function RegistryAccordion(
                     </motion.div>
 
                     <AccordionBody accordionId={_id.toString()}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 100 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                            whileHover={{ scale: 1.008 }}
-                            whileTap={{ scale: 1.09 }}
-                            style={{ cursor: 'pointer' }}
-                            onClick={toggle}
-                            className='shadow-sm rounded rounded-5   p-2 m-4  me-2 bg-success bg-opacity-10  text-success align-items-center justify-content-center d-flex'>
-                            add item
-                        </motion.div>
+                        <Row className='d-flex justify-content-between align-items-center mb-5'>
+                            <Col md={6} >
+                                <motion.div
+                                    initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    whileHover={{ scale: 1.008 }} whileTap={{ scale: 1.09 }} style={{ cursor: 'pointer' }} onClick={toggle}
+                                    className='shadow-sm rounded rounded-5   p-2 mx-1  me-2 bg-success bg-opacity-10  text-success  justify-content-center d-flex'>
+                                    add item
+                                </motion.div>
+                            </Col>
+                            <Col md={4}>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    whileHover={{ scale: 1.008 }} whileTap={{ scale: 1.09 }} style={{ cursor: 'pointer' }} onClick={toggle}
+                                    className='shadow-sm rounded rounded-5   p-2 mx-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'>
+                                    set status active
+                                </motion.div>
+                            </Col>
+                            <Col md={2}>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    whileHover={{ scale: 1.008 }} whileTap={{ scale: 1.09 }} style={{ cursor: 'pointer' }} onClick={toggleDeleteRegistryModal}
+                                    className='shadow-sm rounded rounded-5   p-2 mx-1  me-2 bg-danger bg-opacity-10   text-danger align-items-center justify-content-center d-flex'>
+                                    <BsTrash />
+                                </motion.div>
+                            </Col>
+
+                        </Row>
                         <Row className="px-4" >
                             {debutRegistryItems.length === 0 ?
                                 <div className="text-center text-muted">
