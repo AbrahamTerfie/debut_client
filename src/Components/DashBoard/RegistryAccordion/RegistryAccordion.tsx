@@ -190,23 +190,15 @@ export default function RegistryAccordion(
                                         onChange={inputHandler}
                                         name="registryItemPrice"
                                         id="registryItemPrice" placeholder=" item price"
-
                                     />
                                 </FormGroup>
                             </Col>
-
-
-
                             <Col md={6} >
-
-
                                 <FormGroup>
                                     <Label for="debutEventImage"> Image </Label>
                                     <Input onChange={onSelectFile} type="file" name="debutEventImage" id="debutEventImage" />
-
                                 </FormGroup>
                             </Col>
-
                             <Col md={6} className="mt-4" >
                                 <img
                                     src={previewImage}
@@ -214,7 +206,6 @@ export default function RegistryAccordion(
                                     className='img-fluid'
                                     style={{ height: '200px', width: '200px' }}
                                 />
-
                                 <motion.div
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 1.01 }}
@@ -224,7 +215,6 @@ export default function RegistryAccordion(
                                     save image
                                 </motion.div>
                             </Col>
-
                         </Row>
                     </Form>
                 </ModalBody>
@@ -235,25 +225,18 @@ export default function RegistryAccordion(
                     <Button color="success" outline size='sm' className='px-5' onClick={(e: any) => submitHandler(e)}>
                         add item
                     </Button>{' '}
-
                 </ModalFooter>
             </Modal>
             <UncontrolledAccordion
                 open={open}
                 flush
-                defaultOpen={[
-                    '1',
-                    '2'
-                ]}
-                stayOpen
-            >
+                stayOpen>
                 <AccordionItem>
                     <motion.div
                         whileHover={{ scale: 1.008 }}
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         initial={{ opacity: 0, y: 100 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
+                        animate={{ opacity: 1, y: 0 }}>
                         <AccordionHeader
                             className=' accordionHeader fw-light shadow-sm my-2  '
                             targetId={_id.toString()} >
@@ -278,35 +261,25 @@ export default function RegistryAccordion(
                             add item
                         </motion.div>
                         <Row className="px-4" >
-
-
-                            {
-                                debutRegistryItems.length === 0 ?
-                                    <div className="text-center text-muted">
-                                        No items added yet
-                                    </div> :
-
-                                    debutRegistryItems?.map((item: any) => (
-
-                                        <RegistryItem
-                                            key={item._id}
-                                            itemOfRegistry={item.itemOfRegistry}
-                                            registryItemName={item.registryItemName}
-                                            registryItemDescription={item.registryItemDescription}
-                                            registryItemImage={item.registryItemImage}
-                                            registryItemPrice={item.registryItemPrice}
-                                            registryItemLink={item.registryItemLink}
-                                            registryItemQuantity={item.registryItemQuantity}
-                                            registryItemFullfiled={item.registryItemFullfiled}
-                                        />
-                                    )
-                                    )}
-                            {/* <RegistryItem />
-                            <RegistryItem />
-                            <RegistryItem />
-                            <RegistryItem /> */}
+                            {debutRegistryItems.length === 0 ?
+                                <div className="text-center text-muted">
+                                    No items added yet
+                                </div> :
+                                debutRegistryItems?.map((item: any) => (
+                                    <RegistryItem
+                                        key={item._id}
+                                        _id={item._id}
+                                        itemOfRegistry={item.itemOfRegistry}
+                                        registryItemName={item.registryItemName}
+                                        registryItemDescription={item.registryItemDescription}
+                                        registryItemImage={item.registryItemImage}
+                                        registryItemPrice={item.registryItemPrice}
+                                        registryItemLink={item.registryItemLink}
+                                        registryItemQuantity={item.registryItemQuantity}
+                                        registryItemFullfiled={item.registryItemFullfiled}
+                                    />
+                                ))}
                         </Row>
-
                     </AccordionBody>
                 </AccordionItem>
 

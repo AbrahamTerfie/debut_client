@@ -53,3 +53,17 @@ mutation createRegistryItem($registryItemInput: RegistryItemInput) {
   }
 }
 `
+
+
+export const DELETE_REGISTRY_ITEM = gql`
+mutation deleteRegistryItem($deleteRegistryItemId: ID!){
+  deleteRegistryItem(id: $deleteRegistryItemId)
+
+}`
+
+
+
+export const DELETE_DEBUT_REGISTRY = gql`
+mutation deleteDebutRegistry($deleteDebutRegistryId: ID!){
+  deleteDebutRegistry(id: $deleteDebutRegistryId)
+}`
