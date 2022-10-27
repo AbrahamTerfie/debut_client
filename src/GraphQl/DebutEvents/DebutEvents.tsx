@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_EVENT_WITH_ID = gql`
-query($getDebutEventWithIdId: ID!) {
+query getDebutEventWithId($getDebutEventWithIdId: ID!) {
   getDebutEventWithId(id: $getDebutEventWithIdId) {
     _id
     debutEventName
@@ -32,6 +32,15 @@ query($getDebutEventWithIdId: ID!) {
     }
     debutInvitationLink
     otherRelatedLinks
+  }
+}
+`
+
+
+export const CREATE_DEBUT_REGISTRY = gql`
+mutation createDebutRegistry($debutRegistryInput: debutRegistryInput){
+  createDebutRegistry(debutRegistryInput: $debutRegistryInput) {
+    _id
   }
 }
 `
