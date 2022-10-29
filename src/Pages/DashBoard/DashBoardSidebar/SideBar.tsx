@@ -71,7 +71,7 @@ export default function SideBar({ isOpen, toggle }: {
                         </NavLink>
                     </NavItem>
                     <NavItem
-                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >`
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
                         <NavLink
                             onClick={() => navigate(appRoutes.myProfile)}
                             style={textColor}>

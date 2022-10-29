@@ -9,13 +9,17 @@ import {
     Nav,
 
 } from "reactstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { appRoutes } from "../../../Routes/routes";
 import { motion } from "framer-motion";
 
 export default function TopBar({ toggleSidebar }: any) {
     const [topbarIsOpen, setTopbarOpen] = useState(true);
     const toggleTopbar = () => setTopbarOpen(!topbarIsOpen);
     const location = useLocation();
+    const navigate = useNavigate();
+    // { console.log(location.pathname) }
+
     return (
         <Navbar
             color="light"
@@ -26,11 +30,11 @@ export default function TopBar({ toggleSidebar }: any) {
             sticky="top"
         // style={{ width: "150vh" }}
         >
-            <motion.div 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{type: "spring", stiffness: 300 , duration: 0.5}}
-            color="light" onClick={toggleSidebar} className=" btn outline bg-success bg-opacity-25">
+            <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 300, duration: 0.5 }}
+                color="light" onClick={toggleSidebar} className=" btn outline bg-success bg-opacity-25">
 
                 <FontAwesomeIcon icon={faAlignLeft}
                     color="green"
@@ -42,7 +46,15 @@ export default function TopBar({ toggleSidebar }: any) {
 
                 <Nav className="" navbar>
                     <p className="text-muted mt-2 mx-4 fs-5 fw-bold" >
-                        {location.pathname.slice(1, location.pathname.length)}
+                        <span onClick={() => navigate(appRoutes.dashboard)} style={{ cursor: "pointer" }}>
+                            {location.pathname.split("/")[1]}
+                        </span>
+                        <span> / </span>
+                        <span
+                            onClick={() => navigate(location.pathname.split("/")[2])} style={{ cursor: "pointer" }} >
+                            {location.pathname.split("/")[2]}
+                        </span>
+
                     </p>
                 </Nav>
             </Collapse>
