@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { motion } from 'framer-motion'
-import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Row, Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label } from 'reactstrap'
 import {
-    NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, MY_DEBUT_EVENTS, DELETE_DEBUT_REGISTRY,
-    MARK_ITEM_AS_FULFILLED, TOGGLE_REGISTRY_STATUS,
-
-} from '../../../GraphQl/index'
+    UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Row,
+    Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label
+} from 'reactstrap'
+import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, DELETE_DEBUT_REGISTRY, TOGGLE_REGISTRY_STATUS, } from '../../../GraphQl/index'
 import { useMutation, useQuery } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
 import { useSelector } from 'react-redux'

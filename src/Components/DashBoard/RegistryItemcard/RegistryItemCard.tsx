@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Row, Col, Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { BsTrash } from 'react-icons/bs';
 import { useMutation } from '@apollo/client';
-import { DELETE_REGISTRY_ITEM, GET_EVENT_WITH_ID } from '../../../GraphQl/index';
+import { DELETE_REGISTRY_ITEM, GET_EVENT_WITH_ID, MARK_ITEM_AS_FULFILLED } from '../../../GraphQl/index';
 import { useParams } from 'react-router-dom';
 import { on } from 'process';
 import { notifyError, notifySuccess } from '../../Notification/Toast';
@@ -29,18 +29,23 @@ export default function RegistryItem(
     const toggle = () => setModal(!modal);
     const { id } = useParams<{ id: string }>()
     const [deleteRegistryItem] = useMutation(DELETE_REGISTRY_ITEM, {
-
         refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
         onCompleted: () => {
             notifySuccess("Item deleted")
             toggle()
         },
-        onError: (error) => {
-            notifyError(error.toString())
-        }
-
+        onError: (error) => { notifyError(error.toString()) }
     })
 
+    const [markItemAsFulfilled] = useMutation(MARK_ITEM_AS_FULFILLED, {
+        refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
+        variables: { toggleRegistryItemAsFullfiledId: _id },
+        onCompleted: () => {
+            notifySuccess(registryItemFullfiled ? "Item marked as not fulfilled" : "Item marked as fulfilled")
+        },
+        onError: (error) => { notifyError(error.toString()) }
+
+    })
 
     const handleDeleteItem = () => {
         deleteRegistryItem({ variables: { deleteRegistryItemId: _id } })
@@ -108,15 +113,11 @@ export default function RegistryItem(
                         whileTap={{ scale: 1.08 }}
                         transition={{ type: 'spring', stiffness: 300, duration: 0.5 }}
                         style={{ cursor: 'default' }}
-
-
+                        onClick={() => { markItemAsFulfilled() }}
                         className={!registryItemFullfiled ? ' shadow-sm rounded bg-success bg-opacity-10 p-2  px-4 w-100 m-1 me-2  text-success text-center' : ' shadow-sm rounded bg-dark bg-opacity-10 p-2  px-4 w-100 m-1 me-2  text-dark text-center'}>
-
-
                         {!registryItemFullfiled ? 'mark as fullfiled' : 'fullfiled'}
                     </motion.div>
                     {!registryItemFullfiled &&
-
                         <motion.div
                             whileHover={{ scale: 1.009 }}
                             whileTap={{ scale: 1.08 }}
@@ -124,10 +125,7 @@ export default function RegistryItem(
                             style={{ cursor: 'default' }}
                             onClick={toggle}
                             className=' shadow-sm rounded bg-danger bg-opacity-10 p-2  px-4 w-25 m-1 me-2  text-danger text-center'>
-
-                            <BsTrash
-                                className='text-danger'
-                            />
+                            <BsTrash className='text-danger' />
                         </motion.div>
                     }
                 </div>
