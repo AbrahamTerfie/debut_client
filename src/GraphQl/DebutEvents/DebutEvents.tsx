@@ -80,4 +80,10 @@ export const TOGGLE_REGISTRY_STATUS = gql`
 mutation toggledebutRegistryStatus($toggledebutRegistryStatusId: ID!){
   toggledebutRegistryStatus(id: $toggledebutRegistryStatusId)
 }
-` 
+`
+
+export const NUKE_DEBUT_EVENT = gql`
+mutation deleteDebutEvent($deleteDebutEventId: ID!) {
+  deleteDebutEvent(id: $deleteDebutEventId)
+}
+`

@@ -23,31 +23,20 @@ export default function Landing() {
 
     return (
         <Container fluid className="" >
-            <Parallax pages={2.5} style={{
-                top: '0', left: '0', bottom: '0', right: '0', position: 'absolute',
-
-            }}>
+            <Parallax pages={2.5} style={{ top: '0', left: '0', bottom: '0', right: '0', position: 'absolute', }}>
                 <ParallaxLayer
                     offset={0}
                     speed={1.5}
                     className='d-flex justify-content-start align-items-center 
                         flex-column p-3 mx-2 my-5'>
-                    <Row className='headerText'  >
-                        <p>Debut</p>
-                    </Row>
+                    <Row className='headerText'  ><p>Debut</p></Row>
                     <p className='fs-4 m-0' >Scroll down</p>
                     <p className='text-muted m-0' > to learn more </p>
                 </ParallaxLayer>
                 <ParallaxLayer
-                    offset={0.5}
-                    speed={0.5}
-                    style={{
-                        backgroundColor: '#1985a1',
-                        color: 'lightblue',
-                        height: "max-content",
-                    }}
-                    className="mb-5"
-                >
+                    offset={0.5} speed={0.5}
+                    style={{ backgroundColor: '#1985a1', color: 'lightblue', height: "max-content", }}
+                    className="mb-5">
                     <Row className='d-flex justify-content-center align-items-center pt-5  '>
                         <Col md={5} className="shadow-sm  p-4 rounded mx-2 border border-light" >
                             <p
@@ -61,16 +50,10 @@ export default function Landing() {
                         <Col md={5} className="shadow-lg p-5 rounded  forumCardParent   border-light border-5 mx-2" >
                             <Link to={appRoutes.authentication}>
                                 <div className=" d-flex justify-content-center align-items-center ">
-                                    <VscDebugStart
-                                        className='mx-3'
-                                        size={100}
-                                        color="#ffffff"
-                                    />
+                                    <VscDebugStart className='mx-3' size={100} color="#ffffff" />
                                     <div>
                                         <p className='m-0 fs-1 text-light' >get started </p>
-                                        <span className='text-light' >
-                                            sign up or login
-                                        </span>
+                                        <span className='text-light' > sign up or login </span>
                                     </div>
                                 </div>
                             </Link>

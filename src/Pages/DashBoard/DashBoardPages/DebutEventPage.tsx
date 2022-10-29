@@ -10,12 +10,19 @@ import moment from 'moment'
 import { useSelector } from 'react-redux'
 import RegistryAccordion from '../../../Components/DashBoard/RegistryAccordion/RegistryAccordion'
 import { RootState } from '../../../Store/RootReducer'
+import { BsTrash } from 'react-icons/bs'
+import NukeEvent from '../../../Components/DashBoard/NukeEvent/NukeEvent'
+
 export default function DebutEventPage() {
 
 
     const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const [nukeEventModal, setNukeEventModal] = useState(false);
+    const toggleNukeEventModal = () => setNukeEventModal(!nukeEventModal);
+
+
     const { id } = useParams<{ id: string }>()
     const newRegisstryState = {
         createdBy: userID,
@@ -70,10 +77,22 @@ export default function DebutEventPage() {
         }
     }
 
-    if (loading) return <Loader />
+    if (loading) return (
+
+        <div className='d-flex justify-content-center align-items-center'>
+
+            <Loader />
+        </div>
+    )
 
     return (
         <div className='px-5' >
+            <NukeEvent
+                event={data?.getDebutEventWithId}
+                loading={loading}
+                modalState={nukeEventModal}
+                toggler={toggleNukeEventModal}
+            />
             <Modal isOpen={modal} toggle={toggle} size="lg">
                 <ModalHeader toggle={toggle}> Create New registry </ModalHeader>
                 <ModalBody>
@@ -104,16 +123,10 @@ export default function DebutEventPage() {
                     <span className='text-muted' > event name </span>
                     <p className='fs-1 fw-light mb-0' > {data?.getDebutEventWithId?.debutEventName} </p>
                     <p className='text-muted ' > {data && moment(data.getDebutEventWithId.debutEventDate).format('DD MMMM YYYY')} </p>
-
-
                     <p className='text-muted m-0' > event description </p>
                     <p>{data?.getDebutEventWithId?.debutEventDescription}</p>
-
-
                     <p className='text-muted m-0' > location  </p>
                     <p> {data?.getDebutEventWithId?.debutEventLocation} </p>
-
-
                     <p className='text-muted m-0' >  related liknks   </p>
                     {data?.getDebutEventWithId?.otherRelatedLinks.map((link: any, index: number) => {
                         return (
@@ -143,15 +156,26 @@ export default function DebutEventPage() {
                     className='d-flex justify-content-between align-items-center my-3' >
 
                     <p className='fs-3  fw-light mt-5' >  Registries  </p>
-                    <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        style={{ cursor: 'pointer' }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={toggle}
-                        className='border border-light rounded-pill bg-success bg-opacity-10 p-1  px-4  m-1 me-2 text-success'>
+                    <div className='d-flex justify-content-between align-items-center' >
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            style={{ cursor: 'pointer' }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={toggle}
+                            className='border border-light rounded-pill bg-success bg-opacity-10 p-1  px-4  m-1 me-2 text-success'>
 
-                        create a registry
-                    </motion.div>
+                            create a registry
+                        </motion.div>
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            style={{ cursor: 'pointer' }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={toggleNukeEventModal}
+                            className='border border-light rounded-pill bg-danger bg-opacity-10 p-1  px-4  m-1 me-2 text-danger'>
+
+                            <BsTrash size={20} />
+                        </motion.div>
+                    </div>
                 </div>
 
                 {data?.getDebutEventWithId?.debutRegistry.length === 0 ?

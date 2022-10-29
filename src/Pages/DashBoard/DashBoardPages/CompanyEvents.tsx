@@ -40,7 +40,7 @@ export default function CompanyEvents() {
 
       <div className='d-flex flex-row flex-wrap' >
         {
-          data?.getDebutEventsWithUserId?.map((event: any) => {
+          data.getDebutEventsWithUserId?.map((event: any) => {
             return <MyEventCard
               key={event.id}
               _id={event._id}
