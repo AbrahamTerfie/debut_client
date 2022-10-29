@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { motion } from 'framer-motion'
 import { UncontrolledAccordion, AccordionItem, AccordionHeader, AccordionBody, Row, Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label } from 'reactstrap'
-import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, MY_DEBUT_EVENTS, DELETE_DEBUT_REGISTRY } from '../../../GraphQl/index'
+import {
+    NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, MY_DEBUT_EVENTS, DELETE_DEBUT_REGISTRY,
+    MARK_ITEM_AS_FULFILLED, TOGGLE_REGISTRY_STATUS,
+
+} from '../../../GraphQl/index'
 import { useMutation, useQuery } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
 import { useSelector } from 'react-redux'
@@ -68,6 +72,21 @@ export default function RegistryAccordion(
             notifyError(error.toString())
         }
     })
+
+    const [toggleRegistryStatus, toggleRegistryStatusRes] = useMutation(TOGGLE_REGISTRY_STATUS,
+        {
+            variables: { toggledebutRegistryStatusId: _id },
+            refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
+            onCompleted: (data) => {
+                notifySuccess("Registry Status Updated")
+            },
+            onError: (error) => {
+                notifyError(error.toString())
+
+            }
+        })
+
+
 
     const [deleteRegistry] = useMutation(DELETE_DEBUT_REGISTRY, {
         refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
@@ -206,8 +225,12 @@ export default function RegistryAccordion(
                                 </FormGroup>
                             </Col>
                             <Col md={6} className="mt-4" >
-                                <img src={previewImage} alt="event image" className='img-fluid'
-                                    style={{ height: '200px', width: '200px' }} />
+                                <img src={previewImage} alt="event image" className='img-fluid  shadow-lg rounded rounded-5 m-2 mx-5  '
+
+                                    style={{
+                                        height: '200px', width: "max-content"
+
+                                    }} />
                                 <motion.div
                                     whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.01 }}
                                     transition={{ type: 'spring', stiffness: 300, damping: 10 }} onClick={(e: any) => saveImage(e)}
@@ -271,9 +294,9 @@ export default function RegistryAccordion(
                             <Col md={4}>
                                 <motion.div
                                     initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    whileHover={{ scale: 1.008 }} whileTap={{ scale: 1.09 }} style={{ cursor: 'pointer' }} onClick={toggle}
-                                    className='shadow-sm rounded rounded-5   p-2 mx-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'>
-                                    set status active
+                                    whileHover={{ scale: 1.008 }} whileTap={{ scale: 1.09 }} style={{ cursor: 'pointer' }} onClick={() => toggleRegistryStatus()}
+                                    className={`shadow-sm rounded rounded-5   p-2 mx-1  me-2  ${debutRegistryStatus ? 'bg-danger bg-opacity-10  text-danger' : 'bg-success bg-opacity-10  text-success'}  justify-content-center d-flex`}>
+                                    {debutRegistryStatus ? <span>deactivate</span> : <span >activate</span>}
                                 </motion.div>
                             </Col>
                             <Col md={2}>

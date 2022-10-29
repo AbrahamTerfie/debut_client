@@ -67,3 +67,17 @@ export const DELETE_DEBUT_REGISTRY = gql`
 mutation deleteDebutRegistry($deleteDebutRegistryId: ID!){
   deleteDebutRegistry(id: $deleteDebutRegistryId)
 }`
+
+
+export const MARK_ITEM_AS_FULFILLED = gql`
+mutation toggleRegistryItemAsFullfiled($toggleRegistryItemAsFullfiledId: ID!){
+  toggleRegistryItemAsFullfiled(id: $toggleRegistryItemAsFullfiledId)
+}
+`
+
+
+export const TOGGLE_REGISTRY_STATUS = gql`
+mutation toggledebutRegistryStatus($toggledebutRegistryStatusId: ID!){
+  toggledebutRegistryStatus(id: $toggledebutRegistryStatusId)
+}
+` 
