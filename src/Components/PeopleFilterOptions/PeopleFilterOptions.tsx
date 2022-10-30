@@ -3,6 +3,7 @@ import { Row, Col, FormGroup, Input, Button } from 'reactstrap'
 import { peopleExpertiseFilterHandler, peopleRegionFilterHandler, clearPeopleFilter } from '../../Store/UI/sidebarController'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
+import { motion } from 'framer-motion'
 export default function PeopleFilterOptions() {
     const dispatch = useDispatch()
     const { peopleExpertiseFilter, peopleRegionFilter } = useSelector((store: RootState) => store.uiStore)
@@ -13,20 +14,23 @@ export default function PeopleFilterOptions() {
         dispatch(peopleRegionFilterHandler(e.target.name))
     }
     return (
-        <Row className="shadow-sm border-light m-4 ">
-            <Col md={4} className="mx-5" >
-                <p> expertise</p>
-                <div className=' d-flex justify-content-between ' >
-                    <FormGroup check className='fs-6 fw-light' >
+        <Row className="shadow-sm border-light mt-4  ">
+            <Col md={6}  >
+
+                <p className='text-center fs-4 ' > expertise</p>
+                <div className='d-flex flex-wrap justify-content-center align-items-start '>
+
+                    <FormGroup check className='fs-6 fw-light m-2 mx-3' >
                         <Input type="checkbox"
                             name="businessStratigy"
                             id="businessStratigy"
+
                             checked={peopleExpertiseFilter.includes('businessStratigy')}
                             onChange={handleExpertise}
                         />
                         <span>Business Strategy</span>
                     </FormGroup>
-                    <FormGroup check className='fs-6 fw-light' >
+                    <FormGroup check className='fs-6 fw-light m-2 mx-3' >
                         <Input type="checkbox"
                             name="teamBuilding"
                             id="teamBuilding"
@@ -34,9 +38,9 @@ export default function PeopleFilterOptions() {
                             onChange={handleExpertise} />
                         Team Building
                     </FormGroup>
-                </div>
-                <div className=' d-flex justify-content-between ' >
-                    <FormGroup check className='fs-6 fw-light' >
+
+
+                    <FormGroup check className='fs-6 fw-light m-2 mx-3' >
                         <Input type="checkbox"
                             name="financing"
                             id="financing"
@@ -44,7 +48,7 @@ export default function PeopleFilterOptions() {
                             onChange={handleExpertise} />
                         Financing/Invenstment
                     </FormGroup>
-                    <FormGroup check className='fs-6 fw-light mx-5' >
+                    <FormGroup check className='fs-6 fw-light m-2 mx-3' >
                         <Input type="checkbox"
                             name="mentoring"
                             id="mentoring"
@@ -52,9 +56,9 @@ export default function PeopleFilterOptions() {
                             onChange={handleExpertise} />
                         Coaching/Mentoring
                     </FormGroup>
-                </div>
-                <div className=' d-flex justify-content-between ' >
-                    <FormGroup check className='fs-6 fw-light' >
+
+
+                    <FormGroup check className='fs-6 fw-light m-2 mx-3' >
                         <Input type="checkbox"
                             name="advertizing"
                             id="advertizing"
@@ -62,7 +66,7 @@ export default function PeopleFilterOptions() {
                             onChange={handleExpertise} />
                         advertizing
                     </FormGroup>
-                    <FormGroup check className='fs-6 fw-light mx-5' >
+                    <FormGroup check className='fs-6 fw-light m-2 mx-3' >
                         <Input type="checkbox"
                             name="agriculture"
                             id="agriculture"
@@ -71,12 +75,13 @@ export default function PeopleFilterOptions() {
                         agriculture
                     </FormGroup>
                 </div>
-            </Col>
-            <Col md={4} className="mx-5 my-3">
-                <p> region</p>
-                <div className=' d-flex justify-content-between ' >
 
-                    <FormGroup check className='fs-6 fw-light' >
+            </Col>
+            <Col md={6} >
+                <p className='text-center fs-4 ' > region</p>
+                <div className='d-flex flex-wrap justify-content-center align-items-start '>
+
+                    <FormGroup check className='fs-6 fw-light m-2 mx-4' >
                         <Input type="checkbox"
                             name="northAmerica"
                             id="northAmerica"
@@ -84,7 +89,7 @@ export default function PeopleFilterOptions() {
                             onChange={handleRegion} />
                         North America
                     </FormGroup>
-                    <FormGroup check className='fs-6 fw-light' >
+                    <FormGroup check className='fs-6 fw-light m-2 mx-4' >
                         <Input type="checkbox"
                             name="southAmerica"
                             id="southAmerica"
@@ -92,9 +97,9 @@ export default function PeopleFilterOptions() {
                             onChange={handleRegion} />
                         South America
                     </FormGroup>
-                </div>
-                <div className=' d-flex justify-content-between ' >
-                    <FormGroup check className='fs-6 fw-light' >
+
+
+                    <FormGroup check className='fs-6 fw-light m-2 mx-4' >
                         <Input type="checkbox"
                             name="asia"
                             id="asia"
@@ -102,7 +107,7 @@ export default function PeopleFilterOptions() {
                             onChange={handleRegion} />
                         Asia
                     </FormGroup>
-                    <FormGroup check className='fs-6 fw-light' >
+                    <FormGroup check className='fs-6 fw-light m-2 mx-4' >
                         <Input type="checkbox"
                             name="middleEast"
                             id="middleEast"
@@ -110,9 +115,9 @@ export default function PeopleFilterOptions() {
                             onChange={handleRegion} />
                         Middle East
                     </FormGroup>
-                </div>
-                <div className=' d-flex justify-content-between' >
-                    <FormGroup check className='fs-6 fw-light' >
+
+
+                    <FormGroup check className='fs-6 fw-light m-2 mx-4' >
                         <Input type="checkbox"
                             name="Africa"
                             id="Africa"
@@ -120,7 +125,7 @@ export default function PeopleFilterOptions() {
                             onChange={handleRegion} />
                         Africa
                     </FormGroup>
-                    <FormGroup check className='fs-6 fw-light' >
+                    <FormGroup check className='fs-6 fw-light m-2 mx-4' >
                         <Input type="checkbox"
                             name="Europe"
                             id="Europe"
@@ -128,9 +133,9 @@ export default function PeopleFilterOptions() {
                             onChange={handleRegion} />
                         Europe
                     </FormGroup>
-                </div>
-                <div className=' d-flex justify-content-between' >
-                    <FormGroup check className='fs-6 fw-light' >
+
+
+                    <FormGroup check className='fs-6 fw-light m-2 mx-4' >
                         <Input type="checkbox"
                             name="Oceania"
                             id="Oceania"
@@ -141,12 +146,20 @@ export default function PeopleFilterOptions() {
 
                 </div>
             </Col>
-            <Col md={12} className="my-3 text-center">
-                <Button color='link' outline
-                    onClick={() => dispatch(clearPeopleFilter())}>
-                    clear filters
-                </Button>
-            </Col>
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className='d-flex justify-content-center align-items-center'
+                onClick={() => dispatch(clearPeopleFilter())}
+            >
+                <p className='tex-center  bg-danger bg-opacity-10 p-1 px-5 rounded-pill fs-5 fw-light text-danger m-2' > clear filter</p>
+
+
+            </motion.div>
+
         </Row>
     )
 }

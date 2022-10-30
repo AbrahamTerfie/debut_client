@@ -4,6 +4,7 @@ import './Peoplecards.css'
 import { setActivePersonId } from '../../Store/UI/sidebarController'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Store/RootReducer';
+import { motion } from 'framer-motion';
 export default function PeopleCards({ people }: any) {
     const dispatch = useDispatch()
     const { activePersonId } = useSelector((store: RootState) => store.uiStore)
@@ -13,30 +14,45 @@ export default function PeopleCards({ people }: any) {
     }
 
 
-    // console.log('people', people)
-    // console.log('activePersonId', activePersonId)
+    const handleClick = (e: any) => {
+
+
+        e.preventDefault()
+        people._id === activePersonId ? updatePeopleDirectoryState('') : updatePeopleDirectoryState(people._id)
+
+    }
+
 
     return (
-        <Row
+        <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 1.1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            style={{ cursor: 'pointer' }}
             className={activePersonId === people._id ?
-                '  shadow  border-info rounded-4 p-3 mx-2 my-2 MyeventCard '
-                : '  shadow-sm  border-info  rounded-4 p-3 mx-2 my-2 MyeventCard'}
-            onClick={() => updatePeopleDirectoryState(people._id)}>
-            <Col md={2}  >
-                <img
-                    className='rounded w-100'
-                    src={people.profileImage}
-                    alt='user profile photo' />
-            </Col>
-            <Col md={10} >
-                <p className=' fw-bold fs-5 m-0' > {people.firstName}  {people.lastName}  </p>
-                <p className='fs-6 fw-lighter m-0 text-muted' >
-                    {people.titleAtCompany}
-                </p>
-                <p className='fw-lighter'>
-                    {people.company[0]?.companyName}
-                </p>
-            </Col>
-        </ Row >
+                '  shadow-lg  rounded-1   my-2  bg-dark  bg-opacity-25 m-0 '
+                : '  shadow-sm  border-info  rounded-4   my-2 '}
+        >
+            <Row onClick={(e: any) => handleClick(e)}>
+                <Col md={3} >
+                    <img
+                        src={people.profileImage}
+                        alt='profile'
+                        className='rounded img-fluid h-100 w-100'
+                        style={{ width: '100px', height: '100px', objectFit: 'cover', maxHeight: '100%' }}
+                    />
+                </Col>
+                <Col md={9}
+                    className='d-flex flex-column justify-content-center align-items-start p-5'>
+                    <p className=' fw-bold fs-5 m-0' > {people.firstName}  {people.lastName}  </p>
+                    <p className='fs-6 fw-lighter m-0 text-muted' >
+                        {people.titleAtCompany}
+                    </p>
+                    <p className='fw-lighter'>
+                        {people.company[0]?.companyName}
+                    </p>
+                </Col>
+            </ Row >
+        </motion.div>
     )
 }

@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/RootReducer'
 import { All_USERS } from '../../GraphQl/index'
 import Loader from '../../Components/Loader/Loader'
+import { motion } from 'framer-motion'
 export default function People() {
 
     const { user } = useAuth0();
@@ -60,30 +61,43 @@ export default function People() {
 
     return (
 
-        <div className=' d-flex flex-column w-100 m-4 p-4' >
-            <p className='fw-light fs-3  mx-5'> People directory</p>
-            <Row className='mx-4' >
-                <Col md={10}>
+        <div className=' d-flex flex-column mt-5  px-5 ' >
+            <p className='fw-light fs-1  mx-5'> People directory</p>
+            <Row className='mx-4  d-flex justify-content-between'>
+
+                <Col md={10} sm={8} xs={8} >
                     <SearchComponent />
                 </Col>
-                <Col md={1}>
-                    <Button outline color="light" className='px-4'  >
-                        <FaSearch className='bg-transparent' />
-                    </Button>
+                <Col md={1} sm={4} xs={4}>
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
+                        <FaSearch />
+                    </motion.div>
+
                 </Col>
-                <Col md={1}>
-                    <Button onClick={toggle} outline color="light" className='px-5' >
-                        <IoMdSettings className='bg-transparent' />
-                    </Button>
+                <Col md={1} >
+
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'
+                        onClick={toggle}>
+                        <IoMdSettings />
+                    </motion.div>
+
                 </Col>
             </Row>
             <Collapse isOpen={modal} toggle={toggle} >
-                <Row>
-                    <PeopleFilterOptions />
-                </Row>
+
+                <PeopleFilterOptions />
+
             </Collapse>
             <Row className='mt-4' >
-                <Col md={6} className="overflow-scroll vh-100" >
+                <Col md={5} className="overflow-scroll " >
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={user._id}
@@ -101,7 +115,7 @@ export default function People() {
                         }
                     })}
                 </Col>
-                <Col md={6} className='overflow-scroll' >
+                <Col md={7} sm={12} xs={12} className='overflow-scroll container-fluid' >
                     <PersonDetail />
                 </Col>
             </Row>
