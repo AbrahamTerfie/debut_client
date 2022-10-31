@@ -14,7 +14,10 @@ export default function PeopleFilterOptions() {
         dispatch(peopleRegionFilterHandler(e.target.name))
     }
     return (
-        <Row className="shadow-sm border-light mt-4  ">
+        <Row className="shadow border-light p-4  mt-5 rounded-1 ">
+            <Col md={12}>
+                <p className="fw-light text-center text-muted fs-5">Filter by</p>
+            </Col>
             <Col md={6}  >
 
                 <p className='text-center fs-4 ' > expertise</p>
