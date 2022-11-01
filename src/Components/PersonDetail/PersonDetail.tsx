@@ -32,11 +32,23 @@ export default function PersonDetail() {
     }
 
     return (
-        <div className='p-4 shadow h-auto rounded border border-light my-2 overflow-scroll' >
-            <Row>
+        <div className='p-4 shadow  rounded border border-light my-2 overflow-scroll d-flex flex-column '
+        // make it scrollable
+
+        >
+            <Row
+                // className='d-flex justify-content-between align-items-center '
+            // max-height of the row
+
+
+
+            >
                 <Col md={4}>
                     <img src={data?.getDebutUserWithId.profileImage}
-                        alt="profile" className="img-fluid rounded shadow" />
+                    // have the image a fixed height and width with overflow hidden 
+                        className='rounded-1 shadow-sm  '
+                        style={{ height: '200px' , width:'200px', objectFit:'cover'}}
+                    />
                 </Col>
                 <Col md={8}>
                     <p className='fs-2 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}

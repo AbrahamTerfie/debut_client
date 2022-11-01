@@ -97,7 +97,7 @@ export default function People() {
 
             </Collapse>
             <Row className='mt-4' >
-                <Col md={5} className="overflow-scroll " >
+                <Col md={5}  className="overflow-scroll " >
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={user._id}
