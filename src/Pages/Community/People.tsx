@@ -115,7 +115,7 @@ export default function People() {
                         }
                     })}
                 </Col>
-                <Col md={7} sm={12} xs={12} className='overflow-scroll container-fluid' >
+                <Col md={7} sm={12} xs={12}  >
                     <PersonDetail />
                 </Col>
             </Row>

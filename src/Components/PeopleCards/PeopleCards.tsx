@@ -43,7 +43,7 @@ export default function PeopleCards({ people }: any) {
                     />
                 </Col>
                 <Col md={9}
-                    className='d-flex flex-column justify-content-center align-items-start p-5'>
+                    className='d-flex flex-column justify-content-center align-items-start p-2'>
                     <p className=' fw-bold fs-5 m-0' > {people.firstName}  {people.lastName}  </p>
                     <p className='fs-6 fw-lighter m-0 text-muted' >
                         {people.titleAtCompany}
