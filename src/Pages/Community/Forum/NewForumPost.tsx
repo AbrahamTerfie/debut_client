@@ -7,25 +7,8 @@ import { CREATE_FORUM_POST, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index
 import Loader from '../../../Components/Loader/Loader';
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
 import { motion } from 'framer-motion';
+import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 
-
-function MotionContainer({ children }: any) {
-    return (
-        <div>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                style={{ cursor: 'pointer' }}
-            >
-                {children}
-            </motion.div>
-        </div>
-    )
-}
 
 export default function NewForumPost({ toggler }: { toggler: () => void }) {
     const { userID } = useSelector((store: RootState) => store.identfiers)
