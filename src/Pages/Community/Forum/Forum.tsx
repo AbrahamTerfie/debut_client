@@ -111,23 +111,20 @@ export default function Forum() {
 
     return (
         <div className=' '>
-            <Offcanvas Offcanvas style={{ width: '50%' }
-            }
-                direction="end"
-                isOpen={canvas}
-                toggle={toggle}
-                scrollable={true}
+            <Offcanvas Offcanvas style={{ width: '50%' }}
+                direction="end" isOpen={canvas}
+                toggle={toggle} scrollable={true}
             >
                 <OffcanvasHeader toggle={toggle}>
-                    <p className='fs-3 m-3 px-5 fw-light' >
+                    <h1 className='fs-3 m-3 px-5 fw-light' >
                         Create New Post
-                    </p>
-                    <p className='fs-5 m-3 px-5 fw-light text-muted' >
+                    </h1>
+                    <p className='fs-5 m-3 px-5 fw-light ' >
                         share your events , ideas , or anything you want to share with the community
                     </p>
                 </OffcanvasHeader>
                 <OffcanvasBody >
-                    <NewForumPost />
+                    <NewForumPost toggler={toggle} />
                 </OffcanvasBody>
             </Offcanvas >
 
