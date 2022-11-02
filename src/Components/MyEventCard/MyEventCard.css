@@ -8,6 +8,6 @@
 .MyeventCard:hover{
     transition: all 0.2s ease-in-out;
     border-bottom: 3px solid #1985a1;
-    transform: scale(1.01);
+    /* transform: scale(1.01); */
 
 }

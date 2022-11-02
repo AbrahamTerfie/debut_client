@@ -6,6 +6,9 @@ import { useMutation, useQuery } from '@apollo/client'
 import { RootState } from '../../Store/RootReducer';
 import { CREATE_FORUM_COMMENT, FETCH_POST_COMMENTS } from '../../GraphQl/index';
 import Loader from '../Loader/Loader'
+import { notifyError, notifySuccess } from '../../Components/Notification/Toast';
+import MotionContainer from '../MotionContainer/MotionContainer'
+
 
 export default function ForumCards(
     { _id, createdBy, channel, postTitle, comments, postContent, }: {
@@ -29,45 +32,41 @@ export default function ForumCards(
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
 
+    const inputChecker = () => {
+        if (newComment.comment === '') {
+            notifyError('Please fill all the fields')
+            return false
+        }
+        return true
+    }
 
+    const [postNewComment, postNewCommentRes] = useMutation(CREATE_FORUM_COMMENT, {
+        refetchQueries: [{ query: FETCH_POST_COMMENTS, variables: { getPostCommentWithPostIdId: _id } }],
+        onCompleted: () => {
+            notifySuccess('Comment Posted Successfully')
+        },
+        onError: (err) => {
+            notifyError(err.message)
+        }
 
-    const [postNewComment, postNewCommentRes] = useMutation(CREATE_FORUM_COMMENT,
-        {
-            update(cache, { data: { createPostComment } }) {
-                const { getPostCommentWithPostId }: any = cache.readQuery({
-                    query: FETCH_POST_COMMENTS,
-                    variables: { getPostCommentWithPostIdId: _id }
-                })
-                cache.writeQuery({
-                    query: FETCH_POST_COMMENTS,
-                    variables: { getPostCommentWithPostIdId: _id },
-                    data: { getPostCommentWithPostId: [createPostComment, ...getPostCommentWithPostId] }
-                })
-            }
-        })
-    const { data, loading, error } = useQuery(FETCH_POST_COMMENTS, {
-        variables: { getPostCommentWithPostIdId: _id }
     })
+    const { data, loading, error } = useQuery(FETCH_POST_COMMENTS, { variables: { getPostCommentWithPostIdId: _id } })
 
     // data && console.log(data)
-    if (loading) {
-        return <Loader />
-    }
-    if (error) {
-        console.log(error)
-    }
+    if (loading) { return <Loader /> }
+    if (error) { notifyError(error.message) }
 
 
-
-    const PostCommentHandler = (newComment: any) => {
-        postNewComment({
+    const PostCommentHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        inputChecker() && postNewComment({
             variables: { postCommentInput: newComment }
         })
 
     }
 
     return (
-        <>
+        < >
 
             <Offcanvas style={{ width: '50%' }}
                 direction="end"
@@ -75,46 +74,52 @@ export default function ForumCards(
                 toggle={toggle}
                 scrollable={true}
             >
-                <OffcanvasHeader toggle={toggle}>
+                <OffcanvasHeader toggle={toggle} className="App px-5">
                     <span className="text-start fw-light m-0 fs-6 text-muted">title</span>
                     <p className='fs-2  fw-light m-0  ' > {postTitle} </p>
-                    <br />
-                    <p className='fs-6  px-2 fw-light text-muted' >
-                        channel - <span className='fw-bold' >#{channel}</span>
-                    </p>
+                    <p className='fs-6  px-2 fw-light ' > channel - <span className='fw-bold' >#{channel}</span> </p>
                 </OffcanvasHeader>
                 <OffcanvasBody >
-                    <p className='fs-4  px-5 fw-light border border-1 border-light shadow-sm p-3 mb-5 bg-body rounded'
+                    <p className='fs-4  px-5 fw-light border border-1 border-success shadow-sm p-5 mb-5  rounded
+                    bg-success bg-opacity-10 text-success  rounded-1 '>
+                        {postContent}
+                    </p>
+                    <p className=' m-2 px-5 text-success fw-light fs-3' >comments </p>
+                    <div
+                        className='px-5 d-flex flex-row flex-wrap justify-content-between align-items-start App'
+                    >
+                        <FormGroup className=' w-75 ' size='sm' >
+                            <input
+                                height={12}
+                                type="text" name="comment" id="comment" placeholder=" comment on post "
+                                className='form-control input-md mb-2'
+                                onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
+                            ></input>
+                        </FormGroup>
 
-
-                    > {postContent} </p>
-                    <Label className=' mb-2' >discussion </Label>
-                    <FormGroup className='mx-2 ' size='xs' >
-                        <input
-                            height={12}
-                            type="text" name="comment" id="comment" placeholder=" comment on post "
-                            className='form-control input-md mb-2'
-                            onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
-                        ></input>
-                    </FormGroup>
-                    <Button className=' border-success  m-2  px-5 py-2 shadow-sm MyeventCard   ' color='light ' outline 
-                        onClick={() => PostCommentHandler(newComment)}>
-                        <p className='m-0' >post </p>
-                    </Button>
-                    <div>
+                        <div className='w-10'>
+                            <MotionContainer>
+                                <p className='text-center text-success fw-light  bg-success bg-opacity-10 p-2 px-5 rounded-pill'
+                                    onClick={(e: any) => PostCommentHandler(e)}>post  </p>
+                            </MotionContainer>
+                        </div>
+                    </div>
+                    <div className='px-5 App d-flex flex-column ' >
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-                                <div key={comment.id} className='shadow-sm MyeventCard  pb-3 rounded' >
-                                    <p className='fs-6 m-3 px-5 pt-3 fw-light ' > {comment.comment}</p>
-                                    <span className='fs-6 mx-5 px-3  fw-light text-muted text-end ' > by {comment.createdBy.firstName}  </span>
-                                </div>
+                                <MotionContainer>
+                                    <div key={comment.id} className='shadow-sm MyeventCard  pb-3 rounded' >
+                                        <p className=' m-3 px-5 pt-3 fw-light fs-5' > {comment.comment}</p>
+                                        <p className='fs-6 mx-5 px-3  fw-light text-muted text-start ' > by {comment.createdBy.firstName}  </p>
+                                    </div>
+                                </MotionContainer>
                             )
                         })}
                     </div>
 
                 </OffcanvasBody>
             </Offcanvas>
-            <Row className=' forumCardParent  shadow-sm rounded p-3 m-2  my-3' onClick={() => toggle()}>
+            <Row className=' forumCardParent w-100 shadow-sm rounded p-3 m-2  my-3' onClick={() => toggle()}>
                 <p className='fw-light fs-5 m-1 ' > {postTitle} </p>
                 <p className=' fw-lighter text-muted m-0' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
                 <p className='fw-light m-0' > {postContent} </p>

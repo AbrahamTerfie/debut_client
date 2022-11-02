@@ -6,7 +6,6 @@ import { useMutation } from '@apollo/client';
 import { CREATE_FORUM_POST, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index';
 import Loader from '../../../Components/Loader/Loader';
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
-import { motion } from 'framer-motion';
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 
 
