@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
 import { setUserID, setUserEmail } from '../../../Store/identfiers/identfiers'
+import { motion } from 'framer-motion'
 // types
 
 
@@ -28,6 +29,25 @@ const channelNames = {
     'collaboration': 'collabration',
     'community': 'community',
 }
+
+function MotionContainer({ children }: any) {
+    return (
+        <div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                style={{ cursor: 'pointer' }}
+            >
+                {children}
+            </motion.div>
+        </div>
+    )
+}
+
 
 export default function Forum() {
     const dispatch = useDispatch()
@@ -90,8 +110,9 @@ export default function Forum() {
 
 
     return (
-        <Row className=' d-flex page mt-4' >
-            <Offcanvas style={{ width: '50%' }}
+        <div className=' '>
+            <Offcanvas Offcanvas style={{ width: '50%' }
+            }
                 direction="end"
                 isOpen={canvas}
                 toggle={toggle}
@@ -108,100 +129,100 @@ export default function Forum() {
                 <OffcanvasBody >
                     <NewForumPost />
                 </OffcanvasBody>
-            </Offcanvas>
-            <Col className=' mt-4 m-3' xs='10' sm='10' md='8' lg='2' xl='2' >
-                <h4> Fellow Forum </h4>
-                <p>
+            </Offcanvas >
+
+            <Row className='searchInput mb-1 my-4 pt-4 px-5 mx-5  ' >
+                <p className='fw-light fs-1'> Fellow Forum </p>
+                <p className="text-muted" >
                     A place to discuss and share
                     ideas with fellow members of the
                     community.
                 </p>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center',
-                }} >
-                    <Button
-                        onClick={() => toggle()}
-                        outline color='light' className='my-3 p-3 w-100 shadow-sm MyeventCard' size='sm' >
-                        <IoMdAdd size={20}
-                            style={{ backgroundColor: 'transparent' }}
-                            className='mx-1 ' />
-                        <span className='m-0' > New Post </span>
-                    </Button>
-                </div>
-                <div className='ChanelsContainer w-100 h-25 mt-4' >
-                    <h4 className='mt-4' > Channels</h4>
-                    <div className='channels w-100' >
-                        <p role="button" color='light'
-                            className={`w-100 py-2  my-2 MyeventCard ${channelFilter === channelNames.general ? 'shadow-sm border-bottom border-5  border-info  p-2' : ''}`}
-                            onClick={() => setChannelFilter(channelNames.general)}  >
-                            <IoChatbubblesOutline size={15}
-                                style={{ backgroundColor: 'transparent', }}
-                                className='mx-2' />
-                            General
-                        </p>
-                        <p role="button" color='light'
-                            className={`w-100 py-2  my-2 MyeventCard ${channelFilter === channelNames.collaboration ? 'shadow-sm border-bottom border-5  border-info  p-2' : ''}`}
-                            onClick={() => setChannelFilter(channelNames.collaboration)} >
-                            <FaRegHandPaper size={15}
-                                style={{ backgroundColor: 'transparent', }}
-                                className='mx-2' />
-                            Collabration
-                        </p>
-                        <p role="button" color='light'
-                            className={`w-100 py-2  my-2 MyeventCard ${channelFilter === channelNames.community ? 'shadow-sm border-bottom border-5  border-info  p-2' : ''}`}
-                            onClick={() => setChannelFilter(channelNames.community)} >
-                            <FaRegHandshake size={15}
-                                style={{ backgroundColor: 'transparent', }}
-                                className='mx-2' />
-                            Community
-                        </p>
-                        <span role="button" color='light' className='py-2 w-100 text-muted px-5  my-2  MyeventCard'
-                            onClick={() => setChannelFilter('')} >
-                            clear filter
-                        </span>
-                    </div>
-                </div>
-            </Col>
+                <SearchComponent />
+            </Row>
 
-            <Col className='mainPageContainer ' xs='10' sm='10' md='8' lg='8' xl='8' >
-                <Row className='searchInput mb-1 mt-4' >
-                    <p className='fw-bolder fs-3'> Fellow Forum </p>
-                    <SearchComponent />
-                </Row>
-                <Row className='m-3'>
-                    {data.getForumPosts.map((post: any) => {
-                        if (channelFilter === '') {
-                            return (
-                                <ForumCards
-                                    key={post._id}
-                                    _id={post._id}
-                                    channel={post.channel}
-                                    postTitle={post.postTitle}
-                                    postContent={post.postContent}
-                                    comments={post.comments}
-                                    createdBy={post.createdBy}
-                                />
-                            )
-                        }
-                        if (channelFilter === post.channel) {
-                            return (
-                                <ForumCards
-                                    key={post._id}
-                                    _id={post._id}
-                                    channel={post.channel}
-                                    postTitle={post.postTitle}
-                                    postContent={post.postContent}
-                                    comments={post.comments}
-                                    createdBy={post.createdBy}
-                                />
-                            )
-                        }
-                    })}
-                </Row>
-            </Col>
-        </Row>
+            <div className='d-flex justify-content-around mx-5  flex-row flex-wrap sticky-xxl-top px-5 py-3 '
+                style={{ zIndex: 1, top: '10%', backgroundColor: 'white', }}>
+                <MotionContainer>
+                    <p onClick={() => toggle()}
+                        className='  my-1 p-3 py-2 px-5 shadow-sm  bg-success bg-opacity-10 rounded-pill text-success  d-flex justify-content-center align-items-center'>
+                        <IoMdAdd size={20} className='mx-3 ' />
+                        <span  > New Post </span>
+                    </p>
+                </MotionContainer>
+
+                <MotionContainer>
+                    <p
+                        className={`  my-1 p-3 py-2 px-5 shadow-sm  bg-warning bg-opacity-10 rounded-pill text-warning  d-flex justify-content-center align-items-center
+                                    ${channelFilter === channelNames.general ? 'shadow border border-2 border-warning  ' : ''}`}
+                        onClick={() => setChannelFilter(channelNames.general)}  >
+                        <IoChatbubblesOutline size={20} className='mx-3' />
+                        General
+                    </p>
+                </MotionContainer>
+                <MotionContainer>
+                    <p
+                        className={` my-1 p-3 py-2 px-5 shadow-sm  bg-info bg-opacity-10 rounded-pill text-info  d-flex justify-content-center align-items-center
+                                ${channelFilter === channelNames.collaboration ? 'shadow border border-2 border-info  ' : ''}`}
+                        onClick={() => setChannelFilter(channelNames.collaboration)} >
+                        <FaRegHandPaper size={15}
+                            style={{ backgroundColor: 'transparent', }}
+                            className='mx-2' />
+                        Collabration
+                    </p>
+                </MotionContainer>
+                <MotionContainer>
+                    <p className={` my-1 p-3 py-2 px-5 shadow-sm  bg-primary bg-opacity-10 rounded-pill text-primary  d-flex justify-content-center align-items-center
+                            ${channelFilter === channelNames.community ? 'shadow border border-2 border-primary  ' : ''}`}
+                        onClick={() => setChannelFilter(channelNames.community)} >
+                        <FaRegHandshake size={15}
+                            style={{ backgroundColor: 'transparent', }}
+                            className='mx-2' />
+                        Community
+                    </p>
+                </MotionContainer>
+
+                <MotionContainer>
+                    <span className='py-2  text-muted px-5  my-2  bg-dark bg-opacity-10 rounded-pill text-dark  d-flex justify-content-center align-items-center'
+                        onClick={() => setChannelFilter('')} >
+                        clear filter
+                    </span>
+                </MotionContainer>
+
+            </div>
+
+            <Row className='m-3 mx-5 px-5'>
+                {data.getForumPosts.map((post: any) => {
+                    if (channelFilter === '') {
+                        return (
+                            <ForumCards
+                                key={post._id}
+                                _id={post._id}
+                                channel={post.channel}
+                                postTitle={post.postTitle}
+                                postContent={post.postContent}
+                                comments={post.comments}
+                                createdBy={post.createdBy}
+                            />
+                        )
+                    }
+                    if (channelFilter === post.channel) {
+                        return (
+                            <ForumCards
+                                key={post._id}
+                                _id={post._id}
+                                channel={post.channel}
+                                postTitle={post.postTitle}
+                                postContent={post.postContent}
+                                comments={post.comments}
+                                createdBy={post.createdBy}
+                            />
+                        )
+                    }
+                })}
+            </Row>
+
+        </div >
 
 
     )
