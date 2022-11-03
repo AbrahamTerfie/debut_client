@@ -61,7 +61,7 @@ export default function People() {
 
     return (
 
-        <div className=' d-flex flex-column mt-5  px-5 ' >
+        <div className=' d-flex flex-column mt-5  pt-5 px-5 ' >
             <p className='fw-light fs-1  mx-5'> People directory</p>
             <Row className='mx-4  d-flex justify-content-between'>
 

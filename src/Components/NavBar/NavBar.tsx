@@ -19,8 +19,8 @@ export default function NavBarComponent() {
     const textColor = { color: "#1985a1", cursor: "pointer" }
     return (
         <Navbar
-            className='px-5 mx-md-0 mb-5 shadow-lg  bg-light bg-opacity-80 '
-            dark expand="xl" fixed="top" full  >
+            className='px-5  mb-5 shadow-lg  bg-light bg-opacity-80 '
+            dark expand="xl" fixed="top" fluid    >
             <NavbarBrand href="/"
                 style={{
                     fontFamily: 'Bungee Shade, cursive',

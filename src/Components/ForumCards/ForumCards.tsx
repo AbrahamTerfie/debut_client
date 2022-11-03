@@ -8,7 +8,7 @@ import { CREATE_FORUM_COMMENT, FETCH_POST_COMMENTS } from '../../GraphQl/index';
 import Loader from '../Loader/Loader'
 import { notifyError, notifySuccess } from '../../Components/Notification/Toast';
 import MotionContainer from '../MotionContainer/MotionContainer'
-
+import { motion } from 'framer-motion'
 
 export default function ForumCards(
     { _id, createdBy, channel, postTitle, comments, postContent, }: {
@@ -67,18 +67,11 @@ export default function ForumCards(
 
     return (
         < >
-
             <Offcanvas style={{ width: '50%' }}
                 direction="end"
                 isOpen={canvas}
                 toggle={toggle}
-                scrollable={true}
-
-            >
-                {/* <OffcanvasHeader toggle={toggle} className="App px-5">
-
-                    <p>post</p>
-                </OffcanvasHeader> */}
+                scrollable={true}>
                 <OffcanvasBody >
                     <div className=' App d-flex flex-column   px-5  border border-1 border-success shadow-sm p-5 mb-5  rounded bg-success bg-opacity-10   rounded-1 ' >
                         <small className="text-start fw-light m-0  text-muted">title</small>
@@ -88,9 +81,7 @@ export default function ForumCards(
                     </div>
 
                     <p className=' m-2 px-5 text-success fw-light fs-3' >comments </p>
-                    <div
-                        className='px-5 d-flex flex-row flex-wrap justify-content-between align-items-start App'
-                    >
+                    <div className='px-5 d-flex flex-row flex-wrap justify-content-between align-items-start App'>
                         <FormGroup className=' w-75 ' size='sm' >
                             <input
                                 height={12}
@@ -110,23 +101,28 @@ export default function ForumCards(
                     <div className='px-5 App d-flex flex-column ' >
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-
                                 <div key={comment.id} className='shadow-sm MyeventCard  rounded  my-2 ' >
                                     <p className=' m-3 px-5 pt-3 fw-light fs-5' > {comment.comment}</p>
                                     <p className='fs-6 mx-5 px-3  fw-light text-muted text-start ' > by {comment.createdBy.firstName}  </p>
                                 </div>
-
                             )
                         })}
                     </div>
 
                 </OffcanvasBody>
             </Offcanvas>
-            <Row className=' forumCardParent w-100 shadow-sm rounded p-3 m-2  my-3' onClick={() => toggle()}>
-                <p className='fw-light fs-5 m-1 ' > {postTitle} </p>
-                <p className=' fw-lighter text-muted m-0' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
-                <p className='fw-light m-0' > {postContent} </p>
-            </Row>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, type: 'spring', stiffness: 100, damping: 20 }}
+                whileHover={{ scale: 1.005 }}
+                whileTap={{ scale: 0.9 }}>
+                <Row className=' MyeventCard  shadow-sm rounded p-3 m-2  my-3' onClick={() => toggle()}>
+                    <p className='fw-light fs-5 m-1 ' > {postTitle} </p>
+                    <p className=' fw-lighter text-muted m-0' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
+                    <p className='fw-light m-0' > {postContent} </p>
+                </Row>
+            </motion.div>
         </>
     )
 }

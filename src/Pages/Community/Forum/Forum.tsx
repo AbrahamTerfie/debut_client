@@ -111,7 +111,7 @@ export default function Forum() {
                 </OffcanvasBody>
             </Offcanvas >
 
-            <Row className='searchInput mb-1 my-4 pt-4 px-5 mx-5  ' >
+            <Row className='searchInput mb-1 my-4 pt-5 mt-5 px-5 mx-5  ' >
                 <p className='fw-light fs-1'> Fellow Forum </p>
                 <p className="text-muted" >
                     A place to discuss and share

@@ -10,7 +10,7 @@ import React from 'react'
                 exit={{ opacity: 0 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 50 }}
                 style={{ cursor: 'pointer' }}
             >
                 {children}

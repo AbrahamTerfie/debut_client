@@ -51,15 +51,15 @@ export default function VentureCards(
                 isOpen={isOpen}
                 toggle={toggle}
                 className="offcanvas-style"
-                style={{ width: '75%' }}
+                style={{ width: '60%' }}
             >
-                <OffcanvasHeader onClick={toggle} className="px-5 py-5" >
-                    <p className='fs-6 fw-light text-muted  m-0'> Name </p>
-                    <h3 className="text-center">{companyName}</h3>
-                    <h6 className="text-start text-muted"   >  {companyWebsite} </h6>
+                <OffcanvasHeader onClick={toggle} className=" mb-0 App p-5 shadow" >
+                    <p className='fs-6 fw-light text-muted  m-0  '> Name </p>
+                    <h1 className="">{companyName}</h1>
+                    <h6 className="text-start "   >  {companyWebsite} </h6>
 
                 </OffcanvasHeader>
-                <OffcanvasBody className='p-5 pt-1' >
+                <OffcanvasBody className='px-5 pt-1  d-flex flex-column ' >
                     <Row>
                         <Col md={7}>
                             <small className=' fw-light text-muted  m-0'> mission statemeny </small>
@@ -133,21 +133,12 @@ export default function VentureCards(
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 40 }}
-
                 onClick={toggle}
-                className=' my-2  rounded rounded-5 shadow-sm  border border-1 bg-secondary bg-opacity-10  ' 
-            >
-
+                className=' my-2  rounded rounded-5 shadow-sm  border border-1 bg-light bg-opacity-10  '>
                 <Row>
-                    <Col md={2} 
-                    className='d-flex justify-content-center align-items-center'
-                    >
-
-                        <img
-                            // make image fluid in size and responsive and not to be stretched and distorted not to be cropped and not overflow the container
-                            className="w-75 h-75 shadow-sm  rounded img-fluid  p-3 "
-                            style={{ height: '100px', width: '100px', objectFit: 'cover' }}
-
+                    <Col md={2} className='d-flex justify-content-center align-items-center'>
+                        <img className="w-75 h-75 shadow-sm  rounded img-fluid  p-3 "
+                            style={{ height: '100px', width: '100px', objectFit: 'cover', minHeight: '100px', minWidth: '100px' }}
                             src={companyLogo}
                             alt='user profile photo' />
                     </Col>
@@ -159,13 +150,10 @@ export default function VentureCards(
                             <img src={companyOwner?.profileImage}
                                 className='rounded-circle img-fluid'
                                 style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
-                                alt='user profile photo'
-
-                            />
+                                alt='user profile photo' />
                             <p className='mx-2  fs-6 text-muted fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
                         </div>
                     </Col>
-
                 </Row>
             </motion.div>
 
