@@ -73,17 +73,20 @@ export default function ForumCards(
                 isOpen={canvas}
                 toggle={toggle}
                 scrollable={true}
+
             >
-                <OffcanvasHeader toggle={toggle} className="App px-5">
-                    <span className="text-start fw-light m-0 fs-6 text-muted">title</span>
-                    <p className='fs-2  fw-light m-0  ' > {postTitle} </p>
-                    <p className='fs-6  px-2 fw-light ' > channel - <span className='fw-bold' >#{channel}</span> </p>
-                </OffcanvasHeader>
+                {/* <OffcanvasHeader toggle={toggle} className="App px-5">
+
+                    <p>post</p>
+                </OffcanvasHeader> */}
                 <OffcanvasBody >
-                    <p className='fs-4  px-5 fw-light border border-1 border-success shadow-sm p-5 mb-5  rounded
-                    bg-success bg-opacity-10 text-success  rounded-1 '>
-                        {postContent}
-                    </p>
+                    <div className=' App d-flex flex-column   px-5  border border-1 border-success shadow-sm p-5 mb-5  rounded bg-success bg-opacity-10   rounded-1 ' >
+                        <small className="text-start fw-light m-0  text-muted">title</small>
+                        <p className=' fw-light m-0  fs-5 ' > {postTitle} </p>
+                        <p className='text-success fw-light m-0 fs-3 flex-wrap'>{postContent} </p>
+                        <small className=' fw-light ' > channel - <span className='fw-bold' >#{channel}</span> </small>
+                    </div>
+
                     <p className=' m-2 px-5 text-success fw-light fs-3' >comments </p>
                     <div
                         className='px-5 d-flex flex-row flex-wrap justify-content-between align-items-start App'
@@ -107,12 +110,12 @@ export default function ForumCards(
                     <div className='px-5 App d-flex flex-column ' >
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-                                <MotionContainer>
-                                    <div key={comment.id} className='shadow-sm MyeventCard  pb-3 rounded' >
-                                        <p className=' m-3 px-5 pt-3 fw-light fs-5' > {comment.comment}</p>
-                                        <p className='fs-6 mx-5 px-3  fw-light text-muted text-start ' > by {comment.createdBy.firstName}  </p>
-                                    </div>
-                                </MotionContainer>
+
+                                <div key={comment.id} className='shadow-sm MyeventCard  rounded  my-2 ' >
+                                    <p className=' m-3 px-5 pt-3 fw-light fs-5' > {comment.comment}</p>
+                                    <p className='fs-6 mx-5 px-3  fw-light text-muted text-start ' > by {comment.createdBy.firstName}  </p>
+                                </div>
+
                             )
                         })}
                     </div>
