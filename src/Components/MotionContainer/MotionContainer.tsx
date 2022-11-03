@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 
-export default function MotionContainer({ children }: any) {
+ export default function MotionContainer({ children }: any) {
     return (
         <div>
             <motion.div
