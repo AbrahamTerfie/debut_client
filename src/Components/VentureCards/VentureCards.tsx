@@ -10,7 +10,7 @@ import {
     FaFacebook,
     FaInstagram,
 } from 'react-icons/fa'
-
+import { motion } from 'framer-motion'
 
 export default function VentureCards(
     {
@@ -113,42 +113,62 @@ export default function VentureCards(
                         </Col>
                     </Row>
 
-                        {debutEvents?.map((item: any) => (
-                            <DebutEventCards
-                                _id={item._id}
-                                createdBy={item.createdBy}
-                                belongsTo={item.belongsTo}
-                                debutEventName={item.debutEventName}
-                                debutEventDescription={item.debutEventDescription}
-                                debutEventDate={item.debutEventDate}
-                                debutEventImage={item.debutEventImage}
-                            />
-                        ))}
+                    {debutEvents?.map((item: any) => (
+                        <DebutEventCards
+                            _id={item._id}
+                            createdBy={item.createdBy}
+                            belongsTo={item.belongsTo}
+                            debutEventName={item.debutEventName}
+                            debutEventDescription={item.debutEventDescription}
+                            debutEventDate={item.debutEventDate}
+                            debutEventImage={item.debutEventImage}
+                        />
+                    ))}
 
                 </OffcanvasBody>
             </Offcanvas>
 
-            <Row className=' d-flex my-2 py-3 flex-wrap justify-content-between rounded-5 shadow-sm  companyCard'
-                onClick={toggle}>
-                <Col md={2}  >
-                    <img
-                        className='w-50'
-                        src={companyLogo}
-                        alt='user profile photo' />
-                </Col>
-                <Col md={10}>
-                    <p className='fw-bolder fs-3 m-2' > {companyName} </p>
-                    <p className='fs-light m-2' >{companyDescription} </p>
-                    <p className='text-muted m-2'>  {companyHeadquarters} </p>
-                    <div className='ventureOwner d-flex'>
-                        <img src={companyOwner?.profileImage}
-                            alt='user profile photo'
 
-                        />
-                        <p className='mx-2  fs-6 text-muted fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
-                    </div>
-                </Col>
-            </Row>
+            <motion.div
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 40 }}
+
+                onClick={toggle}
+                className=' my-2  rounded rounded-5 shadow-sm  border border-1 bg-secondary bg-opacity-10  ' 
+            >
+
+                <Row>
+                    <Col md={2} 
+                    className='d-flex justify-content-center align-items-center'
+                    >
+
+                        <img
+                            // make image fluid in size and responsive and not to be stretched and distorted not to be cropped and not overflow the container
+                            className="w-75 h-75 shadow-sm  rounded img-fluid  p-3 "
+                            style={{ height: '100px', width: '100px', objectFit: 'cover' }}
+
+                            src={companyLogo}
+                            alt='user profile photo' />
+                    </Col>
+                    <Col md={10} className=" py-3">
+                        <p className='fw-bolder fs-3' > {companyName} </p>
+                        <p className='fs-light ' >{companyDescription} </p>
+                        <p className='text-muted'>  {companyHeadquarters} </p>
+                        <div className='d-flex flex-row ' >
+                            <img src={companyOwner?.profileImage}
+                                className='rounded-circle img-fluid'
+                                style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
+                                alt='user profile photo'
+
+                            />
+                            <p className='mx-2  fs-6 text-muted fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
+                        </div>
+                    </Col>
+
+                </Row>
+            </motion.div>
+
         </>
     )
 }

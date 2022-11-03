@@ -86,7 +86,7 @@ query  fetchMyCompany($userId: ID!){
       firstName
       email
     }
-    companyRegestry{
+    companyRegistry{
       _id,
       debutRegistryName,
       debutRegistryStatus,

@@ -20,15 +20,9 @@ export default function Ventures() {
 
     return (
         <div className=' d-flex  m-5  flex-column '>
-
             <p className='fs-1 fw-light mx-5 px-5 '> Discover ventures</p>
-
-
-            <Row className='mx-4  d-flex justify-content-between'>
-
-                <Col md={10} >
-                    <SearchComponent />
-                </Col>
+            <Row className='mx-4  d-flex justify-content-center'>
+                <Col md={10} > <SearchComponent /> </Col>
                 <Col md={1} >
                     <MotionContainer>
                         <div className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
@@ -43,11 +37,12 @@ export default function Ventures() {
                         </div>
                     </MotionContainer>
 
-
                 </Col>
             </Row>
-            {
-                data?.getdebutCompanies.map((item: any) => {
+            <Row 
+            className='d-flex justify-content-center px-5 mt-5'
+            >
+                {data?.getdebutCompanies.map((item: any) => {
                     return (
 
                         <VentureCards
@@ -71,16 +66,10 @@ export default function Ventures() {
                             companyCategory={item.companyCategory}
                             companyOwner={item.companyOwner}
                             debutEvents={item.debutEvents}
-
-
-
                         />
-
                     )
-
-                }
-                )
-            }
+                })}
+            </Row>
 
 
 
