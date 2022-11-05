@@ -96,8 +96,8 @@ export default function People() {
                 <PeopleFilterOptions />
 
             </Collapse>
-            <Row className='mt-4' >
-                <Col md={5}  className="overflow-scroll " >
+            <Row className='mt-5 px-5' >
+                <Col md={5} className="overflow-scroll " >
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={user._id}
@@ -115,7 +115,9 @@ export default function People() {
                         }
                     })}
                 </Col>
-                <Col md={7} sm={12} xs={12}  >
+                <Col md={7}
+                    className="overflow-auto"
+                >
                     <PersonDetail />
                 </Col>
             </Row>

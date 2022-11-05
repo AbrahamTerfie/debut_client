@@ -50,7 +50,7 @@ export default function PersonDetail() {
     }
 
     return (
-        <div className='p-4 shadow  rounded border border-light my-2 overflow-auto d-flex flex-column  flex-wrap my-5 py-5 '>
+        <div className='p-4 shadow  rounded border border-light my-2 overflow-auto d-flex flex-column  flex-wrap  py-5 '>
             <Row>
                 <Col md={3}>
                     <img src={data?.getDebutUserWithId.profileImage}

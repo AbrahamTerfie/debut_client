@@ -11,6 +11,7 @@ import {
     FaInstagram,
 } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import MotionContainer from '../MotionContainer/MotionContainer'
 
 export default function VentureCards(
     {
@@ -53,65 +54,80 @@ export default function VentureCards(
                 className="offcanvas-style"
                 style={{ width: '60%' }}
             >
-                <OffcanvasHeader onClick={toggle} className=" mb-0 App p-5 shadow" >
+                <OffcanvasHeader onClick={toggle} className=" mb-0 App p-5 pb-0 shadow" >
                     <p className='fs-6 fw-light text-muted  m-0  '> Name </p>
                     <h1 className="">{companyName}</h1>
                     <h6 className="text-start "   >  {companyWebsite} </h6>
-
+                    <div className="d-flex justify-content-around mb-5 mt-3">
+                        <MotionContainer>
+                            <FaLinkedin className='text-primary mx-2 bg-primary bg-opacity-10 p-2 rounded-circle' size={35}
+                                onClick={() => window.open(linkedInUrl ? linkedInUrl : "", "_blank")} />
+                        </MotionContainer>
+                        <MotionContainer>
+                            <FaTwitter className='text-info mx-2 bg-info bg-opacity-10 p-2 rounded-circle' size={35}
+                                onClick={() => window.open(twitterUrl ? twitterUrl : "", "_blank")} />
+                        </MotionContainer>
+                        <MotionContainer>
+                            <FaFacebook className='text-primary mx-2 bg-primary bg-opacity-10 p-2 rounded-circle' size={35}
+                                onClick={() => window.open(facebookUrl ? facebookUrl : "", "_blank")} />
+                        </MotionContainer>
+                        <MotionContainer>
+                            <FaInstagram className='text-danger mx-2 bg-danger bg-opacity-10 p-2 rounded-circle' size={35}
+                                onClick={() => window.open(instagramUrl ? instagramUrl : "", "_blank")} />
+                        </MotionContainer>
+                    </div>
                 </OffcanvasHeader>
-                <OffcanvasBody className='px-5 pt-1  d-flex flex-column ' >
+                <OffcanvasBody className=' App px-5 pt-5 d-flex flex-column ' >
                     <Row>
-                        <Col md={7}>
-                            <small className=' fw-light text-muted  m-0'> mission statemeny </small>
+                        <Col md={8}>
+                            <small className=' fw-light text-muted  m-0'> mission statement </small>
                             <p> {companyMissionStatement} </p>
-                            <small className='fs-6 fw-light text-muted  m-0'> Description </small>
-                            <p className='fs-5 fw-light mb-3' >{companyDescription}</p>
+                            <small className='fw-light text-muted  m-0'> Description </small>
+                            <p className=' fw-light mb-3' >{companyDescription}</p>
                             <small className=' fw-light text-muted  m-0'> Company owner </small>
-                            <p className='fs-5 fw-light mb-3' > company owner  </p>
+                            <p className=' fw-light mb-3' > company owner  </p>
                             <small className=' fw-light text-muted  m-0'> company achivements </small>
-                            <div className='d-flex flex-wrap' >
+                            <div className='d-flex flex-wrap m-2' >
                                 {majorAchivements?.map((item: any) => (
-                                    <p className='m-2'
-                                        key={item.index}
-                                    >{item}</p>
+                                    <MotionContainer key={item.index}>
+                                        <p className=' mx-1 bg-success text-success bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
+                                    </MotionContainer>
                                 ))}
 
                             </div>
                         </Col>
-                        <Col md={5}>
-                            <img
-                                className="w-75 shadow-sm p-4 rounded"
-                                src={companyLogo}
-                                alt="" />
-                            <div className="d-flex justify-content-around mb-5 mt-3">
-                                <a href={linkedInUrl ? linkedInUrl : ""}>
-                                    <FaLinkedin className='mx-3' size={25} />
-                                </a>
-                                <a href={twitterUrl ? twitterUrl : ""}>
-                                    <FaTwitter size={25} className='mx-3' />
-                                </a>
-                                <a href={facebookUrl ? facebookUrl : ""} >
-                                    <FaFacebook className='mx-3' size={25} />
-                                </a>
-                                <a href={instagramUrl ? instagramUrl : ""}>
-                                    <FaInstagram className='mx-3' size={25} />
-                                </a>
-
-                            </div>
-                            <small className=' fw-light text-muted ' >aera of operations </small>
-                            <div className='d-flex flex-wrap' >
-                                {aeraOfOperation?.map((item: any) => (
-                                    <p className='m-2' >{item}</p>
-                                ))}
-                            </div>
-                            <small className=' fw-light text-muted  m-0'>  active on regions </small>
-                            <div className='d-flex flex-wrap' >
-                                {companyCategory?.map((item: any) => (
-                                    <p className='m-2' >{item}</p>
-                                ))}
+                        <Col md={3} className='d-flex flex-column justify-content-center align-items-center mx-4'>
+                            <div>
+                                <img
+                                    // make the img responsive without looging the aspect ratio
+                                    className="img-fluid w-100 rounded-5 shadow p-3 mb-5 bg-body rounded"
+                                    sizes='(max-width: 300px) 10vw, 300px'
+                                    src={companyLogo}
+                                    alt="" />
                             </div>
                         </Col>
                     </Row>
+
+                    <Row className='d-flex flex-column justify-content-center align-items-start mt-5'>
+                        <small className=' fw-light text-muted ' >aera of operations </small>
+                        <div className='d-flex flex-wrap my-2' >
+                            {aeraOfOperation?.map((item: any) => (
+                                <MotionContainer>
+                                    <p className='text-warning mx-1 bg-warning bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
+                                </MotionContainer>
+                            ))}
+                        </div>
+                        <small className=' fw-light text-muted  m-0'>  active on regions </small>
+                        <div className='d-flex flex-wrap my-2' >
+                            {companyCategory?.map((item: any) => (
+                                <MotionContainer>
+                                    <p className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
+                                </MotionContainer>
+                            ))}
+                        </div>
+
+                    </Row>
+                    <p className='fs-3 fw-light m-3' > company events </p>
 
                     {debutEvents?.map((item: any) => (
                         <DebutEventCards

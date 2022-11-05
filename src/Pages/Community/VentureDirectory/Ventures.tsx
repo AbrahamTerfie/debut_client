@@ -19,7 +19,7 @@ export default function Ventures() {
     if (data) console.log('venture data', data.getdebutCompanies)
 
     return (
-        <div className=' d-flex  m-5  flex-column '>
+        <div className=' d-flex  m-5  mt-5 pt-5 flex-column '>
             <p className='fs-1 fw-light mx-5 px-5 '> Discover ventures</p>
             <Row className='mx-4  d-flex justify-content-center'>
                 <Col md={10} > <SearchComponent /> </Col>
@@ -39,8 +39,8 @@ export default function Ventures() {
 
                 </Col>
             </Row>
-            <Row 
-            className='d-flex justify-content-center px-5 mt-5'
+            <Row
+                className='d-flex justify-content-center px-5 mt-5'
             >
                 {data?.getdebutCompanies.map((item: any) => {
                     return (
