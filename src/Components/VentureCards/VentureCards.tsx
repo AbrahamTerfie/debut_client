@@ -127,19 +127,23 @@ export default function VentureCards(
                         </div>
 
                     </Row>
-                    <p className='fs-3 fw-light m-3' > company events </p>
+                    <Row>
+                        <p className='fs-3 fw-light m-3' > company events </p>
 
-                    {debutEvents?.map((item: any) => (
-                        <DebutEventCards
-                            _id={item._id}
-                            createdBy={item.createdBy}
-                            belongsTo={item.belongsTo}
-                            debutEventName={item.debutEventName}
-                            debutEventDescription={item.debutEventDescription}
-                            debutEventDate={item.debutEventDate}
-                            debutEventImage={item.debutEventImage}
-                        />
-                    ))}
+                        <div>
+                            {debutEvents?.map((item: any) => (
+                                <DebutEventCards
+                                    _id={item._id}
+                                    createdBy={item.createdBy}
+                                    belongsTo={item.belongsTo}
+                                    debutEventName={item.debutEventName}
+                                    debutEventDescription={item.debutEventDescription}
+                                    debutEventDate={item.debutEventDate}
+                                    debutEventImage={item.debutEventImage}
+                                />
+                            ))}
+                        </div>
+                    </Row>
 
                 </OffcanvasBody>
             </Offcanvas>
