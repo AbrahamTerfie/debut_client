@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import MotionContainer from '../MotionContainer/MotionContainer'
+import { appRoutes } from '../../Routes/routes'
 
 export default function VentureCards(
     {
@@ -128,7 +129,14 @@ export default function VentureCards(
 
                     </Row>
                     <Row>
-                        <p className='fs-3 fw-light m-3' > company events </p>
+                        <MotionContainer>
+                            <p
+                                onClick={() => navigate(`${appRoutes.ventures}/${_id}`)}
+                                className='fs-3 fw-light m-3 text-success'> got to the company page to see more </p>
+
+                        </MotionContainer>
+
+                        {/* <p className='fs-3 fw-light m-3' > company events </p>
 
                         <div>
                             {debutEvents?.map((item: any) => (
@@ -142,7 +150,7 @@ export default function VentureCards(
                                     debutEventImage={item.debutEventImage}
                                 />
                             ))}
-                        </div>
+                        </div> */}
                     </Row>
 
                 </OffcanvasBody>
