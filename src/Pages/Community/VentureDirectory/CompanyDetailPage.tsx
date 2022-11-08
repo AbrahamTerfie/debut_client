@@ -94,8 +94,76 @@ export default function CompanyDetailPage() {
 
             </Row>
 
-            <Row>
-                company events and registries
+
+
+            {/* company events and registries  */}
+            <p className='fs-6 fw-light text-muted  m-3 mt-5' > Events and registries  </p>
+
+            <Row className='shadow p-4   d-flex justify-content-between'>
+                <Col md={3}>
+                    <MotionContainer>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
+                            style={{
+                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
+                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
+                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
+                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
+                            }}>
+                            <div className='d-flex justify-content-end align-items-end flex-column'>
+                                <p className='fs-1 m-0' > event title </p>
+                                <p className='text-light' > event description </p>
+                            </div>
+                        </div>
+                    </MotionContainer>
+                </Col>
+                <Col md={3}>
+                    <MotionContainer>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
+                            style={{
+                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
+                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
+                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
+                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
+                            }}>
+                            <div className='d-flex justify-content-end align-items-end flex-column'>
+                                <p className='fs-1 m-0' > event title </p>
+                                <p className='text-light' > event description </p>
+                            </div>
+                        </div>
+                    </MotionContainer>
+                </Col>
+                <Col md={3}>
+                    <MotionContainer>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
+                            style={{
+                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
+                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
+                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
+                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
+                            }}>
+                            <div className='d-flex justify-content-end align-items-end flex-column'>
+                                <p className='fs-1 m-0' > event title </p>
+                                <p className='text-light' > event description </p>
+                            </div>
+                        </div>
+                    </MotionContainer>
+                </Col>
+                <Col md={3}>
+                    <MotionContainer>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
+                            style={{
+                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
+                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
+                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
+                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
+                            }}>
+                            <div className='d-flex justify-content-end align-items-end flex-column'>
+                                <p className='fs-1 m-0' > event title </p>
+                                <p className='text-light' > event description </p>
+                            </div>
+                        </div>
+                    </MotionContainer>
+                </Col>
             </Row>
             <Row>
                 company goals and milestones
