@@ -12,7 +12,8 @@ import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
 import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccordion'
 import { LandingCard2, LandingCard3 } from '../../Components/LandingCard2/LandingCard2'
-
+import { useAuth0 } from '@auth0/auth0-react'
+import Loader from '../../Components/Loader/Loader'
 const iconProperties = {
     size: 40,
     color: 'white'
@@ -20,6 +21,10 @@ const iconProperties = {
 }
 
 export default function Landing() {
+    const { loginWithRedirect, isLoading, isAuthenticated, user, logout } = useAuth0();
+    console.log(" user object form auth0 hook  ", user)
+
+    if (isLoading) { return <Loader /> }
 
     return (
         <Container fluid className="" >
@@ -48,15 +53,24 @@ export default function Landing() {
 
                         </Col>
                         <Col md={5} className="shadow-lg p-5 rounded  forumCardParent   border-light border-5 mx-2" >
-                            <Link to={appRoutes.authentication}>
-                                <div className=" d-flex justify-content-center align-items-center ">
-                                    <VscDebugStart className='mx-3' size={100} color="#ffffff" />
-                                    <div>
-                                        <p className='m-0 fs-1 text-light' >get started </p>
-                                        <span className='text-light' > sign up or login </span>
-                                    </div>
+
+                            <div className=" d-flex justify-content-center align-items-center "
+                                onClick={() => {
+                                    loginWithRedirect(
+                                        {
+                                            redirectUri: "http://localhost:3000/forum"
+                                        }
+                                    )
+                                    //  navigate(appRoutes.forum)
+                                }}
+                            >
+                                <VscDebugStart className='mx-3' size={100} color="#ffffff" />
+                                <div>
+                                    <p className='m-0 fs-1 text-light' >get started </p>
+                                    <span className='text-light' > sign up or login </span>
                                 </div>
-                            </Link>
+                            </div>
+
                         </Col>
                     </Row>
 
