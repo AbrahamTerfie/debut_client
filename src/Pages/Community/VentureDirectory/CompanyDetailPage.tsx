@@ -4,7 +4,12 @@ import { useParams } from 'react-router-dom'
 import { Row, Col } from 'reactstrap'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 
-
+const background: React.CSSProperties = {
+    backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
+    backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
+    objectFit: 'cover', objectPosition: 'center', borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
+    width: '100%', height: '100%', minHeight: '200px', maxHeight: '300px', minWidth: '200px', maxWidth: '300px',
+}
 
 export default function CompanyDetailPage() {
 
@@ -99,16 +104,17 @@ export default function CompanyDetailPage() {
             {/* company events and registries  */}
             <p className='fs-6 fw-light text-muted  m-3 mt-5' > Events and registries  </p>
 
-            <Row className='shadow p-4   d-flex justify-content-between'>
-                <Col md={3}>
+            <Row
+                // constina overflow and make it responsive 
+                className='shadow p-2  d-flex justify-content-start  flex-wrap  overflow-auto '
+
+
+            >
+
+                <Col md={4} className="px-2" >
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={{
-                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
-                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
-                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
-                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
-                            }}>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                            style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>
                                 <p className='text-light' > event description </p>
@@ -116,15 +122,10 @@ export default function CompanyDetailPage() {
                         </div>
                     </MotionContainer>
                 </Col>
-                <Col md={3}>
+                <Col md={4} className="px-2">
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={{
-                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
-                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
-                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
-                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
-                            }}>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                            style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>
                                 <p className='text-light' > event description </p>
@@ -132,15 +133,10 @@ export default function CompanyDetailPage() {
                         </div>
                     </MotionContainer>
                 </Col>
-                <Col md={3}>
+                <Col md={4} className="px-2">
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={{
-                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
-                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
-                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
-                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
-                            }}>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                            style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>
                                 <p className='text-light' > event description </p>
@@ -148,15 +144,10 @@ export default function CompanyDetailPage() {
                         </div>
                     </MotionContainer>
                 </Col>
-                <Col md={3}>
+                <Col md={4} className="px-2">
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={{
-                                backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
-                                backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
-                                height: '300px', width: '300px', maxHeight: '300px', maxWidth: '300px',
-                                borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
-                            }}>
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                            style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>
                                 <p className='text-light' > event description </p>
