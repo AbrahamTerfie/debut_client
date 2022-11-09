@@ -105,15 +105,12 @@ export default function CompanyDetailPage() {
             <p className='fs-6 fw-light text-muted  m-3 mt-5' > Events and registries  </p>
 
             <Row
-                // constina overflow and make it responsive 
-                className='shadow p-2  d-flex justify-content-start  flex-wrap  overflow-auto '
+                className='shadow p-4   d-flex justify-content-between'>
 
 
-            >
-
-                <Col md={4} className="px-2" >
+                <Col className="m-2" >
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
                             style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>
@@ -122,9 +119,9 @@ export default function CompanyDetailPage() {
                         </div>
                     </MotionContainer>
                 </Col>
-                <Col md={4} className="px-2">
+                <Col className=" m-2">
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
                             style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>
@@ -133,9 +130,9 @@ export default function CompanyDetailPage() {
                         </div>
                     </MotionContainer>
                 </Col>
-                <Col md={4} className="px-2">
+                <Col className="m-2">
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
                             style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>
@@ -144,9 +141,9 @@ export default function CompanyDetailPage() {
                         </div>
                     </MotionContainer>
                 </Col>
-                <Col md={4} className="px-2">
+                <Col className="m-2" >
                     <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm m-3'
+                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
                             style={background}>
                             <div className='d-flex justify-content-end align-items-end flex-column'>
                                 <p className='fs-1 m-0' > event title </p>

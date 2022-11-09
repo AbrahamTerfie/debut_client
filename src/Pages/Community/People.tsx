@@ -61,9 +61,9 @@ export default function People() {
 
     return (
 
-        <div className=' d-flex flex-column mt-5  pt-5 px-5 ' >
+        <div className=' d-flex flex-column m-5  p-5 ' >
             <p className='fw-light fs-1  mx-5'> People directory</p>
-            <Row className='mx-4  d-flex justify-content-between'>
+            <Row className=''>
 
                 <Col md={10} sm={8} xs={8} >
                     <SearchComponent />
@@ -96,8 +96,8 @@ export default function People() {
                 <PeopleFilterOptions />
 
             </Collapse>
-            <Row className='mt-5 px-5' >
-                <Col md={5} className="overflow-scroll " >
+            <Row className='mt-5 '  >
+                <Col  className="overflow-scroll " >
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={user._id}
@@ -115,7 +115,7 @@ export default function People() {
                         }
                     })}
                 </Col>
-                <Col md={7}
+                <Col 
                     className="overflow-auto"
                 >
                     <PersonDetail />

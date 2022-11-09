@@ -30,15 +30,15 @@ export default function PeopleCards({ people }: any) {
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             style={{ cursor: 'pointer' }}
             className={activePersonId === people._id ?
-                '  shadow-lg  rounded-1   my-2  bg-dark  bg-opacity-25 m-0 '
-                : '  shadow-sm  border-info  rounded-4   my-2 '}
+                '  shadow-lg  rounded-1   my-2  bg-dark  bg-opacity-10 '
+                : '  shadow-sm rounded-5   my-2 '}
         >
             <Row onClick={(e: any) => handleClick(e)}>
                 <Col md={3} >
                     <img
                         src={people.profileImage}
                         alt='profile'
-                        className='rounded img-fluid h-100 w-100'
+                        className='rounded img-fluid h-100 w-75'
                         style={{ width: '100px', height: '100px', objectFit: 'cover', maxHeight: '100%' }}
                     />
                 </Col>

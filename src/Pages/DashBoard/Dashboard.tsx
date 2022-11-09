@@ -48,7 +48,7 @@ export default function Dashboard() {
     // console.log("loading", loading)
     // console.log("error", error)
     return (
-        <div className="d-flex   ">
+        <div className="d-flex mt-5   ">
             <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
             <div className={classNames("content  Page overflow-scroll ", { "is-open overflow-scroll  ": sidebarIsOpen })}
                 style={sidebarIsOpen ? { width: window.innerWidth * 0.8 } : { width: window.innerWidth }} >
