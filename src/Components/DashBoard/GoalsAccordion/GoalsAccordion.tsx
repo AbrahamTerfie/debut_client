@@ -243,14 +243,7 @@ export default function GoalsAccordion(
                                     <p className='text-muted text-center fs-4' > no milestones yet </p>
                                     <p className='text-muted text-center' > start by adding  new milestone </p>
                                 </div> : mileStones?.map((mileStone: any) => {
-                                    return (
-                                        <MileStoneCard
-
-                                            key={mileStone._id}
-                                            {...mileStone}
-
-                                        />
-                                    )
+                                    return (<MileStoneCard key={mileStone._id} {...mileStone}/> )
                                 })}
 
                         </Row>

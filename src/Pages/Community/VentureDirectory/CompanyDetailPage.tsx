@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { useParams } from 'react-router-dom'
 import { Row, Col } from 'reactstrap'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
+import VentureEventModal from '../../../Components/VentureEventModal/VentureEventModal';
+
 
 const background: React.CSSProperties = {
     backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
@@ -14,9 +16,14 @@ const background: React.CSSProperties = {
 export default function CompanyDetailPage() {
 
     const { id } = useParams<{ id: string }>();
+    const [isEventModalOpen, setIsEventModalOpen] = useState(false)
+    const toggleEventModal = () => setIsEventModalOpen(!isEventModalOpen)
     return (
         <div className='m-5 p-5  '>
-
+            <VentureEventModal
+                isEventModalOpen={isEventModalOpen}
+                toggleEventModal={toggleEventModal}
+            />
             <p className='fs-6 fw-light text-muted  m-0  '> Name </p>
             <h1 className="">
                 {id} complany name
@@ -98,6 +105,14 @@ export default function CompanyDetailPage() {
                 </Col>
 
             </Row>
+            <p className='fs-6 fw-light text-muted  m-3 mt-5' > Goals and milestones  </p>
+
+
+            <Row
+                className='shadow p-4   d-flex justify-content-between'>
+
+
+            </Row>
 
 
 
@@ -108,7 +123,10 @@ export default function CompanyDetailPage() {
                 className='shadow p-4   d-flex justify-content-between'>
 
 
-                <Col className="m-2" >
+                <Col className="m-2"
+                    onClick={toggleEventModal}
+
+                >
                     <MotionContainer>
                         <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
                             style={background}>
@@ -153,9 +171,8 @@ export default function CompanyDetailPage() {
                     </MotionContainer>
                 </Col>
             </Row>
-            <Row>
-                company goals and milestones
-            </Row>
+
+
         </div >
     )
 }
