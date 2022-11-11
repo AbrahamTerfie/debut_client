@@ -13,7 +13,7 @@ export default function VentureEventModal(
             fullscreen={true}
             scrollable={true}
             fade
-            backdropTransition={{ timeout: 700 }}
+            // backdropTransition={{ timeout: 700 }}
             className='App'
         >
             <ModalHeader className='px-5 py-4   shadow' toggle={toggleEventModal}>

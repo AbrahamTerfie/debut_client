@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Row, Col, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 import './VentureCards.css'
 import { useNavigate } from 'react-router-dom'
-import DebutEventCards from '../DebutEventCards/DebutEventCards'
+// import DebutEventCards from '../DebutEventCards/DebutEventCards'
 import {
     FaLinkedin,
     FaTwitter,
@@ -43,7 +43,7 @@ export default function VentureCards(
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
-    const itemlink = "fromVenturepagewithid"
+
     return (
         // <Link to={`${appRoutes.ventures}/${itemlink}`}>
         <>

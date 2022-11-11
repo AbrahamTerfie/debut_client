@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Col, Row, FormGroup, Input, Label } from 'reactstrap'
 import './MyEventCard.css'
 import { useNavigate } from 'react-router-dom'
-import { appRoutes } from '../../Routes/routes'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
@@ -168,7 +167,8 @@ export default function MyEventCard(
                   {data.getEventRegistriesWithEventId?.map((registry: any) => {
                     return (
                       <Row className='shadow-sm  m-2 MyeventCard'
-                        onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}>
+                        // onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}
+                        >
                         <Col md={8}>
                           <small className='text-muted  text-small fw-light' >name</small>
                           <p className='fw-light' > {registry?.debutRegistryName}  </p>
