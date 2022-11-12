@@ -2,13 +2,10 @@ import React from 'react';
 import './App.css';
 import "animate.css/animate.min.css";
 import { Authentication, Landing, Dashboard, DashBoardPages } from './Pages/inedx';
-// import { MyEvents } from './Pages/MyDebut/index'
-import { GiveGratitude, Forum, People, Ventures, CompanyDetailPage } from './Pages/Community/index';
+import { GiveGratitude, Forum, People, Ventures, CompanyDetailPage, Events, EventPage } from './Pages/Community/index';
 
 import { Routes, Route } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
-
-
 import NavBarComponent from './Components/NavBar/NavBar';
 
 import { useAuth0 } from '@auth0/auth0-react';
@@ -32,6 +29,8 @@ function App() {
             <Route path={appRoutes.giveGratitude} caseSensitive element={<GiveGratitude />} />
             <Route path={appRoutes.people} caseSensitive element={<People />} />
             <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
+            <Route path={appRoutes.debutEvent} caseSensitive element={<Events />} />
+            <Route path={appRoutes.debutEventPage} caseSensitive element={<EventPage />} />
 
             {/* *************** */}
 

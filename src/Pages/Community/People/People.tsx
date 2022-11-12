@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Button, Collapse } from 'reactstrap'
-import PeopleCards from '../../Components/PeopleCards/PeopleCards'
+import PeopleCards from '../../../Components/PeopleCards/PeopleCards'
 import './People.css'
-import SearchComponent from '../../Components/GlobalSearch/SearchComponent'
+import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { useMutation, useQuery } from '@apollo/client'
-import { AUTHENTICATED_USER } from '../../GraphQl/index'
+import { AUTHENTICATED_USER } from '../../../GraphQl/index'
 import { useAuth0 } from '@auth0/auth0-react'
-import PersonDetail from '../../Components/PersonDetail/PersonDetail'
-import PeopleFilterOptions from '../../Components/PeopleFilterOptions/PeopleFilterOptions'
+import PersonDetail from '../../../Components/PersonDetail/PersonDetail'
+import PeopleFilterOptions from '../../../Components/PeopleFilterOptions/PeopleFilterOptions'
 import { IoMdSettings } from 'react-icons/io'
 import { FaSearch } from 'react-icons/fa'
 
 //context
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../Store/RootReducer'
-import { All_USERS } from '../../GraphQl/index'
-import Loader from '../../Components/Loader/Loader'
+import { RootState } from '../../../Store/RootReducer'
+import { All_USERS } from '../../../GraphQl/index'
+import Loader from '../../../Components/Loader/Loader'
 import { motion } from 'framer-motion'
 export default function People() {
 

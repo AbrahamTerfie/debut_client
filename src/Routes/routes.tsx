@@ -8,7 +8,8 @@ export const appRoutes = {
     people: '/peopleDirectory',
     ventures: '/ventureDirectory',
     venturePage: '/ventureDirectory/:id',
-
+    debutEvent: '/debutEvent',
+    debutEventPage: '/debutEvent/:id',
 
     dashboard: '/dashboard',
     myProfile: 'myProfile',

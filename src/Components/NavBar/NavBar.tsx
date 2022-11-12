@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap'
 import { BsPeople } from 'react-icons/bs'
-import { FaRegBuilding } from 'react-icons/fa'
+import { FaCalendar, FaRegBuilding } from 'react-icons/fa'
 import { MdOutlineForum, MdLogout, MdOutlineSpaceDashboard } from 'react-icons/md'
 import { appRoutes } from '../../Routes/routes'
 import { useNavigate } from 'react-router-dom'
@@ -46,9 +46,14 @@ export default function NavBarComponent() {
                     </NavItem>
                     <NavItem>
                         <NavLink style={textColor} onClick={() => { navigate(appRoutes.ventures) }} className={location.pathname === appRoutes.ventures ? "MyeventCardActive mx-3" : "MyeventCard"}  >
-
                             <FaRegBuilding size={15} className='mx-3 my-1' />
-                            Ventures Directory
+                            Ventures
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.debutEvent) }} className={location.pathname === appRoutes.debutEvent ? "MyeventCardActive mx-3" : "MyeventCard"}  >
+                            <FaCalendar size={15} className='mx-3 my-1' />
+                            Events
                         </NavLink>
                     </NavItem>
                     <NavItem>
