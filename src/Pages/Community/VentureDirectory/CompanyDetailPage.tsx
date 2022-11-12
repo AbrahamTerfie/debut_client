@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { useParams } from 'react-router-dom'
-import { Row, Col } from 'reactstrap'
+import { Row, Col, Accordion, AccordionBody, AccordionHeader, AccordionItem, UncontrolledAccordion } from 'reactstrap'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 import VentureEventModal from '../../../Components/VentureEventModal/VentureEventModal';
-
+import GoalsBody from '../../../Components/GoalsBody/GoalsBody';
 
 const background: React.CSSProperties = {
     backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
@@ -18,6 +18,15 @@ export default function CompanyDetailPage() {
     const { id } = useParams<{ id: string }>();
     const [isEventModalOpen, setIsEventModalOpen] = useState(false)
     const toggleEventModal = () => setIsEventModalOpen(!isEventModalOpen)
+
+    const [open, setOpen] = useState('');
+    const toggle = (id: string) => {
+        if (open === id) {
+            setOpen('');
+        } else {
+            setOpen(id);
+        }
+    };
     return (
         <div className='m-5 p-5  '>
             <VentureEventModal
@@ -108,25 +117,61 @@ export default function CompanyDetailPage() {
             <p className='fs-6 fw-light text-muted  m-3 mt-5' > Goals and milestones  </p>
 
 
-            <Row
-                className='shadow p-4   d-flex justify-content-between'>
+
+
+
+
+            <Row className='shadow p-4   d-flex justify-content-between'>
+
+
+
+
+                <div>
+                    <UncontrolledAccordion flush open={open} stayOpen={true} >
+
+                        <AccordionItem>
+                            <AccordionHeader targetId="1">Accordion Item 1</AccordionHeader>
+                            <AccordionBody accordionId="1">
+                                <GoalsBody />
+                            </AccordionBody>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionHeader targetId="2">Accordion Item 2</AccordionHeader>
+                            <AccordionBody accordionId="2">
+                            <GoalsBody />
+
+                            </AccordionBody>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionHeader targetId="3">Accordion Item 3</AccordionHeader>
+                            <AccordionBody accordionId="3">
+                                <strong>This is the third item&#39;s accordion body.</strong>
+                                You can modify any of this with custom CSS or overriding our default
+                                variables. It&#39;s also worth noting that just about any HTML can
+                                go within the <code>.accordion-body</code>, though the transition
+                                does limit overflow.
+                            </AccordionBody>
+                        </AccordionItem>
+                    </UncontrolledAccordion>
+                </div>
+
+
+
 
 
             </Row>
 
 
 
+
+
+
+
+
             {/* company events and registries  */}
             <p className='fs-6 fw-light text-muted  m-3 mt-5' > Events and registries  </p>
-
-            <Row
-                className='shadow p-4   d-flex justify-content-between'>
-
-
-                <Col className="m-2"
-                    onClick={toggleEventModal}
-
-                >
+            <Row className='shadow p-4   d-flex justify-content-between'>
+                <Col className="m-2" onClick={toggleEventModal} >
                     <MotionContainer>
                         <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
                             style={background}>
