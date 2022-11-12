@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, Accordion, AccordionBody, AccordionHeader, AccordionItem, UncontrolledAccordion } from 'reactstrap'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 import VentureEventModal from '../../../Components/VentureEventModal/VentureEventModal';
 import GoalsBody from '../../../Components/GoalsBody/GoalsBody';
+import { appRoutes } from '../../../Routes/routes';
+import EventCard from '../../../Components/EventCard/EventCard';
 
 const background: React.CSSProperties = {
     backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
@@ -16,6 +18,7 @@ const background: React.CSSProperties = {
 export default function CompanyDetailPage() {
 
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [isEventModalOpen, setIsEventModalOpen] = useState(false)
     const toggleEventModal = () => setIsEventModalOpen(!isEventModalOpen)
 
@@ -138,7 +141,7 @@ export default function CompanyDetailPage() {
                         <AccordionItem>
                             <AccordionHeader targetId="2">Accordion Item 2</AccordionHeader>
                             <AccordionBody accordionId="2">
-                            <GoalsBody />
+                                <GoalsBody />
 
                             </AccordionBody>
                         </AccordionItem>
@@ -171,50 +174,10 @@ export default function CompanyDetailPage() {
             {/* company events and registries  */}
             <p className='fs-6 fw-light text-muted  m-3 mt-5' > Events and registries  </p>
             <Row className='shadow p-4   d-flex justify-content-between'>
-                <Col className="m-2" onClick={toggleEventModal} >
-                    <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={background}>
-                            <div className='d-flex justify-content-end align-items-end flex-column'>
-                                <p className='fs-1 m-0' > event title </p>
-                                <p className='text-light' > event description </p>
-                            </div>
-                        </div>
-                    </MotionContainer>
-                </Col>
-                <Col className=" m-2">
-                    <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={background}>
-                            <div className='d-flex justify-content-end align-items-end flex-column'>
-                                <p className='fs-1 m-0' > event title </p>
-                                <p className='text-light' > event description </p>
-                            </div>
-                        </div>
-                    </MotionContainer>
-                </Col>
-                <Col className="m-2">
-                    <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={background}>
-                            <div className='d-flex justify-content-end align-items-end flex-column'>
-                                <p className='fs-1 m-0' > event title </p>
-                                <p className='text-light' > event description </p>
-                            </div>
-                        </div>
-                    </MotionContainer>
-                </Col>
-                <Col className="m-2" >
-                    <MotionContainer>
-                        <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-sm'
-                            style={background}>
-                            <div className='d-flex justify-content-end align-items-end flex-column'>
-                                <p className='fs-1 m-0' > event title </p>
-                                <p className='text-light' > event description </p>
-                            </div>
-                        </div>
-                    </MotionContainer>
-                </Col>
+                <EventCard />
+                <EventCard />
+                <EventCard />
+                <EventCard />
             </Row>
 
 
