@@ -5,20 +5,15 @@ import { Row, Col, Accordion, AccordionBody, AccordionHeader, AccordionItem, Unc
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 import VentureEventModal from '../../../Components/VentureEventModal/VentureEventModal';
 import GoalsBody from '../../../Components/GoalsBody/GoalsBody';
-import { appRoutes } from '../../../Routes/routes';
+// import { appRoutes } from '../../../Routes/routes';
 import EventCard from '../../../Components/EventCard/EventCard';
 
-const background: React.CSSProperties = {
-    backgroundImage: `url(https://images.unsplash.com/photo-1667715191315-351400a5789a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80)`,
-    backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
-    objectFit: 'cover', objectPosition: 'center', borderRadius: '10px', backgroundBlendMode: 'multiply', backgroundColor: 'rgba(0,0,0,0.6)',
-    width: '100%', height: '100%', minHeight: '200px', maxHeight: '300px', minWidth: '200px', maxWidth: '300px',
-}
+
 
 export default function CompanyDetailPage() {
 
     const { id } = useParams<{ id: string }>();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [isEventModalOpen, setIsEventModalOpen] = useState(false)
     const toggleEventModal = () => setIsEventModalOpen(!isEventModalOpen)
 
