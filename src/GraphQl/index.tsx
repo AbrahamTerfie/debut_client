@@ -14,7 +14,7 @@ import {
     CREATE_COMPANY, FETCH_COMPANY, UPDATE_COMPANY, GET_ALL_VENTURES
 } from './Company/companyQueries'
 import {
-    CREATE_EVENT, MY_DEBUT_EVENTS, EVENTS_PAGES,
+    CREATE_EVENT, MY_DEBUT_EVENTS, EVENTS_PAGE,
     DEBUT_EVENT_DETAILS, EVENT_PAGE_REGISTRY
 } from './DebutEvents/eventQuries'
 import { EVENT_REGISTRIES } from './DebutRegistry/RegistryQuries'
@@ -53,7 +53,7 @@ export {
     // debut events 
     CREATE_EVENT,
     MY_DEBUT_EVENTS,
-    EVENTS_PAGES,
+    EVENTS_PAGE,
     // registry
     CREATE_DEBUT_REGISTRY,
     EVENT_REGISTRIES,

@@ -62,22 +62,13 @@ query MyDebutEvents ($userId: ID!) {
 
 `
 
-export const EVENTS_PAGES = gql`
-query AllEventPage {
+export const EVENTS_PAGE = gql`
+query getdebutEvents {
   getdebutEvents {
     _id
-    debutEventName
-    debutEventDate
-    debutEventDescription
-    debutEventImage
-    belongsTo {
-      _id
-      companyName
-    }
-    createdBy {
-      _id
-      firstName
-    }
+      debutEventImage
+      debutEventName
+      debutEventDescription
   }
 }
 

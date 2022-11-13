@@ -6,10 +6,22 @@ import { appRoutes } from '../../../Routes/routes'
 import EventCard from '../../../Components/EventCard/EventCard'
 import { MdSearch, MdSettings } from 'react-icons/md'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
+import { eventCard } from '../../../types/eventCardType'
+import { EVENTS_PAGE } from '../../../GraphQl/index'
+import { useQuery } from '@apollo/client'
+import Loader from '../../../Components/Loader/Loader'
+import { notifyError } from '../../../Components/Notification/Toast'
 export default function Events() {
 
-    const itemlink = "fromEvents"
-    const navigate = useNavigate()
+
+    const { data, loading, error } = useQuery(EVENTS_PAGE)
+
+    if (loading) return <Loader />
+    if (error || !data) { notifyError('Error fetching events') }
+    console.log("events data", data)
+
+    const { getdebutEvents: events } = data
+
     return (
         <div className='m-5 p-5  d-flex flex-column' >
 
@@ -32,22 +44,14 @@ export default function Events() {
             <p className='fs-3 text-success fw-light m-2 mx-5 '> Featured  </p>
 
             <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
-                {/* <EventCard /> <EventCard /> <EventCard /> <EventCard />
-                <EventCard /> <EventCard /> <EventCard /> <EventCard /> */}
+                {events.map((event: eventCard) => <EventCard event={event} />)}
             </Row>
-
 
             <p className='fs-3 text-success fw-light m-2 mx-5 mt-5'> events around you   </p>
-
             <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
-                {/* <EventCard /> <EventCard /> <EventCard /> <EventCard />
-                <EventCard /> <EventCard /> <EventCard /> <EventCard /> */}
+                {events.map((event: eventCard) => <EventCard event={event} />)}
             </Row>
 
-
-            {/* <Button onClick={() => navigate(`${itemlink}`)}>
-                this buttton
-            </Button> */}
         </div>
 
     )
