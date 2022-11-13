@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom'
 import { Row, Col } from 'reactstrap'
 import EventRegistryAccordion from '../../../Components/EventRegistryAccordion/EventRegistryAccordion'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
+import { useQuery } from '@apollo/client'
+
 export default function EventPage() {
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
     return (
         <div

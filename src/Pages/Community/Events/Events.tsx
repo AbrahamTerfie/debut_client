@@ -31,20 +31,17 @@ export default function Events() {
             </div>
             <p className='fs-3 text-success fw-light m-2 mx-5 '> Featured  </p>
 
-            <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3
-
-
-            ' >
-                <EventCard /> <EventCard /> <EventCard /> <EventCard />
-                <EventCard /> <EventCard /> <EventCard /> <EventCard />
+            <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
+                {/* <EventCard /> <EventCard /> <EventCard /> <EventCard />
+                <EventCard /> <EventCard /> <EventCard /> <EventCard /> */}
             </Row>
 
 
             <p className='fs-3 text-success fw-light m-2 mx-5 mt-5'> events around you   </p>
 
             <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
-                <EventCard /> <EventCard /> <EventCard /> <EventCard />
-                <EventCard /> <EventCard /> <EventCard /> <EventCard />
+                {/* <EventCard /> <EventCard /> <EventCard /> <EventCard />
+                <EventCard /> <EventCard /> <EventCard /> <EventCard /> */}
             </Row>
 
 
