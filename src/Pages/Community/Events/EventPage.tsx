@@ -66,20 +66,22 @@ export default function EventPage() {
             <p className='text-start fs-4 fw-light  mx-5 px-5 mt-4' > registries </p>
             <Row className='shadow p-3 mx-5' >
                 <UncontrolledAccordion flush open={open} >
-                    {event?.debutRegistry.map((registry: DebutRegistry, index: number) => {
-                        return (
-                            <AccordionItem key={index} >
-                                <AccordionHeader targetId="1">  {registry.debutRegistryName} </AccordionHeader>
-                                <AccordionBody accordionId="1">
-                                    <Row className=' d-flex justify-content-start align-items-center flex-wrap'>
-                                        {registry.debutRegistryItems?.map((item: DebutRegistryItem, index: number) => {
-                                            return (<ItemCard key={index} item={item} />)
-                                        })}
-                                    </Row>
-                                </AccordionBody>
-                            </AccordionItem>
-                        )
-                    })}
+                    {event?.debutRegistry.length === 0 ? <p className='text-center' > no registries yet </p> :
+                        event?.debutRegistry.map((registry: DebutRegistry, index: number) => {
+                            return (
+                                <AccordionItem key={index} >
+                                    <AccordionHeader targetId="1">  {registry.debutRegistryName} </AccordionHeader>
+                                    <AccordionBody accordionId="1">
+                                        <Row className=' d-flex justify-content-start align-items-center flex-wrap'>
+                                            {registry.debutRegistryItems?.length === 0 ? <p className='text-center' > no items yet </p> :
+                                                registry.debutRegistryItems?.map((item: DebutRegistryItem, index: number) => {
+                                                    return (<ItemCard key={index} item={item} />)
+                                                })}
+                                        </Row>
+                                    </AccordionBody>
+                                </AccordionItem>
+                            )
+                        })}
                 </UncontrolledAccordion>
             </Row>
         </div>
