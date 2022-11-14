@@ -14,13 +14,7 @@ export default function EventPage() {
 
     const { id } = useParams()
     const [open, setOpen] = useState('');
-    // const toggle = (id: string) => {
-    //     if (open === id) {
-    //         setOpen('');
-    //     } else {
-    //         setOpen(id);
-    //     }
-    // };
+
     const { data, loading, error } = useQuery(GET_EVENT_WITH_ID, {
         variables: { getDebutEventWithIdId: id }
     })

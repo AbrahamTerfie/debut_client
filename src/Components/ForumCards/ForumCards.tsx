@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './ForumCards.css'
 import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader, FormGroup, Input, Label, Button } from 'reactstrap'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useMutation, useQuery } from '@apollo/client'
 import { RootState } from '../../Store/RootReducer';
 import { CREATE_FORUM_COMMENT, FETCH_POST_COMMENTS } from '../../GraphQl/index';
@@ -117,7 +117,7 @@ export default function ForumCards(
                 transition={{ duration: 1, type: 'spring', stiffness: 100, damping: 20 }}
                 whileHover={{ scale: 1.005 }}
                 whileTap={{ scale: 0.9 }}>
-                <Row className=' MyeventCard  shadow-sm rounded p-3 m-2  my-3' onClick={() => toggle()}>
+                <Row className=' MyeventCard border border-muted shadow-sm rounded p-3 m-2  ' onClick={() => toggle()}>
                     <p className='fw-light fs-5 m-1 ' > {postTitle} </p>
                     <p className=' fw-lighter text-muted m-0' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
                     <p className='fw-light m-0' > {postContent} </p>

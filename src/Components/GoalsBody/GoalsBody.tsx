@@ -55,7 +55,7 @@ function MileStoneCard({ milestone }: { milestone: mileStones }) {
                 <MotionContainer>
                     {!milestone.milestoneCompleted ? <p className='text-center bg-warning m-3 text-warning rounded rounded-1 bg-opacity-10  p-2 px-4  m-2'>let me help  </p> :
                         <p className='text-center bg-success m-3 text-success rounded rounded-1 bg-opacity-10  p-2 px-4  m-2'>
-                            <MdCheck size={30} className='mx-3' />   this item has been fullfilled
+                            <MdCheck size={30} className='mx-3' />   this goal is completed
                         </p>
                     }
                 </MotionContainer>
