@@ -1,8 +1,6 @@
 import React from 'react'
-import { useNavigate, } from 'react-router-dom'
-import { Button, Row } from 'reactstrap'
+import { Row } from 'reactstrap'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
-import { appRoutes } from '../../../Routes/routes'
 import EventCard from '../../../Components/EventCard/EventCard'
 import { MdSearch, MdSettings } from 'react-icons/md'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
@@ -13,13 +11,9 @@ import Loader from '../../../Components/Loader/Loader'
 import { notifyError } from '../../../Components/Notification/Toast'
 export default function Events() {
 
-
     const { data, loading, error } = useQuery(EVENTS_PAGE)
-
     if (loading) return <Loader />
     if (error || !data) { notifyError('Error fetching events') }
-    console.log("events data", data)
-
     const { getdebutEvents: events } = data
 
     return (
@@ -44,12 +38,12 @@ export default function Events() {
             <p className='fs-3 text-success fw-light m-2 mx-5 '> Featured  </p>
 
             <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
-                {events.map((event: eventCard) => <EventCard event={event} />)}
+                {events.map((event: eventCard, index: number) => <EventCard key={index} event={event} />)}
             </Row>
 
             <p className='fs-3 text-success fw-light m-2 mx-5 mt-5'> events around you   </p>
             <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
-                {events.map((event: eventCard) => <EventCard event={event} />)}
+                {events.map((event: eventCard, index: number) => <EventCard key={index} event={event} />)}
             </Row>
 
         </div>

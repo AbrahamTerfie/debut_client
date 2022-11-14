@@ -23,7 +23,7 @@ export default function People() {
     const { peopleExpertiseFilter, peopleRegionFilter } = useSelector((store: RootState) => store.uiStore)
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+    const toggle = (): void => setModal(!modal);
     const { loading, data, error } = useQuery(All_USERS)
 
 
@@ -97,7 +97,7 @@ export default function People() {
 
             </Collapse>
             <Row className='mt-5 '  >
-                <Col  className="overflow-scroll " >
+                <Col className="overflow-scroll " >
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={user._id}
@@ -115,7 +115,7 @@ export default function People() {
                         }
                     })}
                 </Col>
-                <Col 
+                <Col
                     className="overflow-auto"
                 >
                     <PersonDetail />

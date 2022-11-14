@@ -41,9 +41,9 @@ export default function CompanyEvents() {
       <div className='d-flex flex-row flex-wrap' >
         {data.getDebutEventsWithUserId?.length === 0 ?
           <p className='text-muted text-center fs-6 mt-0 mb-2 mx-3'>  you have no events yet </p> :
-          data.getDebutEventsWithUserId?.map((event: any) => {
+          data.getDebutEventsWithUserId?.map((event: any, index: number) => {
             return <MyEventCard
-              key={event.id}
+              key={index}
               _id={event._id}
               debutEventName={event.debutEventName}
               debutEventDate={event.debutEventDate}

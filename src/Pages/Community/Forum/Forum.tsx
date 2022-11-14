@@ -172,11 +172,11 @@ export default function Forum() {
             </div>
 
             <Row className='m-3 mx-5 px-5'>
-                {data.getForumPosts.map((post: any) => {
+                {data.getForumPosts.map((post: any, index: number) => {
                     if (channelFilter === '') {
                         return (
                             <ForumCards
-                                key={post._id}
+                                key={index}
                                 _id={post._id}
                                 channel={post.channel}
                                 postTitle={post.postTitle}
@@ -189,7 +189,7 @@ export default function Forum() {
                     if (channelFilter === post.channel) {
                         return (
                             <ForumCards
-                                key={post._id}
+                                key={index}
                                 _id={post._id}
                                 channel={post.channel}
                                 postTitle={post.postTitle}

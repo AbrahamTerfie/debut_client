@@ -42,11 +42,11 @@ export default function Ventures() {
             <Row
                 className='d-flex justify-content-center px-5 mt-5'
             >
-                {data?.getdebutCompanies.map((item: any) => {
+                {data?.getdebutCompanies.map((item: any, index: number) => {
                     return (
 
                         <VentureCards
-                            key={item._id}
+                            key={index}
                             _id={item._id}
                             companyName={item.companyName}
                             companyMissionStatement={item.companyMissionStatement}
