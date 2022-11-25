@@ -132,9 +132,10 @@ export default function CompanyDetailPage() {
                         {company.companyGoals?.length === 0 ? <p className='text-muted text-center' > no goals added yet </p> :
                             company.companyGoals?.map((goal: companyGoals, index: number) => {
                                 return (<AccordionItem key={index}>
-                                    <AccordionHeader targetId={goal._id}>
-                                        {goal.goalTitle}
-                                    </AccordionHeader>
+                                        <AccordionHeader targetId={goal._id}
+                                            className="shadow-sm d-flex justify-content-between align-items-center  my-3 rounded border border-light ">
+                                            {goal.goalTitle}
+                                        </AccordionHeader>
                                     <AccordionBody accordionId={goal._id}>
                                         <GoalsBody
                                             goals={{

@@ -71,38 +71,23 @@ export default function GoalsAccordion(
     }
 
     useEffect(() => {
-        if (deleteCompanyGoalData) {
-            notifySuccess('Goal deleted successfully')
-        }
-        if (deleteCompanyGoalError) {
-            notifyError("Error deleting goal")
-        }
-        if (deleteCompanyGoalLoading) {
-            notifyLoading('Deleting goal ........')
-        }
-        if (updateCompanyGoalData) {
-            notifySuccess('Goal updated successfully')
-        }
-        if (updateCompanyGoalError) {
-            notifyError("Error updating goal")
-        }
-        if (updateCompanyGoalLoading) {
-            notifyLoading('Updating goal ........')
-        }
+        if (deleteCompanyGoalData) { notifySuccess('Goal deleted successfully') }
+        if (deleteCompanyGoalError) { notifyError("Error deleting goal") }
+        if (deleteCompanyGoalLoading) { notifyLoading('Deleting goal ........') }
+        if (updateCompanyGoalData) { notifySuccess('Goal updated successfully') }
+        if (updateCompanyGoalError) { notifyError("Error updating goal") }
+        if (updateCompanyGoalLoading) { notifyLoading('Updating goal ........') }
 
-    }, [deleteCompanyGoalData,
-        deleteCompanyGoalError,
-        deleteCompanyGoalLoading,
-        updateCompanyGoalData,
-        updateCompanyGoalError,
-        updateCompanyGoalLoading])
+    }, [deleteCompanyGoalData, deleteCompanyGoalError, deleteCompanyGoalLoading,
+        updateCompanyGoalData, updateCompanyGoalError, updateCompanyGoalLoading])
 
     return (
         <div>
             <UncontrolledAccordion
                 open={open}
                 flush
-                stayOpen>
+                stayOpen 
+                >
                 <AccordionItem  >
                     <Offcanvas
                         direction="end"
@@ -120,9 +105,9 @@ export default function GoalsAccordion(
                         </OffcanvasHeader>
                         <OffcanvasBody className='p-5' >
                             {/* new milestone form  */}
-                            <NewGoalMilestone goalID={_id} 
-                            
-                            cnavasOpen={toggleCanvas}
+                            <NewGoalMilestone goalID={_id}
+
+                                cnavasOpen={toggleCanvas}
                             />
                         </OffcanvasBody>
                     </Offcanvas>
@@ -131,7 +116,7 @@ export default function GoalsAccordion(
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     >
                         <AccordionHeader
-                            className=' accordionHeader fw-light shadow-sm my-2  '
+                            className=' accordionHeader fw-light shadow  my-3 rounded rounded-3'
                             targetId={_id.toString()} >
                             {goalTitle}
                         </AccordionHeader>
@@ -243,7 +228,7 @@ export default function GoalsAccordion(
                                     <p className='text-muted text-center fs-4' > no milestones yet </p>
                                     <p className='text-muted text-center' > start by adding  new milestone </p>
                                 </div> : mileStones?.map((mileStone: any) => {
-                                    return (<MileStoneCard key={mileStone._id} {...mileStone}/> )
+                                    return (<MileStoneCard key={mileStone._id} {...mileStone} />)
                                 })}
 
                         </Row>

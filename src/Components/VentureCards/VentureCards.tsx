@@ -132,27 +132,11 @@ export default function VentureCards(
                         <MotionContainer>
                             <p
                                 onClick={() => navigate(`${appRoutes.ventures}/${_id}`)}
-                                className='fs-3 fw-light m-3 text-success'> got to the company page to see more </p>
-
+                                className='fs-4 fw-light m-3 text-success bg-success bg-opacity-10 p-3 px-5 rounded-1 border border-success 
+                                '> got to the company page to see more
+                            </p>
                         </MotionContainer>
-
-                        {/* <p className='fs-3 fw-light m-3' > company events </p>
-
-                        <div>
-                            {debutEvents?.map((item: any) => (
-                                <DebutEventCards
-                                    _id={item._id}
-                                    createdBy={item.createdBy}
-                                    belongsTo={item.belongsTo}
-                                    debutEventName={item.debutEventName}
-                                    debutEventDescription={item.debutEventDescription}
-                                    debutEventDate={item.debutEventDate}
-                                    debutEventImage={item.debutEventImage}
-                                />
-                            ))}
-                        </div> */}
                     </Row>
-
                 </OffcanvasBody>
             </Offcanvas>
 

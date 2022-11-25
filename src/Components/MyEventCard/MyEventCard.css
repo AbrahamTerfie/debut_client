@@ -1,13 +1,20 @@
-.MyeventCardActive{
+.MyeventCardActive {
     transition: all 0.2s ease-in-out;
     border-bottom: 3px solid #1985a1;
     transform: scale(1.01);
+    background-color: rgb(231, 229, 229);
+    border-radius: 5px;
+
+    transition: all 0.2s ease-in-out;
+
 
 }
 
-.MyeventCard:hover{
+.MyeventCard:hover {
     transition: all 0.2s ease-in-out;
     border-bottom: 3px solid #1985a1;
-    /* transform: scale(1.01); */
+    background-color: rgb(231, 229, 229);
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
 
 }

@@ -39,40 +39,33 @@ export default function Ventures() {
 
                 </Col>
             </Row>
-            <Row
-                className='d-flex justify-content-center px-5 mt-5'
-            >
+            <Row className='d-flex justify-content-center px-5 mt-5'>
                 {data?.getdebutCompanies.map((item: any, index: number) => {
-                    return (
-
-                        <VentureCards
-                            key={index}
-                            _id={item._id}
-                            companyName={item.companyName}
-                            companyMissionStatement={item.companyMissionStatement}
-                            companyHeadquarters={item.companyHeadquarters}
-                            companyWebsite={item.companyWebsite}
-                            companyLogo={item.companyLogo}
-                            jobBoard={item.jobBoard}
-                            linkedInUrl={item.linkedInUrl}
-                            twitterUrl={item.twitterUrl}
-                            instagramUrl={item.instagramUrl}
-                            facebookUrl={item.facebookUrl}
-                            majorAchivements={item.majorAchivements}
-                            companyDescription={item.companyDescription}
-                            companyServivesGeography={item.companyServivesGeography}
-                            aeraOfOperation={item.aeraOfOperation}
-                            companySize={item.companySize}
-                            companyCategory={item.companyCategory}
-                            companyOwner={item.companyOwner}
-                            debutEvents={item.debutEvents}
-                        />
+                    return (<VentureCards
+                        key={index}
+                        _id={item._id}
+                        companyName={item.companyName}
+                        companyMissionStatement={item.companyMissionStatement}
+                        companyHeadquarters={item.companyHeadquarters}
+                        companyWebsite={item.companyWebsite}
+                        companyLogo={item.companyLogo}
+                        jobBoard={item.jobBoard}
+                        linkedInUrl={item.linkedInUrl}
+                        twitterUrl={item.twitterUrl}
+                        instagramUrl={item.instagramUrl}
+                        facebookUrl={item.facebookUrl}
+                        majorAchivements={item.majorAchivements}
+                        companyDescription={item.companyDescription}
+                        companyServivesGeography={item.companyServivesGeography}
+                        aeraOfOperation={item.aeraOfOperation}
+                        companySize={item.companySize}
+                        companyCategory={item.companyCategory}
+                        companyOwner={item.companyOwner}
+                        debutEvents={item.debutEvents}
+                    />
                     )
                 })}
             </Row>
-
-
-
         </div >
     )
 }
