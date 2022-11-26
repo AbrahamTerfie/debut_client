@@ -6,12 +6,19 @@ import { companyGoals, mileStones } from '../../types/Goals_MileStones'
 import classNames from 'classnames'
 import moment from 'moment'
 import { MdCheck } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
+import { toggleEmailPopup } from '../../Store/UI/sidebarController'
+import { EmailTypes } from '../../Email/EmailTypes'
+import Emailcanvas from '../Email/Emailcanvas'
+import { IoHandRightOutline } from 'react-icons/io5'
 
 function MileStoneCard({ milestone }: { milestone: mileStones }) {
+    const dispatch = useDispatch()
     return (
         <div className={classNames('shadow-sm m-2  d-flex flex-column  justify-content-between  px-4  py-3 rounded rounded-2', {
             'border-success border': milestone.milestoneCompleted
         })}>
+            <Emailcanvas />
             <Row className='p-3 pt-0' >
                 <Col md={12}>
                     <h6 className='fw-bold' > {milestone.mileStoneTitle}
@@ -53,9 +60,16 @@ function MileStoneCard({ milestone }: { milestone: mileStones }) {
             </Row >
             <Row>
                 <MotionContainer>
-                    {!milestone.milestoneCompleted ? <p className='text-center bg-warning m-3 text-warning rounded rounded-1 bg-opacity-10  p-2 px-4  m-2'>let me help  </p> :
+                    {!milestone.milestoneCompleted ?
+                        <p className='text-center bg-warning m-3 text-warning rounded rounded-1 bg-opacity-10  p-2 px-4  m-2'
+                            onClick={() => dispatch(toggleEmailPopup(EmailTypes.helpWithGoal))} >
+
+                            let me help
+                            <IoHandRightOutline className='mx-3' size={25} />
+                        </p> :
                         <p className='text-center bg-success m-3 text-success rounded rounded-1 bg-opacity-10  p-2 px-4  m-2'>
-                            <MdCheck size={30} className='mx-3' />   this goal is completed
+                            this goal is completed
+                            <MdCheck size={25} className='mx-3' />
                         </p>
                     }
                 </MotionContainer>

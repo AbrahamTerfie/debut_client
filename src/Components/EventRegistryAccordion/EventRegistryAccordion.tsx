@@ -1,15 +1,20 @@
 import { motion } from 'framer-motion';
-import React, { useState } from 'react'
+import React from 'react'
 import { Col, Row } from 'reactstrap'
 import MotionContainer from '../MotionContainer/MotionContainer';
 import { DebutRegistryItem } from '../../types/EventPageTypes'
 import classNames from 'classnames'
-
+import { EmailTypes } from '../../Email/EmailTypes';
+import { toggleEmailPopup } from '../../Store/UI/sidebarController';
+import { useDispatch } from 'react-redux';
+import Emailcanvas from '../Email/Emailcanvas';
 
 export default function ItemCard({ item }: { item: DebutRegistryItem }) {
+    const dispatch = useDispatch()
     return (
         <Col md={3} className={classNames(' shadow-sm rounded-3 d-flex flex-column  justify-content-between m-3   ', 'm-2',
             item.registryItemFullfiled ? 'border border-success' : '')} >
+            <Emailcanvas />
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -50,7 +55,8 @@ export default function ItemCard({ item }: { item: DebutRegistryItem }) {
                 <Row className='px-3'>
                     <MotionContainer>
                         {item.registryItemFullfiled ? <p className='text-center text-dark bg-dark  bg-opacity-10  py-1'> fulfilled </p> :
-                            <p className='text-center text-success bg-success  bg-opacity-10  py-1'> let me help with this </p>}
+                            <p className='text-center text-warning bg-warning  bg-opacity-10  py-1'
+                                onClick={() => dispatch(toggleEmailPopup(EmailTypes.helpWiithItem))}> let me help with this </p>}
                     </MotionContainer>
                 </Row>
             </motion.div >

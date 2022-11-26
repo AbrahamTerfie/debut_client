@@ -9,11 +9,15 @@ import {
     FaTwitter,
     FaFacebook,
     FaInstagram,
+    FaHandsHelping,
 } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import MotionContainer from '../MotionContainer/MotionContainer'
 import { appRoutes } from '../../Routes/routes'
-
+import { toggleEmailPopup } from '../../Store/UI/sidebarController'
+import { EmailTypes } from '../../Email/EmailTypes'
+import { useDispatch } from 'react-redux'
+import Emailcanvas from '../Email/Emailcanvas'
 export default function VentureCards(
     {
         _id,
@@ -39,7 +43,7 @@ export default function VentureCards(
     }: any
 
 ) {
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
@@ -47,6 +51,7 @@ export default function VentureCards(
     return (
         // <Link to={`${appRoutes.ventures}/${itemlink}`}>
         <>
+            <Emailcanvas />
             <Offcanvas
                 direction="end"
                 scrollable
@@ -97,7 +102,7 @@ export default function VentureCards(
 
                             </div>
                         </Col>
-                        <Col md={3} className='d-flex flex-column justify-content-center align-items-center mx-4'>
+                        <Col md={3} className='d-flex flex-column justify-content-center align-items-center mx-3'>
                             <div>
                                 <img
                                     // make the img responsive without looging the aspect ratio
@@ -106,6 +111,17 @@ export default function VentureCards(
                                     src={companyLogo}
                                     alt="" />
                             </div>
+                            <MotionContainer>
+                                <small
+                                    className='d-flex text-center text-primary fw-bolder bg-primary bg-opacity-10  p-1 px-3  rounded-1 '
+                                    onClick={() => dispatch(toggleEmailPopup(EmailTypes.companyIntroduction))}
+
+                                >
+                                    request introduction
+                                    <FaHandsHelping size={25} className='mx-2' />
+
+                                </small>
+                            </MotionContainer>
                         </Col>
                     </Row>
 

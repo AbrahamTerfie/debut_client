@@ -115,9 +115,7 @@ export default function People() {
                         }
                     })}
                 </Col>
-                <Col
-                    className="overflow-auto"
-                >
+                <Col className="overflow-auto">
                     <PersonDetail />
                 </Col>
             </Row>

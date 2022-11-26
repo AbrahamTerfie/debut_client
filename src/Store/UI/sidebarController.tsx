@@ -1,5 +1,8 @@
 import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
+import { EmailTypes } from '../../Email/EmailTypes';
+
+
 
 
 const initalState = {
@@ -8,6 +11,8 @@ const initalState = {
     activePersonId: '',
     peopleExpertiseFilter: [] as any,
     peopleRegionFilter: [] as any,
+    emailPopup: false,
+    emailType: "",
 
 }
 
@@ -16,6 +21,11 @@ const uiStore = createSlice({
     name: 'sidebar',
     initialState: initalState,
     reducers: {
+        toggleEmailPopup(state: any, action?: any) {
+            state.emailPopup = !state.emailPopup
+            // chanhe email type 
+            action ? (state.emailType = action?.payload) : (state.emailType = EmailTypes.clear)
+        },
         toggleSidebar: (state) => {
             state.isSidebarOpen = !state.isSidebarOpen;
         },
@@ -48,7 +58,7 @@ const uiStore = createSlice({
 
 
 
-export const { toggleSidebar, setMyDebutTab, setActivePersonId,
+export const { toggleEmailPopup, toggleSidebar, setMyDebutTab, setActivePersonId,
     peopleExpertiseFilterHandler, peopleRegionFilterHandler, clearPeopleFilter } = uiStore.actions;
 
 export default uiStore.reducer;

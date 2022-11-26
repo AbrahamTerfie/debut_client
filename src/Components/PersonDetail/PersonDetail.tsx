@@ -6,6 +6,8 @@ import {
     FaFacebook,
     FaInstagram,
     FaEnvelope,
+    FaHandPaper,
+    FaHandsHelping,
 } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/RootReducer';
@@ -13,8 +15,10 @@ import { useQuery } from '@apollo/client';
 import { FETCH_USER_WITH_ID } from '../../GraphQl/index'
 import Loader from '../Loader/Loader';
 import { motion } from 'framer-motion';
-
-
+import MotionContainer from '../MotionContainer/MotionContainer';
+import { toggleEmailPopup } from '../../Store/UI/sidebarController'
+import Emailcanvas from '../Email/Emailcanvas';
+import { EmailTypes } from '../../Email/EmailTypes';
 function MotionCover({ children }: any) {
     return (
         <motion.div
@@ -24,6 +28,7 @@ function MotionCover({ children }: any) {
             transition={{ type: 'spring', stiffness: 100, duration: 0.5 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            style={{ cursor: 'pointer' }}
         >
             {children}
         </motion.div>
@@ -31,26 +36,17 @@ function MotionCover({ children }: any) {
 }
 
 export default function PersonDetail() {
-    const { activePersonId } = useSelector((store: RootState) => store.uiStore)
-    const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, {
-        variables: {
-            getDebutUserWithIdId: activePersonId
-        }
-    })
-    if (loading) {
-        <Loader />
-    }
+    const dispatch = useDispatch()
+    const { activePersonId, emailPopup } = useSelector((store: RootState) => store.uiStore)
+    const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
+    if (loading) { <Loader /> }
     // console.log(data)
-    if (activePersonId === "") {
-        return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > select user </p>
-    }
-
-    if (error) {
-        return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p>
-    }
+    if (activePersonId === "") { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > select user </p> }
+    if (error) { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p> }
 
     return (
         <div className='p-4 px-5 shadow  rounded rounded-5 my-2 overflow-auto d-flex flex-column  flex-wrap  py-5  bg-dark bg-opacity-10'>
+            <Emailcanvas />
             <Row>
                 <Col md={3}>
                     <img src={data?.getDebutUserWithId.profileImage}
@@ -68,15 +64,26 @@ export default function PersonDetail() {
                     <p className='fs-6 fw-bold  m-0'>
                         {data?.getDebutUserWithId.userName} / <span className='text-muted' >  </span> </p>
 
-                    <p className='fs-4 fw-light m-0 d-flex justify-content-start'>
+                    <p className='fs-5 fw-light m-0 d-flex justify-content-start'>
                         <span > {data?.getDebutUserWithId.titleAtCompany}</span>
-                        <span className='text-muted mx-2'> at </span>
+                        <span className='text-muted mx-1'> at </span>
                         <span >{data?.getDebutUserWithId.company[0]?.companyName} </span>
                     </p>
-                    <p>
-                        <FaEnvelope className='text-muted mx-2 my-2' />
-                        {data?.getDebutUserWithId.email}
-                    </p>
+                    <div
+                        className='d-flex justify-content-start align-items-start my-3 px-4'
+                    >
+                        {/* <p>
+                            <FaEnvelope className='text-muted mx-2 my-2' />
+                            {data?.getDebutUserWithId.email}
+                        </p> */}
+                        <MotionContainer>
+                            <p className='text-primary  fw-light  bg-primary bg-opacity-10 rounded-1 px-3 py-1 '
+                                onClick={() => dispatch(toggleEmailPopup(EmailTypes.peopleIntroduction,))}>
+                                request introduction
+                                <FaHandsHelping size={25} className='mx-3' />
+                            </p>
+                        </MotionContainer>
+                    </div>
 
 
                     <div className='d-flex justify-content-start my-2' >

@@ -1,18 +1,10 @@
 
-
-
-
 import { configureStore, Action } from '@reduxjs/toolkit'
-
 import { ThunkAction } from 'redux-thunk'
-
 import rootReducer, { RootState } from './RootReducer'
-
 const store = configureStore({
     reducer: rootReducer
 })
-
-
 
 const newRootReducer = require('./RootReducer').default
 store.replaceReducer(newRootReducer)

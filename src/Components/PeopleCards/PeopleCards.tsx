@@ -39,7 +39,7 @@ export default function PeopleCards({ people }: any) {
                         src={people.profileImage}
                         alt='profile'
                         className='rounded img-fluid h-100 w-75'
-                        style={{ width: '100px', height: '100px', objectFit: 'cover', maxHeight: '100%' }}
+                        style={{ width: '100px', height: '100px', objectFit: 'cover', maxHeight: '10em', minHeight:'10em' }}
                     />
                 </Col>
                 <Col md={9}
