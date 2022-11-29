@@ -19,13 +19,22 @@ export default function Emailcanvas() {
         emailfrom: '',
         emailto: '',
         emailsubject: '',
-        emailbody: '',
-        emaildefatultPlaceholder: 'this is an email placeholder'
+        emailbody: '\n email body goes here \n',
+        emailIntro: 'introo intorro introo introooo \n',
+        userBiography: 'this is a biography placeholder' + " \n some more data here",
+        userContributions: 'this is a contributions placeholder',
     })
 
 
     const dispatch = useDispatch()
     const { emailPopup, emailType } = useSelector((store: RootState) => store.uiStore)
+
+
+
+    const emialbodyValue: any = useRef(null)
+
+
+
     return (
         <Offcanvas
             direction="bottom"
@@ -67,16 +76,30 @@ export default function Emailcanvas() {
                 <Row>
                     <FormGroup>
                         <Input type="textarea" name="emailTo" id="emailTo" placeholder={` email body ${emailType} `}
+                            className="fw-bolder"
                             rows={18}
                             value={
+                                //   prevent from repeting email intro and user biography while typing emil body 
+                                editorState.emailbody === 
+                                // inout value
+                                '\n email body goes here \n' 
+                                
+                                ?
+                                    editorState.emailIntro + editorState.userBiography + editorState.emailbody
+                                    : editorState.emailbody
 
-                                editorState.emaildefatultPlaceholder.concat(
-                                    editorState.emailbody.includes(editorState.emaildefatultPlaceholder) ?
-                                        editorState.emailbody.replace(editorState.emaildefatultPlaceholder, '') :
-                                        editorState.emailbody
-                                )
+
+
                             }
-                            onChange={(e) => setEditorState({ ...editorState, emailbody: e.target.value })}
+                            onChange={(e) =>
+                                setEditorState({
+                                    ...editorState,
+                                    emailbody: e.target.value,
+                                    emailIntro: editorState.emailIntro,
+                                    userBiography: editorState.userBiography,
+                                })
+
+                            }
                         />
                     </FormGroup>
                 </Row>
