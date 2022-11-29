@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Label, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
 import { toggleEmailPopup } from '../../Store/UI/sidebarController'
-import { EmailTypes } from '../../Email/EmailTypes'
+import { EmailTypes, EmailHeaders } from '../../Email/EmailTypes'
 import { Row, Col, Input, FormGroup } from 'reactstrap'
 import MotionContainer from '../MotionContainer/MotionContainer'
 
@@ -16,10 +16,15 @@ export default function Emailcanvas() {
 
 
     const [editorState, setEditorState] = useState({
-        emailfrom: '',
+        emailfrom: 'abrahamTerfe',
         emailto: '',
         emailsubject: '',
         emailbody: '\n email body goes here \n',
+        companyName: "company name",
+        name: "name name ",
+        companyDescripton: "company description",
+        itemName: "item name",
+        goalName: "goal name",
         emailIntro: 'introo intorro introo introooo \n',
         userBiography: 'this is a biography placeholder' + " \n some more data here",
         userContributions: 'this is a contributions placeholder',
@@ -29,9 +34,14 @@ export default function Emailcanvas() {
     const dispatch = useDispatch()
     const { emailPopup, emailType } = useSelector((store: RootState) => store.uiStore)
 
+    useEffect(() => {
 
+        setEditorState({
+            ...editorState,
+            emailIntro: EmailHeaders(editorState.emailfrom, emailType, editorState.userBiography, editorState.companyName, editorState.name, editorState.companyDescripton, editorState.itemName, editorState.goalName)
+        })
+    }, [EmailTypes])
 
-    const emialbodyValue: any = useRef(null)
 
 
 
@@ -78,28 +88,15 @@ export default function Emailcanvas() {
                         <Input type="textarea" name="emailTo" id="emailTo" placeholder={` email body ${emailType} `}
                             className="fw-bolder"
                             rows={18}
-                            value={
-                                //   prevent from repeting email intro and user biography while typing emil body 
-                                editorState.emailbody === 
-                                // inout value
-                                '\n email body goes here \n' 
-                                
-                                ?
-                                    editorState.emailIntro + editorState.userBiography + editorState.emailbody
-                                    : editorState.emailbody
 
+                        onChange={(e) =>
+                            setEditorState({
+                                ...editorState,
+                                emailbody: e.target.value
 
+                            })
 
-                            }
-                            onChange={(e) =>
-                                setEditorState({
-                                    ...editorState,
-                                    emailbody: e.target.value,
-                                    emailIntro: editorState.emailIntro,
-                                    userBiography: editorState.userBiography,
-                                })
-
-                            }
+                        }
                         />
                     </FormGroup>
                 </Row>
