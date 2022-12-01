@@ -6,7 +6,7 @@ import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import { EmailTypes, EmailHeaders } from '../../Email/EmailTypes'
 import { Row, Col, Input, FormGroup } from 'reactstrap'
 import MotionContainer from '../MotionContainer/MotionContainer'
-
+import { updateEmailBody } from '../../Store/UI/sidebarController'
 import { useEditor, EditorContent, FloatingMenu, BubbleMenu, ChainedCommands } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Editor } from '@tiptap/core'
@@ -21,12 +21,12 @@ import { MenuBar } from './EditorMenuBar'
 export default function Emailcanvas() {
 
     const dispatch = useDispatch()
-    const { emailPopup, emailType } = useSelector((store: RootState) => store.uiStore)
+    const { emailPopup, emailType, emailBody } = useSelector((store: RootState) => store.uiStore)
     const [editorState, setEditorState] = useState({
         emailfrom: 'abrahamTerfe',
         emailto: '',
         emailsubject: '',
-        emailbody: '\n email body goes here \n',
+        emailbody: emailBody,
         companyName: "company name",
         name: "name name ",
         companyDescripton: "company description",
@@ -36,12 +36,27 @@ export default function Emailcanvas() {
         userBiography: 'this is a biography placeholder' + " \n some more data here",
         userContributions: 'this is a contributions placeholder',
     })
-    const [emailBody, setEmailbody] = useState('')
+    // const [emailBody, setEmailbody] = useState('')
 
+    // console.log('email body', emailBody)
+    // useEffect(() => {
+    //     dispatch(updateEmailBody({
+    //         userEmail: editorState.emailfrom,
+
+    //         name: editorState.name,
+    //         emailBody: editorState.emailbody,
+    //         userBioGraphy: editorState.userBiography,
+    //         companyName: editorState.companyName,
+    //         companyDescription: editorState.companyDescripton,
+    //         itemName: editorState.itemName,
+    //         goalName: editorState.goalName
+    //     }))
+    // }, [])
 
 
     // const EmailEditor = () => {
     const editor = useEditor({
+
         extensions: [
             Document,
             Paragraph.configure({ HTMLAttributes: { class: 'paragraph', }, }),
@@ -49,9 +64,8 @@ export default function Emailcanvas() {
             Heading.configure({ levels: [1, 2, 3, 4, 5, 6], }),
             // Placeholder.configure({ placeholder: 'Start writing here...', })
         ],
-        content: EmailHeaders(editorState.emailfrom, emailType, editorState.emailbody,
-            editorState.userBiography, editorState.companyName, editorState.name,
-            editorState.companyDescripton, editorState.itemName, editorState.goalName),
+        content: emailBody,
+
 
 
         onUpdate: ({ editor }) => {
@@ -62,19 +76,23 @@ export default function Emailcanvas() {
         },
     })
 
+    useEffect(() => {
+        editor?.commands.setContent(emailBody)
+    }, [emailType])
+    // function Email(){
+    //     editor 
+    // }
 
     // return (
-    //     <EditorContent
-    //         style={{ minHeight: '30em', border: "1px solid black", padding: "2em", paddingLeft: "4em" }}
-    //         editor={editor} />
+
     // )
     // }
 
 
 
-    useEffect(() => {
-        console.log("editor", editor)
-    }, [editor])
+    console.log(EmailTypes.peopleIntroduction === emailType)
+    console.log(emailType, emailBody)
+
 
 
 
@@ -85,7 +103,6 @@ export default function Emailcanvas() {
     // }, [emailType])
 
 
-    console.log(emailType)
 
     return (
         <Offcanvas
@@ -137,7 +154,11 @@ export default function Emailcanvas() {
                 </Row> */}
                 <Row>
 
+                    <EditorContent
+                        style={{ minHeight: '30em', border: "1px solid black", padding: "2em", paddingLeft: "4em" }}
+                        editor={editor}
 
+                    />
 
                     {/* {EmailEditor()} */}
 
