@@ -169,7 +169,10 @@ query AllVentures {
       _id,
       firstName,
       lastName,
-      profileImage
+      profileImage,
+      email,
+      assistantEmail,
+      yourBiography
     },
     debutEvents{
       _id,

@@ -16,7 +16,7 @@ import { FETCH_USER_WITH_ID } from '../../GraphQl/index'
 import Loader from '../Loader/Loader';
 import { motion } from 'framer-motion';
 import MotionContainer from '../MotionContainer/MotionContainer';
-import { toggleEmailPopup } from '../../Store/UI/sidebarController'
+import { toggleEmailPopup, updateEmailBody } from '../../Store/UI/sidebarController'
 import Emailcanvas from '../Email/Emailcanvas';
 import { EmailTypes } from '../../Email/EmailTypes';
 function MotionCover({ children }: any) {
@@ -43,6 +43,22 @@ export default function PersonDetail() {
     // console.log(data)
     if (activePersonId === "") { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > select user </p> }
     if (error) { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p> }
+
+
+    const personIntroductoinHandler = (e: any) => {
+        e.preventDefault()
+        dispatch(toggleEmailPopup({
+            emailData: {
+                emailType: EmailTypes.peopleIntroduction,
+                name: data.getDebutUserWithId.name,
+                userEmail: data.getDebutUserWithId.email,
+                userBioGraphy: data.getDebutUserWithId.yourBiography,
+                // companyName: data.getDebutUserWithId.companyName,
+
+            }
+        }))
+
+    }
 
     return (
         <div className='p-4 px-5 shadow  rounded rounded-5 my-2 overflow-auto d-flex flex-column  flex-wrap  py-5  bg-dark bg-opacity-10'>
@@ -78,7 +94,7 @@ export default function PersonDetail() {
                         </p> */}
                         <MotionContainer>
                             <p className='text-primary  fw-light  bg-primary bg-opacity-10 rounded-1 px-3 py-1 '
-                                onClick={() => dispatch(toggleEmailPopup(EmailTypes.peopleIntroduction,))}>
+                                onClick={(e: any) => personIntroductoinHandler(e)}>
                                 request introduction
                                 <FaHandsHelping size={25} className='mx-3' />
                             </p>

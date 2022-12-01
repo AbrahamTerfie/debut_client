@@ -40,8 +40,8 @@ export default function Emailcanvas() {
         ],
         content: emailBody,
         onUpdate: ({ editor }) => {
-            const json = editor.getJSON()
-            console.log("json", json.content)
+            const dataToSend = editor.getHTML()
+            console.log(dataToSend)
         },
     })
 
@@ -52,6 +52,18 @@ export default function Emailcanvas() {
 
     console.log(EmailTypes.peopleIntroduction === emailType)
     console.log(emailType, emailBody)
+    const closeCanvasHandler = () => {
+        dispatch(toggleEmailPopup({
+            emailData: {
+                emailType: EmailTypes.clear,
+                name: "",
+                userEmail: "",
+                userBioGraphy: "",
+                // companyName: data.getDebutUserWithId.companyName,
+
+            }
+        }))
+    }
 
     return (
         <Offcanvas
@@ -59,7 +71,7 @@ export default function Emailcanvas() {
             scrollable
             isOpen={emailPopup}
             style={{ height: '80%', width: '50%', left: '50%', }}>
-            <OffcanvasHeader toggle={() => dispatch(toggleEmailPopup(EmailTypes.clear))}
+            <OffcanvasHeader toggle={() => closeCanvasHandler()}
                 className="bg-success text-success bg-opacity-10 "
                 toggleClassName="text-primary">
                 Offcanvas || {emailType}

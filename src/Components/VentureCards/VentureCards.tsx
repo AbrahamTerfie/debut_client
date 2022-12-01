@@ -48,6 +48,18 @@ export default function VentureCards(
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
 
+    const copanyIntroductionHandeler = () => {
+        dispatch(toggleEmailPopup({
+            emailData: {
+                emailType: EmailTypes.companyIntroduction,
+                name: companyOwner.firstName,
+                userEmail: companyOwner.email ? companyOwner.email : companyOwner.assistantEmail,
+                userBioGraphy: companyOwner.yourBiography,
+                // companyName: data.getDebutUserWithId.companyName,
+
+            }
+        }))
+    }
     return (
         // <Link to={`${appRoutes.ventures}/${itemlink}`}>
         <>
@@ -114,7 +126,7 @@ export default function VentureCards(
                             <MotionContainer>
                                 <small
                                     className='d-flex text-center text-primary fw-bolder bg-primary bg-opacity-10  p-1 px-3  rounded-1 '
-                                    onClick={() => dispatch(toggleEmailPopup(EmailTypes.companyIntroduction))}
+                                    onClick={() => copanyIntroductionHandeler()}
 
                                 >
                                     request introduction
