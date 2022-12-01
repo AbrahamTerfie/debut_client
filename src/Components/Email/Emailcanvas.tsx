@@ -20,7 +20,8 @@ import { MenuBar } from './EditorMenuBar'
 
 export default function Emailcanvas() {
 
-
+    const dispatch = useDispatch()
+    const { emailPopup, emailType } = useSelector((store: RootState) => store.uiStore)
     const [editorState, setEditorState] = useState({
         emailfrom: 'abrahamTerfe',
         emailto: '',
@@ -31,66 +32,60 @@ export default function Emailcanvas() {
         companyDescripton: "company description",
         itemName: "item name",
         goalName: "goal name",
-        emailIntro: 'introo intorro introo introooo \n',
+        emailIntro: '',
         userBiography: 'this is a biography placeholder' + " \n some more data here",
         userContributions: 'this is a contributions placeholder',
     })
     const [emailBody, setEmailbody] = useState('')
 
 
-    const dispatch = useDispatch()
-    const { emailPopup, emailType } = useSelector((store: RootState) => store.uiStore)
+
+    // const EmailEditor = () => {
+    const editor = useEditor({
+        extensions: [
+            Document,
+            Paragraph.configure({ HTMLAttributes: { class: 'paragraph', }, }),
+            Text,
+            Heading.configure({ levels: [1, 2, 3, 4, 5, 6], }),
+            // Placeholder.configure({ placeholder: 'Start writing here...', })
+        ],
+        content: EmailHeaders(editorState.emailfrom, emailType, editorState.emailbody,
+            editorState.userBiography, editorState.companyName, editorState.name,
+            editorState.companyDescripton, editorState.itemName, editorState.goalName),
 
 
-    const Tiptap = () => {
+        onUpdate: ({ editor }) => {
+
+            const json = editor.getJSON()
+
+            console.log("json", json)
+        },
+    })
 
 
-        const editor = useEditor({
+    // return (
+    //     <EditorContent
+    //         style={{ minHeight: '30em', border: "1px solid black", padding: "2em", paddingLeft: "4em" }}
+    //         editor={editor} />
+    // )
+    // }
 
-            extensions: [
 
-                Document,
-                Paragraph,
-                Text,
-                Heading.configure({
-                    levels: [1, 2, 3, 4, 5, 6],
-                }),
-                Placeholder.configure({
-                    placeholder: 'Start writing here...',
 
-                })
-            ],
-            content: EmailHeaders(
-                editorState.emailfrom, emailType, emailBody, editorState.userBiography, editorState.companyName, editorState.name, editorState.companyDescripton, editorState.itemName, editorState.goalName
-            ),
-        })
-        const [isEditable, setIsEditable] = React.useState(true)
-
-        useEffect(() => {
-            if (editor) {
-                editor.setEditable(isEditable)
-            }
-        }, [isEditable, editor])
-
-        return (
-            <div>
-                {/* <MenuBar editor={editor} /> */}
-
-                <EditorContent
-                    style={{ height: '30em', border: "1px solid black" }}
-                    editor={editor} />
-            </div>
-        )
-    }
     useEffect(() => {
-
-        setEditorState({
-            ...editorState,
-            emailIntro: EmailHeaders(editorState.emailfrom, emailType, emailBody, editorState.userBiography, editorState.companyName, editorState.name, editorState.companyDescripton, editorState.itemName, editorState.goalName)
-        })
-    }, [emailType, emailBody])
+        console.log("editor", editor)
+    }, [editor])
 
 
+
+
+
+    // useEffect(() => {
+    //     EmailEditor()
+    // }, [emailType])
+
+
+    console.log(emailType)
 
     return (
         <Offcanvas
@@ -141,16 +136,12 @@ export default function Emailcanvas() {
                     </p>
                 </Row> */}
                 <Row>
-                    <Tiptap />
-                    {/* <FormGroup>
-                        <Input type="textarea" name="emailTo" id="emailTo"
-                            placeholder='write additonal message here your information will be included in the email '
-                            className="fw-bolder"
-                            rows={16}
-                            value={emailBody}
-                            onChange={(e) => setEmailbody(e.target.value)}
-                        />
-                    </FormGroup> */}
+
+
+
+                    {/* {EmailEditor()} */}
+
+
                 </Row>
                 <Row>
                     <MotionContainer>
