@@ -3,20 +3,14 @@ import { Label, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
 import { toggleEmailPopup } from '../../Store/UI/sidebarController'
-import { EmailTypes, EmailHeaders } from '../../Email/EmailTypes'
-import { Row, Col, Input, FormGroup } from 'reactstrap'
+import { EmailTypes } from '../../Email/EmailTypes'
+import { Row, Input, FormGroup } from 'reactstrap'
 import MotionContainer from '../MotionContainer/MotionContainer'
-import { updateEmailBody } from '../../Store/UI/sidebarController'
-import { useEditor, EditorContent, FloatingMenu, BubbleMenu, ChainedCommands } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import { Editor } from '@tiptap/core'
+import { useEditor, EditorContent } from '@tiptap/react'
 import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import Heading from '@tiptap/extension-heading'
-import Placeholder from '@tiptap/extension-placeholder'
-
-import { MenuBar } from './EditorMenuBar'
 
 export default function Emailcanvas() {
 
@@ -36,73 +30,28 @@ export default function Emailcanvas() {
         userBiography: 'this is a biography placeholder' + " \n some more data here",
         userContributions: 'this is a contributions placeholder',
     })
-    // const [emailBody, setEmailbody] = useState('')
 
-    // console.log('email body', emailBody)
-    // useEffect(() => {
-    //     dispatch(updateEmailBody({
-    //         userEmail: editorState.emailfrom,
-
-    //         name: editorState.name,
-    //         emailBody: editorState.emailbody,
-    //         userBioGraphy: editorState.userBiography,
-    //         companyName: editorState.companyName,
-    //         companyDescription: editorState.companyDescripton,
-    //         itemName: editorState.itemName,
-    //         goalName: editorState.goalName
-    //     }))
-    // }, [])
-
-
-    // const EmailEditor = () => {
     const editor = useEditor({
-
         extensions: [
             Document,
             Paragraph.configure({ HTMLAttributes: { class: 'paragraph', }, }),
             Text,
             Heading.configure({ levels: [1, 2, 3, 4, 5, 6], }),
-            // Placeholder.configure({ placeholder: 'Start writing here...', })
         ],
         content: emailBody,
-
-
-
         onUpdate: ({ editor }) => {
-
             const json = editor.getJSON()
-
-            console.log("json", json)
+            console.log("json", json.content)
         },
     })
 
     useEffect(() => {
         editor?.commands.setContent(emailBody)
-    }, [emailType])
-    // function Email(){
-    //     editor 
-    // }
-
-    // return (
-
-    // )
-    // }
-
+    }, [emailBody])
 
 
     console.log(EmailTypes.peopleIntroduction === emailType)
     console.log(emailType, emailBody)
-
-
-
-
-
-
-    // useEffect(() => {
-    //     EmailEditor()
-    // }, [emailType])
-
-
 
     return (
         <Offcanvas
@@ -112,14 +61,10 @@ export default function Emailcanvas() {
             style={{ height: '80%', width: '50%', left: '50%', }}>
             <OffcanvasHeader toggle={() => dispatch(toggleEmailPopup(EmailTypes.clear))}
                 className="bg-success text-success bg-opacity-10 "
-                toggleClassName="text-primary"
-            >
-
+                toggleClassName="text-primary">
                 Offcanvas || {emailType}
             </OffcanvasHeader>
-            <OffcanvasBody className='p-0 border border-dark border-2  
-            justify-content-between d-flex flex-column'>
-
+            <OffcanvasBody className='p-0 border border-dark border-2   justify-content-between d-flex flex-column'>
                 <Row>
                     <Row className='border border-light border-2 d-flex justify-content-center align-items-center py-1  bg-dark bg-opacity-25'>
 
@@ -141,28 +86,11 @@ export default function Emailcanvas() {
                         </FormGroup>
                     </Row>
                 </Row>
-                {/* <Row>
-
-                    <p className='border border-light border-2 p-0  py-1  bg-dark bg-opacity-10 p-5 fw-bold  lh-lg' >
-                        <p
-                            className='text-muted'
-                        >email preview</p>
-
-                        {EmailHeaders(editorState.emailfrom, emailType, emailBody, editorState.userBiography, editorState.companyName, editorState.name, editorState.companyDescripton, editorState.itemName, editorState.goalName)}
-                        <br />
-                    </p>
-                </Row> */}
                 <Row>
 
                     <EditorContent
                         style={{ minHeight: '30em', border: "1px solid black", padding: "2em", paddingLeft: "4em" }}
-                        editor={editor}
-
-                    />
-
-                    {/* {EmailEditor()} */}
-
-
+                        editor={editor} />
                 </Row>
                 <Row>
                     <MotionContainer>
