@@ -19,7 +19,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
-import { setUserID, setUserEmail } from '../../../Store/identfiers/identfiers'
+import { setPersonaldata } from '../../../Store/identfiers/identfiers'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 // types
 
@@ -35,7 +35,7 @@ const channelNames = {
 export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
+    const { userID, userEmail, myBiography, userFullName } = useSelector((store: RootState) => store.identfiers)
     // console.log(userID , userEmail)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
@@ -67,10 +67,18 @@ export default function Forum() {
         })
     }, [auth0UserInfo.email])
 
+
+    console.log("id ", userID)
+    console.log("email ", userEmail)
+    console.log("myBiography ", myBiography)
+    console.log("userFullName ", userFullName)
     if (authenticatedUsrRes.data) {
-        // saves user id in steore to be used in other components
-        dispatch(setUserID(authenticatedUsrRes.data.authenticatedUser._id))
-        dispatch(setUserEmail(authenticatedUsrRes.data.authenticatedUser.email))
+        dispatch(setPersonaldata({
+            userID: authenticatedUsrRes.data.authenticatedUser._id,
+            userEmail: authenticatedUsrRes.data.authenticatedUser.email,
+            myBiography: authenticatedUsrRes.data.authenticatedUser.yourBiography,
+            userFullName: authenticatedUsrRes.data.authenticatedUser.firstName + " " + authenticatedUsrRes.data.authenticatedUser.lastName,
+        }))
 
     }
     if (authenticatedUsrRes.error) {

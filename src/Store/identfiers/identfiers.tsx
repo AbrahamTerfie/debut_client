@@ -14,6 +14,7 @@ const initalState = {
     forumPostID: '',
     postCommentID: '',
     gratitudeID: '',
+    myBiography: '',
 
 }
 
@@ -31,6 +32,16 @@ const Id_Identfiers = createSlice({
         setUserEmail: (state, action) => {
             state.userEmail = action.payload;
         },
+        setMyBiography: (state, action) => {
+            state.myBiography = action.payload;
+        },
+        setPersonaldata: (state, action) => {
+            state.userID = action.payload.userID;
+            state.userFullName = action.payload.userFullName;
+            state.userEmail = action.payload.userEmail;
+            state.myBiography = action.payload.myBiography;
+        },
+
         setHasCompany: (state, action) => {
             state.hasCompany = action.payload;
         },
@@ -60,6 +71,7 @@ export const {
     setCompanyID,
     togglehasCompany,
     setUserFullName,
+    setPersonaldata,
     setUserEmail,
     setHasCompany } = Id_Identfiers.actions;
 export default Id_Identfiers.reducer;

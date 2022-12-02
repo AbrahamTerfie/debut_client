@@ -6,11 +6,32 @@ import { DebutRegistryItem } from '../../types/EventPageTypes'
 import classNames from 'classnames'
 import { EmailTypes } from '../../Email/EmailTypes';
 import { toggleEmailPopup } from '../../Store/UI/sidebarController';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Emailcanvas from '../Email/Emailcanvas';
+import { RootState } from '../../Store/RootReducer';
 
 export default function ItemCard({ item }: { item: DebutRegistryItem }) {
     const dispatch = useDispatch()
+
+
+    const { userEmail } = useSelector((store: RootState) => store.identfiers)
+
+
+    const EmailHandler = () => {
+        dispatch(toggleEmailPopup({
+            emailData: {
+                emailType: EmailTypes.helpWiithItem,
+                itemName: item.registryItemName,
+                userEmail: userEmail,
+                userBioGraphy: "this is plaveholder biography  ",
+                // companyName: data.getDebutUserWithId.companyName,
+
+            }
+        }))
+    }
+
+    console.log("my email", userEmail)
+
     return (
         <Col md={3} className={classNames(' shadow-sm rounded-3 d-flex flex-column  justify-content-between m-3   ', 'm-2',
             item.registryItemFullfiled ? 'border border-success' : '')} >
@@ -56,7 +77,7 @@ export default function ItemCard({ item }: { item: DebutRegistryItem }) {
                     <MotionContainer>
                         {item.registryItemFullfiled ? <p className='text-center text-dark bg-dark  bg-opacity-10  py-1'> fulfilled </p> :
                             <p className='text-center text-warning bg-warning  bg-opacity-10  py-1'
-                                onClick={() => dispatch(toggleEmailPopup(EmailTypes.helpWiithItem))}> let me help with this </p>}
+                                onClick={() => EmailHandler()}> let me help with this </p>}
                     </MotionContainer>
                 </Row>
             </motion.div >

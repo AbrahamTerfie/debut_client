@@ -19,6 +19,7 @@ import MotionContainer from '../MotionContainer/MotionContainer';
 import { toggleEmailPopup, updateEmailBody } from '../../Store/UI/sidebarController'
 import Emailcanvas from '../Email/Emailcanvas';
 import { EmailTypes } from '../../Email/EmailTypes';
+import { maybeDependOnExistenceOfEntity } from '@apollo/client/cache/inmemory/entityStore';
 function MotionCover({ children }: any) {
     return (
         <motion.div
@@ -37,7 +38,8 @@ function MotionCover({ children }: any) {
 
 export default function PersonDetail() {
     const dispatch = useDispatch()
-    const { activePersonId, emailPopup } = useSelector((store: RootState) => store.uiStore)
+    const { activePersonId, emailPopup, } = useSelector((store: RootState) => store.uiStore)
+    const { userEmail, myBiography } = useSelector((store: RootState) => store.identfiers)
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
     if (loading) { <Loader /> }
     // console.log(data)
@@ -51,9 +53,10 @@ export default function PersonDetail() {
             emailData: {
                 emailType: EmailTypes.peopleIntroduction,
                 name: data.getDebutUserWithId.name,
-                userEmail: data.getDebutUserWithId.email,
+                userEmail: userEmail,
                 userBioGraphy: data.getDebutUserWithId.yourBiography,
-                // companyName: data.getDebutUserWithId.companyName,
+                emailTo: data.getDebutUserWithId.email,
+                userBiography: myBiography
 
             }
         }))

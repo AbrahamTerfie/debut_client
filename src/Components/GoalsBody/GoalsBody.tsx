@@ -6,14 +6,32 @@ import { companyGoals, mileStones } from '../../types/Goals_MileStones'
 import classNames from 'classnames'
 import moment from 'moment'
 import { MdCheck } from 'react-icons/md'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import { EmailTypes } from '../../Email/EmailTypes'
 import Emailcanvas from '../Email/Emailcanvas'
 import { IoHandRightOutline } from 'react-icons/io5'
+import { RootState } from '../../Store/RootReducer'
 
 function MileStoneCard({ milestone }: { milestone: mileStones }) {
     const dispatch = useDispatch()
+    const { userEmail } = useSelector((store: RootState) => store.identfiers)
+
+
+    const EmailHandler = () => {
+        dispatch(toggleEmailPopup({
+            emailData: {
+                emailType: EmailTypes.helpWithGoal,
+                name: milestone.mileStoneTitle,
+                userEmail: userEmail,
+                userBioGraphy: "this is plaveholder biography  ",
+                // companyName: data.getDebutUserWithId.companyName,
+
+            }
+        }))
+    }
+
+
     return (
         <div className={classNames('shadow-sm m-2  d-flex flex-column  justify-content-between  px-4  py-3 rounded rounded-2', {
             'border-success border': milestone.milestoneCompleted
@@ -62,7 +80,7 @@ function MileStoneCard({ milestone }: { milestone: mileStones }) {
                 <MotionContainer>
                     {!milestone.milestoneCompleted ?
                         <p className='text-center bg-warning m-3 text-warning rounded rounded-1 bg-opacity-10  p-2 px-4  m-2'
-                            onClick={() => dispatch(toggleEmailPopup(EmailTypes.helpWithGoal))} >
+                            onClick={() => EmailHandler()} >
 
                             let me help
                             <IoHandRightOutline className='mx-3' size={25} />
