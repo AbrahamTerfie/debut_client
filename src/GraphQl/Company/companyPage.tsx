@@ -25,6 +25,7 @@ query getDebutCompanyWithId($getDebutCompanyWithIdId: ID!) {
     companyOwner {
       firstName
       lastName
+      email
       profileImage
       role
     }

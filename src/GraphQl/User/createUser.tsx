@@ -26,7 +26,8 @@ mutation  AuthenticatedUser ($userInput: UserInput){
     preferredName,
     yourBiography
     company {
-      _id
+      _id,
+      companyDescription,
     }
 
   }

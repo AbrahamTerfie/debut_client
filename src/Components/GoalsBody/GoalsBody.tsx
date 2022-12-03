@@ -13,7 +13,7 @@ import Emailcanvas from '../Email/Emailcanvas'
 import { IoHandRightOutline } from 'react-icons/io5'
 import { RootState } from '../../Store/RootReducer'
 
-function MileStoneCard({ milestone }: { milestone: mileStones }) {
+function MileStoneCard({ milestone, ownerEmail }: { milestone: mileStones, ownerEmail: string }) {
     const dispatch = useDispatch()
     const { userEmail } = useSelector((store: RootState) => store.identfiers)
 
@@ -24,9 +24,8 @@ function MileStoneCard({ milestone }: { milestone: mileStones }) {
                 emailType: EmailTypes.helpWithGoal,
                 name: milestone.mileStoneTitle,
                 userEmail: userEmail,
+                emailTo: ownerEmail,
                 userBioGraphy: "this is plaveholder biography  ",
-                // companyName: data.getDebutUserWithId.companyName,
-
             }
         }))
     }
@@ -98,7 +97,7 @@ function MileStoneCard({ milestone }: { milestone: mileStones }) {
 
 
 
-export default function GoalsBody({ goals }: { goals: companyGoals }) {
+export default function GoalsBody({ goals, ownerEmail }: { goals: companyGoals, ownerEmail: string }) {
     return (
         <div className='p-4'>
             <small className=' fw-bold text-muted text-start m-0 p-0' >  descriptoin </small>
@@ -112,7 +111,9 @@ export default function GoalsBody({ goals }: { goals: companyGoals }) {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 40 }}
                                 whileHover={{ scale: 1.01 }}>
-                                <MileStoneCard milestone={milestone} />
+                                <MileStoneCard milestone={milestone}
+                                    ownerEmail={ownerEmail} />
+
                             </motion.div>
                         </Col>
                     )

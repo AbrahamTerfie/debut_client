@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Input } from 'reactstrap'
+import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 // components
 import ForumCards from '../../../Components/ForumCards/ForumCards'
 import NewForumPost from './NewForumPost'
@@ -35,7 +35,7 @@ const channelNames = {
 export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    const { userID, userEmail, myBiography, userFullName } = useSelector((store: RootState) => store.identfiers)
+    // const { userID, userEmail, myBiography, userFullName, myCompanyDescription } = useSelector((store: RootState) => store.identfiers)
     // console.log(userID , userEmail)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
@@ -67,17 +67,13 @@ export default function Forum() {
         })
     }, [auth0UserInfo.email])
 
-
-    console.log("id ", userID)
-    console.log("email ", userEmail)
-    console.log("myBiography ", myBiography)
-    console.log("userFullName ", userFullName)
     if (authenticatedUsrRes.data) {
         dispatch(setPersonaldata({
             userID: authenticatedUsrRes.data.authenticatedUser._id,
             userEmail: authenticatedUsrRes.data.authenticatedUser.email,
-            myBiography: authenticatedUsrRes.data.authenticatedUser.yourBiography,
+            myBiography: authenticatedUsrRes.data.authenticatedUser.yourBiography ? authenticatedUsrRes.data.authenticatedUser.yourBiography : '',
             userFullName: authenticatedUsrRes.data.authenticatedUser.firstName + " " + authenticatedUsrRes.data.authenticatedUser.lastName,
+            myCompanyDescription: authenticatedUsrRes.data.authenticatedUser.company?.companyDescription,
         }))
 
     }
@@ -107,12 +103,8 @@ export default function Forum() {
                 toggle={toggle} scrollable={true}
             >
                 <OffcanvasHeader toggle={toggle}>
-                    <h1 className='fs-3 m-3 px-5 fw-light' >
-                        Create New Post
-                    </h1>
-                    <p className='fs-5 m-3 px-5 fw-light ' >
-                        share your events , ideas , or anything you want to share with the community
-                    </p>
+                    <h1 className='fs-3 m-3 px-5 fw-light' >Create New Post</h1>
+                    <p className='fs-5 m-3 px-5 fw-light ' > share your events , ideas , or anything you want to share with the community</p>
                 </OffcanvasHeader>
                 <OffcanvasBody >
                     <NewForumPost toggler={toggle} />

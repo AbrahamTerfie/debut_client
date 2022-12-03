@@ -15,6 +15,7 @@ const initalState = {
     postCommentID: '',
     gratitudeID: '',
     myBiography: '',
+    myCompanyDescription: '',
 
 }
 
@@ -40,6 +41,7 @@ const Id_Identfiers = createSlice({
             state.userFullName = action.payload.userFullName;
             state.userEmail = action.payload.userEmail;
             state.myBiography = action.payload.myBiography;
+            state.myCompanyDescription = action.payload.myCompanyDescription;
         },
 
         setHasCompany: (state, action) => {

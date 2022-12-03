@@ -8,6 +8,7 @@ export interface EventPageType {
 
 export interface GetDebutEventWithId {
     _id: string
+    createdBy: any
     debutEventName: string
     debutEventDescription: string
     debutEventDate: string

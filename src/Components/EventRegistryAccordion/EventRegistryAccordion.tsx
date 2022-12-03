@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Emailcanvas from '../Email/Emailcanvas';
 import { RootState } from '../../Store/RootReducer';
 
-export default function ItemCard({ item }: { item: DebutRegistryItem }) {
+export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem, createdBy: any }) {
     const dispatch = useDispatch()
 
 
@@ -23,14 +23,13 @@ export default function ItemCard({ item }: { item: DebutRegistryItem }) {
                 emailType: EmailTypes.helpWiithItem,
                 itemName: item.registryItemName,
                 userEmail: userEmail,
+                emailTo: createdBy.email,
                 userBioGraphy: "this is plaveholder biography  ",
-                // companyName: data.getDebutUserWithId.companyName,
 
             }
         }))
     }
 
-    console.log("my email", userEmail)
 
     return (
         <Col md={3} className={classNames(' shadow-sm rounded-3 d-flex flex-column  justify-content-between m-3   ', 'm-2',

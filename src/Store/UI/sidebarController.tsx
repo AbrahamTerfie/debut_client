@@ -3,10 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { EmailTypes } from '../../Email/EmailTypes';
 
 
-// emial body types 
-// userEmail: String, emailType: String, emailBody: String,
-//     userBiography?: String, companyName?: String, name?: string,
-//     companyDescription?: String, itemName?: String, goalName?: String
 
 interface EmailBodyInterface {
     userEmail: string,
@@ -14,8 +10,6 @@ interface EmailBodyInterface {
     emailSubject: string,
     emailBody: string,
     userBiography: string,
-
-
     name?: string,
     companyName?: string,
     companyDescription?: string,
@@ -48,23 +42,21 @@ const uiStore = createSlice({
             // chanhe email type 
             action ? (state.emailType = emailData.emailType) : (emailData.emailType == EmailTypes.clear && (state.emailType = EmailTypes.clear && state.emailPopup === false))
             if (state.emailType === EmailTypes.peopleIntroduction) {
-                state.emailBody = ` <h5> Hi ${emailData.name},</h5></br> <p>  I would like to introduce my self ... a bit of information about  my self ${emailData.userBiography} </p> </br><P>  a bit more about my compnay ... ${emailData.companyDescription} </br> </p><p> ${emailData.emailBody ? emailData.emailBody : ' '}</br> </p>I hope we can connect and work together and make sure to reply to me with this email adress  \n <h6> ${emailData.userEmail} </h6>    `
+                state.emailTo = emailData.emailTo
+                state.emailBody = ` <h5> Hi ${emailData.name},</h5></br> <p>  I would like to introduce my self ... a bit of information about  my self <h6>  ${emailData.userBiography}</h6> </p> </br><P>  a bit more about my compnay ... ${emailData.companyDescription} </br> </p><p> ${emailData.emailBody ? emailData.emailBody : ' '}</br> </p>I hope we can connect and work together and make sure to reply to me with this email adress  \n <h6> ${emailData.userEmail} </h6>    `
             }
             else if (state.emailType === EmailTypes.companyIntroduction) {
-                state.emailBody = `<h5> Hi ${emailData.companyName},</h5></br><p>  I would like to introduce my self and my company  ... a bit of information abpit my self ${emailData.userBiography}  </br> </p></br><p>  a bit more about my compnay ... ${emailData.companyDescription} </br> </p><p>${state.emailBody ? emailData.emailBody : ' '} </br> I hope we can connect and work together and make sure to reply to me with this email adress   </p></br><h6>   ${emailData.userEmail} . </h6>  `
+                state.emailTo = emailData.emailTo
+                state.emailBody = `<h5> Hi ${emailData.name},</h5></br><p>  I would like to introduce my self and my company  ... a bit of information abpit my self <h6> ${emailData.userBiography}  </h6>  </br> </p></br><p>  a bit more about my compnay ...<h6> ${emailData.companyDescription}</h6> </br> </p><p>${state.emailBody ? emailData.emailBody : ' '} </br> I hope we can connect and work together and make sure to reply to me with this email adress   </p></br><h6>   ${emailData.userEmail} . </h6>  `
             }
             else if (state.emailType === EmailTypes.helpWithGoal) {
-                state.emailBody = `<h5> Hi there,</h5></br><p>  I would like to help you with your goal ${emailData.goalName} </br> I have a lot of experience in this field and hope to work with you on it  </br>a bit more about my self ... ${emailData.userBiography}  </br> ${emailData.emailBody ? emailData.emailBody : ''} </br> </p><p> I hope we can connect and work together and make sure to reply to me with this email adress ${emailData.userEmail}  </p></br>`
+                state.emailTo = emailData.emailTo
+                state.emailBody = `<h5> Hi there,</h5></br><p>  I would like to help you with your goal <h6>  ${emailData.goalName} </h6> </br> I have a lot of experience in this field and hope to work with you on it  </br>a bit more about my self ... <h6> ${emailData.userBiography}  </h6> </br> ${emailData.emailBody ? emailData.emailBody : ''} </br> </p><p> I hope we can connect and work together and make sure to reply to me with this email adress <h6> ${emailData.userEmail} </h6>  </p></br>`
             }
             else if (state.emailType === EmailTypes.helpWiithItem) {
-                state.emailBody = `<h5> Hi there,</h5></br><p>  I would like to help you with your item posted on Debut -  ${emailData.itemName} </br>I have a lot of experience in this field and hope to work with you on it and help you with it  </br>a bit more about my self ... ${emailData.userBiography}  </br>  ${emailData.emailBody ? emailData.emailBody : ''} </br></p><p> I hope we can connect and work together and make sure to reply to me with this email adress ${emailData.userEmail}  </br> </p>`
+                state.emailTo = emailData.emailTo
+                state.emailBody = `<h5> Hi there,</h5></br><p>  I would like to help you with your item posted on Debut -  <h6> ${emailData.itemName}</h6> </br>I have a lot of experience in this field and hope to work with you on it and help you with it  </br>a bit more about my self ... <h6> ${emailData.userBiography}  </h6> </br>  ${emailData.emailBody ? emailData.emailBody : ''} </br></p><p> I hope we can connect and work together and make sure to reply to me with this email adress <h6> ${emailData.userEmail} </h6>  </br> </p>`
             }
-
-            // if (state.emailType === EmailTypes.clear) {
-            //     state.emailBody = ""
-            // }
-        },
-        updateEmailBody(state, action: EmailBodyInterface | any) {
 
 
         },
@@ -101,7 +93,7 @@ const uiStore = createSlice({
 
 
 
-export const { toggleEmailPopup, updateEmailBody, toggleSidebar, setMyDebutTab, setActivePersonId,
+export const { toggleEmailPopup, toggleSidebar, setMyDebutTab, setActivePersonId,
     peopleExpertiseFilterHandler, peopleRegionFilterHandler, clearPeopleFilter } = uiStore.actions;
 
 export default uiStore.reducer;

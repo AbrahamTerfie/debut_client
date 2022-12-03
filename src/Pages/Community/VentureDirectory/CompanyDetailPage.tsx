@@ -130,7 +130,7 @@ export default function CompanyDetailPage() {
                 <div>
                     <UncontrolledAccordion flush open={open} stayOpen={true} >
                         {company.companyGoals?.length === 0 ? <p className='text-muted text-center' > no goals added yet </p> :
-                            company.companyGoals?.map((goal: companyGoals, index: number) => {
+                            company.companyGoals?.map((goal: companyGoals, index: number, ownerEmail: string) => {
                                 return (<AccordionItem key={index}>
                                     <AccordionHeader targetId={goal._id}
                                         className="shadow-sm d-flex justify-content-between align-items-center  my-3  MyeventCard  ">
@@ -138,6 +138,7 @@ export default function CompanyDetailPage() {
                                     </AccordionHeader>
                                     <AccordionBody accordionId={goal._id}>
                                         <GoalsBody
+                                            ownerEmail={company.companyOwner?.email}
                                             goals={{
                                                 _id: goal._id,
                                                 goalDescription: goal.goalDescription,

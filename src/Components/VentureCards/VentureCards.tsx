@@ -16,7 +16,8 @@ import MotionContainer from '../MotionContainer/MotionContainer'
 import { appRoutes } from '../../Routes/routes'
 import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import { EmailTypes } from '../../Email/EmailTypes'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../Store/RootReducer'
 import Emailcanvas from '../Email/Emailcanvas'
 export default function VentureCards(
     {
@@ -26,19 +27,19 @@ export default function VentureCards(
         companyHeadquarters,
         companyWebsite,
         companyLogo,
-        jobBoard,
+        // jobBoard,
         linkedInUrl,
         twitterUrl,
         instagramUrl,
         facebookUrl,
         majorAchivements,
         companyDescription,
-        companyServivesGeography,
+        // companyServivesGeography,
         aeraOfOperation,
-        companySize,
+        // companySize,
         companyCategory,
         companyOwner,
-        debutEvents,
+        // debutEvents,
 
     }: any
 
@@ -47,16 +48,15 @@ export default function VentureCards(
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
-
+    const { userEmail } = useSelector((state: RootState) => state.identfiers)
     const copanyIntroductionHandeler = () => {
         dispatch(toggleEmailPopup({
             emailData: {
                 emailType: EmailTypes.companyIntroduction,
                 name: companyOwner.firstName,
-                userEmail: companyOwner.email ? companyOwner.email : companyOwner.assistantEmail,
+                userEmail: userEmail,
                 userBioGraphy: companyOwner.yourBiography,
-                // companyName: data.getDebutUserWithId.companyName,
-
+                emailTo: companyOwner.email ? companyOwner.email : companyOwner.assistantEmail,
             }
         }))
     }

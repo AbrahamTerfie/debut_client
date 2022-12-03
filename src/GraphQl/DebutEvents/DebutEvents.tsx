@@ -9,6 +9,10 @@ query getDebutEventWithId($getDebutEventWithIdId: ID!) {
     debutEventDate
     debutEventLocation
     debutEventImage
+    createdBy {
+      _id,
+      email
+    }
     debutRegistry {
       _id
       debutRegistryName

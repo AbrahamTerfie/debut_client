@@ -21,20 +21,7 @@ export default function Emailcanvas() {
     const { emailPopup, emailType, emailBody, emailTo } = useSelector((store: RootState) => store.uiStore)
     const { userEmail } = useSelector((store: RootState) => store.identfiers)
     const [headers, setHeaders] = useState(EmailStatticValues.empty)
-    const [editorState, setEditorState] = useState({
-        emailfrom: 'abrahamTerfe',
-        emailto: '',
-        emailsubject: '',
-        emailbody: emailBody,
-        companyName: "company name",
-        name: "name name ",
-        companyDescripton: "company description",
-        itemName: "item name",
-        goalName: "goal name",
-        emailIntro: '',
-        userBiography: 'this is a biography placeholder' + " \n some more data here",
-        userContributions: 'this is a contributions placeholder',
-    })
+
     console.log("my email", userEmail)
 
     const editor = useEditor({
@@ -62,10 +49,11 @@ export default function Emailcanvas() {
         dispatch(toggleEmailPopup({
             emailData: {
                 emailType: EmailTypes.clear,
-                name: "",
-                userEmail: "",
-                userBioGraphy: "",
-                emailTo: "",
+                name: "", userEmail: "",
+                userBioGraphy: "", emailTo: "",
+                emailSubject: "", emailBody: "",
+                companyName: "", companyDescription: "",
+                itemName: "", goalName: ""
             }
         }))
     }
@@ -115,7 +103,7 @@ export default function Emailcanvas() {
                     <Row className='border border-light  p-0 border-2 py-1  bg-success text-success bg-opacity-10' >
                         <FormGroup className='   d-flex '>
                             <Label for="emailTo" className='text-center d-flex justify-content-center align-items-center  mx-4' > TO</Label>
-                            <Input type="text" name="emailTo" id="emailTo" placeholder=" email to " value={emailTo} />
+                            <Input type="text" name="emailTo" id="emailTo" placeholder=" email to " value={emailTo} disabled />
                         </FormGroup>
                     </Row>
                     <Row className='border border-light  p-0  py-1  bg-success text-success bg-opacity-10' >

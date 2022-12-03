@@ -21,6 +21,7 @@ export default function EventPage() {
     if (loading) return <Loader />
     if (error || !data) { notifyError('Error fetching event') }
     const { getDebutEventWithId: event }: EventPageType = data
+
     return (
         <div className='mt-5 pt-5 '>
             <div className='m-5 px-5'>
@@ -69,7 +70,9 @@ export default function EventPage() {
                                         <Row className=' d-flex justify-content-start align-items-center flex-wrap'>
                                             {registry.debutRegistryItems?.length === 0 ? <p className='text-center' > no items yet </p> :
                                                 registry.debutRegistryItems?.map((item: DebutRegistryItem, index: number) => {
-                                                    return (<ItemCard key={index} item={item} />)
+                                                    return (<ItemCard key={index} item={item}
+                                                        createdBy={event?.createdBy}
+                                                    />)
                                                 })}
                                         </Row>
                                     </AccordionBody>

@@ -16,10 +16,10 @@ import { FETCH_USER_WITH_ID } from '../../GraphQl/index'
 import Loader from '../Loader/Loader';
 import { motion } from 'framer-motion';
 import MotionContainer from '../MotionContainer/MotionContainer';
-import { toggleEmailPopup, updateEmailBody } from '../../Store/UI/sidebarController'
+import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import Emailcanvas from '../Email/Emailcanvas';
 import { EmailTypes } from '../../Email/EmailTypes';
-import { maybeDependOnExistenceOfEntity } from '@apollo/client/cache/inmemory/entityStore';
+
 function MotionCover({ children }: any) {
     return (
         <motion.div
@@ -38,7 +38,7 @@ function MotionCover({ children }: any) {
 
 export default function PersonDetail() {
     const dispatch = useDispatch()
-    const { activePersonId, emailPopup, } = useSelector((store: RootState) => store.uiStore)
+    const { activePersonId, emailPopup, emailTo } = useSelector((store: RootState) => store.uiStore)
     const { userEmail, myBiography } = useSelector((store: RootState) => store.identfiers)
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
     if (loading) { <Loader /> }
@@ -52,7 +52,7 @@ export default function PersonDetail() {
         dispatch(toggleEmailPopup({
             emailData: {
                 emailType: EmailTypes.peopleIntroduction,
-                name: data.getDebutUserWithId.name,
+                name: data.getDebutUserWithId.firstName,
                 userEmail: userEmail,
                 userBioGraphy: data.getDebutUserWithId.yourBiography,
                 emailTo: data.getDebutUserWithId.email,
@@ -62,6 +62,7 @@ export default function PersonDetail() {
         }))
 
     }
+
 
     return (
         <div className='p-4 px-5 shadow  rounded rounded-5 my-2 overflow-auto d-flex flex-column  flex-wrap  py-5  bg-dark bg-opacity-10'>
