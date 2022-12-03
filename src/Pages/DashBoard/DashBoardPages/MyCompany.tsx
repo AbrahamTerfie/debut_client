@@ -16,6 +16,7 @@ import Loader from '../../../Components/Loader/Loader';
 import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
+import { notifyError } from '../../../Components/Notification/Toast';
 
 export default function YourComapany() {
   const dispatch = useDispatch();
@@ -44,31 +45,24 @@ export default function YourComapany() {
 
 
   const [createMyCompany, createMyCompanyRes] = useMutation(CREATE_COMPANY, {
-    update(cache, { data: { createDebutCompany } }) {
-      const { getCompany }: any = cache.readQuery({
-        query: FETCH_COMPANY,
-        variables: { userId: userID }
-      })
-      cache.writeQuery({
-        query: FETCH_COMPANY,
-        variables: { userId: userID },
-        data: { getCompany: createDebutCompany }
-      })
-    }
+    refetchQueries: [{ query: FETCH_COMPANY, variables: { userId: userID } }],
+
+    // update(cache, { data: { createDebutCompany } }) {
+    //   const { getCompany }: any = cache.readQuery({
+    //     query: FETCH_COMPANY,
+    //     variables: { userId: userID }
+    //   })
+    //   cache.writeQuery({
+    //     query: FETCH_COMPANY,
+    //     variables: { userId: userID },
+    //     data: { getCompany: createDebutCompany }
+    //   })
+    // }
   })
 
   const [updateMyCompany, updateMyCompanyRes] = useMutation(UPDATE_COMPANY, {
-    update(cache, { data: { updateDebutCompany } }) {
-      const { getCompany }: any = cache.readQuery({
-        query: FETCH_COMPANY,
-        variables: { userId: userID }
-      })
-      cache.writeQuery({
-        query: FETCH_COMPANY,
-        variables: { userId: userID },
-        data: { getCompany: updateDebutCompany }
-      })
-    }
+    refetchQueries: [{ query: FETCH_COMPANY, variables: { userId: userID } }],
+
   })
 
 
@@ -116,7 +110,8 @@ export default function YourComapany() {
         setCompanyState({ ...companyState, companyLogo: response.data.secure_url })
       })
       .catch((error) => {
-        console.log(error)
+        notifyError("Error uploading image")
+        // console.log(error)
       })
 
 
@@ -131,8 +126,10 @@ export default function YourComapany() {
   }
 
   if (createMyCompanyRes.error || updateMyCompanyRes.error) {
-    console.log(createMyCompanyRes.error)
-    console.log(updateMyCompanyRes.error)
+    createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
+    updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
+    // console.log(createMyCompanyRes.error)
+    // console.log(updateMyCompanyRes.error)
   }
 
   const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
@@ -151,7 +148,7 @@ export default function YourComapany() {
         }
       })
       if (createMyCompanyRes.data) {
-        console.log("createMyCompanyRes.data", createMyCompanyRes.data)
+        // console.log("createMyCompanyRes.data", createMyCompanyRes.data)
         setIsCreatingAcompany(false)
         setCompanyState(myComapnyInitialState)
         // dispatch(setMyDebutTab('5'))
@@ -177,7 +174,7 @@ export default function YourComapany() {
         }
       })
       if (updateMyCompanyRes.data) {
-        console.log("updateMyCompanyRes.data", updateMyCompanyRes.data)
+        // console.log("updateMyCompanyRes.data", updateMyCompanyRes.data)
         setCompanyState(myComapnyInitialState)
         setIsCreatingAcompany(false)
         // dispatch(setMyDebutTab('5'))
@@ -190,16 +187,13 @@ export default function YourComapany() {
 
 
 
-  if (loading || loadingCompany) {
-    return <Loader />
-  }
+  if (loading || loadingCompany) { return <Loader /> }
   if (error || errorCompany) {
-    console.log(error)
+    error && notifyError(error.message.toString())
+    errorCompany && notifyError(errorCompany.message.toString())
     // return <div> something went wrong  </div>
   }
-  if (data) {
-    dispatch(togglehasCompany(data.checkIfUserHasCompany))
-  }
+  if (data) { dispatch(togglehasCompany(data.checkIfUserHasCompany)) }
 
 
 

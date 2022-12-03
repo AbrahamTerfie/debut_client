@@ -3,13 +3,11 @@
 
 import React, { useState } from 'react'
 import {
-    Row, Col, Button, TabContent, TabPane, Nav, NavItem, NavLink,
+    Row, TabContent, TabPane, Nav, NavItem, NavLink,
     Offcanvas, OffcanvasBody, OffcanvasHeader
 } from 'reactstrap'
 import GratitudeCards from '../../../Components/Gratitudecards/GratitudeCards';
-// import './GiveGratitude.scss'
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
-import { IoMdAdd } from 'react-icons/io'
+
 import { MdForwardToInbox, MdMailOutline } from 'react-icons/md'
 import NewGratitudeForm from '../../../Components/NewGratitudeForm/NewGratitudeForm';
 import Loader from '../../../Components/Loader/Loader';
@@ -34,8 +32,8 @@ export default function GratitudePage() {
     })
 
 
-    console.log("recGraData", recGraData)
-    console.log("sentGraData", sentGraData)
+    // console.log("recGraData", recGraData)
+    // console.log("sentGraData", sentGraData)
 
     if (recGraLoading || sentGraLoading) { return <Loader /> }
     return (

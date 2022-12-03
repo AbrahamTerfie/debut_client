@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import "animate.css/animate.min.css";
-import { Authentication, Landing, Dashboard, DashBoardPages } from './Pages/inedx';
+import {  Landing, Dashboard, DashBoardPages } from './Pages/inedx';
 import { GiveGratitude, Forum, People, Ventures, CompanyDetailPage, Events, EventPage } from './Pages/Community/index';
 
 import { Routes, Route } from "react-router-dom";
@@ -18,7 +18,7 @@ function App() {
       {!isAuthenticated ?
         <Routes>
           <Route path={appRoutes.landing} element={<Landing />} />
-          <Route path={appRoutes.authentication} element={<Authentication />} />
+          {/* <Route path={appRoutes.authentication} element={<Authentication />} /> */}
         </Routes>
         :
         <div>

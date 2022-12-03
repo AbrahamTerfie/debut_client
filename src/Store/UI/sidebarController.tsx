@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 import { EmailTypes } from '../../Email/EmailTypes';
 
@@ -40,7 +40,7 @@ const uiStore = createSlice({
             const { emailData } = action?.payload
             state.emailPopup = !state.emailPopup
             // chanhe email type 
-            action ? (state.emailType = emailData.emailType) : (emailData.emailType == EmailTypes.clear && (state.emailType = EmailTypes.clear && state.emailPopup === false))
+            action ? (state.emailType = emailData.emailType) : (emailData.emailType === EmailTypes.clear && (state.emailType = EmailTypes.clear && state.emailPopup === false))
             if (state.emailType === EmailTypes.peopleIntroduction) {
                 state.emailTo = emailData.emailTo
                 state.emailBody = ` <h5> Hi ${emailData.name},</h5></br> <p>  I would like to introduce my self ... a bit of information about  my self <h6>  ${emailData.userBiography}</h6> </p> </br><P>  a bit more about my compnay ... ${emailData.companyDescription} </br> </p><p> ${emailData.emailBody ? emailData.emailBody : ' '}</br> </p>I hope we can connect and work together and make sure to reply to me with this email adress  \n <h6> ${emailData.userEmail} </h6>    `

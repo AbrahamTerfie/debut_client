@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineEvent } from 'react-icons/md'
 import { FiTarget } from 'react-icons/fi'
-import { FaPrayingHands, FaRegHandSpock } from 'react-icons/fa'
+import { FaRegHandSpock } from 'react-icons/fa'
 import { BsBuilding, BsPerson } from 'react-icons/bs'
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";

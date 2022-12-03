@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, Alert, FormGroup, Input, Label, Form } from 'reactstrap';
+import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, FormGroup, Input, Label, } from 'reactstrap';
 import GoalsAccordion from '../../../Components/DashBoard/GoalsAccordion/GoalsAccordion';
 // import NewGoalForm from '../../../Components/DashBoard/NewGoalForm/NewGoalForm';
-import { BsTrash } from 'react-icons/bs'
-import { motion } from "framer-motion";
+
 import { useMutation, useQuery } from '@apollo/client';
 import { FETCH_COMPANY_GOALS_WITH_COMPANY_ID, CREATE_COMPANY_GOAL } from '../../../GraphQl/Goals/goals';
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import Loader from '../../../Components/Loader/Loader';
-import { Toaster } from 'react-hot-toast';
-import { notifySuccess, notifyError, notifyLoading } from '../../../Components/Notification/Toast'
+
+import { notifySuccess, notifyError } from '../../../Components/Notification/Toast'
 
 
 
@@ -66,13 +65,13 @@ export default function CompanyGolas(props: any) {
       notifyError(createCompanyGoalError.toString())
     }
     if (loading || createCompanyGoalLoading) {
-      return notifyLoading('Loading ...........')
+      return <Loader />
     }
     setNewGoal(initState)
   }
 
 
-  console.log("error", error)
+  // console.log("error", error)
 
   return (
     <Row className="page">

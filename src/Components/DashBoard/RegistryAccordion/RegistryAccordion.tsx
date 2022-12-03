@@ -161,7 +161,7 @@ export default function RegistryAccordion(
             })
             .catch((error) => {
                 notifyError(error.toString())
-                console.log(error)
+                // console.log(error)
             })
     }
     const saveImage = (e: any) => {

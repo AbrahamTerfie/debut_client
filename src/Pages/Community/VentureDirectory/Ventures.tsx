@@ -7,16 +7,16 @@ import { useQuery } from '@apollo/client'
 import { GET_ALL_VENTURES } from '../../../GraphQl/index'
 import Loader from '../../../Components/Loader/Loader'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
-import { MdSearch } from 'react-icons/md'
-import { BsGear } from 'react-icons/bs'
 import { FaSearch } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
+import { notifyError } from '../../../Components/Notification/Toast'
 export default function Ventures() {
 
     const { loading, error, data } = useQuery(GET_ALL_VENTURES)
     if (loading) return <Loader />
+    if (error) { notifyError(error.message.toString()) }
 
-    if (data) console.log('venture data', data.getdebutCompanies)
+    // if (data) console.log('venture data', data.getdebutCompanies)
 
     return (
         <div className=' d-flex  m-5  mt-5 pt-5 flex-column '>

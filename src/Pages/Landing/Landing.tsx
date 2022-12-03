@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../../Styles/Landing.css'
 
 import { LandingCard } from '../../Components/index'
 import { Row, Col, Container } from 'reactstrap'
 import { FaHandsHelping, FaHandPointUp, FaHandHoldingHeart } from 'react-icons/fa'
 import { VscDebugStart } from 'react-icons/vsc'
-import { Link } from 'react-router-dom'
-import { appRoutes } from '../../Routes/routes'
-import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
 import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccordion'
@@ -21,8 +19,12 @@ const iconProperties = {
 }
 
 export default function Landing() {
-    const { loginWithRedirect, isLoading, isAuthenticated, user, logout } = useAuth0();
-    console.log(" user object form auth0 hook  ", user)
+    const {
+        loginWithRedirect, isLoading,
+        // isAuthenticated, user,
+        // logout
+    } = useAuth0();
+    // console.log(" user object form auth0 hook  ", user)
 
     if (isLoading) { return <Loader /> }
 

@@ -12,11 +12,12 @@ import { IoMdSettings } from 'react-icons/io'
 import { FaSearch } from 'react-icons/fa'
 
 //context
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer'
 import { All_USERS } from '../../../GraphQl/index'
 import Loader from '../../../Components/Loader/Loader'
 import { motion } from 'framer-motion'
+import { notifyError } from '../../../Components/Notification/Toast'
 export default function People() {
 
     const { user } = useAuth0();
@@ -39,25 +40,12 @@ export default function People() {
 
             }
         })
-        if (authenticatedUsrRes.data) {
-            return console.log(authenticatedUsrRes.data)
-        }
-        if (authenticatedUsrRes.error) {
-            return console.log(authenticatedUsrRes.error)
-        }
-        if (authenticatedUsrRes.loading) {
-            return console.log('getching user......,,,,,')
-        }
+
     }, [])
-    if (loading) {
-        return <Loader />
-    }
-    if (error) {
-        return <div>Error</div>
-    }
-    // if (data) {
-    //     console.log(data)
-    // }
+    if (authenticatedUsrRes.error) { (notifyError(authenticatedUsrRes.error.message)) }
+    if (authenticatedUsrRes.loading || loading) { return <Loader /> }
+
+    if (error) { notifyError(error.message.toString()) }
 
     return (
 

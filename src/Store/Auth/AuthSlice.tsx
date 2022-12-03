@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+// import React from 'react'
 import { createSlice } from '@reduxjs/toolkit'
-import { useAuth0 } from '@auth0/auth0-react'
-import { useMutation } from '@apollo/client'
-import { CHECK_EMAIL_VALIDITY } from '../../GraphQl/index'
+// import { useAuth0 } from '@auth0/auth0-react'
+
 
 
 

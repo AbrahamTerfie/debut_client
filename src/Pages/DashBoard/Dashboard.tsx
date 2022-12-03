@@ -7,14 +7,16 @@ import { CHECK_IF_USER_HAS_COMPANY, FETCH_COMPANY } from '../../GraphQl/index'
 import { RootState } from '../../Store/RootReducer';
 import { setHasCompany, setCompanyID } from '../../Store/identfiers/identfiers';
 import { useDispatch, useSelector } from 'react-redux'
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import Loader from '../../Components/Loader/Loader'
 
 export default function Dashboard() {
     const dispatch = useDispatch()
     const [sidebarIsOpen, setSidebarOpen] = useState(true);
     const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
-    const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
+    const { userID,
+        //  companyID, hasCompany
+    } = useSelector((store: RootState) => store.identfiers)
     const location = useLocation();
     const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
         variables: { userId: userID }
@@ -32,9 +34,7 @@ export default function Dashboard() {
             getCompany()
             dataCompany && dispatch(setCompanyID(dataCompany?.getCompanyWithUserId?._id))
         }
-        if (data?.checkIfUserHasCompany === false) {
-            dispatch(setHasCompany(false))
-        }
+        if (data?.checkIfUserHasCompany === false) { dispatch(setHasCompany(false)) }
     }, [data, dataCompany])
 
 
@@ -55,7 +55,7 @@ export default function Dashboard() {
                 <Topbar toggleSidebar={toggleSidebar} />
 
                 {location.pathname === "/dashboard" ?
-                    <p> 
+                    <p>
                         this is dashboard item d
 
                         {data && data.checkIfUserHasCompany === true ? <p>you have a company</p> : <p>you dont have a company</p>}

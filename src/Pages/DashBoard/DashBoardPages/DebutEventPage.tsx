@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@apollo/client'
 import { GET_EVENT_WITH_ID, CREATE_DEBUT_REGISTRY } from '../../../GraphQl/index'
 import { Row, Col, Modal, Button, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label, } from 'reactstrap'
 import { motion } from 'framer-motion'
-import { notifyError, notifyLoading, notifySuccess, notifyWarning } from '../../../Components/Notification/Toast'
+import { notifyError, notifySuccess, notifyWarning } from '../../../Components/Notification/Toast'
 import Loader from '../../../Components/Loader/Loader'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
@@ -40,11 +40,11 @@ export default function DebutEventPage() {
 
     const { data, loading, error } = useQuery(GET_EVENT_WITH_ID, {
         variables: { getDebutEventWithIdId: id },
-        onCompleted: (data) => {
-            console.log("event data", data)
-        },
+        // onCompleted: (data) => {
+        //     console.log("event data", data)
+        // },
         onError: (error) => {
-            console.log(error)
+            // console.log(error)
             notifyError(error.toString())
         }
     })

@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
 import {
     Navbar,
-    Button,
     NavbarToggler,
     Collapse,
     Nav,

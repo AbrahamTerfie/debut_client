@@ -22,7 +22,7 @@ export default function Emailcanvas() {
     const { userEmail } = useSelector((store: RootState) => store.identfiers)
     const [headers, setHeaders] = useState(EmailStatticValues.empty)
 
-    console.log("my email", userEmail)
+    // console.log("my email", userEmail)
 
     const editor = useEditor({
         extensions: [
@@ -43,8 +43,7 @@ export default function Emailcanvas() {
     }, [emailBody])
 
 
-    console.log(EmailTypes.peopleIntroduction === emailType)
-    console.log(emailType, emailBody)
+   
     const closeCanvasHandler = () => {
         dispatch(toggleEmailPopup({
             emailData: {

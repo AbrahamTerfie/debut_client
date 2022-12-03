@@ -1,13 +1,17 @@
 import React from 'react'
 import MyEventCard from '../../../Components/MyEventCard/MyEventCard'
-import { MY_DEBUT_EVENTS, CREATE_EVENT, CHECK_IF_USER_HAS_COMPANY, FETCH_COMPANY } from '../../../GraphQl/index'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  MY_DEBUT_EVENTS,
+  // CREATE_EVENT, CHECK_IF_USER_HAS_COMPANY, FETCH_COMPANY
+} from '../../../GraphQl/index'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
-import { setCompanyID } from '../../../Store/identfiers/identfiers'
-import { useMutation, useQuery } from '@apollo/client'
+// import { setCompanyID } from '../../../Store/identfiers/identfiers'
+import { useQuery } from '@apollo/client'
 import Loader from '../../../Components/Loader/Loader'
 import { Outlet } from 'react-router-dom'
 import NewEvent from '../../../Components/DashBoard/NewEvent'
+import { notifyError } from '../../../Components/Notification/Toast'
 
 export default function CompanyEvents() {
   const { userID } = useSelector((store: RootState) => store.identfiers)
@@ -19,7 +23,8 @@ export default function CompanyEvents() {
 
   if (loading) return <Loader />
   if (error) {
-    console.log(error)
+    notifyError(error.message.toString())
+    // console.log(error)
   }
   // if (data) {
   // console.log(data.getDebutEventsWithUserId)

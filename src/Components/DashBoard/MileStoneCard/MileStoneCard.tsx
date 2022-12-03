@@ -1,10 +1,10 @@
 import { motion } from "framer-motion"
-import { BsThreeDotsVertical, BsTrash, BsPen } from 'react-icons/bs';
+import { BsTrash } from 'react-icons/bs';
 import { DELETE_COMPANY_MILESTONE, FETCH_COMPANY_GOALS_WITH_COMPANY_ID, TOGGLE_MILESTONE_STATUS } from '../../../GraphQl/index'
 import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import moment from "moment"
-import { useMutation, useQuery } from "@apollo/client"
-import { notifyError, notifyLoading, notifySuccess, notifyWarning } from "../../../Components/Notification/Toast"
+import { useMutation } from "@apollo/client"
+import { notifyError, notifySuccess, notifyWarning } from "../../../Components/Notification/Toast"
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { useState } from "react";
@@ -34,11 +34,11 @@ export default function MileStoneCard(
     const [deleteCompanyMilestone, { data: deleteCompanyMilestoneData, loading: deleteCompanyMilestoneLoading, error: deleteCompanyMilestoneError }] = useMutation(DELETE_COMPANY_MILESTONE, {
         refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }],
         onCompleted: (deleteCompanyMilestoneData) => {
-            console.log(deleteCompanyMilestoneData)
+            // console.log(deleteCompanyMilestoneData)
             deleteCompanyMilestoneData?.deleteCompanyMilestone ? notifySuccess('Milestone deleted successfully') : notifyError('Something went wrong')
         },
         onError: (deleteCompanyMilestoneError) => {
-            console.log(deleteCompanyMilestoneError)
+            // console.log(deleteCompanyMilestoneError)
             notifyError(deleteCompanyMilestoneError.toString())
         }
 
@@ -47,13 +47,13 @@ export default function MileStoneCard(
     const [toggleMilestoneStatus, { data: toggleMilestoneStatusData, loading: toggleMilestoneStatusLoading, error: toggleMilestoneStatusError }] = useMutation(TOGGLE_MILESTONE_STATUS, {
         refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }],
         onCompleted: (toggleMilestoneStatusData) => {
-            console.log(toggleMilestoneStatusData)
+            // console.log(toggleMilestoneStatusData)
             toggleMilestoneStatusData && !milestoneCompleted ?
                 notifySuccess('Milestone status changed to completed ') :
                 notifyWarning(' status changed to pending ')
         },
         onError: (toggleMilestoneStatusError) => {
-            console.log(toggleMilestoneStatusError)
+            // console.log(toggleMilestoneStatusError)
             notifyError(toggleMilestoneStatusError.toString())
         }
     })
