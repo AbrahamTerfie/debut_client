@@ -11,8 +11,8 @@ import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import Heading from '@tiptap/extension-heading'
-
-
+import emailjs from '@emailjs/browser';
+import { notifySuccess, notifyError } from '../Notification/Toast'
 
 
 export default function Emailcanvas() {
@@ -32,10 +32,10 @@ export default function Emailcanvas() {
             Heading.configure({ levels: [1, 2, 3, 4, 5, 6], }),
         ],
         content: emailBody,
-        onUpdate: ({ editor }) => {
-            const dataToSend = editor.getHTML()
-            console.log(dataToSend)
-        },
+        // onUpdate: ({ editor }) => {
+        //     const dataToSend = editor.getText()
+        //     console.log(dataToSend)
+        // },
     })
 
     useEffect(() => {
@@ -43,8 +43,8 @@ export default function Emailcanvas() {
     }, [emailBody])
 
 
-   
-    const closeCanvasHandler = () => {
+
+    const closeCanvasHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         dispatch(toggleEmailPopup({
             emailData: {
                 emailType: EmailTypes.clear,
@@ -77,6 +77,30 @@ export default function Emailcanvas() {
         }
     }, [emailType])
 
+    const emailJsInfo = {
+        service_id: "service_st0qe55",
+        template_id: "template_c1f7n49",
+        public_key: "rO7tJ3s1smQ3YT5Vb"
+    }
+
+
+    const sendEmail = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        emailjs.send(
+            emailJsInfo.service_id,
+            emailJsInfo.template_id,
+            {
+                from_name: userEmail,
+                email_subject: headers.subject,
+                message: editor?.getText(),
+                reply_to: emailTo,
+            },
+            emailJsInfo.public_key
+        ).then((result) => { notifySuccess(result.text.toString() + " " + "email sent") })
+            .catch((error) => { notifyError(error.text.toString() + " " + "email not sent") })
+
+    }
+
+
 
     return (
         <Offcanvas
@@ -85,7 +109,7 @@ export default function Emailcanvas() {
             isOpen={emailPopup}
             className=" text-success "
             style={{ height: '80%', width: '50%', left: '50%', }}>
-            <OffcanvasHeader toggle={() => closeCanvasHandler()}
+            <OffcanvasHeader toggle={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => closeCanvasHandler(e)}
                 className="bg-success text-success bg-opacity-10 "
                 toggleClassName="text-primary">
                 {headers.title}
@@ -118,10 +142,12 @@ export default function Emailcanvas() {
                         style={{ minHeight: '30em', border: "1px solid black", padding: "2em", paddingLeft: "4em" }}
                         editor={editor} />
                 </Row>
-                <Row>
+                <Row
+                    onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => sendEmail(e)}
+                >
                     <MotionContainer>
                         <p className='text-center text-primary bg-success bg-opacity-10 p-3 text-success fw-bold m-3'>
-                            show preview
+                            send
                         </p>
                     </MotionContainer>
                 </Row>

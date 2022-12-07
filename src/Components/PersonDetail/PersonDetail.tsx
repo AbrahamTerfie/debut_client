@@ -1,14 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import {
-    FaLinkedin,
-    FaTwitter,
-    FaFacebook,
-    FaInstagram,
-    FaEnvelope,
-    FaHandPaper,
-    FaHandsHelping,
-} from 'react-icons/fa'
+import { FaLinkedin, FaTwitter, FaFacebook, FaInstagram, FaHandsHelping, } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/RootReducer';
 import { useQuery } from '@apollo/client';
@@ -43,7 +35,7 @@ export default function PersonDetail() {
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
     if (loading) { <Loader /> }
     // console.log(data)
-    if (activePersonId === "") { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > select user </p> }
+    if (activePersonId === "") { return <p className='text-center p-5 shadow-sm h-auto rounded  border border-muted  text-muted fw-bolder my-2 ' > select user </p> }
     if (error) { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p> }
 
 

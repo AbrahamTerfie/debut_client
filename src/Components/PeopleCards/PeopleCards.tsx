@@ -13,25 +13,20 @@ export default function PeopleCards({ people }: any) {
         dispatch(setActivePersonId(newname))
     }
 
-
     const handleClick = (e: any) => {
-
-
         e.preventDefault()
         people._id === activePersonId ? updatePeopleDirectoryState('') : updatePeopleDirectoryState(people._id)
-
     }
-
 
     return (
         <motion.div
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             style={{ cursor: 'pointer' }}
             className={activePersonId === people._id ?
-                '  shadow-lg  rounded-1   my-2  bg-dark  bg-opacity-10 '
-                : '  shadow-sm rounded-5   my-2 '}
+                '  shadow-lg  rounded-3   my-2  bg-dark  bg-opacity-10 border-muted '
+                : '  shadow-sm rounded-5   my-2  border border-muted '}
         >
             <Row onClick={(e: any) => handleClick(e)}>
                 <Col md={3} >
@@ -39,7 +34,7 @@ export default function PeopleCards({ people }: any) {
                         src={people.profileImage}
                         alt='profile'
                         className='rounded img-fluid h-100 w-75'
-                        style={{ width: '100px', height: '100px', objectFit: 'cover', maxHeight: '10em', minHeight:'10em' }}
+                        style={{ width: '75px', height: '75px', objectFit: 'cover', maxHeight: '7em', minHeight: '7em' }}
                     />
                 </Col>
                 <Col md={9}
