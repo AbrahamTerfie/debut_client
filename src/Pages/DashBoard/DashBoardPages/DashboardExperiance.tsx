@@ -10,6 +10,7 @@ import { FETCH_USER_WITH_ID, UPDATE_DEBUT_USER_WITH_ID } from '../../../GraphQl/
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from "../../../Components/Loader/Loader";
 import { motion } from "framer-motion";
+import { notifyError, notifySuccess } from "../../../Components/Notification/Toast";
 export default function DashboardExperiance() {
     const { userID } = useSelector((store: RootState) => store.identfiers)
     const dispatch = useDispatch();
@@ -27,30 +28,29 @@ export default function DashboardExperiance() {
     }
     const [experienceInfoForm, setExperienceInfoForm] = useState(experienceInfoInitState)
     useEffect(() => {
-        if (data) {
-            setExperienceInfoForm({
-                yourBiography: data.getDebutUserWithId.yourBiography === null ? '' : data.getDebutUserWithId.yourBiography,
-                howyouContribute: data.getDebutUserWithId.howyouContribute === null ? '' : data.getDebutUserWithId.howyouContribute,
-                aeraOfExpertise: data.getDebutUserWithId.aeraOfExpertise === null ? [] : data.getDebutUserWithId.aeraOfExpertise,
-                regions: data.getDebutUserWithId.regions === null ? [] : data.getDebutUserWithId.regions,
-            })
+        if (!data) {
+            return;
         }
-    }, [data])
+        setExperienceInfoForm({
+            yourBiography: data.getDebutUserWithId.yourBiography || '',
+            howyouContribute: data.getDebutUserWithId.howyouContribute || '',
+            aeraOfExpertise: data.getDebutUserWithId.aeraOfExpertise || [],
+            regions: data.getDebutUserWithId.regions || [],
+        });
+    }, [data]);
 
 
     const [updateExperiance, updateExperianceRes] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
         {
-            update(cache, { data: { updateDebutUser } }) {
-                const { getDebutUserWithId }: any = cache.readQuery({
-                    query: FETCH_USER_WITH_ID,
-                    variables: { getDebutUserWithIdId: userID }
-                })
-                cache.writeQuery({
-                    query: FETCH_USER_WITH_ID,
-                    variables: { getDebutUserWithIdId: userID },
-                    data: { getDebutUserWithId: updateDebutUser }
-                })
+            refetchQueries: [{ query: FETCH_USER_WITH_ID, variables: { getDebutUserWithIdId: userID } }],
+            awaitRefetchQueries: true,
+            onCompleted: () => {
+                notifySuccess("Experiance updated successfully")
+            },
+            onError: (err) => {
+                notifyError("failed to update " + err.message.toString())
             }
+
         })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +72,16 @@ export default function DashboardExperiance() {
     if (error) return <p>Error</p>
     return (
         <Form className="px-5" >
-            <Row form>
+
+
+            <div className='mb-5'>
+                <p className=' fs-1 fw-light mt-4 mb-1 mx-3' > professional Experiance </p>
+                <p className='text-muted fs-6 mt-0 mb-2 mx-3'>
+                    identfy your personal and professional expertise
+                </p>
+            </div>
+
+            <Row form className="shadow-sm p-4 border border-muted">
 
                 <Col md={12}>
                     <FormGroup>
@@ -135,21 +144,23 @@ export default function DashboardExperiance() {
                         />
                     </FormGroup>
                 </Col>
+
+                <Col md={12} className=' mx-5 my-2'
+                    onClick={(e) => handleSubmit(e)}
+
+                >
+                    <motion.div whileHover={{ scale: 1.009 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  "
+                        style={{ cursor: 'default' }}>
+                        <p className=' text-success m-2 fs-5 fw-bold' > save your experiance    </p>
+                    </motion.div>
+                </Col>
             </Row>
 
 
 
-            <Row className='d-flex justify-content-center align-items-center mx-5 my-2'
-                onClick={(e) => handleSubmit(e)}
 
-            >
-                <motion.div whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill  border border-success "
-                    style={{ cursor: 'default' }}>
-                    <p className=' text-success m-2 fs-5 fw-bold' > save your experiance    </p>
-                </motion.div>
-            </Row>
 
         </Form>
     );

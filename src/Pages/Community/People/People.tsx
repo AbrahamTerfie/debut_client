@@ -18,6 +18,7 @@ import { All_USERS } from '../../../GraphQl/index'
 import Loader from '../../../Components/Loader/Loader'
 import { motion } from 'framer-motion'
 import { notifyError } from '../../../Components/Notification/Toast'
+import { v4 as uuid } from 'uuid'
 export default function People() {
 
     const { user } = useAuth0();
@@ -45,7 +46,10 @@ export default function People() {
     if (authenticatedUsrRes.error) { (notifyError(authenticatedUsrRes.error.message)) }
     if (authenticatedUsrRes.loading || loading) { return <Loader /> }
 
-    if (error) { notifyError(error.message.toString()) }
+    if (error) {
+        console.log(error)
+        notifyError(error.message.toString())
+    }
 
     return (
 
@@ -88,17 +92,17 @@ export default function People() {
                 <Col className="overflow-scroll " >
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
-                            return <PeopleCards key={user._id}
+                            return <PeopleCards key={uuid()}
                                 people={user} />
                         }
                         // comapre  user.aeraOfExpertise array with peopleExpertiseFilter array and if they match return only those users
                         if (peopleExpertiseFilter.length !== 0 && user.aeraOfExpertise.some((expertise: String) => peopleExpertiseFilter.includes(expertise))) {
-                            return <PeopleCards key={user._id}
+                            return <PeopleCards key={uuid()}
                                 people={user} />
                         }
                         // comapre  user.regions  array with peopleRegionsFilter array and if they match return only those users
                         if (peopleRegionFilter.length !== 0 && user.regions.some((region: String) => peopleRegionFilter.includes(region))) {
-                            return <PeopleCards key={user._id}
+                            return <PeopleCards key={uuid()}
                                 people={user} />
                         }
                     })}

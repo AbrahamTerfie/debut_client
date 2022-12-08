@@ -4,6 +4,7 @@ import MyCompany from "./MyCompany";
 import MyProfile from "./MyProfile";
 import GratitudePage from "./GratitudePage";
 import DebutEventPage from "./DebutEventPage";
+import DashboardExperiance from "./DashboardExperiance";
 
 
 export {
@@ -12,6 +13,7 @@ export {
     CompanyEvents,
     MyCompany,
     GratitudePage,
-    DebutEventPage
+    DebutEventPage,
+    DashboardExperiance
 
 }

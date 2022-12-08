@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlineEvent } from 'react-icons/md'
 import { FiTarget } from 'react-icons/fi'
 import { FaRegHandSpock } from 'react-icons/fa'
-import { BsBuilding, BsPerson } from 'react-icons/bs'
+import { BsArchive, BsBuilding, BsPerson } from 'react-icons/bs'
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -71,6 +71,16 @@ export default function SideBar({ isOpen, toggle }: {
                         </NavLink>
                     </NavItem>
                     <NavItem
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.experience ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                        <NavLink
+                            onClick={() => navigate(appRoutes.experience)}
+                            style={textColor}>
+                            <BsArchive className="mx-2" />
+                            Experience
+                        </NavLink>
+
+                    </NavItem>
+                    <NavItem
                         className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
                         <NavLink
                             onClick={() => navigate(appRoutes.myProfile)}
@@ -78,7 +88,9 @@ export default function SideBar({ isOpen, toggle }: {
                             <BsPerson className="mx-2" />
                             Profile
                         </NavLink>
+
                     </NavItem>
+
                 </Nav>
             </div>
         </div >

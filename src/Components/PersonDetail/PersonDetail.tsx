@@ -74,7 +74,7 @@ export default function PersonDetail() {
                         </span>
                     </p>
                     <p className='fs-6 fw-bold  m-0'>
-                        {data?.getDebutUserWithId.userName} / <span className='text-muted' >  </span> </p>
+                        {data?.getDebutUserWithId.userName} / <span className='text-muted' >  {data?.getDebutUserWithId.preferredName} </span> </p>
 
                     <p className='fs-5 fw-light m-0 d-flex justify-content-start'>
                         <span > {data?.getDebutUserWithId.titleAtCompany}</span>

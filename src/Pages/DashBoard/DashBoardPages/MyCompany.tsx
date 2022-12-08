@@ -67,26 +67,28 @@ export default function YourComapany() {
 
 
   useEffect(() => {
-    if (dataCompany) {
-      setCompanyState({
-        // ...companyState,
-        companyName: dataCompany.getCompanyWithUserId.companyName === null ? '' : dataCompany.getCompanyWithUserId.companyName,
-        companyMissionStatement: dataCompany.getCompanyWithUserId.companyMissionStatement === null ? '' : dataCompany.getCompanyWithUserId.companyMissionStatement,
-        companyHeadquarters: dataCompany.getCompanyWithUserId.companyHeadquarters === null ? '' : dataCompany.getCompanyWithUserId.companyHeadquarters,
-        companyWebsite: dataCompany.getCompanyWithUserId.companyWebsite === null ? '' : dataCompany.getCompanyWithUserId.companyWebsite,
-        companyLogo: dataCompany.getCompanyWithUserId.companyLogo === null ? '' : dataCompany.getCompanyWithUserId.companyLogo,
-        jobBoard: dataCompany.getCompanyWithUserId.jobBoard === null ? '' : dataCompany.getCompanyWithUserId.jobBoard,
-        linkedInUrl: dataCompany.getCompanyWithUserId.linkedInUrl === null ? '' : dataCompany.getCompanyWithUserId.linkedInUrl,
-        twitterUrl: dataCompany.getCompanyWithUserId.twitterUrl === null ? '' : dataCompany.getCompanyWithUserId.twitterUrl,
-        facebookUrl: dataCompany.getCompanyWithUserId.facebookUrl === null ? '' : dataCompany.getCompanyWithUserId.facebookUrl,
-        instagramUrl: dataCompany.getCompanyWithUserId.instagramUrl === null ? '' : dataCompany.getCompanyWithUserId.instagramUrl,
-        majorAchivements: dataCompany.getCompanyWithUserId.majorAchivements === null ? [] : dataCompany.getCompanyWithUserId.majorAchivements,
-        companyDescription: dataCompany.getCompanyWithUserId.companyDescription === null ? '' : dataCompany.getCompanyWithUserId.companyDescription,
-      })
-
-      dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id))
+    if (!dataCompany) {
+      return;
     }
-  }, [dataCompany])
+
+    setCompanyState({
+      // ...companyState,
+      companyName: dataCompany.getCompanyWithUserId.companyName || '',
+      companyMissionStatement: dataCompany.getCompanyWithUserId.companyMissionStatement || '',
+      companyHeadquarters: dataCompany.getCompanyWithUserId.companyHeadquarters || '',
+      companyWebsite: dataCompany.getCompanyWithUserId.companyWebsite || '',
+      companyLogo: dataCompany.getCompanyWithUserId.companyLogo || '',
+      jobBoard: dataCompany.getCompanyWithUserId.jobBoard || '',
+      linkedInUrl: dataCompany.getCompanyWithUserId.linkedInUrl || '',
+      twitterUrl: dataCompany.getCompanyWithUserId.twitterUrl || '',
+      facebookUrl: dataCompany.getCompanyWithUserId.facebookUrl || '',
+      instagramUrl: dataCompany.getCompanyWithUserId.instagramUrl || '',
+      majorAchivements: dataCompany.getCompanyWithUserId.majorAchivements || [],
+      companyDescription: dataCompany.getCompanyWithUserId.companyDescription || '',
+    });
+
+    dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id));
+  }, [dataCompany]);
 
 
 

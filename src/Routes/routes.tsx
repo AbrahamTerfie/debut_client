@@ -13,6 +13,7 @@ export const appRoutes = {
 
     dashboard: '/dashboard',
     myProfile: 'myProfile',
+    experience: 'experience',
     myCompany: 'myCompany',
     goals: 'goals',
     events: 'events',

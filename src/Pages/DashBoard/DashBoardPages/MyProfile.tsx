@@ -10,6 +10,7 @@ import Loader from '../../../Components/Loader/Loader';
 import Axios from 'axios';
 import { motion } from 'framer-motion';
 import DashboardExperiance from "./DashboardExperiance"
+import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
 
 
 export default function MyProfile() {
@@ -20,74 +21,43 @@ export default function MyProfile() {
     variables: { getDebutUserWithIdId: userID }
   })
   const [personalInfoForm, setPersonalInfoForm] = useState(personalInfoInitialState)
-  console.log(data)
   useEffect(() => {
     if (data) {
+      const { firstName, lastName, preferredName, pronouns, titleAtCompany, linkedinUrl, twitterUrl, instagramUrl, facebookUrl, mailingAddress, profileImage,
+        email, mobilePhone, officePhone, preferedContactMethod, hasAssistat, assistantName, assistantEmail, assistantPhone } = data.getDebutUserWithId;
       setPersonalInfoForm({
-        firstName: data.getDebutUserWithId.firstName === null ? '' : data.getDebutUserWithId.firstName,
-        lastName: data.getDebutUserWithId.lastName === null ? '' : data.getDebutUserWithId.lastName,
-        preferredName: data.getDebutUserWithId.preferredName === null ? '' : data.getDebutUserWithId.preferredName,
-        pronouns: data.getDebutUserWithId.pronouns === null ? '' : data.getDebutUserWithId.pronouns,
-        titleAtCompany: data.getDebutUserWithId.titleAtCompany === null ? '' : data.getDebutUserWithId.titleAtCompany,
-        linkedinUrl: data.getDebutUserWithId.linkedinUrl === null ? '' : data.getDebutUserWithId.linkedinUrl,
-        twitterUrl: data.getDebutUserWithId.twitterUrl === null ? '' : data.getDebutUserWithId.twitterUrl,
-        instagramUrl: data.getDebutUserWithId.instagramUrl === null ? '' : data.getDebutUserWithId.instagramUrl,
-        facebookUrl: data.getDebutUserWithId.facebookUrl === null ? '' : data.getDebutUserWithId.facebookUrl,
-        mailingAddress: data.getDebutUserWithId.mailingAddress === null ? '' : data.getDebutUserWithId.mailingAddress,
-        profileImage: data.getDebutUserWithId.profileImage === null ? '' : data.getDebutUserWithId.profileImage,
-        email: data.getDebutUserWithId.email === null ? '' : data.getDebutUserWithId.email,
-        mobilePhone: data.getDebutUserWithId.mobilePhone === null ? '' : data.getDebutUserWithId.mobilePhone,
-        officePhone: data.getDebutUserWithId.officePhone === null ? '' : data.getDebutUserWithId.officePhone,
-        preferedContactMethod: data.getDebutUserWithId.preferedContactMethod === null ? '' : data.getDebutUserWithId.preferedContactMethod,
-        hasAssistat: data.getDebutUserWithId.hasAssistat === null ? true : data.getDebutUserWithId.hasAssistat,
-        assistantName: data.getDebutUserWithId.assistantName === null ? '' : data.getDebutUserWithId.assistantName,
-        assistantEmail: data.getDebutUserWithId.assistantEmail === null ? '' : data.getDebutUserWithId.assistantEmail,
-        assistantPhone: data.getDebutUserWithId.assistantPhone === null ? '' : data.getDebutUserWithId.assistantPhone,
-        // ForumPost: data.getDebutUserWithId.ForumPost ? data.getDebutUserWithId.ForumPost : [],
-        // companiesFollowed: data.getDebutUserWithId.companiesFollowed ? data.getDebutUserWithId.companiesFollowed : [],
-        // companiesFollowing: data.getDebutUserWithId.companiesFollowing ? data.getDebutUserWithId.companiesFollowing : [],
-        // eventsAttended: data.getDebutUserWithId.eventsAttended ? data.getDebutUserWithId.eventsAttended : [],
-        // eventsToAttend: data.getDebutUserWithId.eventsToAttend ? data.getDebutUserWithId.eventsToAttend : [],
-        // gratitides: data.getDebutUserWithId.gratitudes ? data.getDebutUserWithId.gratitudes : [],
-        // comments: data.getDebutUserWithId.comments ? data.getDebutUserWithId.comments : [],
-      })
+        firstName: firstName || '', lastName: lastName || '',
+        preferredName: preferredName || '', pronouns: pronouns || '',
+        titleAtCompany: titleAtCompany || '', linkedinUrl: linkedinUrl || '',
+        twitterUrl: twitterUrl || '', instagramUrl: instagramUrl || '',
+        facebookUrl: facebookUrl || '',
+        mailingAddress: mailingAddress || '', profileImage: profileImage || '',
+        email: email || '', mobilePhone: mobilePhone || '',
+        officePhone: officePhone || '', preferedContactMethod: preferedContactMethod || '',
+        hasAssistat: hasAssistat || true, assistantName: assistantName || '',
+        assistantEmail: assistantEmail || '', assistantPhone: assistantPhone || '',
+      });
     }
-  }, [data])
+  }, [data]);
+
   console.log("profileee", personalInfoForm.profileImage)
-  function UploadImage() {
-
-    const formData = new FormData()
-    formData.append('file', imageSelected)
-    // file is the file object
-    // first one is the preset and the second one is name  for cloudnary api
-    formData.append('upload_preset', 'debutClient')
-    imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
-      .then((response) => {
-        setPersonalInfoForm({ ...personalInfoForm, profileImage: response.data.secure_url })
-        console.log(response.data.secure_url)
-      }).catch((error) => {
-        console.log(error)
-      })
+  // function UploadImage() {
 
 
-  }
+  // }
 
-  useEffect(() => {
-    UploadImage()
-  }, [imageSelected])
+  // useEffect(() => {
+  //   UploadImage()
+  // }, [imageSelected])
 
   const [updatePersonalInfo, updatePersonalInfoRes] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
     {
-      update(cache, { data: { updateDebutUser } }) {
-        const { ...getDebutUserWithId }: any = cache.readQuery({
-          query: FETCH_USER_WITH_ID,
-          variables: { getDebutUserWithIdId: userID }
-        })
-        cache.writeQuery({
-          query: FETCH_USER_WITH_ID,
-          variables: { getDebutUserWithIdId: userID },
-          data: { getDebutUserWithId: updateDebutUser }
-        })
+      refetchQueries: [{ query: FETCH_USER_WITH_ID, variables: { getDebutUserWithIdId: userID } }],
+      onCompleted: () => {
+        notifySuccess('Personal Information Updated Successfully')
+      },
+      onError: (error) => {
+        notifyError(error.message.toString())
       }
     })
 
@@ -98,12 +68,36 @@ export default function MyProfile() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    updatePersonalInfo({
-      variables: {
-        userInput: personalInfoForm,
-        updateDebutUserId: userID
-      }
-    })
+    const formData = new FormData()
+    formData.append('file', imageSelected)
+    formData.append('upload_preset', 'debutClient')
+    imageSelected ? Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+      .then((response) => {
+        updatePersonalInfo({
+          variables: {
+            userInput: {
+              ...personalInfoForm, profileImage: response.data.secure_url
+            }, updateDebutUserId: userID
+          }
+        })
+        setPersonalInfoForm({ ...personalInfoForm, profileImage: response.data.secure_url })
+        notifySuccess('Personal Information Updated Successfully')
+
+      }).catch((error) => {
+        console.log(error)
+        notifyError('Image failed to update')
+      })
+      : updatePersonalInfo({
+        variables: { userInput: personalInfoForm, updateDebutUserId: userID }
+      }).then(() => {
+        notifySuccess('Personal Information Updated Successfully')
+      }).catch((error) => {
+        console.log(error)
+        notifyError('Personal Information failed to update')
+      })
+
+
+
   }
 
 
@@ -116,10 +110,10 @@ export default function MyProfile() {
         <p className=' fs-1 fw-light mt-4 mb-1 mx-3' > personal informaion </p>
         <p className='text-muted fs-6 mt-0 mb-2 mx-3'>  once  your complete  it will be marked as achivement </p>
       </div>
-      <Row form className='px-5' >
+      <Row form className='p-5 mx-2 border border-muted  shadow-sm ' >
         <Col md={9} >
 
-          <Row>
+          <Row >
             <Col md={4}>
               <FormGroup>
                 <Label for="firstname">first name </Label>
@@ -241,7 +235,7 @@ export default function MyProfile() {
 
 
 
-            <Col md={6}>
+            <Col md={3}>
               <FormGroup>
                 <Label for="email"> email </Label>
                 <Input type="email"
@@ -254,7 +248,7 @@ export default function MyProfile() {
                 />
               </FormGroup>
             </Col>
-            <Col md={6}>
+            <Col md={3}>
               <FormGroup>
                 <Label for="mobilePhone "> mobile phone </Label>
                 <Input type="number"
@@ -267,7 +261,7 @@ export default function MyProfile() {
                 />
               </FormGroup>
             </Col>
-            <Col md={6}>
+            <Col md={3}>
               <FormGroup>
                 <Label for="officePhone "> office phone </Label>
                 <Input type="number"
@@ -279,7 +273,7 @@ export default function MyProfile() {
                 />
               </FormGroup>
             </Col>
-            <Col md={6}>
+            <Col md={3}>
               <FormGroup>
                 <Label for="preferedContactMethod"> prefred contact method</Label>
                 <Input type="select" name="preferedContactMethod" id="preferedContactMethod"
@@ -358,33 +352,16 @@ export default function MyProfile() {
               type="file" />
           </FormGroup>
         </Col>
+        <Col md={12} className=' mx-5 my-2'
+          onClick={(e) => handleSubmit(e)}>
+          <motion.div whileHover={{ scale: 1.009 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            className=" px-5   d-flex justify-content-center align-items-center  mx-2 py-2 my-4 bg-success bg-opacity-25  rounded   "
+            style={{ cursor: 'default' }}>
+            <p className=' text-success m-2 fs-5 fw-bold' > save personal info   </p>
+          </motion.div>
+        </Col>
       </Row>
-      <Row className='d-flex justify-content-center align-items-center mx-5 my-2'
-        onClick={(e) => handleSubmit(e)}>
-        <motion.div whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-          className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill  border border-success "
-          style={{ cursor: 'default' }}>
-          <p className=' text-success m-2 fs-5 fw-bold' > save personal info   </p>
-        </motion.div>
-      </Row>
-
-      <Row>
-
-        <div className='m-5'>
-          <p className=' fs-1 fw-light mt-4 mb-1 mx-3' > professional Experiance </p>
-          <p className='text-muted fs-6 mt-0 mb-2 mx-3'>
-            identfy your personal and professional expertise
-          </p>
-        </div>
-      </Row>
-
-
-
-      <Row>
-        <DashboardExperiance />
-      </Row>
-
 
     </Form>
   );

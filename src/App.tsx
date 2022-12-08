@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import "animate.css/animate.min.css";
-import {  Landing, Dashboard, DashBoardPages } from './Pages/inedx';
+import { Landing, Dashboard, DashBoardPages } from './Pages/inedx';
 import { GiveGratitude, Forum, People, Ventures, CompanyDetailPage, Events, EventPage } from './Pages/Community/index';
 
 import { Routes, Route } from "react-router-dom";
@@ -42,6 +42,7 @@ function App() {
               <Route path={appRoutes.events} element={<DashBoardPages.CompanyEvents />} />
               <Route path={appRoutes.eventDetails} element={<DashBoardPages.DebutEventPage />} />
               <Route path={appRoutes.gratitudes} element={<DashBoardPages.GratitudePage />} />
+              <Route path={appRoutes.experience} element={<DashBoardPages.DashboardExperiance />} />
             </Route>
           </Routes>
           <Toaster />
