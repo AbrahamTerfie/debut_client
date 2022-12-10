@@ -2,17 +2,25 @@ import React, { useEffect, useState } from 'react'
 import SideBar from './DashBoardSidebar/SideBar'
 import classNames from "classnames";
 import Topbar from './DashBoardSidebar/TopBar';
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, Routes, useLocation, useNavigate } from "react-router-dom";
 import { CHECK_IF_USER_HAS_COMPANY, FETCH_COMPANY } from '../../GraphQl/index'
 import { RootState } from '../../Store/RootReducer';
 import { setHasCompany, setCompanyID } from '../../Store/identfiers/identfiers';
 import { useDispatch, useSelector } from 'react-redux'
 import { useLazyQuery, useQuery } from '@apollo/client'
 import Loader from '../../Components/Loader/Loader'
+import { appRoutes } from '../../Routes/routes';
 import { notifyError } from '../../Components/Notification/Toast';
+import { motion } from 'framer-motion';
+import { Row, Col } from 'reactstrap';
+// icon imports
+import { IoBusiness, IoCalendarClear, IoHandLeft, IoPerson, IoTrophy, IoNewspaperOutline } from 'react-icons/io5';
+// describe className="fa-5x"
+
 
 export default function Dashboard() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [sidebarIsOpen, setSidebarOpen] = useState(true);
     const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
     const { userID,
@@ -43,11 +51,56 @@ export default function Dashboard() {
 
     if (error || errorCompany) { notifyError(error?.message.toString() || errorCompany?.message.toString() || "something went wrong") }
 
-
-
-    // console.log("data", data)
-    // console.log("loading", loading)
-    // console.log("error", error)
+    const cardInfo = [
+        {
+            title: "Profile",
+            icon: <IoPerson className="fa-4x" />,
+            description: "your personal information ",
+            link: appRoutes.myProfile,
+            bgColor: "bg-primary",
+            color: "primary"
+        },
+        {
+            title: "Company",
+            icon: <IoBusiness className="fa-4x" />,
+            description: "information about your company ",
+            link: appRoutes.myCompany,
+            bgColor: "bg-success",
+            color: "success"
+        },
+        {
+            title: "Event",
+            icon: <IoCalendarClear className="fa-4x" />,
+            description: "keep track of your events , registries ",
+            link: appRoutes.events,
+            bgColor: "bg-warning",
+            color: "warning"
+        },
+        {
+            title: "Goals & Milestones",
+            icon: <IoTrophy className="fa-4x" />,
+            description: "set goals and milestones",
+            link: appRoutes.goals,
+            bgColor: "bg-danger",
+            color: "danger"
+        },
+        {
+            title: "Gratitude",
+            icon: <IoHandLeft className="fa-4x" />,
+            description: "give thanks to your colleagues ",
+            link: appRoutes.gratitudes,
+            bgColor: "bg-info",
+            color: "info"
+        },
+        {
+            title: "Experiance",
+            icon: <IoNewspaperOutline className="fa-4x" />,
+            description: "keep track of your work experience ",
+            link: appRoutes.experience,
+            bgColor: "bg-secondary",
+            color: "secondary"
+        }
+    ]
     return (
         <div className="d-flex mt-5   ">
             <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
@@ -56,11 +109,39 @@ export default function Dashboard() {
                 <Topbar toggleSidebar={toggleSidebar} />
 
                 {location.pathname === "/dashboard" ?
-                    <p>
-                        this is dashboard item d
+                    <>
+                        <h1 className="text-start px-5">Welcome to your dashboard</h1>
+                        <h5 className="text-start text-muted px-5">
+                            Here you can keep track of your company, events, goals, milestones, gratitude and work experience.
+                        </h5>
+                        <div className="d-flex flex-wrap justify-content-start align-items-center">
+                            {cardInfo.map((card, index) => (
+                                <motion.div
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    animate={{ scale: 1 }}
+                                    transition={{ duration: 0.2 }}
+                                    key={index} className=" my-3 mx-4" style={{ width: "18rem" }} onClick={() => navigate(card.link)}>
+                                    <Row className={`card-body shadow border ${card.bgColor} text-${card.color} border-muted  bg-opacity-10 d-flex justify-content-center align-items-between `}  >
+                                        <Col className='d-flex justify-content-center align-items-center'>
+                                            {card.icon}
+                                        </Col>
+                                        <Col>
+                                            <h5 className="card-title  fw-bold ">{card.title}</h5>
+                                            <p className="card-text"> {card.description} .</p>
+                                        </Col>
+                                    </Row>
 
-                        {data && data.checkIfUserHasCompany === true ? <p>you have a company</p> : <p>you dont have a company</p>}
-                    </p> :
+                                </motion.div>
+                            )
+                            )}
+
+
+                            {/* {data && data.checkIfUserHasCompany === true ? <p>you have a company</p> : <p>you dont have a company</p>} */}
+                        </div>
+                    </>
+
+                    :
                     <Outlet />}
             </div>
         </div>
