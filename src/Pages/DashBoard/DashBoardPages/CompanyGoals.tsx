@@ -10,6 +10,7 @@ import { RootState } from '../../../Store/RootReducer'
 import Loader from '../../../Components/Loader/Loader';
 
 import { notifySuccess, notifyError } from '../../../Components/Notification/Toast'
+import { motion } from 'framer-motion';
 
 
 
@@ -20,8 +21,16 @@ export default function CompanyGolas(props: any) {
     variables: { companyId: companyID }
   })
 
-  const [createCompanyGoal, { data: createCompanyGoalData, loading: createCompanyGoalLoading, error: createCompanyGoalError }] = useMutation(CREATE_COMPANY_GOAL, {
-    refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }]
+  const [createCompanyGoal, { loading: createCompanyGoalLoading }] = useMutation(CREATE_COMPANY_GOAL, {
+    refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }],
+    onCompleted: () => {
+      toggle()
+      setNewGoal(initState)
+      notifySuccess('Goal created successfully')
+    },
+    onError: (err) => {
+      notifyError("something went wrong" + err.toString())
+    },
   })
   const initState = {
     createdBy: userID,
@@ -32,7 +41,7 @@ export default function CompanyGolas(props: any) {
   }
   const [newGoal, setNewGoal] = useState(initState)
   const inputHndler = (e: any) => {
-    const { name, value } = e.target;
+    const { name, value }: { name: string, value: string } = e.target;
     setNewGoal({ ...newGoal, [name]: value })
   }
   const [modal, setModal] = useState(false);
@@ -50,24 +59,8 @@ export default function CompanyGolas(props: any) {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    checkInput() && createCompanyGoal({
-      variables: {
-        companyGoalInput: newGoal
-      }
-    })
-    toggle()
-    if (createCompanyGoalData) {
-      notifySuccess('Goal created successfully')
-      // console.log(createCompanyGoalData)
-      // setModal(false)
-    }
-    if (createCompanyGoalError) {
-      notifyError(createCompanyGoalError.toString())
-    }
-    if (loading || createCompanyGoalLoading) {
-      return <Loader />
-    }
-    setNewGoal(initState)
+    checkInput() && createCompanyGoal({ variables: { companyGoalInput: newGoal } })
+    if (loading || createCompanyGoalLoading) { return <Loader /> }
   }
 
 
@@ -139,10 +132,16 @@ export default function CompanyGolas(props: any) {
       <div className='mx-3 p-3' >
 
         {data?.getCompanyGoalWithCompanyId?.length === 0 ?
-          <div className='m-5'>
+          <motion.div className='m-5'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            whileHover={{ scale: 1.009 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <p className='text-muted text-center fs-4 '>  you have no goals yet </p>
             <p className=' text-center fs-6 '>  click on the button above to create one </p>
-          </div> :
+          </motion.div > :
 
           data?.getCompanyGoalWithCompanyId?.map((goal: any) => {
             return <GoalsAccordion

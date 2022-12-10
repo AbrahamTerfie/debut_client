@@ -83,11 +83,7 @@ export default function GoalsAccordion(
 
     return (
         <div>
-            <UncontrolledAccordion
-                open={open}
-                flush
-                stayOpen 
-                >
+            <UncontrolledAccordion open={open} flush stayOpen >
                 <AccordionItem  >
                     <Offcanvas
                         direction="end"
@@ -99,7 +95,7 @@ export default function GoalsAccordion(
                             color: '#1985a1'
                         }}>
                         <OffcanvasHeader toggle={toggleCanvas}  >
-                            <p className="fw-light m-4 fs-3">
+                            <p className="fw-light m-4 fs-3 ">
                                 create new milestone for this goal
                             </p>
                         </OffcanvasHeader>
@@ -116,7 +112,9 @@ export default function GoalsAccordion(
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     >
                         <AccordionHeader
-                            className=' accordionHeader fw-light shadow  my-3 rounded rounded-3'
+                            className=' accordionHeader fw-light shadow-sm  my-3 rounded rounded-3 border border-muted'
+                            // conditional classnames only for border color
+
                             targetId={_id.toString()} >
                             {goalTitle}
                         </AccordionHeader>
@@ -124,9 +122,10 @@ export default function GoalsAccordion(
 
                     <AccordionBody accordionId={_id.toString()}>
                         <Row>
-                            <Col md={7} className=' text-muted' >
+                            <Col md={7} className=' ' >
                                 <span className='mx-3' > goal description</span>
-                                <p className='text-muted p-2'>
+                                <p className='text-muted p-2 px-3 flex-wrap
+                                 '>
                                     {goalDescription}
                                 </p>
                             </Col>
