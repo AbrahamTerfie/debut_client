@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Row, Col, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
 import './VentureCards.css'
 import { useNavigate } from 'react-router-dom'
-// import DebutEventCards from '../DebutEventCards/DebutEventCards'
 import {
     FaLinkedin,
     FaTwitter,
@@ -61,7 +60,6 @@ export default function VentureCards(
         }))
     }
     return (
-        // <Link to={`${appRoutes.ventures}/${itemlink}`}>
         <>
             <Emailcanvas />
             <Offcanvas
@@ -70,8 +68,7 @@ export default function VentureCards(
                 isOpen={isOpen}
                 toggle={toggle}
                 className="offcanvas-style"
-                style={{ width: '60%' }}
-            >
+                style={{ width: '60%' }}>
                 <OffcanvasHeader onClick={toggle} className=" mb-0 App p-5 pb-0 shadow" >
                     <p className='fs-6 fw-light text-muted  m-0  '> Name </p>
                     <h1 className="">{companyName}</h1>
@@ -111,24 +108,18 @@ export default function VentureCards(
                                         <p className=' mx-1 bg-success text-success bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
                                     </MotionContainer>
                                 ))}
-
                             </div>
                         </Col>
                         <Col md={3} className='d-flex flex-column justify-content-center align-items-center mx-3'>
                             <div>
-                                <img
-                                    // make the img responsive without looging the aspect ratio
-                                    className="img-fluid w-100 rounded-5 shadow p-3 mb-5 bg-body rounded"
+                                <img className="img-fluid w-100 rounded-5 shadow p-3 mb-5 bg-body rounded"
                                     sizes='(max-width: 300px) 10vw, 300px'
                                     src={companyLogo}
                                     alt="" />
                             </div>
                             <MotionContainer>
-                                <small
-                                    className='d-flex text-center text-primary fw-bolder bg-primary bg-opacity-10  p-1 px-3  rounded-1 '
-                                    onClick={() => copanyIntroductionHandeler()}
-
-                                >
+                                <small className='d-flex text-center text-primary fw-bolder bg-primary bg-opacity-10  p-1 px-3  rounded-1 '
+                                    onClick={() => copanyIntroductionHandeler()}>
                                     request introduction
                                     <FaHandsHelping size={25} className='mx-2' />
 
@@ -154,14 +145,12 @@ export default function VentureCards(
                                 </MotionContainer>
                             ))}
                         </div>
-
                     </Row>
                     <Row>
                         <MotionContainer>
-                            <p
-                                onClick={() => navigate(`${appRoutes.ventures}/${_id}`)}
-                                className='fs-4 fw-light m-3 text-success bg-success bg-opacity-10 p-3 px-5 rounded-1 border border-success 
-                                '> got to the company page to see more
+                            <p onClick={() => navigate(`${appRoutes.ventures}/${_id}`)}
+                                className='fs-4 fw-bold m-3 text-success bg-success bg-opacity-10  py-2  px-5 rounded-1 '>
+                                got to the company page to see more
                             </p>
                         </MotionContainer>
                     </Row>
@@ -174,27 +163,30 @@ export default function VentureCards(
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 40 }}
                 onClick={toggle}
-                className=' my-2  rounded rounded-5 shadow-sm  border border-1 bg-light bg-opacity-10  '>
-                <Row>
-                    <Col md={2} className='d-flex justify-content-center align-items-center'>
-                        <img className="w-75 h-75 shadow-sm  rounded img-fluid  p-3 "
-                            style={{ height: '100px', width: '100px', objectFit: 'cover', minHeight: '100px', minWidth: '100px' }}
-                            src={companyLogo}
+                className=' my-2 py-2 rounded rounded-5 shadow-sm  border border-muted bg-light bg-opacity-10 d-flex flex-row '>
+                <Col md={1} className='d-flex justify-content-center align-items-center mx-3 shadow-sm rounded-5'>
+
+                    <img
+                        src={companyLogo}
+                        alt='user profile photo'
+                        className='rounded img-fluid h-100 w-75'
+                        style={{ width: '75px', height: '75px', objectFit: 'contain', maxHeight: '7em', minHeight: '7em' }} />
+                </Col>
+                <Col md={10} >
+                    <p className='fw-bolder fs-5 m-0' > {companyName} </p>
+                    <span className=' text-muted' >{
+                        companyDescription?.length > 150 ? companyDescription?.slice(0, 150) + "..." : companyDescription
+                    } </span>
+                    <p className=' fw-bold'>  {companyHeadquarters} </p>
+                    <div className='d-flex flex-row ' >
+                        <img src={companyOwner?.profileImage}
+                            className='rounded-circle img-fluid'
+                            style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
                             alt='user profile photo' />
-                    </Col>
-                    <Col md={10} className=" py-3">
-                        <p className='fw-bolder fs-3' > {companyName} </p>
-                        <p className='fs-light ' >{companyDescription} </p>
-                        <p className='text-muted'>  {companyHeadquarters} </p>
-                        <div className='d-flex flex-row ' >
-                            <img src={companyOwner?.profileImage}
-                                className='rounded-circle img-fluid'
-                                style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
-                                alt='user profile photo' />
-                            <p className='mx-2  fs-6 text-muted fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
-                        </div>
-                    </Col>
-                </Row>
+                        <p className='mx-2  fs-6  fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
+                    </div>
+                </Col>
+
             </motion.div>
 
         </>

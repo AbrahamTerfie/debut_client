@@ -10,8 +10,8 @@ import { appRoutes } from "../../../Routes/routes";
 import "./styles.css"
 
 export default function SideBar({ isOpen, toggle }: {
-    isOpen: any;
-    toggle: any
+    isOpen: Boolean;
+    toggle: () => void;
 }) {
     const location = useLocation()
     const navigate = useNavigate();
@@ -27,53 +27,42 @@ export default function SideBar({ isOpen, toggle }: {
             </div>
             <div className="side-menu">
                 <Nav vertical className=" p-3">
-                    <p className="text-muted fs-2 mt-4 mb-1 mx-2"
+                    <p className="text-muted fs-2 mt-5 mb-1 mx-2"
                         style={textColor}
                         onClick={() => navigate(appRoutes.dashboard)}>
-                        Dashboard
+                        MyDebut
                     </p>
                     <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.events ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
-                        <NavLink
-                            onClick={() => navigate(appRoutes.events)}
+                        <NavLink onClick={() => navigate(appRoutes.events)}
                             style={textColor}>
                             <MdOutlineEvent
                                 className="mx-2" />
                             Events
                         </NavLink>
                     </NavItem>
-                    <NavItem
-                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.goals ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
-                        <NavLink
-                            onClick={() => navigate(appRoutes.goals)}
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.goals ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                        <NavLink onClick={() => navigate(appRoutes.goals)}
                             style={textColor}>
                             <FiTarget className="mx-2" />
                             Goals
                         </NavLink>
                     </NavItem>
-                    <NavItem
-                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.gratitudes ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
-                        <NavLink
-                            onClick={() => navigate(appRoutes.gratitudes)}
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.gratitudes ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                        <NavLink onClick={() => navigate(appRoutes.gratitudes)}
                             style={textColor}>
                             <FaRegHandSpock className="mx-2" />
                             Gratitudes
                         </NavLink>
                     </NavItem>
-                    <NavItem
-                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myCompany ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
-
-
-                        <NavLink
-                            onClick={() => navigate(appRoutes.myCompany)}
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myCompany ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                        <NavLink onClick={() => navigate(appRoutes.myCompany)}
                             style={textColor}>
                             <BsBuilding className="mx-2" />
-                            Your Company
+                            Company
                         </NavLink>
                     </NavItem>
-                    <NavItem
-                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.experience ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
-                        <NavLink
-                            onClick={() => navigate(appRoutes.experience)}
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.experience ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                        <NavLink onClick={() => navigate(appRoutes.experience)}
                             style={textColor}>
                             <BsArchive className="mx-2" />
                             Experience

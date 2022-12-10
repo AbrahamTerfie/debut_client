@@ -10,6 +10,7 @@ import { FETCH_USER_WITH_ID, UPDATE_DEBUT_USER_WITH_ID } from '../../../GraphQl/
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from "../../../Components/Loader/Loader";
 import { motion } from "framer-motion";
+import { v4 as uuid } from 'uuid';
 import { notifyError, notifySuccess } from "../../../Components/Notification/Toast";
 export default function DashboardExperiance() {
     const { userID } = useSelector((store: RootState) => store.identfiers)
@@ -38,7 +39,6 @@ export default function DashboardExperiance() {
             regions: data.getDebutUserWithId.regions || [],
         });
     }, [data]);
-
 
     const [updateExperiance, updateExperianceRes] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
         {
@@ -105,7 +105,9 @@ export default function DashboardExperiance() {
                     <Label for="intersts ">
                         select 3-5 areas of interest that you would like to be involved in or have experience in
                     </Label>
-
+                    <div className="d-flex flex-wrap justify-content-start align-items-center ">
+                        {experienceInfoForm.aeraOfExpertise?.map((item: string) => { return <span key={uuid()} className="fw-bold bg-success rounded-pill p-2 bg-opacity-10  text-success me-4 mb-2 px-3" >{item}</span> })}
+                    </div>
                     <MultiSelect
                         hasSelectAll={false}
                         options={optionsOfInterst}
@@ -114,11 +116,15 @@ export default function DashboardExperiance() {
                         labelledBy="Select your interest"
                     />
                 </Col>
+
+
                 <Col md={12} className="my-3" >
                     <Label for="regions ">
                         select geographical regions that you would like to be involved in or have experience in
                     </Label>
-
+                    <div className="d-flex flex-wrap justify-content-start align-items-center ">
+                        {experienceInfoForm.regions?.map((region: string) => { return <span key={uuid()} className="fw-bold bg-success rounded-pill p-2 bg-opacity-10  text-success me-4 mb-2 px-3">{region}</span> })}
+                    </div>
                     <MultiSelect
                         hasSelectAll={false}
                         options={optionOfGeography}
@@ -144,11 +150,7 @@ export default function DashboardExperiance() {
                         />
                     </FormGroup>
                 </Col>
-
-                <Col md={12} className=' mx-5 my-2'
-                    onClick={(e) => handleSubmit(e)}
-
-                >
+                <Col md={12} className=' mx-5 my-2' onClick={(e) => handleSubmit(e)}>
                     <motion.div whileHover={{ scale: 1.009 }}
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  "
@@ -157,11 +159,6 @@ export default function DashboardExperiance() {
                     </motion.div>
                 </Col>
             </Row>
-
-
-
-
-
         </Form>
     );
 }

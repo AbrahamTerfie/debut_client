@@ -16,7 +16,9 @@ import Loader from '../../../Components/Loader/Loader';
 import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
-import { notifyError } from '../../../Components/Notification/Toast';
+import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
+import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
+
 
 export default function YourComapany() {
   const dispatch = useDispatch();
@@ -32,11 +34,11 @@ export default function YourComapany() {
   const [companyState, setCompanyState] = useState(myComapnyInitialState)
 
 
-  console.log({
-    ...companyState,
-    companyServivesGeography: selectedGeography.map((geography: any) => geography.value),
-    aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-  })
+  // console.log({
+  //   ...companyState,
+  //   companyServivesGeography: selectedGeography.map((geography: any) => geography.value),
+  //   aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
+  // })
 
   const { data: dataCompany, loading: loadingCompany, error: errorCompany
   } = useQuery(FETCH_COMPANY, {
@@ -46,22 +48,26 @@ export default function YourComapany() {
 
   const [createMyCompany, createMyCompanyRes] = useMutation(CREATE_COMPANY, {
     refetchQueries: [{ query: FETCH_COMPANY, variables: { userId: userID } }],
+    onCompleted: () => {
+      dispatch(togglehasCompany(true))
+      dispatch(setCompanyID(createMyCompanyRes.data.createDebutCompany._id))
+      setIsCreatingAcompany(false)
+      setCompanyState(myComapnyInitialState)
+      notifySuccess("Company created successfully")
+    },
+    onError: (error) => { notifyError(" failed to create" + error.message.toString()) }
 
-    // update(cache, { data: { createDebutCompany } }) {
-    //   const { getCompany }: any = cache.readQuery({
-    //     query: FETCH_COMPANY,
-    //     variables: { userId: userID }
-    //   })
-    //   cache.writeQuery({
-    //     query: FETCH_COMPANY,
-    //     variables: { userId: userID },
-    //     data: { getCompany: createDebutCompany }
-    //   })
-    // }
+
   })
 
   const [updateMyCompany, updateMyCompanyRes] = useMutation(UPDATE_COMPANY, {
     refetchQueries: [{ query: FETCH_COMPANY, variables: { userId: userID } }],
+    onCompleted: () => {
+      setCompanyState(myComapnyInitialState)
+      setIsCreatingAcompany(false)
+      notifySuccess("Company updated successfully")
+    },
+    onError: (error) => { notifyError(" failed to update" + error.message.toString()) }
 
   })
 
@@ -127,6 +133,11 @@ export default function YourComapany() {
     setAchivement('')
   }
 
+  const removeMajorAchivement = (index: number) => {
+    const newAchivements = companyState.majorAchivements.filter((achivement: string, i: number) => i !== index)
+    setCompanyState({ ...companyState, majorAchivements: newAchivements })
+  }
+
   if (createMyCompanyRes.error || updateMyCompanyRes.error) {
     createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
     updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
@@ -136,57 +147,44 @@ export default function YourComapany() {
 
   const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (isCreatingAcompany) {
-      imageSelected && handleFileSelected()
-      createMyCompany({
-        variables: {
-          companyInput: {
-            ...companyState,
-            companyOwner: userID,
-            companyCategory: selectedGeography.map((geography: any) => geography.value),
-            aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
+    console.log("companyState", companyState)
+    imageSelected && handleFileSelected()
 
-          }
-        }
-      })
-      if (createMyCompanyRes.data) {
-        // console.log("createMyCompanyRes.data", createMyCompanyRes.data)
-        setIsCreatingAcompany(false)
-        setCompanyState(myComapnyInitialState)
-        // dispatch(setMyDebutTab('5'))
-
-      }
-    }
-    //if being created call create mutation 
-    //check if image is being uploaded or not
-
-    //if being updated call update mutation
-    //check if image is being uploaded or not
-    else if (hasCompany) {
-      imageSelected && handleFileSelected()
-      updateMyCompany({
-        variables: {
-          updateDebutCompanyId: companyID,
-          companyInput: {
-            ...companyState,
-            companyCategory: selectedGeography.map((geography: any) => geography.value),
-            aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-          },
+    isCreatingAcompany && createMyCompany({
+      variables: {
+        companyInput: {
+          ...companyState,
+          companyOwner: userID,
+          companyCategory: selectedGeography.map((geography: any) => geography.value),
+          aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
 
         }
-      })
-      if (updateMyCompanyRes.data) {
-        // console.log("updateMyCompanyRes.data", updateMyCompanyRes.data)
-        setCompanyState(myComapnyInitialState)
-        setIsCreatingAcompany(false)
-        // dispatch(setMyDebutTab('5'))
       }
-      //dispatch to the next tab
+    })
 
 
-    }
+    hasCompany && updateMyCompany({
+      variables: {
+        updateDebutCompanyId: companyID,
+        companyInput: {
+          ...companyState,
+          companyCategory: selectedGeography.map((geography: any) => geography.value),
+          aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
+        },
+
+      }
+    })
+
   }
+  //if being created call create mutation 
+  //check if image is being uploaded or not
 
+  //if being updated call update mutation
+  //check if image is being uploaded or not
+
+
+
+  { console.log(selectedAeraasOfImpact) }
 
 
   if (loading || loadingCompany) { return <Loader /> }
@@ -216,7 +214,7 @@ export default function YourComapany() {
           <Button
             size='md'
             outline
-            color='light'
+            color='success'
             className='m-5 w-50 mx-auto shadow'
             onClick={() => setIsCreatingAcompany(true)}
           >
@@ -337,9 +335,7 @@ export default function YourComapany() {
                   <img src={companyState?.companyLogo} alt="" className='w-50' />
                   <FormGroup>
                     <Label for="companyLogo"> upload high resolution image of your logo </Label>
-                    <Input onChange={(event: any) => {
-                      setImageSelected(event.target.files[0])
-                    }} type="file" />
+                    <Input onChange={(event: any) => { setImageSelected(event.target.files[0]) }} type="file" />
                   </FormGroup>
                 </Col>
               </Row>
@@ -349,18 +345,24 @@ export default function YourComapany() {
                 <Label for="achievements" className='mt-3' > major achivements as a company</Label>
                 <span className='fs-6 text-muted mx-3' >  points of credibility you'd like to highlight on your company profile  </span>
 
-                {companyState.majorAchivements.map((savedAchivement: String, index: any) => {
-                  return <p className='fs-6 w-100  py-3 px-3  border border-success rounded-3 border-opacity-10' key={index}  >
-                    {savedAchivement}
-                    <Button color='link' className='text-danger p-1  mx-2 text-end '
-                      onClick={() => {
-                        let newAchivements = companyState.majorAchivements
-                        newAchivements.splice(index, 1)
-                        setCompanyState({ ...companyState, majorAchivements: newAchivements })
-                      }}
-                    >  remove </Button>
-                  </p>
-                })}
+                <div
+                  className='d-flex flex-wrap justify-content-start align-items-center mt-3 mx-3'
+                >
+                  {companyState.majorAchivements.map((savedAchivement: String, index: any) => {
+                    return <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      whileHover={{ scale: 1.009 }}
+                      className=' d-flex fs-6  rounded-3 border-opacity-10 bg-info bg-opacity-10  m-2 p-2  tex-info' key={index}  >
+                      {savedAchivement}
+                      <p color='link' className='text-danger mx-4  bg-danger bg-opacity-10 rounded-3 p-1'
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => removeMajorAchivement(index)} >  remove </p>
+                    </motion.div>
+                  })}
+                </div>
                 <Input className='my-3'
                   type="text"
                   name="achievements" id="achievements"
@@ -400,12 +402,14 @@ export default function YourComapany() {
                 aera of operations
               </Label>
 
+
+
+
               <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.companyCategory.map((savedRegion: String, index: any) => {
-                  return (<p key={index} className='fs-6 text-muted fw-light px-1 py-2'>{savedRegion}, </p>)
+                {dataCompany && dataCompany.getCompanyWithUserId.aeraOfOperation.map((aera: String, index: any) => {
+                  return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>{aera}, </p>)
                 })}
               </div>
-
               <MultiSelect
                 hasSelectAll={false}
                 options={optionsOfAeraasOfImpact}
@@ -414,17 +418,17 @@ export default function YourComapany() {
                 labelledBy="Select your geographical region"
               />
             </Col>
-
             <Col md={12} className="my-3" >
               <Label for="aera of operations">
                 select geographical regions that you would like to be involved in or have experience in
 
               </Label>
 
-
               <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.aeraOfOperation.map((aera: String, index: any) => {
-                  return (<p key={index} className='fs-7 text-muted fw-light px-1 py-2'>{aera}, </p>)
+                {dataCompany && dataCompany.getCompanyWithUserId.companyCategory.map((savedRegion: String, index: any) => {
+                  return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>
+                    {savedRegion}
+                  </p>)
                 })}
               </div>
               <MultiSelect
@@ -438,15 +442,18 @@ export default function YourComapany() {
           </Row>
 
 
-          <Row className='d-flex justify-content-center align-items-center mx-5 my-5'
-            onClick={(e) => handleCompanySubimt}>
+          <Col md={12} className=' mx-5 my-5'>
             <motion.div whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
-              className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill  border border-success "
-              style={{ cursor: 'default' }}>
-              <p className=' text-success m-2 fs-5 fw-bold' > save  </p>
+              className=" px-5   mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill   "
+              style={{ cursor: 'default' }}
+              onClick={(e: any) => handleCompanySubimt(e)}
+            >
+              <p className=' text-success m-2 fs-5 fw-bold text-center' > {hasCompany ? 'update company' : 'create company'} </p>
+
+
             </motion.div>
-          </Row>
+          </Col>
         </Form>
       }
     </>

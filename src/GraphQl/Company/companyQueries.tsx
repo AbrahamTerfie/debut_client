@@ -40,7 +40,7 @@ mutation  createDebutCompany ($companyInput: CompanyInput) {
       firstName
       email
     }
-    companyRegestry{
+    companyRegistry{
       _id,
       debutRegistryName,
       debutRegistryStatus,
@@ -133,7 +133,7 @@ mutation updateDebutCompany ($updateDebutCompanyId: ID!, $companyInput: CompanyI
       firstName
       email
     }
-    companyRegestry {
+    companyRegistry {
       _id
       debutRegistryName
       debutRegistryStatus
