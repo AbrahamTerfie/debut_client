@@ -23,33 +23,33 @@ export default function Dashboard() {
     const navigate = useNavigate()
     const [sidebarIsOpen, setSidebarOpen] = useState(true);
     const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
-    const { userID,
+    const { userID, hasCompany
         //  companyID, hasCompany
     } = useSelector((store: RootState) => store.identfiers)
     const location = useLocation();
-    const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
-        variables: { userId: userID }
-    })
+    // const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
+    //     variables: { userId: userID }
+    // })
     const [getCompany, { data: dataCompany, loading: loadingCompany, error: errorCompany
     }] = useLazyQuery(FETCH_COMPANY, {
         variables: { userId: userID }
     })
 
     // console.info(userID, companyID, hasCompany)
-
+    console.log(dataCompany)
     useEffect(() => {
-        if (data?.checkIfUserHasCompany === true) {
-            dispatch(setHasCompany(true))
+        if (hasCompany) {
+            // dispatch(setHasCompany(true))
             getCompany()
             dataCompany && dispatch(setCompanyID(dataCompany?.getCompanyWithUserId?._id))
         }
-        if (data?.checkIfUserHasCompany === false) { dispatch(setHasCompany(false)) }
-    }, [data, dataCompany])
+        // if (data?.checkIfUserHasCompany === false) { dispatch(setHasCompany(false)) }
+    }, [dataCompany])
 
 
-    if (loading || loadingCompany) return <Loader />
+    if (loadingCompany) return <Loader />
 
-    if (error || errorCompany) { notifyError(error?.message.toString() || errorCompany?.message.toString() || "something went wrong") }
+    if (errorCompany) { notifyError("something went wrong" + errorCompany?.message.toString()) }
 
     const cardInfo = [
         {

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap'
+import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader, Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 // components
 import ForumCards from '../../../Components/ForumCards/ForumCards'
 import NewForumPost from './NewForumPost'
@@ -12,15 +12,16 @@ import { IoMdAdd } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 // graphql
-import { useMutation, useQuery } from '@apollo/client'
-import { AUTHENTICATED_USER, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
+import { AUTHENTICATED_USER, CHECK_IF_USER_HAS_COMPANY, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
 // auth and redux
 import { useAuth0 } from '@auth0/auth0-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
-import { setPersonaldata } from '../../../Store/identfiers/identfiers'
+import { setHasCompany, setPersonaldata } from '../../../Store/identfiers/identfiers'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
+import { notifyError } from '../../../Components/Notification/Toast'
 // types
 
 
@@ -35,14 +36,17 @@ const channelNames = {
 export default function Forum() {
     const dispatch = useDispatch()
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    // const { userID, userEmail, myBiography, userFullName, myCompanyDescription } = useSelector((store: RootState) => store.identfiers)
+    const { userID, hasCompany } = useSelector((store: RootState) => store.identfiers)
     // console.log(userID , userEmail)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS)
+    const [isNewUser, setIsNewUser] = useState(true)
+    const toggleIsNewUser = () => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
+
 
 
     // console.log("channelFilter", channelFilter)
@@ -67,37 +71,75 @@ export default function Forum() {
         })
     }, [auth0UserInfo.email])
 
-    if (authenticatedUsrRes.data) {
-        dispatch(setPersonaldata({
-            userID: authenticatedUsrRes.data.authenticatedUser._id,
-            userEmail: authenticatedUsrRes.data.authenticatedUser.email,
-            myBiography: authenticatedUsrRes.data.authenticatedUser.yourBiography ? authenticatedUsrRes.data.authenticatedUser.yourBiography : '',
-            userFullName: authenticatedUsrRes.data.authenticatedUser.firstName + " " + authenticatedUsrRes.data.authenticatedUser.lastName,
-            myCompanyDescription: authenticatedUsrRes.data.authenticatedUser.company?.companyDescription,
-        }))
 
-    }
-    if (authenticatedUsrRes.error) {
-        console.log(authenticatedUsrRes.error)
-    }
-    // if (authenticatedUsrRes.loading) {
-    //     console.log('loading ')
+    const [checkIsNewUser, { data: isNewUserData, loading: isNewUserLoading, error: isNewUserError }] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
+        // variables: { userId: userID },
+        onCompleted: (data) => {
+
+            // ********** is not checkeing for new user but instead for company **********
+            if (data?.checkIfUserHasCompany === true) {
+                dispatch(setHasCompany(true))
+                setIsNewUser(false)
+            } else if (data?.checkIfUserHasCompany === false) {
+                setIsNewUser(true)
+                dispatch(setHasCompany(false))
+            }
+        }
+    })
+
+    useEffect(() => {
+        if (authenticatedUsrRes.data) {
+            dispatch(setPersonaldata({
+                userID: authenticatedUsrRes.data.authenticatedUser._id,
+                userEmail: authenticatedUsrRes.data.authenticatedUser.email,
+                myBiography: authenticatedUsrRes.data.authenticatedUser.yourBiography ? authenticatedUsrRes.data.authenticatedUser.yourBiography : '',
+                userFullName: authenticatedUsrRes.data.authenticatedUser.firstName + " " + authenticatedUsrRes.data.authenticatedUser.lastName,
+                myCompanyDescription: authenticatedUsrRes.data.authenticatedUser.company?.companyDescription,
+            }))
+            checkIsNewUser(
+                {
+                    variables: {
+                        userId: authenticatedUsrRes.data.authenticatedUser._id
+                    }
+                }
+            )
+
+        }
+    }, [authenticatedUsrRes?.data])
+
+    // if (authenticatedUsrRes.error) {
+    //     // console.log(authenticatedUsrRes.error)
     // }
 
-
-    if (loading || authenticatedUsrRes.loading) {
-        return <Loader />
-    }
-    if (error) {
-        return <div>Error!</div>
-    }
-    // if (data) {
-    //     console.log("data res ", data)
-    // }
+    if (loading || authenticatedUsrRes.loading) { return <Loader /> }
+    if (error) { notifyError("soething went wrong ") }
 
 
     return (
         <div className=' '>
+
+
+            <Modal isOpen={isNewUser && !hasCompany} toggle={toggleIsNewUser} >
+                <ModalHeader toggle={toggleIsNewUser}>Modal title</ModalHeader>
+                <ModalBody>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={toggleIsNewUser}>
+                        Do Something
+                    </Button>{' '}
+                    <Button color="secondary" onClick={toggleIsNewUser}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
             <Offcanvas Offcanvas style={{ width: '50%' }}
                 direction="end" isOpen={canvas}
                 toggle={toggle} scrollable={true}
