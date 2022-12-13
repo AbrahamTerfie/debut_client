@@ -10,7 +10,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
-import { notifyError, notifySuccess } from '../../Notification/Toast'
+import { notifyError, notifyLoading, notifySuccess } from '../../Notification/Toast'
 import { useParams } from 'react-router-dom'
 import { BsTrash } from 'react-icons/bs'
 
@@ -64,11 +64,15 @@ export default function RegistryAccordion(
 
     const [newRegistryItemMutation, newRegistryItemMutationRes] = useMutation(NEW_REGISTRY_ITEM, {
         refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
-        onCompleted: (data) => {
+        onCompleted: () => {
+            setNewRegistryItem(itemState)
+            setPreviewImage("")
+            setImageSelected(undefined)
+            setModal(false)
             notifySuccess("New Registry Item created")
         },
         onError: (error) => {
-            notifyError(error.toString())
+            notifyError("failed to create " + error.toString())
         }
     })
 
@@ -89,7 +93,7 @@ export default function RegistryAccordion(
 
     const [deleteRegistry] = useMutation(DELETE_DEBUT_REGISTRY, {
         refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
-        onCompleted: (data) => {
+        onCompleted: () => {
             notifySuccess("Registry Deleted")
         },
         onError: (error) => {
@@ -117,17 +121,7 @@ export default function RegistryAccordion(
         return true
     }
 
-    const submitHandler = (e: any) => {
-        e.preventDefault()
-        if (inputChecker()) {
-            newRegistryItemMutation({ variables: { registryItemInput: newRegistryItem } })
-            setNewRegistryItem(itemState)
-            setPreviewImage("")
-            setImageSelected(undefined)
-            setModal(false)
-            notifySuccess("New Registry Item created")
-        }
-    }
+
 
 
     //create preview image string 
@@ -148,31 +142,39 @@ export default function RegistryAccordion(
         }
     }
 
-    const handleFileSelected = () => {
+    const submitHandler = (e: any) => {
+        e.preventDefault()
         const formData = new FormData()
         formData.append('file', imageSelected)
         // file is the file object
         // first one is the preset and the second one is name  for cloudnary api
         formData.append('upload_preset', 'debutClient')
-        Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+        imageSelected ? Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
             .then((response) => {
-                setNewRegistryItem({ ...newRegistryItem, registryItemImage: response.data.url })
-                notifySuccess("Image uploaded")
+                // setNewRegistryItem({ ...newRegistryItem, registryItemImage: response.data.url })
+                inputChecker() && newRegistryItemMutation({
+                    variables: {
+                        registryItemInput: {
+                            ...newRegistryItem, registryItemImage: response.data.url
+                        }
+                    }
+                })
+
             })
             .catch((error) => {
-                notifyError(error.toString())
+                notifyError("something went wrong " + error.toString())
                 // console.log(error)
             })
+            : notifyError("Please select an image")
     }
-    const saveImage = (e: any) => {
-        e.preventDefault()
-        handleFileSelected()
-    }
+
 
     const inputHandler = (e: any) => {
         const { name, value } = e.target;
         setNewRegistryItem({ ...newRegistryItem, [name]: value })
     }
+
+    if (newRegistryItemMutationRes.loading) notifyLoading("Creating Registry Item... ")
 
     return (
         <div>
@@ -230,12 +232,7 @@ export default function RegistryAccordion(
                                         height: '200px', width: "max-content"
 
                                     }} />
-                                <motion.div
-                                    whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.01 }}
-                                    transition={{ type: 'spring', stiffness: 300, damping: 10 }} onClick={(e: any) => saveImage(e)}
-                                    className="mt-2 text-center bg-success text-success p-2 rounded bg-opacity-10">
-                                    save image
-                                </motion.div>
+
                             </Col>
                         </Row>
                     </Form>
@@ -309,7 +306,7 @@ export default function RegistryAccordion(
 
                         </Row>
                         <Row className="px-4" >
-                            {debutRegistryItems.length === 0 ?
+                            {debutRegistryItems?.length === 0 ?
                                 <div className="text-center text-muted">
                                     No items added yet
                                 </div> :

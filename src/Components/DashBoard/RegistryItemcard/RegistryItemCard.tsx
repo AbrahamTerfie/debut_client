@@ -88,8 +88,12 @@ export default function RegistryItem(
                 className=' shadow-sm rounded rounded-5   pt-0   m-2 me-2'>
                 <Row>
                     {/* placeholder image  */}
-                    <img src={registryItemImage} alt="registryItemImage" className='rounded rounded-5 img-fluid'
-                        style={{ height: '200px' }} />
+                    <img src={registryItemImage} alt="registryItemImage" className='rounded rounded-5 img-fluid '
+                        style={{
+                            height: '200px',
+                            objectFit: 'cover'
+                            
+                        }} />
                 </Row>
 
                 <Row className='p-4 '>
