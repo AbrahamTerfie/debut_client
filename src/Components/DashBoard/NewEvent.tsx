@@ -1,17 +1,17 @@
 
 import React, { useState, useEffect } from 'react'
-import { Button, Col, Form, FormGroup, Input, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Row } from 'reactstrap'
+import { Col, Form, FormGroup, Input, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Row } from 'reactstrap'
 import { FaPlus } from 'react-icons/fa'
 import { BsTrash } from "react-icons/bs";
 
 import { MY_DEBUT_EVENTS, CREATE_EVENT, CHECK_IF_USER_HAS_COMPANY, FETCH_COMPANY } from '../../GraphQl/index'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
 import { useMutation, useQuery } from '@apollo/client'
 import Loader from '../../Components/Loader/Loader'
 import Axios from 'axios'
 import { motion } from 'framer-motion'
-import { notifySuccess, notifyError, notifyLoading, notifyWarning } from '../../Components/Notification/Toast'
+import { notifySuccess, notifyError, notifyWarning, notifyLoading } from '../../Components/Notification/Toast'
 
 interface newEventForm {
     createdBy: string
@@ -32,7 +32,6 @@ interface newEventForm {
 
 export default function NewEvent() {
 
-    const dispatch = useDispatch()
     const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
 
     const initState: newEventForm = {
@@ -78,6 +77,8 @@ export default function NewEvent() {
         onCompleted: () => {
             notifySuccess(" New Event Created")
             setCanvas(false)
+            setNewEventData(initState)
+
         },
         onError: (err) => {
             notifyError(err.message)
@@ -89,6 +90,7 @@ export default function NewEvent() {
         const { name, value } = e.target;
         setNewEventData({ ...newEventData, [name]: value })
     }
+
 
     const inputChecker = () => {
         if (newEventData.debutEventName === "" ||
@@ -102,40 +104,39 @@ export default function NewEvent() {
 
     }
 
+
+
+
     const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        !createDebutEventRes.loading && inputChecker() && createDebutEvent({
-            variables: {
-                debutEventInput: newEventData
-            }
-        })
-        setNewEventData(initState)
-
-    }
-
-    const handleFileSelected = () => {
         const formData = new FormData()
         formData.append('file', imageSelected)
-        // file is the file object
-        // first one is the preset and the second one is name  for cloudnary api
         formData.append('upload_preset', 'debutClient')
-        Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+        imageSelected ? Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
             .then((response) => {
-                setNewEventData({ ...newEventData, debutEventImage: response.data.secure_url })
-            })
-            .catch((error) => {
+                inputChecker() && createDebutEvent({
+                    variables: {
+                        debutEventInput: {
+                            ...newEventData,
+                            debutEventImage: response.data.secure_url
+                        }
+                    }
+                })
+            }).catch((error) => {
                 console.log(error)
+                notifyError("Creation Failed")
             })
+            : notifyWarning("Please select an image")
+
     }
 
-    useEffect(() => {
-        handleFileSelected()
-    }, [imageSelected])
+
 
     const toggle = () => setCanvas(!canvas);
 
     if (loading || loadingCompany) return <Loader />
-    if (error || errorCompany) return <p>error</p>
+    if (error || errorCompany) notifyError("Error Occured")
+    if (createDebutEventRes.loading) notifyLoading("Creating Event...")
 
     return (
         <div >

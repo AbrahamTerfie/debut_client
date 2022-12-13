@@ -102,7 +102,7 @@ export default function MyProfile() {
 
 
   if (loading || updatePersonalInfoRes.loading) return <div>   <Loader /> </div>
-  if (error || updatePersonalInfoRes.error) console.log(error || updatePersonalInfoRes.error)
+  if (error || updatePersonalInfoRes.error) notifyError("somehting went wrong")
 
   return (
     <Form className='px-1' >

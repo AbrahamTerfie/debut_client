@@ -64,6 +64,7 @@ export default function Dashboard() {
             title: "Company",
             icon: <IoBusiness className="fa-4x" />,
             description: "information about your company ",
+            companyName: dataCompany?.getCompanyWithUserId?.companyName,
             link: appRoutes.myCompany,
             bgColor: "bg-success",
             color: "success"
@@ -122,15 +123,19 @@ export default function Dashboard() {
                                     animate={{ scale: 1 }}
                                     transition={{ duration: 0.2 }}
                                     key={index} className=" my-3 mx-4" style={{ width: "18rem" }} onClick={() => navigate(card.link)}>
-                                    <Row className={`card-body shadow border ${card.bgColor} text-${card.color} border-muted  bg-opacity-10 d-flex justify-content-center align-items-between `}  >
-                                        <Col className='d-flex justify-content-center align-items-center'>
+                                    <div className={` shadow border ${card.bgColor} text-${card.color} border-muted  bg-opacity-10 d-flex justify-content-center align-items-center flex-row p-3 rounded  `}
+                                        // make the card size the same
+                                        style={{ height: "150px" , cursor:"default" }}>
+
+                                        <div className='d-flex justify-content-center align-items-center mx-2'>
                                             {card.icon}
-                                        </Col>
-                                        <Col>
-                                            <h5 className="card-title  fw-bold ">{card.title}</h5>
-                                            <p className="card-text"> {card.description} .</p>
-                                        </Col>
-                                    </Row>
+                                        </div>
+                                        <div className='py-3 . px-2' >
+                                            <h6 className="card-title  fw-bold ">{card.title}</h6>
+                                            <span className='' > {card.title === "Company" && card.companyName ? card.companyName : null} </span>
+                                            <span className="card-text fw-light text-muted"> {card.description} .</span>
+                                        </div>
+                                    </div>
 
                                 </motion.div>
                             )

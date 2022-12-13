@@ -22,6 +22,8 @@ import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
 import { setHasCompany, setPersonaldata } from '../../../Store/identfiers/identfiers'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 import { notifyError } from '../../../Components/Notification/Toast'
+import { useNavigate } from 'react-router-dom'
+import { appRoutes } from '../../../Routes/routes'
 // types
 
 
@@ -35,6 +37,8 @@ const channelNames = {
 
 export default function Forum() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
     const { userID, hasCompany } = useSelector((store: RootState) => store.identfiers)
     // console.log(userID , userEmail)
@@ -48,14 +52,9 @@ export default function Forum() {
     const [channelFilter, setChannelFilter] = useState('')
 
 
-
     // console.log("channelFilter", channelFilter)
     // saves the user information when the user logs in to keep it in sybc with store 
-    useEffect(() => {
-        if (user) {
-            dispatch(saveAuth0UserInfo(user))
-        }
-    }, [user])
+    useEffect(() => { if (user) { dispatch(saveAuth0UserInfo(user)) } }, [user])
 
     //gets the user from the server if it exists and if it doesn't it creates a new user
     // console.log(data.allForumPosts)
@@ -107,36 +106,27 @@ export default function Forum() {
         }
     }, [authenticatedUsrRes?.data])
 
-    // if (authenticatedUsrRes.error) {
-    //     // console.log(authenticatedUsrRes.error)
-    // }
-
     if (loading || authenticatedUsrRes.loading) { return <Loader /> }
     if (error) { notifyError("soething went wrong ") }
 
 
     return (
-        <div className=' '>
-
-
-            <Modal isOpen={isNewUser && !hasCompany} toggle={toggleIsNewUser} >
-                <ModalHeader toggle={toggleIsNewUser}>Modal title</ModalHeader>
-                <ModalBody>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+        <div>
+            <Modal centered size='lg' isOpen={isNewUser && !hasCompany} toggle={toggleIsNewUser}  >
+                <ModalHeader
+                    className='bg-success bg-opacity-10 text-success'
+                    toggle={toggleIsNewUser}>
+                    <p className='m-0'>Welcome to Debut </p>
+                </ModalHeader>
+                <ModalBody className='bg-success bg-opacity-10 text-muted text-start p-5 d-flex flex-column  '>
+                    {/* welcome prompt to the app and tell them to set up profile and compnay infomation */}
+                    <h3 className='m-0'> We are glad to have you here</h3>
+                    <h5 className='text-success'>Please set up your profile and company information to continue </h5>
                 </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={toggleIsNewUser}>
-                        Do Something
+                <ModalFooter className='bg-success bg-opacity-10 text-muted'>
+                    <Button color="success " size="sm" outline onClick={() => navigate(appRoutes.dashboard)}>
+                        <p className='mx-5 my-0'>set up</p>
                     </Button>{' '}
-                    <Button color="secondary" onClick={toggleIsNewUser}>
-                        Cancel
-                    </Button>
                 </ModalFooter>
             </Modal>
 
