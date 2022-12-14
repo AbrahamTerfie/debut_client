@@ -9,7 +9,6 @@ import { personalInfoInitialState } from '../../MyDebutInfo/initSattes'
 import Loader from '../../../Components/Loader/Loader';
 import Axios from 'axios';
 import { motion } from 'framer-motion';
-import DashboardExperiance from "./DashboardExperiance"
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
 
 
@@ -40,16 +39,7 @@ export default function MyProfile() {
     }
   }, [data]);
 
-  console.log("profileee", personalInfoForm.profileImage)
-  // function UploadImage() {
-
-
-  // }
-
-  // useEffect(() => {
-  //   UploadImage()
-  // }, [imageSelected])
-
+ 
   const [updatePersonalInfo, updatePersonalInfoRes] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
     {
       refetchQueries: [{ query: FETCH_USER_WITH_ID, variables: { getDebutUserWithIdId: userID } }],
@@ -116,7 +106,7 @@ export default function MyProfile() {
           <Row >
             <Col md={4}>
               <FormGroup>
-                <Label for="firstname">first name </Label>
+                <Label for="firstName">first name </Label>
                 <Input type="text"
                   name="firstName"
                   value={personalInfoForm.firstName}
@@ -239,11 +229,11 @@ export default function MyProfile() {
               <FormGroup>
                 <Label for="email"> email </Label>
                 <Input type="email"
-                  name="firstName"
-                  id="FirstName"
+                  name="email"
+                  id="FirstNemailame"
                   placeholder={personalInfoForm.email}
                   value={personalInfoForm.email}
-                  onChange={() => { }}
+                  onChange={handleChange}
 
                 />
               </FormGroup>
@@ -256,7 +246,8 @@ export default function MyProfile() {
                   id="mobilePhone"
                   placeholder={personalInfoForm.mobilePhone}
                   value={personalInfoForm.mobilePhone}
-                  onChange={handleChange}
+                  disabled
+                  // onChange={handleChange}
 
                 />
               </FormGroup>

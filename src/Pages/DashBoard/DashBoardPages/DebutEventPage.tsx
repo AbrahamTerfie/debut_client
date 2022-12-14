@@ -16,7 +16,7 @@ import NukeEvent from '../../../Components/DashBoard/NukeEvent/NukeEvent'
 export default function DebutEventPage() {
 
 
-    const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
+    const { userID, companyID } = useSelector((store: RootState) => store.identfiers)
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const [nukeEventModal, setNukeEventModal] = useState(false);
@@ -38,20 +38,20 @@ export default function DebutEventPage() {
         setNewRegistry({ ...newRegistry, [name]: value })
     }
 
-    const { data, loading, error } = useQuery(GET_EVENT_WITH_ID, {
+    const { data, loading } = useQuery(GET_EVENT_WITH_ID, {
         variables: { getDebutEventWithIdId: id },
         // onCompleted: (data) => {
         //     console.log("event data", data)
         // },
         onError: (error) => {
             // console.log(error)
-            notifyError(error.toString())
+            notifyError("failed to fetch " + error.toString())
         }
     })
 
-    const [createDebutRegistry, createDebutRegistryRes] = useMutation(CREATE_DEBUT_REGISTRY, {
+    const [createDebutRegistry] = useMutation(CREATE_DEBUT_REGISTRY, {
         refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
-        onCompleted: (data) => {
+        onCompleted: () => {
             notifySuccess(" New Registry created")
         },
         onError: (error) => {
@@ -147,7 +147,7 @@ export default function DebutEventPage() {
                     <img
                         className='img-fluid shadow-lg rounded '
                         style={{ height: '300px', width: '100%' }}
-                        src={data?.getDebutEventWithId?.debutEventImage} alt="event image " />
+                        src={data?.getDebutEventWithId?.debutEventImage} alt="event_identfier_image " />
                 </Col>
             </Row>
 

@@ -18,7 +18,7 @@ export default function CompanyDetailPage() {
     const { data, loading, error } = useQuery(COMPANY_PAGE, {
         variables: { getDebutCompanyWithIdId: id }
     })
-    const [open, setOpen] = useState('');
+    const [open] = useState('');
     if (loading) return <Loader />
     if (error || !data) { notifyError('Error fetching company details') }
     // console.log("company data", data)

@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react'
 import SideBar from './DashBoardSidebar/SideBar'
 import classNames from "classnames";
 import Topbar from './DashBoardSidebar/TopBar';
-import { Outlet, Routes, useLocation, useNavigate } from "react-router-dom";
-import { CHECK_IF_USER_HAS_COMPANY, FETCH_COMPANY } from '../../GraphQl/index'
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { FETCH_COMPANY } from '../../GraphQl/index'
 import { RootState } from '../../Store/RootReducer';
-import { setHasCompany, setCompanyID } from '../../Store/identfiers/identfiers';
+import { setCompanyID } from '../../Store/identfiers/identfiers';
 import { useDispatch, useSelector } from 'react-redux'
-import { useLazyQuery, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import Loader from '../../Components/Loader/Loader'
 import { appRoutes } from '../../Routes/routes';
 import { notifyError } from '../../Components/Notification/Toast';
 import { motion } from 'framer-motion';
-import { Row, Col } from 'reactstrap';
+
 // icon imports
 import { IoBusiness, IoCalendarClear, IoHandLeft, IoPerson, IoTrophy, IoNewspaperOutline } from 'react-icons/io5';
 // describe className="fa-5x"
@@ -23,28 +23,32 @@ export default function Dashboard() {
     const navigate = useNavigate()
     const [sidebarIsOpen, setSidebarOpen] = useState(true);
     const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
-    const { userID, hasCompany
-        //  companyID, hasCompany
-    } = useSelector((store: RootState) => store.identfiers)
+    const { userID, hasCompany } = useSelector((store: RootState) => store.identfiers)
     const location = useLocation();
-    // const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
-    //     variables: { userId: userID }
-    // })
-    const [getCompany, { data: dataCompany, loading: loadingCompany, error: errorCompany
-    }] = useLazyQuery(FETCH_COMPANY, {
+
+    const { data: dataCompany, loading: loadingCompany, error: errorCompany
+    } = useQuery(FETCH_COMPANY, {
         variables: { userId: userID }
     })
 
-    // console.info(userID, companyID, hasCompany)
-    console.log(dataCompany)
+
+    // useEffect(() => {
+    //     if (hasCompany && dataCompany?.getCompanyWithUserId) {
+    //         getCompany()
+    //         dataCompany && dispatch(setCompanyID(dataCompany?.getCompanyWithUserId?._id))
+    //     }
+    // }, [dataCompany])
+
     useEffect(() => {
-        if (hasCompany) {
-            // dispatch(setHasCompany(true))
-            getCompany()
-            dataCompany && dispatch(setCompanyID(dataCompany?.getCompanyWithUserId?._id))
+        if (dataCompany) {
+            if (hasCompany && dataCompany.getCompanyWithUserId) {
+                // call the getCompany() function here
+                dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id))
+            }
         }
-        // if (data?.checkIfUserHasCompany === false) { dispatch(setHasCompany(false)) }
-    }, [dataCompany])
+
+    })
+
 
 
     if (loadingCompany) return <Loader />
@@ -125,7 +129,7 @@ export default function Dashboard() {
                                     key={index} className=" my-3 mx-4" style={{ width: "18rem" }} onClick={() => navigate(card.link)}>
                                     <div className={` shadow border ${card.bgColor} text-${card.color} border-muted  bg-opacity-10 d-flex justify-content-center align-items-center flex-row p-3 rounded  `}
                                         // make the card size the same
-                                        style={{ height: "150px" , cursor:"default" }}>
+                                        style={{ height: "150px", cursor: "default" }}>
 
                                         <div className='d-flex justify-content-center align-items-center mx-2'>
                                             {card.icon}
@@ -140,12 +144,8 @@ export default function Dashboard() {
                                 </motion.div>
                             )
                             )}
-
-
-                            {/* {data && data.checkIfUserHasCompany === true ? <p>you have a company</p> : <p>you dont have a company</p>} */}
                         </div>
                     </>
-
                     :
                     <Outlet />}
             </div>

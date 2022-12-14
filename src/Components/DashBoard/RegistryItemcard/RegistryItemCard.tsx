@@ -5,7 +5,6 @@ import { BsTrash } from 'react-icons/bs';
 import { useMutation } from '@apollo/client';
 import { DELETE_REGISTRY_ITEM, GET_EVENT_WITH_ID, MARK_ITEM_AS_FULFILLED } from '../../../GraphQl/index';
 import { useParams } from 'react-router-dom';
-import { on } from 'process';
 import { notifyError, notifySuccess } from '../../Notification/Toast';
 interface registryItem {
     _id: string;
@@ -92,7 +91,7 @@ export default function RegistryItem(
                         style={{
                             height: '200px',
                             objectFit: 'cover'
-                            
+
                         }} />
                 </Row>
 

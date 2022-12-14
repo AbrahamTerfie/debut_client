@@ -16,8 +16,8 @@ import { motion } from 'framer-motion';
 
 export default function CompanyGolas(props: any) {
 
-  const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
-  const { data, loading, error } = useQuery(FETCH_COMPANY_GOALS_WITH_COMPANY_ID, {
+  const { userID, companyID } = useSelector((store: RootState) => store.identfiers)
+  const { data, loading } = useQuery(FETCH_COMPANY_GOALS_WITH_COMPANY_ID, {
     variables: { companyId: companyID }
   })
 

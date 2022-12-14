@@ -17,7 +17,7 @@ import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
-import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
+
 
 
 export default function YourComapany() {
@@ -107,24 +107,6 @@ export default function YourComapany() {
   // console.log("errorCompany", errorCompany)
 
 
-  const handleFileSelected = () => {
-    const formData = new FormData();
-    formData.append('file', imageSelected)
-    // file is the file object
-    // first one is the preset and the second one is name  for cloudnary api
-    formData.append('upload_preset', 'debutCompanyProfilePicture')
-    Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
-      .then((response) => {
-        setCompanyState({ ...companyState, companyLogo: response.data.secure_url })
-      })
-      .catch((error) => {
-        notifyError("Error uploading image")
-        // console.log(error)
-      })
-
-
-  }
-
 
   //add to majot achivement to company
   const addToMajorAchovements = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,50 +123,61 @@ export default function YourComapany() {
   if (createMyCompanyRes.error || updateMyCompanyRes.error) {
     createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
     updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
-    // console.log(createMyCompanyRes.error)
-    // console.log(updateMyCompanyRes.error)
+
   }
+
+
 
   const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("companyState", companyState)
-    imageSelected && handleFileSelected()
+    const formData = new FormData();
+    formData.append('file', imageSelected)
+    // file is the file object
+    let imageUri = companyState.companyLogo
+    formData.append('upload_preset', 'debutCompanyProfilePicture')
+    imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+      .then((response) => {
+        imageUri = response.data.secure_url
+      })
 
-    isCreatingAcompany && createMyCompany({
-      variables: {
-        companyInput: {
-          ...companyState,
-          companyOwner: userID,
-          companyCategory: selectedGeography.map((geography: any) => geography.value),
-          aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
+      .catch((error) => {
+        notifyError("Error uploading image" + error.message.toString())
+        // console.log(error)
+      })
 
+    if (isCreatingAcompany) {
+      createMyCompany({
+        variables: {
+          companyInput: {
+            ...companyState,
+            companyOwner: userID,
+            companyCategory: selectedGeography.map((geography: any) => geography.value),
+            aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
+            companyLogo: imageUri
+
+          }
         }
-      }
-    })
+      })
+    }
 
-
-    hasCompany && updateMyCompany({
-      variables: {
-        updateDebutCompanyId: companyID,
-        companyInput: {
-          ...companyState,
-          companyCategory: selectedGeography.map((geography: any) => geography.value),
-          aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-        },
-
-      }
-    })
+    else if (hasCompany) {
+      updateMyCompany({
+        variables: {
+          updateDebutCompanyId: companyID,
+          companyInput: {
+            ...companyState,
+            companyCategory: selectedGeography.map((geography: any) => geography.value),
+            aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
+            companyLogo: imageUri
+          }
+        }
+      })
+    }
 
   }
-  //if being created call create mutation 
-  //check if image is being uploaded or not
-
-  //if being updated call update mutation
-  //check if image is being uploaded or not
 
 
 
-  { console.log(selectedAeraasOfImpact) }
 
 
   if (loading || loadingCompany) { return <Loader /> }

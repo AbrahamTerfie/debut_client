@@ -11,6 +11,7 @@ import MotionContainer from '../MotionContainer/MotionContainer';
 import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import Emailcanvas from '../Email/Emailcanvas';
 import { EmailTypes } from '../../Email/EmailTypes';
+import { v4 as uuid } from 'uuid'
 
 function MotionCover({ children }: any) {
     return (
@@ -148,7 +149,7 @@ export default function PersonDetail() {
                     </p>
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.aeraOfExpertise.map((item: any) => {
-                            return <MotionCover>
+                            return <MotionCover key={uuid()}>
                                 <span className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>
                                     {item}
                                 </span>
@@ -163,7 +164,7 @@ export default function PersonDetail() {
                     </p>
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.regions.map((item: any) => {
-                            return <MotionCover>
+                            return <MotionCover key={uuid()}>
                                 <span className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>
                                     {item}
                                 </span>

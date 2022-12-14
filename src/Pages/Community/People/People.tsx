@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Button, Collapse } from 'reactstrap'
+import { Row, Col, Collapse } from 'reactstrap'
 import PeopleCards from '../../../Components/PeopleCards/PeopleCards'
 import './People.css'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
@@ -42,7 +42,7 @@ export default function People() {
             }
         })
 
-    }, [])
+    }, [user?.email, user?.name, user?.nickname, authenticatedUser])
     if (authenticatedUsrRes.error) { (notifyError(authenticatedUsrRes.error.message)) }
     if (authenticatedUsrRes.loading || loading) { return <Loader /> }
 
@@ -105,7 +105,8 @@ export default function People() {
                             return <PeopleCards key={uuid()}
                                 people={user} />
                         }
-                    })}
+                    }
+                    )}
                 </Col>
                 <Col className="overflow-auto">
                     <PersonDetail />

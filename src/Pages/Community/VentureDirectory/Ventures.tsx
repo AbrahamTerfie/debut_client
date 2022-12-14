@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Row, Col } from 'reactstrap'
 import VentureCards from '../../../Components/VentureCards/VentureCards'
-import FilterVenture from '../../../Components/FilterVentures/FilterVenture'
+
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_VENTURES } from '../../../GraphQl/index'

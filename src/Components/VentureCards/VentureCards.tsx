@@ -18,6 +18,7 @@ import { EmailTypes } from '../../Email/EmailTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
 import Emailcanvas from '../Email/Emailcanvas'
+import { v4 as uuid } from 'uuid'
 export default function VentureCards(
     {
         _id,
@@ -59,6 +60,7 @@ export default function VentureCards(
             }
         }))
     }
+
     return (
         <>
             <Emailcanvas />
@@ -69,11 +71,11 @@ export default function VentureCards(
                 toggle={toggle}
                 className="offcanvas-style"
                 style={{ width: '60%' }}>
-                <OffcanvasHeader onClick={toggle} className=" mb-0 App p-5 pb-0 shadow" >
+                <OffcanvasHeader onClick={toggle} className=" mb-0 App px-5 pt-3 shadow" >
                     <p className='fs-6 fw-light text-muted  m-0  '> Name </p>
                     <h1 className="">{companyName}</h1>
-                    <h6 className="text-start "   >  {companyWebsite} </h6>
-                    <div className="d-flex justify-content-around mb-5 mt-3">
+                    <p className="text-start "   >  {companyWebsite} </p>
+                    <div className="d-flex justify-content-around mb-1 mt-3">
                         <MotionContainer>
                             <FaLinkedin className='text-primary mx-2 bg-primary bg-opacity-10 p-2 rounded-circle' size={35}
                                 onClick={() => window.open(linkedInUrl ? linkedInUrl : "", "_blank")} />
@@ -94,36 +96,52 @@ export default function VentureCards(
                 </OffcanvasHeader>
                 <OffcanvasBody className=' App px-5 pt-5 d-flex flex-column ' >
                     <Row>
-                        <Col md={8}>
+                        <Col md={7}>
                             <small className=' fw-light text-muted  m-0'> mission statement </small>
                             <p> {companyMissionStatement} </p>
                             <small className='fw-light text-muted  m-0'> Description </small>
                             <p className=' fw-light mb-3' >{companyDescription}</p>
                             <small className=' fw-light text-muted  m-0'> Company owner </small>
-                            <p className=' fw-light mb-3' > company owner  </p>
+                            <p className=' fw-light mb-3' >
+                                <span className='fw-bold'> {companyOwner.firstName} {companyOwner.lastName} </span>
+                            </p>
                             <small className=' fw-light text-muted  m-0'> company achivements </small>
                             <div className='d-flex flex-wrap m-2' >
                                 {majorAchivements?.map((item: any) => (
-                                    <MotionContainer key={item.index}>
+                                    <MotionContainer key={uuid()}>
                                         <p className=' mx-1 bg-success text-success bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
                                     </MotionContainer>
                                 ))}
                             </div>
                         </Col>
-                        <Col md={3} className='d-flex flex-column justify-content-center align-items-center mx-3'>
+                        <Col md={4} className='d-flex flex-column justify-content-start align-items-center
+                         mx-3'>
                             <div>
-                                <img className="img-fluid w-100 rounded-5 shadow p-3 mb-5 bg-body rounded"
-                                    sizes='(max-width: 300px) 10vw, 300px'
+                                <img className="img-fluid h-75 rounded-5 shadow-sm p-3 mb-5 bg-body rounded border border-muted"
+                                    style={{
+                                        maxHeight: '200px',
+                                        maxWidth: '200px',
+                                        objectFit: 'cover',
+                                        minHeight: '200px',
+                                        minWidth: '200px',
+                                        objectPosition: 'center',
+                                    }}
                                     src={companyLogo}
                                     alt="" />
                             </div>
                             <MotionContainer>
-                                <small className='d-flex text-center text-primary fw-bolder bg-primary bg-opacity-10  p-1 px-3  rounded-1 '
-                                    onClick={() => copanyIntroductionHandeler()}>
-                                    request introduction
-                                    <FaHandsHelping size={25} className='mx-2' />
+                                <div
+                                    className='d-flex flex-column justify-content-center align-items-center bg-primary bg-opacity-10 p-2 px-4 rounded-5 shadow-sm border border-muted'
+                                    onClick={() => copanyIntroductionHandeler()}
+                                >
+                                    <small
+                                    >
+                                        request introduction
+                                        <FaHandsHelping size={25} className=' mx-2
+                                      ' />
 
-                                </small>
+                                    </small>
+                                </div>
                             </MotionContainer>
                         </Col>
                     </Row>
@@ -132,7 +150,7 @@ export default function VentureCards(
                         <small className=' fw-light text-muted ' >aera of operations </small>
                         <div className='d-flex flex-wrap my-2' >
                             {aeraOfOperation?.map((item: any) => (
-                                <MotionContainer>
+                                <MotionContainer key={uuid()}>
                                     <p className='text-warning mx-1 bg-warning bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
                                 </MotionContainer>
                             ))}
@@ -140,7 +158,7 @@ export default function VentureCards(
                         <small className=' fw-light text-muted  m-0'>  active on regions </small>
                         <div className='d-flex flex-wrap my-2' >
                             {companyCategory?.map((item: any) => (
-                                <MotionContainer>
+                                <MotionContainer key={uuid()}>
                                     <p className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
                                 </MotionContainer>
                             ))}

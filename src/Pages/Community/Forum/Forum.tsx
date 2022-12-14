@@ -40,7 +40,7 @@ export default function Forum() {
     const navigate = useNavigate()
 
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    const { userID, hasCompany } = useSelector((store: RootState) => store.identfiers)
+    const { hasCompany } = useSelector((store: RootState) => store.identfiers)
     // console.log(userID , userEmail)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
@@ -71,7 +71,7 @@ export default function Forum() {
     }, [auth0UserInfo.email])
 
 
-    const [checkIsNewUser, { data: isNewUserData, loading: isNewUserLoading, error: isNewUserError }] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
+    const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
         // variables: { userId: userID },
         onCompleted: (data) => {
 

@@ -24,10 +24,10 @@ export default function GratitudePage() {
     const toggle = (tab: any) => { if (activeTab !== tab) setActiveTab(tab) }
     const toggleCanvas = () => setCanvas(!canvas);
 
-    const { data: recGraData, loading: recGraLoading, error: recGraError } = useQuery(RECIVED_GRATITUDE, {
+    const { data: recGraData, loading: recGraLoading, } = useQuery(RECIVED_GRATITUDE, {
         variables: { userId: userID }
     })
-    const { data: sentGraData, loading: sentGraLoading, error: sentGraError } = useQuery(SENT_GRATITUDE, {
+    const { data: sentGraData, loading: sentGraLoading } = useQuery(SENT_GRATITUDE, {
         variables: { userId: userID }
     })
 
