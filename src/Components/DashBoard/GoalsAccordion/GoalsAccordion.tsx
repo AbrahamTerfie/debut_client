@@ -42,7 +42,7 @@ export default function GoalsAccordion(
 
 
 
-    const [open, setOpen] = useState('');
+    const [open, ] = useState('');
     const [offCanvas, setOffCanvas] = useState(false);
     const toggleCanvas = () => { setOffCanvas(!offCanvas); }
     const [dropdownOpen, setDropdownOpen] = useState(false);

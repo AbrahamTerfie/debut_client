@@ -54,7 +54,7 @@ export default function Forum() {
 
     // console.log("channelFilter", channelFilter)
     // saves the user information when the user logs in to keep it in sybc with store 
-    useEffect(() => { if (user) { dispatch(saveAuth0UserInfo(user)) } }, [user])
+    useEffect(() => { if (user) { dispatch(saveAuth0UserInfo(user)) } }, [user, dispatch])
 
     //gets the user from the server if it exists and if it doesn't it creates a new user
     // console.log(data.allForumPosts)
@@ -68,7 +68,8 @@ export default function Forum() {
                 }
             }
         })
-    }, [auth0UserInfo.email])
+    }, [auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser])
+
 
 
     const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
@@ -86,25 +87,25 @@ export default function Forum() {
         }
     })
 
+
     useEffect(() => {
         if (authenticatedUsrRes.data) {
+            const { authenticatedUser } = authenticatedUsrRes.data;
             dispatch(setPersonaldata({
-                userID: authenticatedUsrRes.data.authenticatedUser._id,
-                userEmail: authenticatedUsrRes.data.authenticatedUser.email,
-                myBiography: authenticatedUsrRes.data.authenticatedUser.yourBiography ? authenticatedUsrRes.data.authenticatedUser.yourBiography : '',
-                userFullName: authenticatedUsrRes.data.authenticatedUser.firstName + " " + authenticatedUsrRes.data.authenticatedUser.lastName,
-                myCompanyDescription: authenticatedUsrRes.data.authenticatedUser.company?.companyDescription,
-            }))
-            checkIsNewUser(
-                {
-                    variables: {
-                        userId: authenticatedUsrRes.data.authenticatedUser._id
-                    }
-                }
-            )
-
+                userID: authenticatedUser._id,
+                userEmail: authenticatedUser.email,
+                myBiography: authenticatedUser.yourBiography || '',
+                userFullName: `${authenticatedUser.firstName} ${authenticatedUser.lastName}`,
+                myCompanyDescription: authenticatedUser.company?.companyDescription,
+            }));
+            checkIsNewUser({
+                variables: {
+                    userId: authenticatedUser._id,
+                },
+            });
         }
-    }, [authenticatedUsrRes?.data])
+    }, [authenticatedUsrRes?.data, dispatch, checkIsNewUser]);
+
 
     if (loading || authenticatedUsrRes.loading) { return <Loader /> }
     if (error) { notifyError("soething went wrong ") }

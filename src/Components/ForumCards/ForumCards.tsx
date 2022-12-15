@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './ForumCards.css'
-import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Row, Offcanvas, OffcanvasBody, FormGroup, } from 'reactstrap'
 import { useSelector } from 'react-redux'
 import { useMutation, useQuery } from '@apollo/client'
 import { RootState } from '../../Store/RootReducer';
@@ -9,20 +9,22 @@ import Loader from '../Loader/Loader'
 import { notifyError, notifySuccess } from '../../Components/Notification/Toast';
 import MotionContainer from '../MotionContainer/MotionContainer'
 import { motion } from 'framer-motion'
-
+import { v4 as uuid } from 'uuid'
 export default function ForumCards(
-    { _id, createdBy, channel, postTitle, comments, postContent, }: {
-        _id: String,
-        createdBy: {
+    { _id,
+        // createdBy,
+        channel, postTitle, comments, postContent, }: {
             _id: String,
-            firstName: String,
-            email: String,
-        },
-        channel: String,
-        postTitle: String,
-        comments: [],
-        postContent: String,
-    }) {
+            createdBy: {
+                _id: String,
+                firstName: String,
+                email: String,
+            },
+            channel: String,
+            postTitle: String,
+            comments: [],
+            postContent: String,
+        }) {
     const { userID } = useSelector((store: RootState) => store.identfiers)
     const [newComment, setNewComment] = useState({
         createdBy: userID,
@@ -40,7 +42,7 @@ export default function ForumCards(
         return true
     }
 
-    const [postNewComment, postNewCommentRes] = useMutation(CREATE_FORUM_COMMENT, {
+    const [postNewComment] = useMutation(CREATE_FORUM_COMMENT, {
         refetchQueries: [{ query: FETCH_POST_COMMENTS, variables: { getPostCommentWithPostIdId: _id } }],
         onCompleted: () => {
             notifySuccess('Comment Posted Successfully')
@@ -101,7 +103,7 @@ export default function ForumCards(
                     <div className='px-5 App d-flex flex-column ' >
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-                                <div key={comment.id} className='shadow-sm MyeventCard  rounded  my-2 ' >
+                                <div key={uuid()} className='shadow-sm MyeventCard  rounded  my-2 ' >
                                     <p className=' m-3 px-5 pt-3 fw-light fs-5' > {comment.comment}</p>
                                     <p className='fs-6 mx-5 px-3  fw-light text-muted text-start ' > by {comment.createdBy.firstName}  </p>
                                 </div>

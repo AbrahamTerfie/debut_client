@@ -6,10 +6,8 @@ import {
     Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label
 } from 'reactstrap'
 import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, DELETE_DEBUT_REGISTRY, TOGGLE_REGISTRY_STATUS, } from '../../../GraphQl/index'
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation,  } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../Store/RootReducer'
 import { notifyError, notifyLoading, notifySuccess } from '../../Notification/Toast'
 import { useParams } from 'react-router-dom'
 import { BsTrash } from 'react-icons/bs'
@@ -37,7 +35,7 @@ interface debutRegistryInterface {
 export default function RegistryAccordion(
     { _id, debutRegistryName, debutRegistryStatus, debutRegistryItems
     }: debutRegistryInterface) {
-    const { userID, companyID, hasCompany } = useSelector((store: RootState) => store.identfiers)
+
     const { id } = useParams<{ id: string }>()
     const itemState: registryItem = {
         itemOfRegistry: _id,
@@ -52,7 +50,7 @@ export default function RegistryAccordion(
     }
 
 
-    const [open, setOpen] = useState('');
+    const [open,] = useState('');
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const [deleteRegistryModal, setDeleteRegistryModal] = useState(false);
@@ -76,7 +74,7 @@ export default function RegistryAccordion(
         }
     })
 
-    const [toggleRegistryStatus, toggleRegistryStatusRes] = useMutation(TOGGLE_REGISTRY_STATUS,
+    const [toggleRegistryStatus] = useMutation(TOGGLE_REGISTRY_STATUS,
         {
             variables: { toggledebutRegistryStatusId: _id },
             refetchQueries: [{ query: GET_EVENT_WITH_ID, variables: { getDebutEventWithIdId: id } }],
@@ -84,7 +82,7 @@ export default function RegistryAccordion(
                 notifySuccess("Registry Status Updated")
             },
             onError: (error) => {
-                notifyError(error.toString())
+                notifyError("something went wrong " + error.toString())
 
             }
         })
@@ -226,7 +224,7 @@ export default function RegistryAccordion(
                                 </FormGroup>
                             </Col>
                             <Col md={6} className="mt-4" >
-                                <img src={previewImage} alt="event image" className='img-fluid  shadow-lg rounded rounded-5 m-2 mx-5  '
+                                <img src={previewImage} alt="eventIdentfier" className='img-fluid  shadow-lg rounded rounded-5 m-2 mx-5  '
 
                                     style={{
                                         height: '200px', width: "max-content"

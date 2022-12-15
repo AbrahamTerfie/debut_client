@@ -31,7 +31,7 @@ function MotionCover({ children }: any) {
 
 export default function PersonDetail() {
     const dispatch = useDispatch()
-    const { activePersonId, emailPopup, emailTo } = useSelector((store: RootState) => store.uiStore)
+    const { activePersonId } = useSelector((store: RootState) => store.uiStore)
     const { userEmail, myBiography } = useSelector((store: RootState) => store.identfiers)
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
     if (loading) { <Loader /> }
@@ -64,6 +64,7 @@ export default function PersonDetail() {
                 <Col md={3}>
                     <img src={data?.getDebutUserWithId.profileImage}
                         // have the image a fixed height and width with overflow hidden 
+                        alt='Userprofile'
                         className='rounded-1 shadow-sm  img-fluid '
                         style={{ height: '200px', width: '200px', objectFit: 'cover' }}
                     />

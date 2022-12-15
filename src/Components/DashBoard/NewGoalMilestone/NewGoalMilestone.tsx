@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
+import {  Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
 import { motion } from "framer-motion";
-import classNames from "classnames";
 import { FaPlus } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer'
 import { BsTrash } from "react-icons/bs";
-import { useMutation, useQuery } from '@apollo/client';
-import { notifyError, notifyLoading, notifySuccess, notifyWarning } from '../../Notification/Toast';
+import { useMutation, } from '@apollo/client';
+import { notifyError, notifySuccess, notifyWarning } from '../../Notification/Toast';
 import { CREATE_NEW_MILESTONE, FETCH_COMPANY_GOALS_WITH_COMPANY_ID } from '../../../GraphQl/index'
 
 interface mileSoneform {

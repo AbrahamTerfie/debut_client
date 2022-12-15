@@ -44,24 +44,25 @@ export default function NewGratitudeForm() {
     // console.log('focused', focused)
 
     // user filtering state
-    const { data, loading, error } = useQuery(GRATITUDE_TO_USER);
+    const { data, error } = useQuery(GRATITUDE_TO_USER);
     const [gratitudeToUser, {
         data: gratitudeToUserData,
-        loading: gratitudeToUserLoading,
-        error: gratitudeToUserError
+        // loading: gratitudeToUserLoading,
+        // error: gratitudeToUserError
     }] = useMutation(CREATE_GRATITUDE,
         {
-            update(cache, { data: { createGratitude } }) {
-                const { getSentGratitudes }: any = cache.readQuery({
-                    query: SENT_GRATITUDE,
-                    variables: { userId: userID }
-                })
-                cache.writeQuery({
-                    query: SENT_GRATITUDE,
-                    variables: { userId: userID },
-                    data: { getSentGratitudes: [createGratitude, ...getSentGratitudes] }
-                })
-            }
+            refetchQueries: [{ query: SENT_GRATITUDE, variables: { userId: userID } }],
+            // update(cache, { data: { createGratitude } }) {
+            //     const { getSentGratitudes }: any = cache.readQuery({
+            //         query: SENT_GRATITUDE,
+            //         variables: { userId: userID }
+            //     })
+            //     cache.writeQuery({
+            //         query: SENT_GRATITUDE,
+            //         variables: { userId: userID },
+            //         data: { getSentGratitudes: [createGratitude, ...getSentGratitudes] }
+            //     })
+            // }
         }
     )
 
@@ -92,17 +93,20 @@ export default function NewGratitudeForm() {
     }
 
     // filter objects by name value 
-    const filterByName = (name: String) => {
-        const filtered = data.getdebutUsers.filter((user: any) => {
-            return (user.firstName?.toLowerCase().includes(name.toLowerCase())
-                || user.lastName?.toLowerCase().includes(name.toLowerCase())
-            )
-        })
-        return setFilteredUsers(filtered)
-    }
+    // const filterByName = (name: String) => {
+
+    // }
     useEffect(() => {
-        if (searchInput.length > 0) { filterByName(searchInput) }
-    }, [searchInput])
+        if (  searchInput.length > 0) {
+
+            const filtered = data.getdebutUsers.filter((user: any) => {
+                return (user.firstName?.toLowerCase().includes(searchInput.toLowerCase())
+                    || user.lastName?.toLowerCase().includes(searchInput.toLowerCase())
+                )
+            })
+            return setFilteredUsers(filtered)
+        }
+    }, [searchInput, data?.getdebutUsers])
 
 
 

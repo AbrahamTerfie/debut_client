@@ -8,7 +8,7 @@ interface EmailTypeInterface {
 
 }
 
-export const EmailTypes = {
+export const EmailTypes: EmailTypeInterface = {
     peopleIntroduction: "INTRODUCE_PEOPLE",
     companyIntroduction: "INTRODUCE_COMPANY",
     helpWithGoal: "HELP_WITH_GOAL",

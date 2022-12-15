@@ -13,7 +13,7 @@ import moment from 'moment'
 export default function EventPage() {
 
     const { id } = useParams()
-    const [open, setOpen] = useState('');
+    const [open] = useState('');
 
     const { data, loading, error } = useQuery(GET_EVENT_WITH_ID, {
         variables: { getDebutEventWithIdId: id }

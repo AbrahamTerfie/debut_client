@@ -1,6 +1,5 @@
 import React from 'react'
 import '../../Styles/Landing.css'
-import { FaHandsHelping } from 'react-icons/fa'
 import { motion } from "framer-motion";
 // helop , point , gratitide
 export default function LandingCard({ icon, title }:

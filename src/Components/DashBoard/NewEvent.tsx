@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Col, Form, FormGroup, Input, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Row } from 'reactstrap'
 import { FaPlus } from 'react-icons/fa'
 import { BsTrash } from "react-icons/bs";
@@ -66,7 +66,7 @@ export default function NewEvent() {
     const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
         variables: { userId: userID }
     })
-    const { data: dataCompany, loading: loadingCompany, error: errorCompany
+    const {  loading: loadingCompany, error: errorCompany
     } = useQuery(FETCH_COMPANY, {
         variables: { userId: userID }
     })
@@ -214,7 +214,7 @@ export default function NewEvent() {
 
 
                             <Col md={12} className="mt-4" >
-                                <img src={newEventData.debutEventImage ? newEventData.debutEventImage : ""} alt="event image" className='img-fluid' />
+                                <img src={newEventData.debutEventImage ? newEventData.debutEventImage : ""} alt="event Identfier" className='img-fluid' />
 
                                 <FormGroup>
                                     <Label for="debutEventImage"> Image </Label>

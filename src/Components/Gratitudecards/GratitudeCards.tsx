@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col } from 'reactstrap'
+import { Row } from 'reactstrap'
 import './GratitudeCards.css'
 import { RootState } from '../../Store/RootReducer'
 import { useSelector } from 'react-redux'

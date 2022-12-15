@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Row, Col, FormGroup, Input, Button } from 'reactstrap'
+import React from 'react'
+import { Row, Col, FormGroup, Input } from 'reactstrap'
 import { peopleExpertiseFilterHandler, peopleRegionFilterHandler, clearPeopleFilter } from '../../Store/UI/sidebarController'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'

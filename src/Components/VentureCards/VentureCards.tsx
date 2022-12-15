@@ -186,7 +186,7 @@ export default function VentureCards(
 
                     <img
                         src={companyLogo}
-                        alt='user profile photo'
+                        alt='colmpany logo'
                         className='rounded img-fluid h-100 w-75'
                         style={{ width: '75px', height: '75px', objectFit: 'contain', maxHeight: '7em', minHeight: '7em' }} />
                 </Col>
@@ -200,7 +200,7 @@ export default function VentureCards(
                         <img src={companyOwner?.profileImage}
                             className='rounded-circle img-fluid'
                             style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
-                            alt='user profile photo' />
+                            alt='company owner profile  ' />
                         <p className='mx-2  fs-6  fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
                     </div>
                 </Col>

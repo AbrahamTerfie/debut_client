@@ -4,7 +4,7 @@ import { DELETE_COMPANY_MILESTONE, FETCH_COMPANY_GOALS_WITH_COMPANY_ID, TOGGLE_M
 import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import moment from "moment"
 import { useMutation } from "@apollo/client"
-import { notifyError, notifySuccess, notifyWarning } from "../../../Components/Notification/Toast"
+import { notifyError, notifyLoading, notifySuccess, notifyWarning } from "../../../Components/Notification/Toast"
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
 import { useState } from "react";
@@ -26,12 +26,15 @@ interface mileSoneform {
 export default function MileStoneCard(
     {
         mileStoneTitle, mileStoneDescription, milestoneDueDate, milestoneCompleted,
-        milestoneCompletedDate, needHelpWith, additionalLinks, underGoal, _id
+        // milestoneCompletedDate,
+        needHelpWith, additionalLinks,
+        //   underGoal,
+        _id
 
     }: mileSoneform) {
     const { companyID } = useSelector((store: RootState) => store.identfiers)
 
-    const [deleteCompanyMilestone, { data: deleteCompanyMilestoneData, loading: deleteCompanyMilestoneLoading, error: deleteCompanyMilestoneError }] = useMutation(DELETE_COMPANY_MILESTONE, {
+    const [deleteCompanyMilestone, { loading: deleteCompanyMilestoneLoading, }] = useMutation(DELETE_COMPANY_MILESTONE, {
         refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }],
         onCompleted: (deleteCompanyMilestoneData) => {
             // console.log(deleteCompanyMilestoneData)
@@ -39,12 +42,12 @@ export default function MileStoneCard(
         },
         onError: (deleteCompanyMilestoneError) => {
             // console.log(deleteCompanyMilestoneError)
-            notifyError(deleteCompanyMilestoneError.toString())
+            notifyError("couldn't delete  " + deleteCompanyMilestoneError.toString())
         }
 
     })
 
-    const [toggleMilestoneStatus, { data: toggleMilestoneStatusData, loading: toggleMilestoneStatusLoading, error: toggleMilestoneStatusError }] = useMutation(TOGGLE_MILESTONE_STATUS, {
+    const [toggleMilestoneStatus, { loading: toggleMilestoneStatusLoading }] = useMutation(TOGGLE_MILESTONE_STATUS, {
         refetchQueries: [{ query: FETCH_COMPANY_GOALS_WITH_COMPANY_ID, variables: { companyId: companyID } }],
         onCompleted: (toggleMilestoneStatusData) => {
             // console.log(toggleMilestoneStatusData)
@@ -54,8 +57,9 @@ export default function MileStoneCard(
         },
         onError: (toggleMilestoneStatusError) => {
             // console.log(toggleMilestoneStatusError)
-            notifyError(toggleMilestoneStatusError.toString())
-        }
+            notifyError("something went wrong " + toggleMilestoneStatusError.toString())
+        },
+
     })
 
 
@@ -70,7 +74,7 @@ export default function MileStoneCard(
     const [deleteModal, setDeleteModal] = useState(false)
     const toggleDeleteModal = () => setDeleteModal(!deleteModal)
 
-
+    if (deleteCompanyMilestoneLoading || toggleMilestoneStatusLoading) notifyLoading('please wait')
     return (
         <Col md={5}
             // className=" shadow-sm p-4 m-3  border border-muted" 

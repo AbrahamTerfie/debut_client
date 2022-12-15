@@ -41,24 +41,25 @@ export default function MyEventCard(
     setNewRegistry({ ...newRegistry, [name]: value })
   }
 
-  const { data, loading, error } = useQuery(EVENT_REGISTRIES, {
+  const { data, loading } = useQuery(EVENT_REGISTRIES, {
     variables: { eventId: _id }
   })
 
   // console.log("event registries", data)
-  const [createDebutRegistry, createDebutRegistryRes] = useMutation(CREATE_DEBUT_REGISTRY,
+  const [createDebutRegistry,] = useMutation(CREATE_DEBUT_REGISTRY,
     {
-      update(cache, { data: { createDebutRegistry } }) {
-        const { getEventRegistriesWithEventId }: any = cache.readQuery({
-          query: EVENT_REGISTRIES,
-          variables: { eventId: _id }
-        })
-        cache.writeQuery({
-          query: EVENT_REGISTRIES,
-          variables: { eventId: _id },
-          data: { getEventRegistriesWithEventId: [createDebutRegistry, ...getEventRegistriesWithEventId] }
-        })
-      }
+      refetchQueries: [{ query: EVENT_REGISTRIES, variables: { eventId: _id } }],
+      // update(cache, { data: { createDebutRegistry } }) {
+      //   const { getEventRegistriesWithEventId }: any = cache.readQuery({
+      //     query: EVENT_REGISTRIES,
+      //     variables: { eventId: _id }
+      //   })
+      //   cache.writeQuery({
+      //     query: EVENT_REGISTRIES,
+      //     variables: { eventId: _id },
+      //     data: { getEventRegistriesWithEventId: [createDebutRegistry, ...getEventRegistriesWithEventId] }
+      //   })
+      // }
     }
 
   )
@@ -84,6 +85,7 @@ export default function MyEventCard(
         className='d-flex m-3 h-50 shadow rounded flex-column  align-items-end w-25  ' >
         <img src={debutEventImage}
           style={{ maxHeight: "200px" }}
+          alt="eventIdentfiier"
           className='w-100 h-50 rounded-top' />
 
         <div className='px-4 py-3' >
@@ -167,8 +169,8 @@ export default function MyEventCard(
                   {data.getEventRegistriesWithEventId?.map((registry: any) => {
                     return (
                       <Row className='shadow-sm  m-2 MyeventCard'
-                        // onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}
-                        >
+                      // onClick={() => navigate(`${appRoutes.myEvents}/${registry._id}`)}
+                      >
                         <Col md={8}>
                           <small className='text-muted  text-small fw-light' >name</small>
                           <p className='fw-light' > {registry?.debutRegistryName}  </p>

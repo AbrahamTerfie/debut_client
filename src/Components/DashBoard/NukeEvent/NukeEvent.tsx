@@ -17,7 +17,7 @@ export default function NukeEvent(
     const navigate = useNavigate()
     const [nukeInput, setNukeInput] = useState("")
 
-    const [nukeEvent, nukeEventRes] = useMutation(NUKE_DEBUT_EVENT, {
+    const [nukeEvent] = useMutation(NUKE_DEBUT_EVENT, {
         refetchQueries: [{ query: MY_DEBUT_EVENTS, variables: { userId: userID } }],
         onCompleted: (data) => {
             data && notifySuccess("Event deleted") &&
