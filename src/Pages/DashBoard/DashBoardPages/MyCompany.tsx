@@ -94,7 +94,7 @@ export default function YourComapany() {
     });
 
     dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id));
-  }, [dataCompany]);
+  }, [dataCompany, dispatch]);
 
 
 

@@ -135,7 +135,10 @@ export default function MyEventCard(
               <Col md={12}>
                 <small className='text-muted  text-small fw-light' > related links </small>
                 {otherRelatedLinks?.map((link: any) => {
-                  <a className='fw-light' href={link}  > link </a>
+                  return (
+                    <a className='fw-light' href={link}  > link </a>
+
+                  )
                 })}
                 <p className='fw-light' >
                   add link resolver abraham
