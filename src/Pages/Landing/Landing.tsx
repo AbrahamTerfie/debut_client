@@ -12,6 +12,10 @@ import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccor
 import { LandingCard2, LandingCard3 } from '../../Components/LandingCard2/LandingCard2'
 import { useAuth0 } from '@auth0/auth0-react'
 import Loader from '../../Components/Loader/Loader'
+import helping from '../../Svg/helping.gif'
+import askingHelp from '../../Svg/askingHelp.gif'
+import givingHelp from '../../Svg/frictionLessHelp.gif'
+import thankyou from '../../Svg/thankyou.gif'
 const iconProperties = {
     size: 40,
     color: 'white'
@@ -30,7 +34,7 @@ export default function Landing() {
 
     return (
         <Container fluid className="" >
-            <Parallax pages={2.5} style={{ top: '0', left: '0', bottom: '0', right: '0', position: 'absolute', }}>
+            <Parallax pages={3} style={{ top: '0', left: '0', bottom: '0', right: '0', position: 'absolute', }}>
                 <ParallaxLayer
                     offset={0}
                     speed={1.5}
@@ -80,18 +84,19 @@ export default function Landing() {
                         <div className='landing-container' >
                             <LandingCard
                                 title='ask for help'
-                                icon={<FaHandsHelping
-                                    {...iconProperties}
-                                />} />
+                                icon={<img src={askingHelp} alt="asking help" className="img-fluid" />}
+
+                            />
                             <LandingCard
                                 title='frictionless help'
-                                icon={<FaHandPointUp
-                                    {...iconProperties}
-                                />} />
+                                icon={<img src={givingHelp} alt="asking help" className="img-fluid" />}
+                            />
                             <LandingCard
                                 title='follow up with gratitude'
-                                icon={<FaHandHoldingHeart
-                                    {...iconProperties} />} />
+                                icon={<img src={thankyou} alt="asking help" className="img-fluid" />}
+
+
+                            />
                         </div>
                     </Row>
                     <Row>
@@ -102,7 +107,7 @@ export default function Landing() {
                     </Row>
                 </ParallaxLayer>
                 <ParallaxLayer
-                    offset={1}
+                    offset={1.2}
                     speed={1}
                     // factor={1.5}
                     style={{
@@ -162,7 +167,7 @@ export default function Landing() {
                 </ParallaxLayer>
 
                 <ParallaxLayer
-                    offset={1.2}
+                    offset={1.5}
                     speed={0.5}
                     factor={2}
 
@@ -186,7 +191,13 @@ export default function Landing() {
 
 
                         <Col md={6} >
-                            <h1 className='  px-5 fw-bold   '> our soluton for goal managemnt</h1>
+
+                            {/* display helping gif here  */}
+                            <img src={helping}
+                                className='img-fluid'
+                                alt="helping gif" />
+
+
                         </Col>
                         <Col md={6} >
                             <div className='px-5' >
