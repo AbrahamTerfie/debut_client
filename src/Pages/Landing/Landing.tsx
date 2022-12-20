@@ -178,7 +178,11 @@ export default function Landing() {
                         backgroundRepeat: 'no-repeat',
                         // height: "100vh"
                     }}>
-                    <Row className='d-flex justify-content-center   align-items-center  px-5 ' >
+                    <Row
+                        // have the dimention of each column doesn't affect the other column
+                        className='d-flex justify-content-center align-items-center
+                    '
+                    >
 
 
                         <Col md={6} >

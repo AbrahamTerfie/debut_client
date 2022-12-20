@@ -15,7 +15,7 @@ export function LandingCard2({
                 {number}   {title}
             </p>
 
-            <p className='fs-6 fw-bold text-center  text-light' p-3 >
+            <p className='fs-6 fw-bold text-center  text-light' >
                 {text}
             </p>
         </motion.div>
@@ -35,7 +35,7 @@ export function LandingCard3({ number, title, text,
             <p className='fs-6 fw-light text-center  ' >
                 {number}   {title}
             </p>
-            <span className=' fw-bold text-center  ' p-3 >
+            <span className=' fw-bold text-center  ' >
                 {text}
             </span>
         </motion.div>

@@ -8,14 +8,16 @@ import "./styles.css";
 
 const textStyles: {} = {
     color: "#1985a1",
-    fontSize: "1.5rem",
+    fontSize: "1.2rem",
     fontWeight: "bold",
     textAlign: "center",
     padding: "1rem 0",
+    maxWidth: "100%",
+    minWidth: "100%",
     margin: "0",
     lineHeight: "1.5",
-    textTransform: "uppercase",
-    letterSpacing: "0.1rem",
+    // textTransform: "uppercase",
+    letterSpacing: "0.2rem",
 
 
 }
@@ -58,13 +60,13 @@ const Accordion = ({ i, expanded, setExpanded,
                 animate={{
                     backgroundColor: isOpen ? "#1985a1" : "darkgray",
                     color: isOpen ? "white" : "black",
-                    height: "5em",
+                    height: "max-content",
                     borderRadius: isOpen ? "1.5rem" : "0.5rem",
                 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 style={textStyles}
-                className="d-flex justify-content-evenly align-items-start px-5 my-5 flex-column shadow w-100"
+                className="d-flex justify-content-start align-items-start px-5 my-3 flex-column shadow  "
                 onClick={() => setExpanded(isOpen ? false : i)}>
                 <p className="fs-3 fw-bold text-center  text-light m-0 mx-3">
                     {isOpen ? "👇" : "👉"}  {"   "}  {title}
@@ -78,23 +80,24 @@ const Accordion = ({ i, expanded, setExpanded,
                 {isOpen && (
 
                     <motion.section
-                        transition={{ type: "spring", stiffness: 400, damping: 70, }}
-
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         key="content"
                         initial="collapsed"
                         animate="open"
                         exit="collapsed"
                         variants={{
                             open: {
-                                opacity: 1, height: "auto",
-
+                                opacity: 1, height: "min-content",
+                                animation: "fadeIn 1s ease-in-out",
+                                width: "50vh", margin: "0", padding: "0", borderRadius: "1.5rem"
                             },
-                            collapsed: { opacity: 0, height: 0 }
+                            collapsed: {
+                                opacity: 0, height: 0, width: "50vh",
+                                margin: "0", padding: "0", borderRadius: "1.5rem"
+                            },
                         }}>
 
-                        <p style={textStyles} className="text-center">
-
-
+                        <p style={textStyles} className="text-start  p-5">
                             {descriprion}
                         </p>
                     </motion.section>
@@ -110,7 +113,9 @@ export function LandingAccordion() {
     const [expanded, setExpanded] = useState<false | number>(0);
 
     return (
-        <div>
+        <div
+
+        >
             {accordoindata.map((item: any) => (
                 <Accordion
                     key={item.id}
