@@ -79,9 +79,9 @@ export default function Forum() {
             // ********** is not checkeing for new user but instead for company **********
             if (data?.checkIfUserHasCompany === true) {
                 dispatch(setHasCompany(true))
-                setIsNewUser(false)
+
             } else if (data?.checkIfUserHasCompany === false) {
-                setIsNewUser(true)
+
                 dispatch(setHasCompany(false))
             }
         }
@@ -113,7 +113,7 @@ export default function Forum() {
 
     return (
         <div>
-            <Modal centered size='lg' isOpen={isNewUser && !hasCompany} toggle={toggleIsNewUser}  >
+            <Modal centered size='lg' isOpen={!hasCompany} toggle={toggleIsNewUser}  >
                 <ModalHeader
                     className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>

@@ -16,7 +16,7 @@ import Loader from '../../../Components/Loader/Loader';
 import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
-import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
+import { notifyError, notifySuccess, notifyWarning } from '../../../Components/Notification/Toast';
 
 
 
@@ -120,7 +120,7 @@ export default function YourComapany() {
     setCompanyState({ ...companyState, majorAchivements: newAchivements })
   }
 
-  if (createMyCompanyRes.error || updateMyCompanyRes.error) {
+  if (createMyCompanyRes.error || (updateMyCompanyRes.error)) {
     createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
     updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
 
@@ -182,8 +182,11 @@ export default function YourComapany() {
 
   if (loading || loadingCompany) { return <Loader /> }
   if (error || errorCompany) {
+    // if has company is false dont show thos error otherwise show it
+    if (hasCompany === false) { notifyWarning("you haven't registerd a company yet") }
     error && notifyError(error.message.toString())
     errorCompany && notifyError(errorCompany.message.toString())
+
     // return <div> something went wrong  </div>
   }
   if (data) { dispatch(togglehasCompany(data.checkIfUserHasCompany)) }

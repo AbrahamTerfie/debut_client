@@ -3,7 +3,6 @@ import '../../Styles/Landing.css'
 
 import { LandingCard } from '../../Components/index'
 import { Row, Col, Container } from 'reactstrap'
-import { FaHandsHelping, FaHandPointUp, FaHandHoldingHeart } from 'react-icons/fa'
 import { VscDebugStart } from 'react-icons/vsc'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import waveSvg from '../../Svg/waveSvg.svg'
@@ -16,11 +15,6 @@ import helping from '../../Svg/helping.gif'
 import askingHelp from '../../Svg/askingHelp.gif'
 import givingHelp from '../../Svg/frictionLessHelp.gif'
 import thankyou from '../../Svg/thankyou.gif'
-const iconProperties = {
-    size: 40,
-    color: 'white'
-
-}
 
 export default function Landing() {
     const {
