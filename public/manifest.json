@@ -1,21 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Debut",
+  "name": "Debut",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://res.cloudinary.com/djpiwnxwl/image/upload/v1671515560/Screen_Shot_2022-12-20_at_12.46.20_AM_2_wame4r.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",
