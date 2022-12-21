@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 
 
+
 export default function NavBarComponent() {
     const location = useLocation()
     const { logout } = useAuth0();
@@ -21,8 +22,8 @@ export default function NavBarComponent() {
     return (
         <Navbar
             className='px-5  mb-5 shadow-lg  bg-light bg-opacity-80 '
-            dark expand="xl" fixed="top" fluid    >
-            <NavbarBrand href="/"
+            dark expand="xl" fixed="top" fluid="true"    >
+            <NavbarBrand onClick={() => { navigate(appRoutes.forum) }} 
                 style={{
                     fontFamily: 'Bungee Shade, cursive',
                     color: '#1985a1',
@@ -63,7 +64,7 @@ export default function NavBarComponent() {
                     <div className='d-flex '>
                         <NavItem>
                             <NavLink style={textColor} onClick={() => { navigate(appRoutes.dashboard) }}
-                                className={ classNames(" mx-2", location.pathname === appRoutes.dashboard ? "MyeventCardActive" : "MyeventCard")}  >
+                                className={classNames(" mx-2", location.pathname === appRoutes.dashboard ? "MyeventCardActive" : "MyeventCard")}  >
                                 <MdOutlineSpaceDashboard size={15} className='mx-2 my-1' />
                                 My Debut
                             </NavLink>

@@ -72,14 +72,18 @@ export default function People() {
                 </Col>
                 <Col md={1} >
 
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                        className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'
-                        onClick={toggle}>
-                        <IoMdSettings />
-                    </motion.div>
+                    <div
+                        onClick={toggle}
+                    >
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                            className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'
+                        >
+                            <IoMdSettings />
+                        </motion.div>
+                    </div>
 
                 </Col>
             </Row>

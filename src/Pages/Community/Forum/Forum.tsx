@@ -59,7 +59,7 @@ export default function Forum() {
     //gets the user from the server if it exists and if it doesn't it creates a new user
     // console.log(data.allForumPosts)
     useEffect(() => {
-        authenticatedUser({
+        if (user && auth0UserInfo) authenticatedUser({
             variables: {
                 userInput: {
                     email: auth0UserInfo.email,

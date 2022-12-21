@@ -3,7 +3,7 @@ import { Input } from 'reactstrap'
 export default function SearchComponent() {
     return (
         <Input
-            inputProps={{ 'aria-label': 'search' }}
+
             size={200}
             type="text"
             name="textarea-input"
