@@ -19,7 +19,8 @@ const spring = {
 export default function LandingDetailCards() {
     return (
         <AnimateSharedLayout>
-            <motion.div className="d-flex justify-content-center LandingDetailCards  align-items-center  flex-wrap flex-row "
+            <motion.div
+                className="d-flex justify-content-center   align-items-start  flex-wrap flex-row mb-5"
                 layout initial={{ borderRadius: 25 }}>
                 {cardDataDetails.map(item => (
                     <Item key={item.id}
@@ -47,8 +48,8 @@ function Item(
     const toggleOpen = () => setIsOpen(!isOpen);
 
     return (
-        <motion.div 
-            className="w-10 p-3  itemList  mx-3 "
+        <motion.div
+            className="w-10 p-3   mx-3  bg-muted bg-opacity-10 rounded-3  border border-muted border-2 shadow-lg"
             layout
             onClick={toggleOpen}
             initial={{ borderRadius: 10 }}
@@ -56,7 +57,7 @@ function Item(
             transition={spring}
             whileHover={{ scale: 1.08 }}
         >
-            <p className="fs-4 fw-light text-center  text-light">
+            <p className="fs-4 fw-bold text-center  text-light">
                 {title}
             </p>
             <AnimatePresence>{isOpen && <Content
@@ -71,9 +72,9 @@ function Item(
 
 function Content(
     {
-        title,
-        icon,
-        id,
+        // title,
+        // icon,
+        // id,
         cardDescriptions
     }: CardProps) {
     return (
@@ -86,13 +87,11 @@ function Content(
             <div>
                 {cardDescriptions?.map((item: any) => (
                     <div key={item.id} className=" flex-column" >
-                        <div className="d-flex justify-content-start  align-items-center"  >
-                            <div className='d-flex justify-content-center align-items-center' >
-                                <p className=' fw-lighter text-center  text-light'>
-                                    - {item.description}
-                                </p>
-                            </div>
-                        </div>
+
+                        <p className=' fw-light  fs-6 text-center  text-light'>
+                            {item.description}
+                        </p>
+
                     </div>
                 ))}
             </div>

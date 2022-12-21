@@ -58,18 +58,9 @@ export default function Landing() {
                             </p>
 
                         </Col>
-                        <Col md={5} className="shadow-lg p-5 rounded  forumCardParent   border-light border-5 mx-2" >
-
-                            <div className=" d-flex justify-content-center align-items-center "
-                                onClick={() => {
-                                    loginWithRedirect(
-                                        {
-                                            redirectUri: "http://localhost:3000/forum"
-                                        }
-                                    )
-                                    //  navigate(appRoutes.forum)
-                                }}
-                            >
+                        <Col md={5} className="shadow-lg p-5 rounded     border-muted border-5 mx-2"
+                            onClick={() => { loginWithRedirect({ redirectUri: "http://localhost:3000/forum" }) }}>
+                            <div className=" d-flex justify-content-center align-items-center ">
                                 <VscDebugStart className='mx-3' size={100} color="#ffffff" />
                                 <div>
                                     <p className='m-0 fs-1 text-light' >get started </p>
@@ -100,7 +91,7 @@ export default function Landing() {
                         </div>
                     </Row>
                     <Row>
-                        <p className='fs-4 fw-lighter text-center text-light '>
+                        <p className='fs-2 my-5  fw-lighter text-center text-light '>
                             mobilize your cimmunity to help with the launch of your idea
                         </p>
                         <LandingDetailCards />
@@ -112,11 +103,12 @@ export default function Landing() {
                     // factor={1.5}
                     style={{
                         backgroundColor: '#1985a1',
-                        color: 'lightblue',
+                        // color: 'lightblue',
                         backgroundSize: 'cover',
                         // height: "100vh"
                     }}>
-                    <p className=' text-center text-light fw-lighter my-5 py-5'>
+                    <p className='fs-2 my-5  fw-lighter text-center text-light '>
+
                         our solutoin for mobilizing your village
                     </p>
                     <Row  >

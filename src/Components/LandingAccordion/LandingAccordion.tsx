@@ -25,22 +25,22 @@ const textStyles: {} = {
 const accordoindata = [
     {
         id: 1,
-        title: "user",
+        title: "your startup",
         titleDescription: "Set Startup/Project Stage and Needs",
-        descriprion: "Set your stage and select from needs you need to address. Download your LinkedIn or Email contact list and select different groups for your custom invitation. ",
+        descriprion: "Set the stage of your startup and the needs you have at that stage. Debut will make recommendations on how to get the most out of your community. ",
     },
     {
         id: 2,
         title: "debut",
-        titleDescription: "goes to work ",
-        descriprion: "Debut turns your needs into different size commitment cards your community can sing up to. Now you are ready to mobilize your community.  and Set the date and send out for your startup babyshower. Reach out individually or host an in-person or virtual event. Different events for friends, family, college buddies, professional network.",
+        titleDescription: "get your name out there, .  ",
+        descriprion: " Debut will make recommendations on how to get the most out of your community.  ",
 
     },
     {
         id: 3,
-        title: "user",
-        titleDescription: "choose actionable recommendations",
-        descriprion: "Make milestones recommendations to mobilize your community at the various stages of your startup and keep everyone in the loop. With different types of gratitude. ",
+        title: "community",
+        titleDescription: "You are your community ",
+        descriprion: "Make milestones recommendations to mobilize your community at the various stages of your startup and keep everyone in the loop. With different types of gratitude.",
     }
 
 ]

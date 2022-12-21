@@ -71,15 +71,7 @@ export const cardDataDetails = [
             }
         ]
     },
-    {
-        id: 4,
-        title: "recognise help and share lessons ",
-        icon: {
-            name: "MdLiveHelp",
-            color: "green",
-        },
-        cardDescriptions: []
-    },
+    
     {
         id: 5,
         title: "automated ststem to remove friction",

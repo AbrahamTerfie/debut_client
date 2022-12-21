@@ -8,13 +8,17 @@ export function LandingCard2({
     return (
         <motion.div className="  d-flex  justify-content-center align-items-center
         bg-dark bg-opacity-25 flex-column  mx-2 mt-5 p-4  shadow rounded
-        w-25 h-100"
+"
             whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-            <p className='fs-6 fw-light text-center  text-light' >
-                {number}   {title}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            style={{
+                width: '30%',
+                height: '100%',
+            }}
+        >
+            <p className='fs-3 fw-bold text-center text-light  ' >
+                {title}
             </p>
-
             <p className='fs-6 fw-bold text-center  text-light' >
                 {text}
             </p>
@@ -29,13 +33,18 @@ export function LandingCard3({ number, title, text,
         <motion.div
             className="  d-flex  justify-content-center align-items-center
             bg-light bg-opacity-75 flex-column  mx-2 mt-5 p-4 shadow rounded"
-            style={{ width: '30%', height: "10em", color: '#1985a1' }}
+            style={{
+                width: '30%',
+                height: '100%',
+                color: '#1985a1'
+            }}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }} >
-            <p className='fs-6 fw-light text-center  ' >
-                {number}   {title}
+            <p className='fs-3 fw-bold text-center  ' >
+                {/* {number}  */}
+                {title}
             </p>
-            <span className=' fw-bold text-center  ' >
+            <span className=' fw-light fs-4 text-center  ' >
                 {text}
             </span>
         </motion.div>
