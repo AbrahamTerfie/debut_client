@@ -48,11 +48,11 @@ export default function YourComapany() {
 
   const [createMyCompany, createMyCompanyRes] = useMutation(CREATE_COMPANY, {
     refetchQueries: [{ query: FETCH_COMPANY, variables: { userId: userID } }],
-    onCompleted: () => {
+    onCompleted: (data) => {
       dispatch(togglehasCompany(true))
       dispatch(setCompanyID(createMyCompanyRes.data.createDebutCompany._id))
       setIsCreatingAcompany(false)
-      setCompanyState(myComapnyInitialState)
+      data && setCompanyState(myComapnyInitialState)
       notifySuccess("Company created successfully")
     },
     onError: (error) => { notifyError(" failed to create" + error.message.toString()) }
