@@ -120,11 +120,11 @@ export default function YourComapany() {
     setCompanyState({ ...companyState, majorAchivements: newAchivements })
   }
 
-  if (createMyCompanyRes.error || (updateMyCompanyRes.error)) {
-    createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
-    updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
+  // if (createMyCompanyRes.error || (updateMyCompanyRes.error)) {
+  //   createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
+  //   updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
 
-  }
+  // }
 
 
 
