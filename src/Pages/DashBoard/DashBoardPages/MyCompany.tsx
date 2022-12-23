@@ -181,7 +181,7 @@ export default function YourComapany() {
 
 
   if (loading || loadingCompany) { return <Loader /> }
-  if (hasCompany === true && error || errorCompany) {
+  if ((hasCompany === true) && (error || errorCompany)) {
     // if has company is false dont show thos error otherwise show it
 
     error && notifyError(error.message.toString())
