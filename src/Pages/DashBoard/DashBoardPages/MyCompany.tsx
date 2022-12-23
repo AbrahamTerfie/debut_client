@@ -181,9 +181,9 @@ export default function YourComapany() {
 
 
   if (loading || loadingCompany) { return <Loader /> }
-  if (error || errorCompany) {
+  if (hasCompany === true && error || errorCompany) {
     // if has company is false dont show thos error otherwise show it
-    if (hasCompany === false) { notifyWarning("you haven't registerd a company yet") }
+
     error && notifyError(error.message.toString())
     errorCompany && notifyError(errorCompany.message.toString())
 

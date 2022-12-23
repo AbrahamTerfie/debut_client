@@ -53,7 +53,7 @@ export default function Dashboard() {
 
     if (loadingCompany) return <Loader />
 
-    if (errorCompany) { notifyError("something went wrong" + errorCompany?.message.toString()) }
+    if (hasCompany === true && errorCompany) { notifyError("something went wrong" + errorCompany?.message.toString()) }
 
     const cardInfo = [
         {
