@@ -15,6 +15,12 @@ import helping from '../../Svg/helping.gif'
 import askingHelp from '../../Svg/askingHelp.gif'
 import givingHelp from '../../Svg/frictionLessHelp.gif'
 import thankyou from '../../Svg/thankyou.gif'
+import { redirectUri } from '../../Constants/apiLink'
+import { FiTarget } from 'react-icons/fi'
+import { TbCalendarTime, TbWriting } from 'react-icons/tb'
+import { IoCheckmarkCircleOutline, IoArrowUndoOutline } from 'react-icons/io5'
+import { GiThumbUp } from 'react-icons/gi'
+
 
 export default function Landing() {
     const {
@@ -53,8 +59,8 @@ export default function Landing() {
 
                         </Col>
                         <Col md={5} className="shadow-lg p-5 rounded     border-muted border-5 mx-2"
-                            onClick={() => { loginWithRedirect({ redirectUri: "https://debutco.app/forum" }) }}>
-                            {/* onClick={() => { loginWithRedirect({ redirectUri: "http://localhost:3000/forum" }) }}> */}
+                            onClick={() => { loginWithRedirect({ redirectUri: redirectUri }) }}>
+
                             <div className=" d-flex justify-content-center align-items-center ">
                                 <VscDebugStart className='mx-3' size={100} color="#ffffff" />
                                 <div>
@@ -66,114 +72,103 @@ export default function Landing() {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <div className='landing-container' >
-                            <LandingCard
-                                title='ask for help'
-                                icon={<img src={askingHelp} alt="asking help" className="img-fluid" />}
-
-                            />
-                            <LandingCard
-                                title='frictionless help'
-                                icon={<img src={givingHelp} alt="asking help" className="img-fluid" />}
-                            />
-                            <LandingCard
-                                title='follow up with gratitude'
-                                icon={<img src={thankyou} alt="asking help" className="img-fluid" />}
-
-
-                            />
-                        </div>
+                    <Row className='d-flex justify-content-around align-items-center my-5 flex-wrap flex-row '>
+                        <LandingCard
+                            title='ask for help'
+                            icon={<img src={askingHelp} alt="asking help" className="img-fluid" />} />
+                        <LandingCard
+                            title='frictionless help'
+                            icon={<img src={givingHelp} alt="asking help" className="img-fluid" />} />
+                        <LandingCard
+                            title='follow up with gratitude'
+                            icon={<img src={thankyou} alt="asking help" className="img-fluid" />} />
                     </Row>
-                    <Row>
+                    <div className='my-5' >
                         <p className='fs-2 my-5  fw-lighter text-center text-light '>
                             mobilize your cimmunity to help with the launch of your idea
                         </p>
                         <LandingDetailCards />
-                    </Row>
+                    </div>
                 </ParallaxLayer>
                 <ParallaxLayer
-                    offset={1.2}
+                    offset={1.3}
                     speed={1}
-                    // factor={1.5}
+                    factor={2}
                     style={{
                         backgroundColor: '#1985a1',
                         // color: 'lightblue',
                         backgroundSize: 'cover',
-                        // height: "100vh"
+                        height: "max-content",
                     }}>
                     <p className='fs-2 my-5  fw-lighter text-center text-light '>
 
                         our solutoin for mobilizing your village
                     </p>
-                    <Row  >
-                        <div className="
-                        d-flex justify-content-evenly flex-wrap flex-row
-                         align-items-center mt-3 pt-3 my-5 py-5
-                        " >
-                            <LandingCard2
-                                number={1}
-                                title='set start up goals '
-                                text="define your professional goal with guidance from our AI system.                                "
-                            />
-                            <LandingCard2
-                                number={2}
-                                title='set timeline '
-                                text="define timeline of your goals "
-                            />
-                            <LandingCard2
-                                number={3}
-                                title='small commitments'
-                                text="Debut breaks the goal to incremental “small offers"
-                            />
-                        </div>
+                    <Row className="d-flex justify-content-evenly flex-wrap flex-row align-items-center my-3">
+
+                        <LandingCard2
+                            number={1}
+                            icon={<FiTarget size={60} color="#ffffff" />}
+                            title='set start up goals '
+                            text="define your professional goal with guidance .  "
+                        />
+                        <LandingCard2
+                            number={2}
+                            icon={<TbCalendarTime size={60} color="#ffffff" />}
+                            title='set timeline '
+                            text="define timeline of your goals "
+                        />
+                        <LandingCard2
+                            number={3}
+                            icon={<IoCheckmarkCircleOutline size={60} color="#ffffff" />}
+                            title='small commitments'
+                            text="Debut breaks the goal to incremental “small offers"
+                        />
+
                     </Row>
-                    <Row  >
-                        <div className="
-                        d-flex justify-content-evenly flex-wrap flex-row
-                         align-items-center my-3" >
+                    <Row className="d-flex justify-content-evenly flex-wrap flex-row align-items-center my-5">
 
-                            <LandingCard3
-                                number={3.1}
-                                title="recomendations"
-                                text="Debut will make bespoke recommendations to utilize your community and remove the friction in: asking for help, getting help and giving gratitude. "
-                            />
+                        <LandingCard3
+                            number={3.1}
+                            icon={<TbWriting size={60} color="#1985a1" />}
+                            title="recomendations"
+                            text="Debut will make bespoke recommendations to utilize your community and remove the friction in: asking for help, getting help and giving gratitude. "
+                        />
 
-                            <LandingCard3
-                                number={3.2}
-                                title='follow up and reward'
-                                text="Consistently follow up and reward your community with gratitude, shares, and other creative ways. "
-                            />
-                            <LandingCard3
-                                number={3.3}
-                                title='rrevise targets'
-                                text="customize the plan"
-                            />
-                        </div>
+                        <LandingCard3
+                            number={3.2}
+                            icon={<GiThumbUp size={60} color="#1985a1" />}
+                            title='follow up and reward'
+                            text="Consistently follow up and reward your community with gratitude, shares, and other creative ways. "
+                        />
+                        <LandingCard3
+                            number={3.3}
+                            icon={<IoArrowUndoOutline size={60} color="#1985a1" />}
+                            title='revise targets'
+                            text="customize the plan"
+                        />
+
                     </Row>
                 </ParallaxLayer>
 
                 <ParallaxLayer
-                    offset={1.5}
+                    offset={1.9}
                     speed={0.5}
                     factor={2}
 
                     style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
                         backgroundImage: `url(${waveSvg})`,
-                        // position image at bottom
+                        //   positoin image to the bottom
                         backgroundPosition: 'bottom',
-                        backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
-                        // height: "100vh"
+                        backgroundSize: 'cover',
+                        height: window.innerHeight * 1.5,
+                        // height: "max-content",
+
                     }}>
                     <Row
                         // have the dimention of each column doesn't affect the other column
-                        className='d-flex justify-content-center align-items-center
-                    '
+                        className='d-flex justify-content-center align-items-center flex-wrap flex-row'
                     >
 
 
@@ -194,7 +189,10 @@ export default function Landing() {
 
                     </Row>
                     <p className=' pb-5  mb-5 fw-lighter  text-light fixed-bottom text-center' >
-                        @ debut 2022
+                        {/* footer   */}
+                        © 2021 Debut. All rights reserved.
+
+
                     </p>
                 </ParallaxLayer>
 

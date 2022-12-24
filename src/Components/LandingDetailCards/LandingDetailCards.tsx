@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import "./styles.css";
 import { cardDataDetails } from './landingCarddata'
+import { Col, Row } from "reactstrap";
 
 type CardProps = {
     title: string,
@@ -22,14 +23,16 @@ export default function LandingDetailCards() {
             <motion.div
                 className="d-flex justify-content-center   align-items-start  flex-wrap flex-row mb-5"
                 layout initial={{ borderRadius: 25 }}>
-                {cardDataDetails.map(item => (
-                    <Item key={item.id}
-                        title={item.title}
-                        icon={item.icon}
-                        id={item.id}
-                        cardDescriptions={item.cardDescriptions}
-                    />
-                ))}
+                <Row>
+                    {cardDataDetails.map(item => (
+                        <Item key={item.id}
+                            title={item.title}
+                            icon={item.icon}
+                            id={item.id}
+                            cardDescriptions={item.cardDescriptions}
+                        />
+                    ))}
+                </Row>
             </motion.div>
         </AnimateSharedLayout>
     );
@@ -48,25 +51,33 @@ function Item(
     const toggleOpen = () => setIsOpen(!isOpen);
 
     return (
-        <motion.div
-            className="w-10 p-3   mx-3  bg-muted bg-opacity-10 rounded-3  border border-muted border-2 shadow-lg"
-            layout
-            onClick={toggleOpen}
-            initial={{ borderRadius: 10 }}
-            animate={{ borderRadius: isOpen ? 25 : 10 }}
-            transition={spring}
-            whileHover={{ scale: 1.08 }}
+        <Col
+            sm="12" md="6" lg="4" xl="3"
         >
-            <p className="fs-4 fw-bold text-center  text-light">
-                {title}
-            </p>
-            <AnimatePresence>{isOpen && <Content
-                title={title}
-                icon={icon}
-                id={id}
-                cardDescriptions={cardDescriptions}
-            />}</AnimatePresence>
-        </motion.div>
+            <motion.div
+                className="w-10 p-3 m-3  bg-muted bg-opacity-10 rounded-3  border border-info border-2 shadow-lg"
+                layout
+                onClick={toggleOpen}
+                initial={{ borderRadius: 10 }}
+                animate={{ borderRadius: isOpen ? 25 : 10 }}
+                transition={spring}
+                whileHover={{ scale: 1.08 }}
+            >
+                <p className="fs-4 fw-bold text-center  text-light">
+                    {title}
+                </p>
+                <AnimatePresence
+                
+                >{isOpen && <Content
+                    title={title}
+                    icon={icon}
+                    id={id}
+                    cardDescriptions={cardDescriptions}
+
+                />}
+                </AnimatePresence>
+            </motion.div>
+        </Col>
     );
 }
 

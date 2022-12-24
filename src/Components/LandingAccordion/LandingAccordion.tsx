@@ -97,7 +97,7 @@ const Accordion = ({ i, expanded, setExpanded,
                             },
                         }}>
 
-                        <p style={textStyles} className="text-start  p-5">
+                        <p style={textStyles} className="text-start text-dark p-5">
                             {descriprion}
                         </p>
                     </motion.section>

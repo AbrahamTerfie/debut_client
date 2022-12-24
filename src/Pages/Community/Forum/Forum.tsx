@@ -40,7 +40,7 @@ export default function Forum() {
     const navigate = useNavigate()
 
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    const { hasCompany, userID } = useSelector((store: RootState) => store.identfiers)
+    const { hasCompany } = useSelector((store: RootState) => store.identfiers)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();
@@ -50,12 +50,12 @@ export default function Forum() {
     const toggleIsNewUser = (): void => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
 
-    console.log(authenticatedUsrRes, "userID")
+    // console.log(authenticatedUsrRes, "userID")
 
     // console.log("channelFilter", channelFilter)
     // saves the user information when the user logs in to keep it in sybc with store 
     useEffect(() => { if (user) { dispatch(saveAuth0UserInfo(user)) } }, [user, dispatch])
-    console.log("user", auth0UserInfo)
+
     //gets the user from the server if it exists and if it doesn't it creates a new user
     // console.log(data.allForumPosts)
     useEffect(() => {

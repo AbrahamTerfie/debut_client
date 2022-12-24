@@ -5,18 +5,11 @@ import { motion } from "framer-motion";
 export default function LandingCard({ icon, title }:
     { icon: any, title: string }) {
     return (
-        <motion.div className=" border 
-            d-flex justify-content-center align-items-start
-            flex-column p-4 mx-2 
-            shadow rounded
-            w-25 h-25
-        "
+        <motion.div className=" border  d-flex justify-content-center align-items-center flex-column p-2 mx-4 my-3 shadow rounded  "
             whileHover={{ scale: 1.08 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        >
-            <div className='my-2'
-
-            >
+            style={{ height: window.innerWidth * 0.12, width: window.innerWidth * 0.28, cursor: "default", }}>
+            <div className='my-2 ' style={{ height: window.innerWidth * 0.2, width: window.innerWidth * 0.2, cursor: "default" }}>
                 {icon}
             </div>
             <p className='fs-6 fw-light text-center  text-light' >

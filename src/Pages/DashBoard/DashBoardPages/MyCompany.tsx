@@ -16,7 +16,7 @@ import Loader from '../../../Components/Loader/Loader';
 import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
-import { notifyError, notifySuccess, notifyWarning } from '../../../Components/Notification/Toast';
+import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
 
 
 
@@ -60,7 +60,7 @@ export default function YourComapany() {
 
   })
 
-  const [updateMyCompany, updateMyCompanyRes] = useMutation(UPDATE_COMPANY, {
+  const [updateMyCompany] = useMutation(UPDATE_COMPANY, {
     refetchQueries: [{ query: FETCH_COMPANY, variables: { userId: userID } }],
     onCompleted: () => {
       setCompanyState(myComapnyInitialState)
