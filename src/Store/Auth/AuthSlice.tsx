@@ -11,6 +11,7 @@ const initalState = {
         email: '',
         name: '',
         nickname: '',
+        picture: '',
 
     },
     isCheckingEmailExists: false,

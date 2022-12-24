@@ -126,7 +126,7 @@ export default function YourComapany() {
 
   // }
 
-
+  console.log("companyState", userID)
 
   const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

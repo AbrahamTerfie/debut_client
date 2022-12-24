@@ -54,7 +54,7 @@ export default function Landing() {
                         </Col>
                         <Col md={5} className="shadow-lg p-5 rounded     border-muted border-5 mx-2"
                             onClick={() => { loginWithRedirect({ redirectUri: "https://debutco.app/forum" }) }}>
-                            {/* // onClick={() => { loginWithRedirect({ redirectUri: "http://localhost:3000/forum" }) }}> */}
+                            {/* onClick={() => { loginWithRedirect({ redirectUri: "http://localhost:3000/forum" }) }}> */}
                             <div className=" d-flex justify-content-center align-items-center ">
                                 <VscDebugStart className='mx-3' size={100} color="#ffffff" />
                                 <div>
@@ -199,6 +199,6 @@ export default function Landing() {
                 </ParallaxLayer>
 
             </Parallax>
-        </Container>
+        </Container >
     )
 }

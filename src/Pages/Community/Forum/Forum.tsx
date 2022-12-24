@@ -40,22 +40,22 @@ export default function Forum() {
     const navigate = useNavigate()
 
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    const { hasCompany } = useSelector((store: RootState) => store.identfiers)
-    // console.log(userID , userEmail)
+    const { hasCompany, userID } = useSelector((store: RootState) => store.identfiers)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS)
     const [isNewUser, setIsNewUser] = useState(true)
-    const toggleIsNewUser = () => setIsNewUser(!isNewUser)
+    const toggleIsNewUser = (): void => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
 
+    console.log(authenticatedUsrRes, "userID")
 
     // console.log("channelFilter", channelFilter)
     // saves the user information when the user logs in to keep it in sybc with store 
     useEffect(() => { if (user) { dispatch(saveAuth0UserInfo(user)) } }, [user, dispatch])
-
+    console.log("user", auth0UserInfo)
     //gets the user from the server if it exists and if it doesn't it creates a new user
     // console.log(data.allForumPosts)
     useEffect(() => {
@@ -65,6 +65,7 @@ export default function Forum() {
                     email: auth0UserInfo.email,
                     userName: auth0UserInfo.name,
                     firstName: auth0UserInfo.nickname,
+                    profileImage: hasCompany === false ? auth0UserInfo.picture : '',
                 }
             }
         })
@@ -113,7 +114,7 @@ export default function Forum() {
 
     return (
         <div>
-            <Modal centered size='lg' isOpen={!hasCompany} toggle={toggleIsNewUser}  >
+            <Modal centered size='lg' isOpen={hasCompany === false} toggle={toggleIsNewUser}  >
                 <ModalHeader
                     className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>
