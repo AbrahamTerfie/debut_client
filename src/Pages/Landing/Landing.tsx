@@ -3,7 +3,7 @@ import '../../Styles/Landing.css'
 
 import { LandingCard } from '../../Components/index'
 import { Row, Col, Container } from 'reactstrap'
-import { VscDebugStart } from 'react-icons/vsc'
+import { BsPlay } from 'react-icons/bs'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
@@ -20,6 +20,7 @@ import { FiTarget } from 'react-icons/fi'
 import { TbCalendarTime, TbWriting } from 'react-icons/tb'
 import { IoCheckmarkCircleOutline, IoArrowUndoOutline } from 'react-icons/io5'
 import { GiThumbUp } from 'react-icons/gi'
+import MotionContainer from '../../Components/MotionContainer/MotionContainer'
 
 
 export default function Landing() {
@@ -48,26 +49,28 @@ export default function Landing() {
                     offset={0.5} speed={0.5}
                     style={{ backgroundColor: '#1985a1', color: 'lightblue', height: "max-content", }}
                     className="mb-5">
-                    <Row className='d-flex justify-content-center align-items-center pt-5  '>
+                    <Row className='d-flex justify-content-center align-items-center mt-4 '>
                         <Col md={5} className="shadow-sm  p-4 rounded mx-2 border border-light" >
                             <p
-                                className='fs-4 fw-lighter text-start text-light '>
+                                className='fs-4 fw-lighter text-start text-light  flex-wrap'>
                                 Debut is a digital platform aimed at helping founders mobilize
                                 their village (family, friends and extended network) to help launch their startup or project.
                                 Think “baby-shower for your startup”.
                             </p>
 
                         </Col>
-                        <Col md={5} className="shadow-lg p-5 rounded     border-muted border-5 mx-2"
+                        <Col md={5} className="shadow-lg p-5 rounded border    border-info border-2  mx-2"
                             onClick={() => { loginWithRedirect({ redirectUri: redirectUri }) }}>
 
-                            <div className=" d-flex justify-content-center align-items-center ">
-                                <VscDebugStart className='mx-3' size={100} color="#ffffff" />
-                                <div>
-                                    <p className='m-0 fs-1 text-light' >get started </p>
-                                    <span className='text-light' > sign up or login </span>
+                            <MotionContainer>
+                                <div className=" d-flex justify-content-start align-items-center ">
+                                    <BsPlay className='ml-3' size={100} color="#fffff" />
+                                    <div>
+                                        <p className='m-0 fs-1 text-warning' >get started </p>
+                                        <span className='text-warning' > sign up or login </span>
+                                    </div>
                                 </div>
-                            </div>
+                            </MotionContainer>
 
                         </Col>
                     </Row>

@@ -80,8 +80,8 @@ export default function PersonDetail() {
                     />
                 </Col>
                 <Col md={8}
-                    sm={12} lg={8} xl={8} xxl={8} className='d-flex flex-column justify-content-start align-items-start'>
-                
+                    sm={12} lg={8} xl={8} xxl={8} className='d-flex flex-row flex-wrap justify-content-start align-items-start'>
+
                     <p className='fs-4 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}
                         <span className='fs-6 fw-bold text-muted mx-2'>
                             {data?.getDebutUserWithId.pronouns}
@@ -90,20 +90,13 @@ export default function PersonDetail() {
                     <p className='fs-6 fw-bold  m-0'>
                         {data?.getDebutUserWithId.userName} / <span className='text-muted' >  {data?.getDebutUserWithId.preferredName} </span> </p>
 
-                    <p className='fs-5 fw-light m-0 d-flex justify-content-start'>
+                    <p className='fs-5 fw-light m-0 d-flex justify-content-start  flex-row'>
                         <span > {data?.getDebutUserWithId.titleAtCompany}</span>
                         <span className='text-muted mx-1'> at </span>
                         <span >{data?.getDebutUserWithId.company[0]?.companyName} </span>
                     </p>
-                  
-                        <MotionContainer>
-                            <p className=' d-flex justify-content-start align-items-start text-primary  fw-light  bg-primary bg-opacity-10 rounded-1 px-3 py-1  my-3'
-                                onClick={(e: any) => personIntroductoinHandler(e)}>
-                                request introduction
-                                <FaHandsHelping size={25} className='mx-3' />
-                            </p>
-                        </MotionContainer>
 
+                   
 
 
                     <div className='d-flex justify-content-start my-2' >
@@ -129,6 +122,15 @@ export default function PersonDetail() {
                             </a> : null}
                         </MotionCover>
                     </div>
+                    <MotionContainer>
+                        <p className='d-flex flex-row justify-content-center align-items-center bg-primary bg-opacity-10 p-2 px-4 rounded-5 shadow-sm border border-muted'
+
+                            onClick={(e: any) => personIntroductoinHandler(e)}>
+                            request introduction
+                            <FaHandsHelping size={25} className='mx-3' />
+                        </p>
+                    </MotionContainer>
+
                 </Col>
                 <Col md={1} sm={1} lg={1} xl={1} xxl={1} className='d-flex justify-content-end align-items-start'>
                     <MotionCover>
