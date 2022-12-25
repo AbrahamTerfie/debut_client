@@ -32,7 +32,7 @@ function MileStoneCard({ milestone, ownerEmail }: { milestone: mileStones, owner
 
 
     return (
-        <div className={classNames('shadow-sm m-2  d-flex flex-column  justify-content-between  px-4  py-3 rounded rounded-2', {
+        <div className={classNames('shadow-sm m-2  d-flex flex-column  justify-content-between  px-4  py-3 rounded rounded-2 border border-muted', {
             'border-success border': milestone.milestoneCompleted
         })}>
             <Emailcanvas />

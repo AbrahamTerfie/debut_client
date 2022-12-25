@@ -37,7 +37,7 @@ export default function Events() {
             </div>
             <p className='fs-3 text-success fw-light m-2 mx-5 '> Featured  </p>
 
-            <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
+            <Row className='d-flex  flex-wrap justify-content-start align-items-start shadow p-3' >
                 {events.map((event: eventCard, index: number) => <EventCard key={index} event={event} />)}
             </Row>
 

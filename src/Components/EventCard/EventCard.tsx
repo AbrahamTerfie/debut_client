@@ -18,18 +18,17 @@ export default function EventCard({ event }: { event: eventCard }) {
 
 
     return (
-        <Col className="m-3 mx-5  " onClick={() => navigate(appRoutes.debutEvent + `/${event._id}`)} md={2} sm={4} xs={6} xl={2} lg={3}>
-            <MotionContainer>
-                <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-lg'
-                    style={background}>
+        <Col className="m-3   " onClick={() => navigate(appRoutes.debutEvent + `/${event._id}`)} >
+            <div className='d-flex justify-content-end align-items-end flex-column p-4 rounded shadow-lg' style={background}>
+                <MotionContainer>
                     <div className='d-flex justify-content-end align-items-end flex-column'>
                         <p className='fs-3 text-light text-end' > {event.debutEventName} </p>
                         <p className='text-light text-end text-wrap' >
                             {event.debutEventDescription.slice(0, 30)}...
                         </p>
                     </div>
-                </div>
-            </MotionContainer>
+                </MotionContainer>
+            </div>
         </Col >
     )
 }

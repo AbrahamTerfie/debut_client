@@ -79,8 +79,10 @@ export default function PersonDetail() {
                         }}
                     />
                 </Col>
-                <Col md={8}>
-                    <p className='fs-1 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}
+                <Col md={8}
+                    sm={12} lg={8} xl={8} xxl={8} className='d-flex flex-column justify-content-start align-items-start'>
+                
+                    <p className='fs-4 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}
                         <span className='fs-6 fw-bold text-muted mx-2'>
                             {data?.getDebutUserWithId.pronouns}
                         </span>
@@ -93,21 +95,15 @@ export default function PersonDetail() {
                         <span className='text-muted mx-1'> at </span>
                         <span >{data?.getDebutUserWithId.company[0]?.companyName} </span>
                     </p>
-                    <div
-                        className='d-flex justify-content-start align-items-start my-3 px-4'
-                    >
-                        {/* <p>
-                            <FaEnvelope className='text-muted mx-2 my-2' />
-                            {data?.getDebutUserWithId.email}
-                        </p> */}
+                  
                         <MotionContainer>
-                            <p className='text-primary  fw-light  bg-primary bg-opacity-10 rounded-1 px-3 py-1 '
+                            <p className=' d-flex justify-content-start align-items-start text-primary  fw-light  bg-primary bg-opacity-10 rounded-1 px-3 py-1  my-3'
                                 onClick={(e: any) => personIntroductoinHandler(e)}>
                                 request introduction
                                 <FaHandsHelping size={25} className='mx-3' />
                             </p>
                         </MotionContainer>
-                    </div>
+
 
 
                     <div className='d-flex justify-content-start my-2' >
@@ -172,9 +168,9 @@ export default function PersonDetail() {
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.aeraOfExpertise.map((item: any) => {
                             return <MotionCover key={uuid()}>
-                                <span className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>
+                                <p className='text-muted mx-1 my-2 bg-dark bg-opacity-10 p-2 px-4 rounded-pill flex-wrap '>
                                     {item}
-                                </span>
+                                </p>
                             </MotionCover>
                         })}
                     </div>
@@ -187,7 +183,7 @@ export default function PersonDetail() {
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.regions.map((item: any) => {
                             return <MotionCover key={uuid()}>
-                                <span className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>
+                                <span className='text-muted mx-1 my-2 bg-dark bg-opacity-10 p-2 px-4 rounded-pill flex-wrap '>
                                     {item}
                                 </span>
                             </MotionCover>

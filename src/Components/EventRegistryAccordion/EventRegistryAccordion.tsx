@@ -32,8 +32,11 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
 
 
     return (
-        <Col md={3} className={classNames(' shadow-sm rounded-3 d-flex flex-column  justify-content-between m-3   ', 'm-2',
-            item.registryItemFullfiled ? 'border border-success' : '')} >
+        <Col
+            md={4}
+            sm={12}
+            className={classNames(' shadow-sm rounded-3 d-flex flex-column  justify-content-start m-3  border border-muted  ', 'm-2',
+                item.registryItemFullfiled ? 'border border-success' : '')} >
             <Emailcanvas />
             <motion.div
                 initial={{ opacity: 0 }}
@@ -57,7 +60,7 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
                     </p>
                     <p className='text-muted m-0'> item link</p>
                     <MotionContainer>
-                        <p className=' m-3 mt-0 bg-primary text-start text-primary rounded-pill px-4 m-1 mx-1 bg-opacity-10  py-2 flex-wrap'>
+                        <p className=' m-2 mt-0 bg-primary text-start text-primary rounded-pill px-4 m-1 mx-1 bg-opacity-10  py-2 flex-wrap'>
                             {item.registryItemLink}
                         </p>
                     </MotionContainer>
