@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'reactstrap'
-import { FaLinkedin, FaTwitter, FaFacebook, FaInstagram, FaHandsHelping, } from 'react-icons/fa'
+import { FaLinkedin, FaTwitter, FaFacebook, FaInstagram, FaHandsHelping, FaTimes, } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/RootReducer';
 import { useQuery } from '@apollo/client';
@@ -12,7 +12,7 @@ import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import Emailcanvas from '../Email/Emailcanvas';
 import { EmailTypes } from '../../Email/EmailTypes';
 import { v4 as uuid } from 'uuid'
-
+import { setActivePersonId } from '../../Store/UI/sidebarController'
 function MotionCover({ children }: any) {
     return (
         <motion.div
@@ -39,6 +39,9 @@ export default function PersonDetail() {
     if (activePersonId === "") { return <p className='text-center p-5 shadow-sm h-auto rounded  border border-muted  text-muted fw-bolder my-2 ' > select user </p> }
     if (error) { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p> }
 
+    function closePerson() {
+        dispatch(setActivePersonId(""))
+    }
 
     const personIntroductoinHandler = (e: any) => {
         e.preventDefault()
@@ -61,15 +64,22 @@ export default function PersonDetail() {
         <div className='p-4 px-5 shadow  rounded rounded-5 my-2 overflow-auto d-flex flex-column  flex-wrap  py-5  bg-dark bg-opacity-10'>
             <Emailcanvas />
             <Row>
-                <Col md={3}>
+                <Col md={3}
+                    sm={12} lg={3} xl={3} xxl={3} className='d-flex justify-content-start align-items-start'>
+
                     <img src={data?.getDebutUserWithId.profileImage}
                         // have the image a fixed height and width with overflow hidden 
                         alt='Userprofile'
-                        className='rounded-1 shadow-sm  img-fluid '
-                        style={{ height: '200px', width: '200px', objectFit: 'cover' }}
+                        className='rounded-1 shadow  img-fluid '
+                        style={{
+                            // responsive image 
+                            height: window.innerWidth * 0.1,
+                            width: window.innerWidth * 0.22,
+                            objectFit: 'cover',
+                        }}
                     />
                 </Col>
-                <Col md={9}>
+                <Col md={8}>
                     <p className='fs-1 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}
                         <span className='fs-6 fw-bold text-muted mx-2'>
                             {data?.getDebutUserWithId.pronouns}
@@ -123,6 +133,17 @@ export default function PersonDetail() {
                             </a> : null}
                         </MotionCover>
                     </div>
+                </Col>
+                <Col md={1} sm={1} lg={1} xl={1} xxl={1} className='d-flex justify-content-end align-items-start'>
+                    <MotionCover>
+                        <FaTimes className='text-danger
+                        bg-danger bg-opacity-10 p-2 rounded-circle
+                        ' onClick={closePerson}
+                            size={35} />
+
+
+                    </MotionCover>
+
                 </Col>
             </Row>
             <Row className='mt-4 '>

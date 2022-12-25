@@ -22,7 +22,7 @@ import { v4 as uuid } from 'uuid'
 export default function People() {
 
     const { user } = useAuth0();
-    const { peopleExpertiseFilter, peopleRegionFilter } = useSelector((store: RootState) => store.uiStore)
+    const { peopleExpertiseFilter, peopleRegionFilter, activePersonId } = useSelector((store: RootState) => store.uiStore)
     const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const [modal, setModal] = useState(false);
     const toggle = (): void => setModal(!modal);
@@ -93,7 +93,10 @@ export default function People() {
 
             </Collapse>
             <Row className='mt-5 '  >
-                <Col className="overflow-scroll " >
+                <Col className={`overflow-scroll  ${activePersonId === "" ? '' : 'd-none d-sm-block'}`}
+
+                >
+
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={uuid()}
@@ -112,7 +115,14 @@ export default function People() {
                     }
                     )}
                 </Col>
-                <Col className="overflow-auto">
+                <Col
+                    className={`overflow-auto ${activePersonId === "" ? 'd-none d-sm-block' : ''}`}
+
+
+
+                // on small screens if person is selected fhow it full screen otherwise hide it
+
+                >
                     <PersonDetail />
                 </Col>
             </Row>
