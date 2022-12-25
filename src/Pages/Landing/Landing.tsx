@@ -87,8 +87,12 @@ export default function Landing() {
                         <p className='fs-2 my-5  fw-lighter text-center text-light '>
                             mobilize your cimmunity to help with the launch of your idea
                         </p>
-                        <LandingDetailCards />
                     </div>
+                    <Row
+                        className='d-flex justify-content-around align-items-center my-5 flex-wrap flex-row'
+                    >
+                        <LandingDetailCards />
+                    </Row>
                 </ParallaxLayer>
                 <ParallaxLayer
                     offset={1.3}

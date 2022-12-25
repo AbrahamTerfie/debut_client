@@ -23,7 +23,7 @@ export default function LandingDetailCards() {
             <motion.div
                 className="d-flex justify-content-center   align-items-start  flex-wrap flex-row mb-5"
                 layout initial={{ borderRadius: 25 }}>
-                <Row>
+
                     {cardDataDetails.map(item => (
                         <Item key={item.id}
                             title={item.title}
@@ -32,7 +32,7 @@ export default function LandingDetailCards() {
                             cardDescriptions={item.cardDescriptions}
                         />
                     ))}
-                </Row>
+
             </motion.div>
         </AnimateSharedLayout>
     );
