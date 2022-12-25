@@ -94,6 +94,8 @@ export default function People() {
             </Collapse>
             <Row className='mt-5 '  >
                 <Col className={`overflow-scroll  ${activePersonId === "" ? '' : 'd-none d-sm-block'}`}
+                //    make col scrollable  on y axis
+                style={{ maxHeight: '80vh' }}
 
                 >
 
