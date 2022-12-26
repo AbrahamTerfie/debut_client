@@ -7,7 +7,7 @@ import DebutEventPage from "./DebutEventPage";
 import DashboardExperiance from "./DashboardExperiance";
 
 
-export {
+export  {
     MyProfile,
     CompanyGoals,
     CompanyEvents,

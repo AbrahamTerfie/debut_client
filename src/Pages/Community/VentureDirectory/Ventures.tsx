@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Row, Col } from 'reactstrap'
 import VentureCards from '../../../Components/VentureCards/VentureCards'
 
@@ -10,19 +10,46 @@ import MotionContainer from '../../../Components/MotionContainer/MotionContainer
 import { FaSearch } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
 import { notifyError } from '../../../Components/Notification/Toast'
-export default function Ventures() {
 
-    const { loading, error, data } = useQuery(GET_ALL_VENTURES)
+type Venture = {
+    _id: string,
+    companyName: string,
+    companyMissionStatement: string,
+    companyHeadquarters: string,
+    companyWebsite: string,
+    companyLogo: string,
+    jobBoard: string,
+    linkedInUrl: string,
+    twitterUrl: string,
+    instagramUrl: string,
+    facebookUrl: string,
+    majorAchivements: string,
+    companyDescription: string,
+    companyServivesGeography: string,
+    aeraOfOperation: string,
+    companySize: string,
+    companyCategory: string,
+    companyOwner: string,
+    debutEvents: string,
+}
+
+export default function Ventures() {
+    const { loading, error, data } = useQuery<{ getdebutCompanies: Venture[] }>(GET_ALL_VENTURES)
+
     if (loading) return <Loader />
     if (error) { notifyError(error.message.toString()) }
 
-    // if (data) console.log('venture data', data.getdebutCompanies)
+    const ventures = data?.getdebutCompanies ?? []
+
+
 
     return (
-        <div className=' d-flex  m-5  mt-5 pt-5 flex-column '>
+        <div className='d-flex m-5 mt-5 pt-5 flex-column '>
             <p className='fs-1 fw-light mx-5 px-5 '> Discover ventures</p>
-            <Row className='mx-4  d-flex justify-content-center'>
-                <Col md={10} > <SearchComponent /> </Col>
+            <Row className='mx-4 d-flex justify-content-center'>
+                <Col md={10}>
+                    <SearchComponent />
+                </Col>
                 <Col md={1} >
                     <MotionContainer>
                         <div className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
@@ -32,7 +59,7 @@ export default function Ventures() {
                 </Col>
                 <Col md={1} >
                     <MotionContainer>
-                        <div className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'>
+                        <div className='shado-sm border border-muted rounded rounded-5   p-2 m-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'>
                             <IoMdSettings />
                         </div>
                     </MotionContainer>
@@ -40,9 +67,9 @@ export default function Ventures() {
                 </Col>
             </Row>
             <Row className='d-flex justify-content-center px-5 mt-5'>
-                {data?.getdebutCompanies.map((item: any, index: number) => {
-                    return (<VentureCards
-                        key={index}
+                {ventures.map((item: Venture, index: number) => (
+                    <VentureCards
+                        key={item._id}
                         _id={item._id}
                         companyName={item.companyName}
                         companyMissionStatement={item.companyMissionStatement}
@@ -63,9 +90,10 @@ export default function Ventures() {
                         companyOwner={item.companyOwner}
                         debutEvents={item.debutEvents}
                     />
-                    )
-                })}
+                ))}
             </Row>
-        </div >
+        </div>
     )
 }
+
+
