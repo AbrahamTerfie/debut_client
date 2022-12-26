@@ -1,29 +1,16 @@
-/* --raisin-black: #272838ff;
---buff: #f3de8aff;
---vivid-tangerine: #eb9486ff;
---rhythm: #7e7f9aff;
---cultured: #f9f8f8ff; */
+
+
 
 
 
 * {
-  /* background-color: #f2f2f2; */
   margin: 0px;
   padding: 0px;
-  /* color: #1985a1; */
-
 }
-
-/* inpit feilds properties  */
-
 
 .App {
   color: #1985a1;
-
-  /* margin-top: 4em; */
   font-family: 'inter', sans-serif;
-
-
 }
 
 .App input {
@@ -49,6 +36,29 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+
+
+.MyeventCardActive {
+  transition: all 0.2s ease-in-out;
+  border-bottom: 3px solid #1985a1;
+  transform: scale(1.01);
+  background-color: rgb(231, 229, 229);
+  border-radius: 5px;
+
+  transition: all 0.2s ease-in-out;
+
+
+}
+
+.MyeventCard:hover {
+  transition: all 0.2s ease-in-out;
+  border-bottom: 3px solid #1985a1;
+  /* background-color: rgb(231, 229, 229); */
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+
 }
 
 @media (prefers-reduced-motion: no-preference) {

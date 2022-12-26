@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button, Offcanvas, OffcanvasBody, OffcanvasHeader, Col, Row, FormGroup, Input, Label } from 'reactstrap'
-import './MyEventCard.css'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
