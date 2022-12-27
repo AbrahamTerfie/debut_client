@@ -53,8 +53,8 @@ export default function People() {
 
     return (
 
-        <div className=' d-flex flex-column m-5  p-5 ' >
-            <p className='fw-light fs-1  mx-5'> People directory</p>
+        <div className=' d-flex flex-column m-auto p-5 mt-5 ' >
+            <h1 className='fw-light fs-1  m-5 mb-3'> People directory</h1>
             <Row className=''>
 
                 <Col md={10} sm={8} xs={8} >
