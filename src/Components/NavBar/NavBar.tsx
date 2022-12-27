@@ -21,8 +21,8 @@ export default function NavBarComponent() {
     const textColor = { color: "#1985a1", cursor: "pointer" }
     return (
         <Navbar
-            className='px-5  mb-5 shadow-lg  bg-light bg-opacity-80 '
-            dark expand="xl" fixed="top" fluid="true"    >
+            className='px-5  mb-5 shadow-sm  bg-dark '
+             expand="xl" fixed="top" fluid="true"    >
             <NavbarBrand onClick={() => { navigate(appRoutes.forum) }} 
                 style={{
                     fontFamily: 'Bungee Shade, cursive',
@@ -32,7 +32,7 @@ export default function NavBarComponent() {
             </NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={dropdownOpen} navbar>
-                <Nav className=" dark   d-flex justify-content-between" navbar>
+                <Nav className=" d-flex justify-content-between" navbar>
                     <div className='d-flex   '>
                         <NavItem >
                             <NavLink style={textColor} onClick={() => { navigate(appRoutes.people) }} className={classNames(" mx-1 px-2", location.pathname === appRoutes.people ? "MyeventCardActive" : "MyeventCard")}  >

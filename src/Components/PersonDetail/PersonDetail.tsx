@@ -61,7 +61,8 @@ export default function PersonDetail() {
 
 
     return (
-        <div className='p-4 px-5 shadow  rounded rounded-5 my-2 overflow-auto d-flex flex-column  flex-wrap  py-5  bg-dark bg-opacity-10'>
+        <div className='p-4 px-auto shadow-sm  rounded  my-auto overflow-auto d-flex flex-column  flex-wrap  py-5  text-info-emphasis bg-info-subtle border border-info-subtle 
+        '>
             <Emailcanvas />
             <Row>
                 <Col md={3}

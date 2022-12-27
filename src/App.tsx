@@ -35,7 +35,7 @@ function App() {
 
   return (
     <Suspense fallback={<Loader />}>
-      <div className="App">
+      <div className="App" >
         {!isAuthenticated ?
           <Routes>
             <Route path={appRoutes.landing} element={<Landing />} />
@@ -70,7 +70,7 @@ function App() {
           </div>
         }
       </div>
-    </Suspense>
+    </Suspense >
   );
 }
 

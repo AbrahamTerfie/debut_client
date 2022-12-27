@@ -21,9 +21,9 @@ export default function TopBar({ toggleSidebar }: any) {
 
     return (
         <Navbar
-            color="light"
+            // color="dark"
             light
-            className="navbar shadow-sm p-3 my-5  bg-white rounded h-10 border border-muted "
+            className="navbar shadow-sm p-3 my-5  rounded h-10 border border-muted "
             expand="xl"
             md="12"
             sticky="top"

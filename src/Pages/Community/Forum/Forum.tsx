@@ -155,29 +155,26 @@ export default function Forum() {
                 <SearchComponent />
             </Row>
 
-            <div className='d-flex justify-content-around mx-5  flex-row flex-wrap sticky-xxl-top px-5 py-3 '
-                style={{ zIndex: 1, top: '10%', backgroundColor: 'white', }}>
+            <div className='d-flex justify-content-around   flex-row flex-wrap sticky-xxl-top  mx-5 mt-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
                 <MotionContainer>
                     <p onClick={() => toggle()}
-                        className='  my-1 p-3 py-2 px-5 shadow-sm  bg-success bg-opacity-10 rounded-pill text-success  d-flex justify-content-center align-items-center'>
-                        <IoMdAdd size={20} className='mx-3 ' />
+                        className='   p-2 py-auto px-5 shadow-sm  text-success-emphasis bg-success  bg-opacity-10  border border-success-subtle rounded-pill '>
+                        <IoMdAdd size={20} className='mx-auto ' />
                         <span  > New Post </span>
                     </p>
                 </MotionContainer>
 
                 <MotionContainer>
-                    <p
-                        className={`  my-1 p-3 py-2 px-5 shadow-sm  bg-warning bg-opacity-10 rounded-pill text-warning  d-flex justify-content-center align-items-center
-                                    ${channelFilter === channelNames.general ? 'shadow border border-2 border-warning  ' : ''}`}
+                    <p className={`  p-2 py-auto px-5  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-warning-emphasis bg-warning-emphasis  border-warning-emphasis 
+                                    ${channelFilter === channelNames.general ? '   text-warning-emphasis bg-warning-subtle border border-warning-subtle    ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.general)}  >
                         <IoChatbubblesOutline size={20} className='mx-3' />
                         General
                     </p>
                 </MotionContainer>
                 <MotionContainer>
-                    <p
-                        className={` my-1 p-3 py-2 px-5 shadow-sm  bg-info bg-opacity-10 rounded-pill text-info  d-flex justify-content-center align-items-center
-                                ${channelFilter === channelNames.collaboration ? 'shadow border border-2 border-info  ' : ''}`}
+                    <p className={`  p-2 py-auto px-5   border border-2 rounded-pill   d-flex justify-content-center align-items-center text-info-emphasis bg-info-emphasis  border-info-emphasis 
+                                ${channelFilter === channelNames.collaboration ? '   text-info-emphasis bg-info-subtle border border-info-subtle   ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.collaboration)} >
                         <FaRegHandPaper size={15}
                             style={{ backgroundColor: 'transparent', }}
@@ -186,8 +183,8 @@ export default function Forum() {
                     </p>
                 </MotionContainer>
                 <MotionContainer>
-                    <p className={` my-1 p-3 py-2 px-5 shadow-sm  bg-primary bg-opacity-10 rounded-pill text-primary  d-flex justify-content-center align-items-center
-                            ${channelFilter === channelNames.community ? 'shadow border border-2 border-primary  ' : ''}`}
+                    <p className={`   p-2 py-auto px-5  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-primary-emphasis bg-primary-emphasis  border-primary-emphasis 
+                            ${channelFilter === channelNames.community ? '  text-primary-emphasis bg-primary-subtle border border-primary-subtle   ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.community)} >
                         <FaRegHandshake size={15}
                             style={{ backgroundColor: 'transparent', }}
@@ -197,7 +194,7 @@ export default function Forum() {
                 </MotionContainer>
 
                 <MotionContainer>
-                    <span className='py-2  text-muted px-5  my-2  bg-dark bg-opacity-10 rounded-pill text-dark  d-flex justify-content-center align-items-center'
+                    <span className='p-2 py-auto px-5  text-muted    bg-opacity-10 rounded-pill text-dark  d-flex justify-content-center align-items-center border border-muted'
                         onClick={() => setChannelFilter('')} >
                         clear filter
                     </span>
@@ -205,7 +202,9 @@ export default function Forum() {
 
             </div>
 
-            <Row className='m-3 mx-5 px-5'>
+            <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto '
+               
+            >
                 {data.getForumPosts.map((post: any, index: number) => {
                     if (channelFilter === '') {
                         return (

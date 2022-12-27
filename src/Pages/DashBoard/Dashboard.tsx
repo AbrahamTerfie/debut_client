@@ -127,7 +127,7 @@ export default function Dashboard() {
                                     animate={{ scale: 1 }}
                                     transition={{ duration: 0.2 }}
                                     key={index} className=" my-3 mx-4" style={{ width: "18rem" }} onClick={() => navigate(card.link)}>
-                                    <div className={` shadow border ${card.bgColor} text-${card.color} border-muted  bg-opacity-10 d-flex justify-content-center align-items-center flex-row p-3 rounded  `}
+                                    <div className={` shadow-sm border ${card.bgColor} text-${card.color} border-muted  bg-opacity-10 d-flex justify-content-center align-items-center flex-row p-3 rounded  `}
                                         // make the card size the same
                                         style={{ height: "150px", cursor: "default" }}>
 

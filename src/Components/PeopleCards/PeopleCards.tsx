@@ -25,25 +25,32 @@ export default function PeopleCards({ people }: any) {
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             style={{ cursor: 'pointer' }}
             className={activePersonId === people._id ?
-                '  shadow-lg  rounded-3   my-2  bg-dark  bg-opacity-10 border-muted '
-                : '  shadow-sm rounded-5   my-2  border border-muted '}
+                '  my-2 text-info-emphasis bg-info-subtle border border-info-subtle '
+                : '  rounded-1   my-2  border border-muted '}
         >
             <Row onClick={(e: any) => handleClick(e)}>
-                <Col md={3} >
+                <Col md={3}
+                    sm={4}
+                    xs={4}
+                    lg={2}
+                >
                     <img
                         src={people.profileImage}
                         alt='profile'
-                        className='rounded img-fluid h-100 w-75'
-                        style={{ width: '75px', height: '75px', objectFit: 'cover', maxHeight: '7em', minHeight: '7em' }}
+                        // have fixed sizes for all images and responsive sizes for all devices
+                        className='rounded img-fluid mx-auto  d-block  object-fit-cover h-100
+
+                        '
                     />
                 </Col>
-                <Col md={9}
-                    className='d-flex flex-column justify-content-center align-items-start p-2'>
-                    <p className=' fw-bold fs-5 m-0' > {people.firstName}  {people.lastName}  </p>
-                    <p className='fs-6 fw-lighter m-0 text-muted' >
+                <Col md={9} sm={8} xs={8} lg={10}
+                    className='d-flex flex-column justify-content-center align-items-start p-2 mx-auto flex-wrap overflow-hidden '>
+                    <p className=' fw-bold  fs-5 me-auto d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start' >
+                        {people.firstName}  {people.lastName}  </p>
+                    <p className='fs-6 fw-lighter me-auto text-muted  d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start' >
                         {people.titleAtCompany}
                     </p>
-                    <p className='fw-lighter'>
+                    <p className='fw-lighter me-auto   d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start'>
                         {people.company[0]?.companyName}
                     </p>
                 </Col>
