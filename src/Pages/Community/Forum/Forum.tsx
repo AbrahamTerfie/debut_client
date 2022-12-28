@@ -50,7 +50,7 @@ export default function Forum() {
     const toggleIsNewUser = (): void => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
 
-    // console.log(authenticatedUsrRes, "userID")
+    console.log("userID", authenticatedUsrRes)
 
     // console.log("channelFilter", channelFilter)
     // saves the user information when the user logs in to keep it in sybc with store 
@@ -58,6 +58,8 @@ export default function Forum() {
 
     //gets the user from the server if it exists and if it doesn't it creates a new user
     // console.log(data.allForumPosts)
+
+
     useEffect(() => {
         if (user && auth0UserInfo) authenticatedUser({
             variables: {
@@ -203,7 +205,7 @@ export default function Forum() {
             </div>
 
             <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto '
-               
+
             >
                 {data.getForumPosts.map((post: any, index: number) => {
                     if (channelFilter === '') {

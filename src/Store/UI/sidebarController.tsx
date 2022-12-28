@@ -19,8 +19,7 @@ interface EmailBodyInterface {
 }
 
 const initalState = {
-    isSidebarOpen: true,
-    myDebutTab: '1',
+
     activePersonId: '',
     peopleExpertiseFilter: [] as any,
     peopleRegionFilter: [] as any,
@@ -61,12 +60,8 @@ const uiStore = createSlice({
 
         },
 
-        toggleSidebar: (state) => {
-            state.isSidebarOpen = !state.isSidebarOpen;
-        },
-        setMyDebutTab: (state, action) => {
-            state.myDebutTab = action.payload;
-        },
+
+
         setActivePersonId: (state, action) => {
             state.activePersonId = action.payload;
         },
@@ -93,7 +88,7 @@ const uiStore = createSlice({
 
 
 
-export const { toggleEmailPopup, toggleSidebar, setMyDebutTab, setActivePersonId,
+export const { toggleEmailPopup, setActivePersonId,
     peopleExpertiseFilterHandler, peopleRegionFilterHandler, clearPeopleFilter } = uiStore.actions;
 
 export default uiStore.reducer;

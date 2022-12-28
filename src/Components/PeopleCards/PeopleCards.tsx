@@ -44,13 +44,13 @@ export default function PeopleCards({ people }: any) {
                     />
                 </Col>
                 <Col md={9} sm={8} xs={8} lg={10}
-                    className='d-flex flex-column justify-content-center align-items-start p-2 mx-auto flex-wrap overflow-hidden '>
-                    <p className=' fw-bold  fs-5 me-auto d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start' >
+                    className='d-flex flex-column justify-content-center align-items-start p-2 mx-auto flex-wrap overflow-hidden  '>
+                    <p className=' fw-bold m-0  fs-5 me-auto d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start' >
                         {people.firstName}  {people.lastName}  </p>
-                    <p className='fs-6 fw-lighter me-auto text-muted  d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start' >
+                    <p className='fs-6 m-0 fw-lighter me-auto text-muted  d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start' >
                         {people.titleAtCompany}
                     </p>
-                    <p className='fw-lighter me-auto   d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start'>
+                    <p className='fw-lighter m-0  me-auto   d-flex flex-wrap align-items-start justify-content-center justify-content-sm-start'>
                         {people.company[0]?.companyName}
                     </p>
                 </Col>

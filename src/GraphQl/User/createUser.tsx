@@ -18,6 +18,8 @@ export const AUTHENTICATED_USER = gql`
 mutation  AuthenticatedUser ($userInput: UserInput){
   authenticatedUser (  userInput: $userInput){
     _id,
+    newUser,
+    hasCompany,
     aeraOfExpertise,
     email,
     assistantName,
