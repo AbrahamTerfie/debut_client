@@ -24,6 +24,7 @@ import MotionContainer from '../../../Components/MotionContainer/MotionContainer
 import { notifyError } from '../../../Components/Notification/Toast'
 import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../../Routes/routes'
+import OnBoardingForm from '../../../Components/OnBoarding/OnBoardingForm'
 
 
 
@@ -127,6 +128,7 @@ export default function Forum() {
                     <h3 className='m-0'> We are glad to have you here</h3>
                     <h5 className='text-success'>Please set up your profile and company information to continue </h5>
 
+                    <OnBoardingForm />
 
 
                 </ModalBody>
