@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
 import NavBarComponent from './Components/NavBar/NavBar';
 
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0  } from '@auth0/auth0-react';
 import { Toaster } from 'react-hot-toast';
 
 const Landing = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Landing })));

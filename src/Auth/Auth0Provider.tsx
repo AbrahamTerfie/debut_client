@@ -15,6 +15,11 @@ export const Auth0ProviderWithHistory = ({ children }:
         clientId={clientId}
         redirectUri={window.location.origin}
         audience={audience}
+        cacheLocation='localstorage'
+        useRefreshTokens={true}
+        
+
+
 
     >
         {children}

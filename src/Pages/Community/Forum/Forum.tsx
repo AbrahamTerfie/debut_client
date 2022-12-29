@@ -119,11 +119,12 @@ export default function Forum() {
         <div>
             <Modal centered size='lg' isOpen={!hasCompany === false} toggle={toggleIsNewUser}  >
                 <ModalHeader
-                    className='bg-success bg-opacity-10 text-success'
+                    // className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>
                     <p className='m-0'>Welcome to Debut </p>
                 </ModalHeader>
-                <ModalBody className='bg-success bg-opacity-10 text-muted text-start p-5 d-flex flex-column  '>
+                <ModalBody
+                 className=' text-muted text-start p-5 d-flex flex-column  '>
                     {/* welcome prompt to the app and tell them to set up profile and compnay infomation */}
                     <h3 className='m-0'> We are glad to have you here</h3>
                     <h5 className='text-success'>Please set up your profile and company information to continue </h5>
@@ -132,7 +133,7 @@ export default function Forum() {
 
 
                 </ModalBody>
-                <ModalFooter className='bg-success bg-opacity-10 text-muted'>
+                <ModalFooter className=' text-muted'>
                     <Button color="success " size="sm" outline onClick={() => navigate(appRoutes.dashboard)}>
                         <p className='mx-5 my-0'>set up</p>
                     </Button>{' '}
