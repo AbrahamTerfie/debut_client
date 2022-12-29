@@ -24,7 +24,7 @@ import MotionContainer from '../../../Components/MotionContainer/MotionContainer
 import { notifyError } from '../../../Components/Notification/Toast'
 import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../../Routes/routes'
-// types
+
 
 
 const channelNames = {
@@ -116,7 +116,7 @@ export default function Forum() {
 
     return (
         <div>
-            <Modal centered size='lg' isOpen={hasCompany === false} toggle={toggleIsNewUser}  >
+            <Modal centered size='lg' isOpen={!hasCompany === false} toggle={toggleIsNewUser}  >
                 <ModalHeader
                     className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>
@@ -126,6 +126,9 @@ export default function Forum() {
                     {/* welcome prompt to the app and tell them to set up profile and compnay infomation */}
                     <h3 className='m-0'> We are glad to have you here</h3>
                     <h5 className='text-success'>Please set up your profile and company information to continue </h5>
+
+
+
                 </ModalBody>
                 <ModalFooter className='bg-success bg-opacity-10 text-muted'>
                     <Button color="success " size="sm" outline onClick={() => navigate(appRoutes.dashboard)}>
