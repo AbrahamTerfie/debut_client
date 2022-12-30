@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import OnBoardingCompany from './OnBoardingCompany'
 import OnboardingPersonal from './OnboardingPersonal'
-import {
-    Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText
-} from 'reactstrap'
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -12,17 +9,9 @@ import StepContent from '@mui/material/StepContent';
 
 import { GiDividedSpiral } from 'react-icons/gi';
 import MotionContainer from '../MotionContainer/MotionContainer';
-// firstName: firstName || '', lastName: lastName || '',
-// preferredName: preferredName || '', pronouns: pronouns || '',
-// titleAtCompany: titleAtCompany || '', linkedinUrl: linkedinUrl || '',
-// twitterUrl: twitterUrl || '', instagramUrl: instagramUrl || '',
-// facebookUrl: facebookUrl || '',
-// mailingAddress: mailingAddress || '', profileImage: profileImage || '',
-// email: email || '', mobilePhone: mobilePhone || '',
-// officePhone: officePhone || '', preferedContactMethod: preferedContactMethod || '',
-// hasAssistat: hasAssistat || true, assistantName: assistantName || '',
-// assistantEmail: assistantEmail || '', assistantPhone: assistantPhone || '',
 
+
+// dummy place holder component
 function Component(Number: string) {
     return (
         <div>
@@ -51,22 +40,18 @@ export default function OnBoardingForm(
 
     const steps = [
         {
-            label: 'Select campaign settings',
-            Component: Component('1'),
+            label: 'Personal Information',
+            Component: <OnboardingPersonal />,
         },
         {
-            label: 'Create an ad group',
-            Component: Component('2'),
+            label: 'Your Business',
+            Component: <OnBoardingCompany />,
         },
         {
-            label: 'Create an ad',
+            label: 'All done !',
             Component: Component('3'),
         },
     ];
-
-
-
-
 
 
     return (
@@ -84,68 +69,29 @@ export default function OnBoardingForm(
                         </StepLabel>
 
                         <StepContent>
-                            <>{step.Component}</>
+                            {step.Component}
                             <Box sx={{ mb: 2 }}>
                                 <div className='d-flex justify-content-start '>
                                     <MotionContainer>
                                         <div onClick={index === 0 ? undefined : handleBack}
-                                            className={` rounded-3  px-3 py-2 mx-2 ${index === 0 ? 'disabled' : 'text-warning-emphasis bg-warning-subtle border border-warning-subtle'}`}>
+                                            className={` rounded-3  px-3 py-2 m-2 ${index === 0 ? 'disabled' : 'text-warning-emphasis bg-warning-subtle border border-warning-subtle'}`}>
                                             back
                                         </div>
                                     </MotionContainer>
                                     <MotionContainer>
-                                        <div onClick={
-                                            activeStep === steps.length - 1 ? () => null : handleNext
-
-                                        }
-                                            className='text-success-emphasis bg-success-subtle border border-success-subtle rounded-3  px-3 py-2 mx-2' >
-                                            {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                                        <div
+                                            className='text-success-emphasis bg-success-subtle border border-success-subtle rounded-3  px-3 py-2 m-2'
+                                            onClick={activeStep === steps.length - 1 ? () => null : handleNext} >
+                                            {index === steps.length - 1 ? 'Finish' : 'save & Continue'}
                                         </div>
                                     </MotionContainer>
-
-
-
                                 </div>
                             </Box>
                         </StepContent>
                     </Step>
                 ))}
-                {/* {activeStep === steps.length && (
-
-            <div>
-                 <Typography>All steps completed - you&apos;re finished</Typography>
-                 <Button onClick={() => toggle('2')}
-                     className='text-success-emphasis bg-success-subtle border border-success-subtle rounded-3  px-3 py-2 mx-2'
-                 >
-                     set up company
-                 </Button>
-
-             </div>
-         )} */}
 
             </Stepper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div >
     )
 }
