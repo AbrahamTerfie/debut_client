@@ -103,7 +103,7 @@ export default function VentureCards(
                             <p className=' fw-light mb-3' >{companyDescription}</p>
                             <small className=' fw-light text-muted  m-0'> Company owner </small>
                             <p className=' fw-light mb-3' >
-                                <span className='fw-bold'> {companyOwner.firstName} {companyOwner.lastName} </span>
+                                <span className='fw-bold'> {companyOwner?.firstName} {companyOwner?.lastName} </span>
                             </p>
                             <small className=' fw-light text-muted  m-0'> company achivements </small>
                             <div className='d-flex flex-wrap m-2' >

@@ -70,6 +70,10 @@ export default function OnBoardingForm(
 
                         <StepContent>
                             {step.Component}
+
+
+
+                            
                             <Box sx={{ mb: 2 }}>
                                 <div className='d-flex justify-content-start '>
                                     <MotionContainer>

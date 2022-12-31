@@ -3,11 +3,11 @@ import './App.css';
 import "animate.css/animate.min.css";
 // import { Landing, Dashboard, DashBoardPages } from './Pages/inedx';
 // import { GiveGratitude, Forum, People, Ventures, CompanyDetailPage, Events, EventPage } from './Pages/Community/index';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { appRoutes } from './Routes/routes';
 import NavBarComponent from './Components/NavBar/NavBar';
 
-import { useAuth0  } from '@auth0/auth0-react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Toaster } from 'react-hot-toast';
 
 const Landing = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Landing })));
@@ -32,43 +32,45 @@ const Loader = React.lazy(() => import('./Components/Loader/Loader'));
 
 function App() {
   const { isAuthenticated } = useAuth0();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
+  // if authenticated and on landing page, redirect to forum page
+  if (isAuthenticated && location.pathname === appRoutes.landing) {
+    navigate(appRoutes.forum);
+  } else if (!isAuthenticated && location.pathname !== appRoutes.landing) {
+    navigate(appRoutes.landing);
+  }
 
   return (
     <Suspense fallback={<Loader />}>
       <div className="App" >
-        {!isAuthenticated ?
-          <Routes>
-            <Route path={appRoutes.landing} element={<Landing />} />
-            {/* <Route path={appRoutes.authentication} element={<Authentication />} /> */}
-          </Routes>
-          :
-          <div>
-            <NavBarComponent />
-            <Routes>
+        {isAuthenticated && <NavBarComponent />}
+        <Routes>
+          <Route path={appRoutes.landing} element={<Landing />} />
 
-              <Route path={appRoutes.forum} caseSensitive element={<Forum />} />
-              <Route path={appRoutes.giveGratitude} caseSensitive element={<GiveGratitude />} />
-              <Route path={appRoutes.people} caseSensitive element={<People />} />
-              <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
-              <Route path={appRoutes.debutEvent} caseSensitive element={<Events />} />
-              <Route path={appRoutes.debutEventPage} caseSensitive element={<EventPage />} />
+          <Route path={appRoutes.forum} caseSensitive element={<Forum />} />
+          <Route path={appRoutes.giveGratitude} caseSensitive element={<GiveGratitude />} />
+          <Route path={appRoutes.people} caseSensitive element={<People />} />
+          <Route path={appRoutes.ventures} caseSensitive element={<Ventures />} />
+          <Route path={appRoutes.debutEvent} caseSensitive element={<Events />} />
+          <Route path={appRoutes.debutEventPage} caseSensitive element={<EventPage />} />
 
-              {/* *************** */}
+          {/* *************** */}
 
-              <Route path={appRoutes.venturePage} element={<CompanyDetailPage />} />
-              <Route path={appRoutes.dashboard} element={<Dashboard />} >
-                <Route path={appRoutes.myProfile} element={<MyProfile />} />
-                <Route path={appRoutes.myCompany} element={<MyCompany />} />
-                <Route path={appRoutes.goals} element={<CompanyGoals />} />
-                <Route path={appRoutes.events} element={<CompanyEvents />} />
-                <Route path={appRoutes.eventDetails} element={<DebutEventPage />} />
-                <Route path={appRoutes.gratitudes} element={<GratitudePage />} />
-                <Route path={appRoutes.experience} element={<DashboardExperiance />} />
-              </Route>
-            </Routes>
-            <Toaster />
-          </div>
-        }
+          <Route path={appRoutes.venturePage} element={<CompanyDetailPage />} />
+          <Route path={appRoutes.dashboard} element={<Dashboard />} >
+            <Route path={appRoutes.myProfile} element={<MyProfile />} />
+            <Route path={appRoutes.myCompany} element={<MyCompany />} />
+            <Route path={appRoutes.goals} element={<CompanyGoals />} />
+            <Route path={appRoutes.events} element={<CompanyEvents />} />
+            <Route path={appRoutes.eventDetails} element={<DebutEventPage />} />
+            <Route path={appRoutes.gratitudes} element={<GratitudePage />} />
+            <Route path={appRoutes.experience} element={<DashboardExperiance />} />
+          </Route>
+        </Routes>
+        <Toaster />
       </div>
     </Suspense >
   );

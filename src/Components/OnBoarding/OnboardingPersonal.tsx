@@ -3,23 +3,26 @@ import { Row, Col, Input, FormGroup, Label } from 'reactstrap'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { aeraOfExpertise, regions } from '../../Constants/index';
+import { UPDATE_DEBUT_USER_WITH_ID } from '../../GraphQl/index';
+import { useMutation } from '@apollo/client';
+import { notifyError } from '../Notification/Toast';
 
+
+const initState = {
+    firstName: '',
+    lastName: '',
+    preferredName: '',
+    titleAtCompany: '',
+    linkedinUrl: '',
+    biography: '',
+    howWillYouHelp: '',
+    aeraOfExpertise: [],
+    regions: [],
+}
 
 export default function OnboardingPersonal() {
     const animatedComponents = makeAnimated();
-
-    const [onBoardingPersonalform, setOnBoardingPersonalform] = useState({
-        firstName: '',
-        lastName: '',
-        preferredName: '',
-        titleAtCompany: '',
-        linkedinUrl: '',
-        biography: '',
-        howWillYouHelp: '',
-        aeraOfExpertise: [],
-        regions: [],
-    })
-
+    const [onBoardingPersonalform, setOnBoardingPersonalform] = useState(initState)
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setOnBoardingPersonalform({
             ...onBoardingPersonalform, [e.target.name]: e.target.value
