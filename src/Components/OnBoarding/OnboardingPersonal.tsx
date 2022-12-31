@@ -31,7 +31,6 @@ export default function OnboardingPersonal() {
         })
     }
 
-    console.log(onBoardingPersonalform);
     return (
         <Row>
             <Col sm={12} md={6} lg={6} xl={6} >

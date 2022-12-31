@@ -6,7 +6,7 @@ import {
     Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label
 } from 'reactstrap'
 import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, DELETE_DEBUT_REGISTRY, TOGGLE_REGISTRY_STATUS, } from '../../../GraphQl/index'
-import { useMutation,  } from '@apollo/client'
+import { useMutation, } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
 import { notifyError, notifyLoading, notifySuccess } from '../../Notification/Toast'
 import { useParams } from 'react-router-dom'
@@ -123,23 +123,29 @@ export default function RegistryAccordion(
 
 
     //create preview image string 
-    useEffect(() => {
-        if (!imageSelected) {
-            setPreviewImage("")
-            return
-        }
-        const objectURL = URL.createObjectURL(imageSelected)
-        setPreviewImage(objectURL)
-        return () => URL.revokeObjectURL(objectURL)
-    }, [imageSelected])
+    // useEffect(() => {
+    //     if (!imageSelected) {
+    //         setPreviewImage("")
+    //         return
+    //     }
+    //     const objectURL = URL.createObjectURL(imageSelected)
+    //     setPreviewImage(objectURL)
+    //     return () => URL.revokeObjectURL(objectURL)
+    // }, [imageSelected])
 
 
     const onSelectFile = (e: any) => {
+        // if (e.target.files && e.target.files.length > 0) {
+        //     setImageSelected(e.target.files[0])
+        // }
+
         if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader()
+            reader.addEventListener('load', () => setPreviewImage(reader.result as string))
+            reader.readAsDataURL(e.target.files[0])
             setImageSelected(e.target.files[0])
         }
     }
-
     const submitHandler = (e: any) => {
         e.preventDefault()
         const formData = new FormData()
