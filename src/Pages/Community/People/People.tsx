@@ -30,25 +30,25 @@ export default function People() {
 
 
 
-    useEffect(() => {
-        authenticatedUser({
-            variables: {
-                userInput: {
-                    email: user?.email,
-                    userName: user?.name,
-                    firstName: user?.nickname,
-                }
+    // useEffect(() => {
+    //     authenticatedUser({
+    //         variables: {
+    //             userInput: {
+    //                 email: user?.email,
+    //                 userName: user?.name,
+    //                 firstName: user?.nickname,
+    //             }
 
-            }
-        })
+    //         }
+    //     })
 
-    }, [user?.email, user?.name, user?.nickname, authenticatedUser])
-    if (authenticatedUsrRes.error) { (notifyError(authenticatedUsrRes.error.message)) }
+    // }, [user?.email, user?.name, user?.nickname, authenticatedUser])
+    if (authenticatedUsrRes.error) { (notifyError( "1 " +authenticatedUsrRes.error.message)) }
     if (authenticatedUsrRes.loading || loading) { return <Loader /> }
 
     if (error) {
         console.log(error)
-        notifyError(error.message.toString())
+        notifyError("1 " + error.message.toString())
     }
 
     return (
@@ -94,8 +94,8 @@ export default function People() {
             </Collapse>
             <Row className='mt-5 '  >
                 <Col className={`overflow-scroll  ${activePersonId === "" ? '' : 'd-none d-sm-block'}`}
-                //    make col scrollable  on y axis
-                style={{ maxHeight: '80vh' }}
+                    //    make col scrollable  on y axis
+                    style={{ maxHeight: '80vh' }}
 
                 >
 

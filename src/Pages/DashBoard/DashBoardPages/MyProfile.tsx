@@ -32,7 +32,7 @@ export default function MyProfile() {
         twitterUrl: twitterUrl || '', instagramUrl: instagramUrl || '',
         facebookUrl: facebookUrl || '',
         mailingAddress: mailingAddress || '', profileImage: profileImage || '',
-        email: email || '', mobilePhone: mobilePhone || '',
+        email: email, mobilePhone: mobilePhone || '',
         officePhone: officePhone || '', preferedContactMethod: preferedContactMethod || '',
         hasAssistat: hasAssistat || true, assistantName: assistantName || '',
         assistantEmail: assistantEmail || '', assistantPhone: assistantPhone || '',

@@ -45,86 +45,68 @@ export default function Forum() {
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
     const { user } = useAuth0();
-    const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS)
     const [isNewUser, setIsNewUser] = useState(true)
     const toggleIsNewUser = (): void => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
+    const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER,
+        {
+            onCompleted: (data) => {
+                const { authenticatedUser } = data;
+                // console.log("111111111111authenticatedUser", authenticatedUser.email)
 
-    console.log("userID", authenticatedUsrRes)
-
-    // console.log("channelFilter", channelFilter)
-    // saves the user information when the user logs in to keep it in sybc with store 
-    useEffect(() => { if (user) { dispatch(saveAuth0UserInfo(user)) } }, [user, dispatch])
-
-    //gets the user from the server if it exists and if it doesn't it creates a new user
-    // console.log(data.allForumPosts)
-
-
-    useEffect(() => {
-        if (user && auth0UserInfo) authenticatedUser({
-            variables: {
-                userInput: {
-                    email: auth0UserInfo.email,
-                    userName: auth0UserInfo.name,
-                    firstName: auth0UserInfo.nickname,
-                    profileImage: hasCompany === false ? auth0UserInfo.picture : '',
-                }
+                dispatch(setPersonaldata({
+                    userID: authenticatedUser._id,
+                    userEmail: authenticatedUser.email,
+                
+                }));
+                checkIsNewUser({ variables: { userId: authenticatedUser._id } });
             }
-        })
-    }, [auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser])
-
+        }
+    )
 
 
     const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
         // variables: { userId: userID },
         onCompleted: (data) => {
-
-            // ********** is not checkeing for new user but instead for company **********
             if (data?.checkIfUserHasCompany === true) {
                 dispatch(setHasCompany(true))
-
             } else if (data?.checkIfUserHasCompany === false) {
-
                 dispatch(setHasCompany(false))
             }
         }
     })
 
-
     useEffect(() => {
-        if (authenticatedUsrRes.data) {
-            const { authenticatedUser } = authenticatedUsrRes.data;
-            dispatch(setPersonaldata({
-                userID: authenticatedUser._id,
-                userEmail: authenticatedUser.email,
-                myBiography: authenticatedUser.yourBiography || '',
-                userFullName: `${authenticatedUser.firstName} ${authenticatedUser.lastName}`,
-                myCompanyDescription: authenticatedUser.company?.companyDescription,
-            }));
-            checkIsNewUser({
+        if (user) {
+            dispatch(saveAuth0UserInfo(user))
+            auth0UserInfo && authenticatedUser({
                 variables: {
-                    userId: authenticatedUser._id,
-                },
-            });
+                    userInput: {
+                        email: auth0UserInfo.email,
+                        userName: auth0UserInfo.name,
+                        firstName: auth0UserInfo.nickname,
+                        profileImage: auth0UserInfo.picture,
+                    }
+                }
+            })
         }
-    }, [authenticatedUsrRes?.data, dispatch, checkIsNewUser]);
+    }, [auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser])
 
 
     if (loading || authenticatedUsrRes.loading) { return <Loader /> }
     if (error) { notifyError("soething went wrong ") }
 
-
     return (
         <div>
-            <Modal centered size='lg' isOpen={!hasCompany === false} toggle={toggleIsNewUser}  >
+            <Modal centered size='lg' isOpen={hasCompany === true ? false : true} toggle={toggleIsNewUser}  >
                 <ModalHeader
                     // className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>
                     <p className='m-0'>Welcome to Debut </p>
                 </ModalHeader>
                 <ModalBody
-                 className=' text-muted text-start p-5 d-flex flex-column  '>
+                    className=' text-muted text-start p-5 d-flex flex-column  '>
                     {/* welcome prompt to the app and tell them to set up profile and compnay infomation */}
                     <h3 className='m-0'> We are glad to have you here</h3>
                     <h5 className='text-success'>Please set up your profile and company information to continue </h5>
