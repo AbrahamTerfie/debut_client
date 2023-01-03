@@ -8,8 +8,8 @@ import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import './Forum.css'
 import Loader from '../../../Components/Loader/Loader'
 // icons
-import { IoMdAdd } from 'react-icons/io'
-import { IoChatbubblesOutline } from 'react-icons/io5'
+import { IoMdAdd, IoMdClose } from 'react-icons/io'
+import { IoChatbubblesOutline, IoExit, IoLogoXbox } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 // graphql
 import { useQuery } from '@apollo/client'
@@ -81,13 +81,24 @@ export default function Forum() {
                 </ModalFooter>
             </Modal>
 
-            <Offcanvas Offcanvas style={{ width: '50%' }}
+            <Offcanvas 
+                responsive={true}
+                fade={true}
+                keyboard
+                backdrop={true}
+                md={6} lg={6} xl={6} sm={8} xs={10}
                 direction="end" isOpen={canvas}
                 toggle={toggle} scrollable={true}
             >
-                <OffcanvasHeader toggle={toggle}>
-                    <h1 className='fs-3 m-3 px-5 fw-light' >Create New Post</h1>
-                    <p className='fs-5 m-3 px-5 fw-light ' > share your events , ideas , or anything you want to share with the community</p>
+                <OffcanvasHeader toggle={toggle}
+                    close={<MotionContainer>
+                        <IoMdClose className=' text-danger-emphasis' onClick={toggle} size={20} />
+                    </MotionContainer>}
+                >
+                    <p className='fs-1 m-0 ps-2  text-success-emphasis ' >
+                        post to forun
+                    </p>
+                    <p className='fs-5 me-3 ps-3 fw-light ' > share your events , ideas , or anything you want to share with the community</p>
                 </OffcanvasHeader>
                 <OffcanvasBody >
                     <NewForumPost toggler={toggle} />
@@ -104,56 +115,66 @@ export default function Forum() {
                 <SearchComponent />
             </Row>
 
-            <div className='d-flex justify-content-around   flex-row flex-wrap sticky-xxl-top  mx-5 mt-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
+            <div className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 mt-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
                 <MotionContainer>
                     <p onClick={() => toggle()}
-                        className='   p-2 py-auto px-5 shadow-sm  text-success-emphasis bg-success  bg-opacity-10  border border-success-subtle rounded-pill '>
-                        <IoMdAdd size={20} className='mx-auto ' />
-                        <span  > New Post </span>
+                        className='   p-2 py-auto px-3 shadow-sm  text-success-emphasis bg-success  bg-opacity-10  border border-success-subtle rounded-pill '>
+                        <IoMdAdd
+                            size={15}
+                            style={{ backgroundColor: 'transparent', }}
+                            className='mx-2'
+
+                        />
+                        <span className='d-none d-md-inline-block'>New Post</span>
                     </p>
                 </MotionContainer>
 
                 <MotionContainer>
-                    <p className={`  p-2 py-auto px-5  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-warning-emphasis bg-warning-emphasis  border-warning-emphasis 
+                    <p className={`  p-2 py-auto px-3  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-warning-emphasis bg-warning-emphasis  border-warning-emphasis 
                                     ${channelFilter === channelNames.general ? '   text-warning-emphasis bg-warning-subtle border border-warning-subtle    ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.general)}  >
                         <IoChatbubblesOutline size={20} className='mx-3' />
-                        General
+                        <span className='d-none d-md-inline-block'>General </span>
+
                     </p>
                 </MotionContainer>
                 <MotionContainer>
-                    <p className={`  p-2 py-auto px-5   border border-2 rounded-pill   d-flex justify-content-center align-items-center text-info-emphasis bg-info-emphasis  border-info-emphasis 
+                    <p className={`  p-2 py-auto px-3   border border-2 rounded-pill   d-flex justify-content-center align-items-center text-info-emphasis bg-info-emphasis  border-info-emphasis 
                                 ${channelFilter === channelNames.collaboration ? '   text-info-emphasis bg-info-subtle border border-info-subtle   ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.collaboration)} >
                         <FaRegHandPaper size={15}
                             style={{ backgroundColor: 'transparent', }}
                             className='mx-2' />
-                        Collabration
+                        <span className='d-none d-md-inline-block'>Contributions  </span>
+
                     </p>
                 </MotionContainer>
                 <MotionContainer>
-                    <p className={`   p-2 py-auto px-5  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-primary-emphasis bg-primary-emphasis  border-primary-emphasis 
+                    <p className={`   p-2 py-auto px-3  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-primary-emphasis bg-primary-emphasis  border-primary-emphasis 
                             ${channelFilter === channelNames.community ? '  text-primary-emphasis bg-primary-subtle border border-primary-subtle   ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.community)} >
                         <FaRegHandshake size={15}
                             style={{ backgroundColor: 'transparent', }}
                             className='mx-2' />
-                        Community
+                        <span className='d-none d-md-inline-block'>Community </span>
+
                     </p>
                 </MotionContainer>
 
                 <MotionContainer>
-                    <span className='p-2 py-auto px-5  text-muted    bg-opacity-10 rounded-pill text-dark  d-flex justify-content-center align-items-center border border-muted'
+                    <p className={`   p-2 py-auto px-3  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-secondary-emphasis bg-secondary-emphasis  border-secondary-emphasis`}
                         onClick={() => setChannelFilter('')} >
-                        clear filter
-                    </span>
+                        <IoMdClose size={15}
+                            style={{ backgroundColor: 'transparent', }}
+                            className='mx-2' />
+                        <span className='d-none d-md-inline-block'>clear </span>
+
+                    </p>
                 </MotionContainer>
 
             </div>
 
-            <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto '
-
-            >
+            <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto '>
                 {data.getForumPosts.map((post: any, index: number) => {
                     if (channelFilter === '') {
                         return (

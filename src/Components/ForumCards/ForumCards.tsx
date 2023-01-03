@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './ForumCards.css'
-import { Row, Offcanvas, OffcanvasBody, FormGroup, } from 'reactstrap'
+import { Row, Offcanvas, OffcanvasBody, FormGroup, OffcanvasHeader, Col, } from 'reactstrap'
 import { useSelector } from 'react-redux'
 import { useMutation, useQuery } from '@apollo/client'
 import { RootState } from '../../Store/RootReducer';
@@ -10,6 +10,7 @@ import { notifyError, notifySuccess } from '../../Components/Notification/Toast'
 import MotionContainer from '../MotionContainer/MotionContainer'
 import { motion } from 'framer-motion'
 import { v4 as uuid } from 'uuid'
+import { IoMdClose } from 'react-icons/io'
 export default function ForumCards(
     { _id,
         // createdBy,
@@ -45,7 +46,8 @@ export default function ForumCards(
     const [postNewComment] = useMutation(CREATE_FORUM_COMMENT, {
         refetchQueries: [{ query: FETCH_POST_COMMENTS, variables: { getPostCommentWithPostIdId: _id } }],
         onCompleted: () => {
-            notifySuccess('Comment Posted Successfully')
+            notifySuccess(' Posted Successfully')
+            setNewComment({ ...newComment, comment: "" })
         },
         onError: (err) => {
             notifyError(err.message)
@@ -67,45 +69,60 @@ export default function ForumCards(
 
     }
 
+
+    const inputHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        setNewComment({ ...newComment, comment: e.currentTarget.value })
+    }
+
     return (
         < >
-            <Offcanvas style={{ width: '50%' }}
+            <Offcanvas
+                //  style={{ width: '50%' }}
                 direction="end"
                 isOpen={canvas}
                 toggle={toggle}
+                responsive={true}
                 scrollable={true}>
+
+                <OffcanvasHeader
+                    close={<MotionContainer>
+                        <IoMdClose className=' text-danger-emphasis' onClick={toggle} size={20} />
+                    </MotionContainer>} >
+                </OffcanvasHeader>
+
                 <OffcanvasBody >
-                    <div className=' App d-flex flex-column   px-5  border border-1 border-success shadow-sm p-5 mb-5  rounded bg-success bg-opacity-10   rounded-1 ' >
-                        <small className="text-start fw-light m-0  text-muted">title</small>
-                        <p className=' fw-light m-0  fs-5 ' > {postTitle} </p>
-                        <p className='text-success fw-light m-0 fs-3 flex-wrap'>{postContent} </p>
+                    <div className='  d-flex flex-column   border-bottom border-success-subtle border-2
+                    shadow-sm p-3 mt-3 mb-5
+                      rounded-1 ' >
+                        <small className="text-start fw-light m-0 flex-wrap text-secondary">title</small>
+                        <p className=' fw-light m-0  fs-5  flex-wrap' > {postTitle} </p>
+                        <p className=' App fw-light m-0 fs-5 flex-wrap'>{postContent} </p>
                         <small className=' fw-light ' > channel - <span className='fw-bold' >#{channel}</span> </small>
                     </div>
 
-                    <p className=' m-2 px-5 text-success fw-light fs-3' >comments </p>
-                    <div className='px-5 d-flex flex-row flex-wrap justify-content-between align-items-start App'>
-                        <FormGroup className=' w-75 ' size='sm' >
+                    <p className=' m-2 px-1 text-success fw-light fs-3' >comments </p>
+                    <Row className='px-1 d-flex flex-row flex-wrap '>
+                        <FormGroup
+                            className='d-flex flex-row flex-wrap'>
                             <input
                                 height={12}
                                 type="text" name="comment" id="comment" placeholder=" comment on post "
                                 className='form-control input-md mb-2'
-                                onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
+                                onChange={(e: any) => inputHandler(e)}
                             ></input>
                         </FormGroup>
+                        <MotionContainer>
+                            <p className='text-center  fw-light    text-success-emphasis  fs-5 bg-success-subtle rounded-1 py-2 border border-success-subtle border-1'
+                                onClick={(e: any) => PostCommentHandler(e)}>post  </p>
+                        </MotionContainer>
 
-                        <div className='w-10'>
-                            <MotionContainer>
-                                <p className='text-center text-success fw-light  bg-success bg-opacity-10 p-2 px-5 rounded-pill'
-                                    onClick={(e: any) => PostCommentHandler(e)}>post  </p>
-                            </MotionContainer>
-                        </div>
-                    </div>
-                    <div className='px-5 App d-flex flex-column ' >
+                    </Row>
+                    <div className='p-auto App d-flex flex-column ' >
                         {data && data.getPostCommentWithPostId.map((comment: any) => {
                             return (
-                                <div key={uuid()} className='shadow-sm MyeventCard  rounded  my-2 ' >
-                                    <p className=' m-3 px-5 pt-3 fw-light fs-5' > {comment.comment}</p>
-                                    <p className='fs-6 mx-5 px-3  fw-light text-muted text-start ' > by {comment.createdBy.firstName}  </p>
+                                <div key={uuid()} className='shadow-sm   rounded  my-1 ps-2 p-1  border border-tertiary-emphasis border-1 ' >
+                                    <p className=' m-0  fw-normal fs-6' > {comment.comment}</p>
+                                    <span className=' m-0  text-secondary fw-lighter text-small  text-start ' >  {comment.createdBy.firstName + "" + comment.createdBy.lastName}  </span>
                                 </div>
                             )
                         })}
