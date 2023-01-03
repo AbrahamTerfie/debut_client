@@ -16,13 +16,16 @@ import { notifyError, notifySuccess } from '../Notification/Toast';
 import { RootState } from '../../Store/RootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCompanyID, setHasCompany, togglehasCompany } from '../../Store/identfiers/identfiers';
+import Loader from '../Loader/Loader';
+import { useNavigate } from 'react-router-dom';
+import { appRoutes } from '../../Routes/routes';
 
 // dummy place holder component
 function FinalComponent() {
     return (
         <div>
             {/* icon and text showing the they successfully signed up  */}
-            <GiDividedSpiral size={100} color={'#00bfa6'} />
+            {/* <Loader /> */}
             <h2> you're all set!</h2>
         </div>
     )
@@ -31,12 +34,12 @@ function FinalComponent() {
 
 export default function OnBoardingForm() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { hasCompany, userID, userEmail } = useSelector((store: RootState) => store.identfiers)
 
     const [imageSelected, setImageSelected] = useState<any>()
 
     const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-    console.log('auth0UserInfo', auth0UserInfo)
     const [onBoardingPersonalform, setOnBoardingPersonalform] = useState({
         firstName: '',
         lastName: '',
@@ -70,20 +73,32 @@ export default function OnBoardingForm() {
     const { data: dataCompany,
         //  loading: loadingCompany, error: errorCompany
     } = useQuery(FETCH_COMPANY, {
-        variables: { userId: userID }
-    })
+        variables: { userId: userID },
 
 
-    const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
-        // variables: { userId: userID },
-        onCompleted: (data) => {
-            if (data?.checkIfUserHasCompany === true) {
-                dispatch(setHasCompany(true))
-            } else if (data?.checkIfUserHasCompany === false) {
-                dispatch(setHasCompany(false))
-            }
-        }
-    })
+        // onCompleted: (data) => {
+        //     const { getCompanyWithUserId } = data
+        //     if (getCompanyWithUserId) {
+        //         dispatch(setCompanyID(getCompanyWithUserId._id))
+        //         dispatch(setHasCompany(true))
+        //     }
+
+        // }
+    }
+    )
+
+    console.log('dataCompany', dataCompany)
+
+    // const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
+    //     // variables: { userId: userID },
+    //     onCompleted: (data) => {
+    //         if (data?.checkIfUserHasCompany === true) {
+    //             dispatch(setHasCompany(true))
+    //         } else if (data?.checkIfUserHasCompany === false) {
+    //             dispatch(setHasCompany(false))
+    //         }
+    //     }
+    // })
     const [updatePersonalInfo] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
         {
             // refetchQueries: [{ query: FETCH_USER_WITH_ID, variables: { getDebutUserWithIdId: userID } }],
@@ -95,13 +110,18 @@ export default function OnBoardingForm() {
                 notifyError(error.message.toString())
             }
         })
+
+
+
     const [createMyCompany, createMyCompanyRes] = useMutation(CREATE_COMPANY, {
-        refetchQueries: [{ query: FETCH_COMPANY, variables: { userId: userID } }],
         onCompleted: (data) => {
+            const { createDebutCompany } = data
+            // dispatch(setHasCompany(true))
+
             dispatch(togglehasCompany(true))
-            dispatch(setCompanyID(createMyCompanyRes.data.createDebutCompany._id))
-            dispatch(setHasCompany(true))
-            checkIsNewUser({ variables: { userId: userID } });
+            // dispatch(setCompanyID(createDebutCompany._id))
+            // dispatch(setHasCompany(true))
+            // checkIsNewUser({ variables: { userId: userID } });
             notifySuccess("Company created successfully")
         },
         onError: (error) => { notifyError(" failed to create" + error.message.toString()) }
@@ -149,17 +169,19 @@ export default function OnBoardingForm() {
         const formData = new FormData();
         formData.append('file', imageSelected)
         // file is the file object
-        let imageUri = onBoardingCompanyform.companyLogo
+
         formData.append('upload_preset', 'debutCompanyProfilePicture')
         imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
             .then((response) => {
-                imageUri = response.data.secure_url
+                const imageUri = response.data.secure_url
+                setOnBoardingCompanyform({ ...onBoardingCompanyform, companyLogo: imageUri })
             }).then(() => {
+                console.log('onBoardingCompanyform', onBoardingCompanyform)
                 createMyCompany({
                     variables: {
                         companyInput: {
                             ...onBoardingCompanyform,
-                            companyLogo: imageUri,
+                            // companyLogo: imageUri,
                             companyOwner: userID,
                         }
                     }
@@ -179,20 +201,41 @@ export default function OnBoardingForm() {
 
     // stepper controller
     const [activeStep, setActiveStep] = useState(0);
-    const handleNext = () => {
-        if (activeStep === 0) {
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            handleProfileUpdate()
-            // setUserNeeds({ ...userNeeds, isNewUser: true })
-        }
-        if (activeStep === 1) {
-            activeStep === 1 &&
-                handleCompanySubimt()
+    // console.log(activeStep, hasCompany, "has comp")
+    const handleNext
+        = () => {
+            // console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd')
+
+
+
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-        }
+            if (activeStep === 0) {
+                return (
+                    // console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd'),
+                    handleProfileUpdate()
+                )
+                // setUserNeeds({ ...userNeeds, isNewUser: true })
+            }
+            if (activeStep === 1) {
+                return (
+                    // console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd'),
+                    handleCompanySubimt()
 
-    };
+                )
+            }
+            // if (activeStep === 2) {
+            //     return (
+            //         console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd')
+            //     )
+            // }
+            // if (activeStep === 3) {
+            //     return (
+            //         // navigate(appRoutes.dashboard)
+            //     )
+            // }
+
+        };
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
@@ -247,7 +290,10 @@ export default function OnBoardingForm() {
                                     <MotionContainer>
                                         <div
                                             className='text-success-emphasis bg-success-subtle border border-success-subtle rounded-3  px-3 py-2 m-2'
-                                            onClick={activeStep === steps.length - 1 ? () => null : handleNext} >
+                                            onClick={
+                                                index === steps.length - 1 ? undefined : handleNext
+                                            }
+                                        >
                                             {index === steps.length - 1 ? 'Finish' : 'save & Continue'}
                                         </div>
                                     </MotionContainer>

@@ -205,7 +205,7 @@ export default function YourComapany() {
           details and information about your company
         </p>
       </div>
-      {hasCompany === true ?
+      {hasCompany === false ?
 
 
         < Row Row >

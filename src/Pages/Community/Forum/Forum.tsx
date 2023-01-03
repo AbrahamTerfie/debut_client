@@ -58,7 +58,7 @@ export default function Forum() {
 
     return (
         <div>
-            <Modal centered size='lg' isOpen={hasCompany} toggle={toggleIsNewUser}  >
+            <Modal centered size='lg' isOpen={hasCompany === false} toggle={toggleIsNewUser}  >
                 <ModalHeader
                     // className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>

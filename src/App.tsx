@@ -14,7 +14,7 @@ import { useMutation } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './Store/RootReducer';
 import { AUTHENTICATED_USER } from './GraphQl';
-import { setPersonaldata } from './Store/identfiers/identfiers';
+import { setHasCompany, setPersonaldata } from './Store/identfiers/identfiers';
 import { saveAuth0UserInfo } from './Store/Auth/AuthSlice';
 const Landing = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Landing })));
 const Dashboard = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Dashboard })));
@@ -59,7 +59,7 @@ function App() {
           hasCompany: authenticatedUser.hasCompany,
 
         }));
-        // dispatch(setHasCompany(authenticatedUser.hasCompany))
+        dispatch(setHasCompany(authenticatedUser.hasCompany))
         // checkIsNewUser({ variables: { userId: authenticatedUser._id } });
       }
     }
@@ -71,9 +71,9 @@ function App() {
   } else if (!isAuthenticated && location.pathname !== appRoutes.landing) {
     navigate(appRoutes.landing);
   }
-  else if (isAuthenticated && hasCompany) {
-    navigate(appRoutes.dashboard);
-  }
+  // else if (isAuthenticated && hasCompany) {
+  //   navigate(appRoutes.dashboard);
+  // }
 
 
   useEffect(() => {

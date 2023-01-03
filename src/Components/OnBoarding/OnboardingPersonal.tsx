@@ -142,7 +142,7 @@ export default function OnboardingPersonal(
             <Col m={12} md={12} lg={12} xl={12} className='my-2'>
                 <Label for="regions"> Regions </Label>
                 <Select
-                    name='regions'
+                    name='regiregionsons'
                     onChange={(e: any) => selecthandler(e, 'regions')}
                     closeMenuOnSelect={false}
                     components={animatedComponents}
