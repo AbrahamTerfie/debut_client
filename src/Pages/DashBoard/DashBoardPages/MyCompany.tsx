@@ -28,9 +28,9 @@ export default function YourComapany() {
   const [selectedGeography, setSelectedGeography] = useState([]);
   const [isCreatingAcompany, setIsCreatingAcompany] = useState(false)
   const [achivement, setAchivement] = useState('');
-  const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
-    variables: { userId: userID }
-  })
+  // const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
+  //   variables: { userId: userID }
+  // })
   const [companyState, setCompanyState] = useState(myComapnyInitialState)
 
 
@@ -180,16 +180,20 @@ export default function YourComapany() {
 
 
 
-  if (loading || loadingCompany) { return <Loader /> }
-  if ((hasCompany === true) && (error || errorCompany)) {
+  if (
+    // loading ||
+    loadingCompany) { return <Loader /> }
+  if ((hasCompany === true) && (
+    // error ||
+    errorCompany)) {
     // if has company is false dont show thos error otherwise show it
 
-    error && notifyError(error.message.toString())
+    // error && notifyError(error.message.toString())
     errorCompany && notifyError(errorCompany.message.toString())
 
     // return <div> something went wrong  </div>
   }
-  if (data) { dispatch(togglehasCompany(data.checkIfUserHasCompany)) }
+  // if (data) { dispatch(togglehasCompany(data.checkIfUserHasCompany)) }
 
 
 
@@ -201,9 +205,10 @@ export default function YourComapany() {
           details and information about your company
         </p>
       </div>
-      {!hasCompany && !isCreatingAcompany ?
+      {hasCompany === true ?
 
-        <Row>
+
+        < Row Row >
           <p className='m-5 text-muted fs-2 fw-light text-center'  >
             you haven't registerd a company yet
           </p>

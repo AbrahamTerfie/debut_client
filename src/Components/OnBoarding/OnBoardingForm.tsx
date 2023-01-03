@@ -196,7 +196,7 @@ export default function OnBoardingForm() {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-    console.log("onBoardingPersonalform", onBoardingPersonalform)
+    // console.log("onBoardingPersonalform", onBoardingPersonalform)
 
     const steps = [
         {

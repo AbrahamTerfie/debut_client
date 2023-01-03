@@ -12,14 +12,13 @@ import { IoMdAdd } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 // graphql
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
-import { AUTHENTICATED_USER, CHECK_IF_USER_HAS_COMPANY, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
+import { useQuery } from '@apollo/client'
+import { FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
 // auth and redux
-import { useAuth0 } from '@auth0/auth0-react'
-import { useSelector, useDispatch } from 'react-redux'
+
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
-import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
-import { setHasCompany, setPersonaldata } from '../../../Store/identfiers/identfiers'
+
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 import { notifyError } from '../../../Components/Notification/Toast'
 import { useNavigate } from 'react-router-dom'
@@ -37,69 +36,29 @@ const channelNames = {
 
 
 export default function Forum() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
 
-    const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
+    const navigate = useNavigate()
     const { hasCompany } = useSelector((store: RootState) => store.identfiers)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
-    const { user } = useAuth0();
+
     const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS)
     const [isNewUser, setIsNewUser] = useState(true)
     const toggleIsNewUser = (): void => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
-    const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER,
-        {
-            onCompleted: (data) => {
-                const { authenticatedUser } = data;
-                // console.log("111111111111authenticatedUser", authenticatedUser.email)
-
-                dispatch(setPersonaldata({
-                    userID: authenticatedUser._id,
-                    userEmail: authenticatedUser.email,
-                
-                }));
-                checkIsNewUser({ variables: { userId: authenticatedUser._id } });
-            }
-        }
-    )
 
 
-    const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
-        // variables: { userId: userID },
-        onCompleted: (data) => {
-            if (data?.checkIfUserHasCompany === true) {
-                dispatch(setHasCompany(true))
-            } else if (data?.checkIfUserHasCompany === false) {
-                dispatch(setHasCompany(false))
-            }
-        }
-    })
-
-    useEffect(() => {
-        if (user) {
-            dispatch(saveAuth0UserInfo(user))
-            auth0UserInfo && authenticatedUser({
-                variables: {
-                    userInput: {
-                        email: auth0UserInfo.email,
-                        userName: auth0UserInfo.name,
-                        firstName: auth0UserInfo.nickname,
-                        profileImage: auth0UserInfo.picture,
-                    }
-                }
-            })
-        }
-    }, [auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser])
-
-
-    if (loading || authenticatedUsrRes.loading) { return <Loader /> }
+    if (loading) { return <Loader /> }
     if (error) { notifyError("soething went wrong ") }
+
+
+
+
+    // console.log("authenticatedUsrRes", authenticatedUsrRes)
 
     return (
         <div>
-            <Modal centered size='lg' isOpen={hasCompany === true ? false : true} toggle={toggleIsNewUser}  >
+            <Modal centered size='lg' isOpen={hasCompany} toggle={toggleIsNewUser}  >
                 <ModalHeader
                     // className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>

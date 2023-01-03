@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import './App.css';
 import "animate.css/animate.min.css";
 // import { Landing, Dashboard, DashBoardPages } from './Pages/inedx';
@@ -10,6 +10,12 @@ import NavBarComponent from './Components/NavBar/NavBar';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Toaster } from 'react-hot-toast';
 
+import { useMutation } from '@apollo/client';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './Store/RootReducer';
+import { AUTHENTICATED_USER } from './GraphQl';
+import { setPersonaldata } from './Store/identfiers/identfiers';
+import { saveAuth0UserInfo } from './Store/Auth/AuthSlice';
 const Landing = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Landing })));
 const Dashboard = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Dashboard })));
 const MyProfile = React.lazy(() => import('./Pages/DashBoard/DashBoardPages/index').then((module) => ({ default: module.MyProfile })));
@@ -31,10 +37,33 @@ const Loader = React.lazy(() => import('./Components/Loader/Loader'));
 
 
 function App() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
+  const { hasCompany } = useSelector((store: RootState) => store.identfiers)
 
+
+
+
+  const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER,
+    {
+      onCompleted: (data) => {
+        const { authenticatedUser } = data;
+        console.log("111111111111authenticatedUser", authenticatedUser)
+
+        dispatch(setPersonaldata({
+          userID: authenticatedUser._id,
+          userEmail: authenticatedUser.email,
+          hasCompany: authenticatedUser.hasCompany,
+
+        }));
+        // dispatch(setHasCompany(authenticatedUser.hasCompany))
+        // checkIsNewUser({ variables: { userId: authenticatedUser._id } });
+      }
+    }
+  )
 
   // if authenticated and on landing page, redirect to forum page
   if (isAuthenticated && location.pathname === appRoutes.landing) {
@@ -42,11 +71,36 @@ function App() {
   } else if (!isAuthenticated && location.pathname !== appRoutes.landing) {
     navigate(appRoutes.landing);
   }
+  else if (isAuthenticated && hasCompany) {
+    navigate(appRoutes.dashboard);
+  }
+
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      if (user) {
+        dispatch(saveAuth0UserInfo(user))
+        auth0UserInfo && authenticatedUser({
+          variables: {
+            userInput: {
+              email: auth0UserInfo.email,
+              userName: auth0UserInfo.name,
+              firstName: auth0UserInfo.nickname,
+              profileImage: auth0UserInfo.picture,
+            }
+          }
+        })
+      }
+    }
+  }, [isAuthenticated, user, auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser]);
+  if (authenticatedUsrRes.loading) { return <Loader /> }
 
   return (
     <Suspense fallback={<Loader />}>
       <div className="App" >
         {isAuthenticated && <NavBarComponent />}
+        {/* {isAuthenticated && user && StartUp()} */}
+        ƒ
         <Routes>
           <Route path={appRoutes.landing} element={<Landing />} />
 

@@ -38,7 +38,7 @@ export default function OnboardingPersonal(
             ...onBoardingPersonalform, [name]: e.map((item: any) => item.value)
         })
     }
-console.log("onBoardingPers...........onalform", onBoardingPersonalform)
+// console.log("onBoardingPers...........onalform", onBoardingPersonalform)
     return (
         <Row>
             <Col sm={12} md={6} lg={6} xl={6} >
