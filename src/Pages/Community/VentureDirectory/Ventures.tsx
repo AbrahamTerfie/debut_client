@@ -44,9 +44,20 @@ export default function Ventures() {
 
 
     return (
-        <div className='d-flex m-5 mt-5 pt-5 flex-column '>
-            <p className='fs-1 fw-light mx-5 px-5 '> Discover ventures</p>
-            <Row className='mx-4 d-flex justify-content-center'>
+        <div >
+
+            <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
+                <h1 className='fw-light fs-1  m-5 mb-3'>
+                    Venture Directory
+                </h1>
+                <p className="text-muted ms-5" >
+                    Find and connect with other ventures in your industry
+                </p>
+
+            </Row>
+            <Row
+                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
+
                 <Col md={10}>
                     <SearchComponent />
                 </Col>
@@ -66,7 +77,7 @@ export default function Ventures() {
 
                 </Col>
             </Row>
-            <Row className='d-flex justify-content-center px-5 mt-5'>
+            <Row className='d-flex justify-content-center px-5 ms-2 mt-5'>
                 {ventures.map((item: Venture, index: number) => (
                     <VentureCards
                         key={item._id}

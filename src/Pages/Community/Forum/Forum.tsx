@@ -81,7 +81,7 @@ export default function Forum() {
                 </ModalFooter>
             </Modal>
 
-            <Offcanvas 
+            <Offcanvas
                 responsive={true}
                 fade={true}
                 keyboard
@@ -106,8 +106,8 @@ export default function Forum() {
             </Offcanvas >
 
             <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
-                <h1 className='fw-light fs-1'> Fellow Forum </h1>
-                <p className="text-muted" >
+                <h1 className='fw-light fs-1  m-5 mb-3'> Forum </h1>
+                <p className="text-muted ms-5" >
                     A place to discuss and share
                     ideas with fellow members of the
                     community.

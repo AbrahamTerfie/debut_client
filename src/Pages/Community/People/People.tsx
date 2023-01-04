@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Collapse } from 'reactstrap'
 import PeopleCards from '../../../Components/PeopleCards/PeopleCards'
 import './People.css'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
-import { useMutation, useQuery } from '@apollo/client'
-import { AUTHENTICATED_USER } from '../../../GraphQl/index'
-import { useAuth0 } from '@auth0/auth0-react'
+import { useQuery } from '@apollo/client'
+
 import PersonDetail from '../../../Components/PersonDetail/PersonDetail'
 import PeopleFilterOptions from '../../../Components/PeopleFilterOptions/PeopleFilterOptions'
 import { IoMdSettings } from 'react-icons/io'
@@ -21,41 +20,33 @@ import { notifyError } from '../../../Components/Notification/Toast'
 import { v4 as uuid } from 'uuid'
 export default function People() {
 
-    const { user } = useAuth0();
     const { peopleExpertiseFilter, peopleRegionFilter, activePersonId } = useSelector((store: RootState) => store.uiStore)
-    const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const [modal, setModal] = useState(false);
     const toggle = (): void => setModal(!modal);
     const { loading, data, error } = useQuery(All_USERS)
 
 
 
-    // useEffect(() => {
-    //     authenticatedUser({
-    //         variables: {
-    //             userInput: {
-    //                 email: user?.email,
-    //                 userName: user?.name,
-    //                 firstName: user?.nickname,
-    //             }
 
-    //         }
-    //     })
-
-    // }, [user?.email, user?.name, user?.nickname, authenticatedUser])
-    if (authenticatedUsrRes.error) { (notifyError( "1 " +authenticatedUsrRes.error.message)) }
-    if (authenticatedUsrRes.loading || loading) { return <Loader /> }
-
-    if (error) {
-        console.log(error)
-        notifyError("1 " + error.message.toString())
-    }
+    if (error) { notifyError("something went wrong") }
+    if (loading) { return <Loader /> }
 
     return (
 
-        <div className=' d-flex flex-column m-auto p-5 mt-5 ' >
-            <h1 className='fw-light fs-1  m-5 mb-3'> People directory</h1>
-            <Row className=''>
+        <div  >
+            <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
+                <h1 className='fw-light fs-1  m-5 mb-3'>
+                    People directory
+                </h1>
+                <p className="text-muted ms-5" >
+                    Find people you will love to work with and help grow
+                </p>
+
+            </Row>
+            <Row
+                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
+
+
 
                 <Col md={10} sm={8} xs={8} >
                     <SearchComponent />
@@ -72,9 +63,7 @@ export default function People() {
                 </Col>
                 <Col md={1} >
 
-                    <div
-                        onClick={toggle}
-                    >
+                    <div onClick={toggle}>
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -92,12 +81,9 @@ export default function People() {
                 <PeopleFilterOptions />
 
             </Collapse>
-            <Row className='mt-5 '  >
+            <Row className='mx-auto ms-5  px-auto overflow-y-auto '>
                 <Col className={`overflow-scroll  ${activePersonId === "" ? '' : 'd-none d-sm-block'}`}
-                    //    make col scrollable  on y axis
-                    style={{ maxHeight: '80vh' }}
-
-                >
+                    style={{ maxHeight: '80vh' }}>
 
                     {data?.getdebutUsers.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
@@ -114,17 +100,9 @@ export default function People() {
                             return <PeopleCards key={uuid()}
                                 people={user} />
                         }
-                    }
-                    )}
+                    })}
                 </Col>
-                <Col
-                    className={`overflow-auto ${activePersonId === "" ? 'd-none d-sm-block' : ''}`}
-
-
-
-                // on small screens if person is selected fhow it full screen otherwise hide it
-
-                >
+                <Col className={`overflow-auto ${activePersonId === "" ? 'd-none d-sm-block' : ''}`}>
                     <PersonDetail />
                 </Col>
             </Row>

@@ -181,30 +181,38 @@ export default function VentureCards(
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 40 }}
                 onClick={toggle}
-                className=' my-2 py-2 rounded rounded-5 shadow-sm  border border-muted bg-light bg-opacity-10 d-flex flex-row '>
-                <Col md={1} className='d-flex justify-content-center align-items-center mx-3 shadow-sm rounded-5'>
+                className='my-2 py-2 rounded rounded-1 shadow-sm  border border-muted bg-light bg-opacity-10 '>
+                <Row >
+                    <Col
+                        sm={12} md={2} lg={2} xl={2} xxl={2}
+                        className='d-flex justify-content-center align-items-center '>
 
-                    <img
-                        src={companyLogo}
-                        alt='colmpany logo'
-                        className='rounded img-fluid h-100 w-75'
-                        style={{ width: '75px', height: '75px', objectFit: 'contain', maxHeight: '7em', minHeight: '7em' }} />
-                </Col>
-                <Col md={10} >
-                    <p className='fw-bolder fs-5 m-0' > {companyName} </p>
-                    <span className=' text-muted' >{
-                        companyDescription?.length > 150 ? companyDescription?.slice(0, 150) + "..." : companyDescription
-                    } </span>
-                    <p className=' fw-bold'>  {companyHeadquarters} </p>
-                    <div className='d-flex flex-row ' >
-                        <img src={companyOwner?.profileImage}
-                            className='rounded-circle img-fluid'
-                            style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
-                            alt='company owner profile  ' />
-                        <p className='mx-2  fs-6  fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
-                    </div>
-                </Col>
-
+                        <img
+                            src={companyLogo}
+                            alt='colmpany logo'
+                            className='rounded-2 img-fluid  '
+                            style={{
+                                width: '100px', height: '100px', objectFit: 'cover', maxHeight: '100%',
+                                minWidth: '100px', minHeight: '100px'
+                            }}
+                        />
+                    </Col>
+                    <Col sm={12} md={10} lg={10} xl={10} xxl={10}
+                    >
+                        <p className='fw-bolder fs-5 m-0' > {companyName} </p>
+                        <span className=' text-muted' >{
+                            companyDescription?.length > 150 ? companyDescription?.slice(0, 150) + "..." : companyDescription
+                        } </span>
+                        <p className=' fw-bold'>  {companyHeadquarters} </p>
+                        <div className='d-flex flex-row ' >
+                            <img src={companyOwner?.profileImage}
+                                className='rounded-circle img-fluid'
+                                style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
+                                alt='company owner profile  ' />
+                            <p className='mx-2  fs-6  fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
+                        </div>
+                    </Col>
+                </Row>
             </motion.div>
 
         </>
