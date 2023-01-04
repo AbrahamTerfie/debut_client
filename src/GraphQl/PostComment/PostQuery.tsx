@@ -51,6 +51,7 @@ mutation ($postCommentInput: postCommentInput){
     createdBy {
       _id,
       firstName,
+      lastName,
       email
     },
     post {

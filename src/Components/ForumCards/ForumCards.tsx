@@ -95,9 +95,9 @@ export default function ForumCards(
                     shadow-sm p-3 mt-3 mb-5
                       rounded-1 ' >
                         <small className="text-start fw-light m-0 flex-wrap text-secondary">title</small>
-                        <p className=' fw-light m-0  fs-5  flex-wrap' > {postTitle} </p>
+                        <span className=' fw-light m-0    flex-wrap' > {postTitle} </span>
                         <p className=' App fw-light m-0 fs-5 flex-wrap'>{postContent} </p>
-                        <small className=' fw-light ' > channel - <span className='fw-bold' >#{channel}</span> </small>
+                        <small className=' fw-light ' > channel - <span className='fw-bold text-success-emphasis  ' >#{channel}</span> </small>
                     </div>
 
                     <p className=' m-2 px-1 text-success fw-light fs-3' >comments </p>
@@ -106,7 +106,8 @@ export default function ForumCards(
                             className='d-flex flex-row flex-wrap'>
                             <input
                                 height={12}
-                                type="text" name="comment" id="comment" placeholder=" comment on post "
+                                type="text"
+                                name="comment" id="comment" placeholder=" comment on post "
                                 className='form-control input-md mb-2'
                                 onChange={(e: any) => inputHandler(e)}
                             ></input>

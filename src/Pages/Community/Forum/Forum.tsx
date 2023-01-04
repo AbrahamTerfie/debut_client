@@ -105,14 +105,14 @@ export default function Forum() {
                 </OffcanvasBody>
             </Offcanvas >
 
-            <Row className='searchInput mb-1 my-4 pt-5 mt-5 px-5 mx-5  ' >
-                <p className='fw-light fs-1'> Fellow Forum </p>
+            <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
+                <h1 className='fw-light fs-1'> Fellow Forum </h1>
                 <p className="text-muted" >
                     A place to discuss and share
                     ideas with fellow members of the
                     community.
                 </p>
-                <SearchComponent />
+                {/* <SearchComponent /> */}
             </Row>
 
             <div className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 mt-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
