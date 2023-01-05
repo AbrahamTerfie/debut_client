@@ -56,51 +56,54 @@ export default function CompanyDetailPage() {
             </div>
             <p className='fs-6 fw-light text-muted  m-3' > company details </p>
             <Row className='shadow p-4   d-flex justify-content-between'>
-                <Col md={6} className='m-2 text-wrap overflow-auto'>
+                <Col
+                    md={6} sm={12} lg={6} xl={6} xs={12}
+                    className='m-2 text-wrap overflow-auto'>
                     <p className='fs-6 fw-light text-muted  m-0' > company description </p>
                     <p> {company?.companyDescription} </p>
                     <p className='fs-6 fw-light text-muted  m-0'> mission statement </p>
                     <p> {company?.companyMissionStatement} </p>
-                    <Col md={12} >
-                        <p className='text-muted' >major achivements</p>
-                        <div className='d-flex justify-content-start align-items-center flex-wrap'>
-                            {company.majorAchivements?.map((achivement: string, index: number) => {
-                                return (<MotionContainer key={index}>
-                                    <p className=' mx-1 bg-success text-success bg-opacity-10 p-2 px-4 rounded-pill '>
-                                        {achivement}
-                                    </p>
-                                </MotionContainer>)
-                            })}
-                        </div>
-                    </Col>
-                    <Col md={12} >
-                        <p className='text-muted' > active regions </p>
-                        <div className='d-flex justify-content-start align-items-center flex-wrap'>
-                            {company.companyCategory?.map((category: string, index: number) => {
-                                return (<MotionContainer key={index}>
-                                    <p className='text-warning mx-1 bg-warning bg-opacity-10 p-2 px-4 rounded-pill '>
-                                        {category}
-                                    </p>
-                                </MotionContainer>)
-                            })}
-                        </div>
-                    </Col>
-                    <Col md={12} >
-                        <p className='text-muted' > aera of operation </p>
-                        <div className='d-flex justify-content-start align-items-center flex-wrap'>
-                            {company.aeraOfOperation?.map((aera: string, index: number) => {
-                                return (<MotionContainer key={index} >
-                                    <p className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>
-                                        {aera}
-                                    </p>
-                                </MotionContainer>
-                                )
-                            })}
-                        </div>
-                    </Col>
+
+                    <p className='text-muted' >major achivements</p>
+                    <div className='d-flex justify-content-start align-items-center flex-wrap'>
+                        {company.majorAchivements?.map((achivement: string, index: number) => {
+                            return (<MotionContainer key={index}>
+                                <p className=' mx-1 bg-success text-success bg-opacity-10 p-2 px-4 rounded-pill '>
+                                    {achivement}
+                                </p>
+                            </MotionContainer>)
+                        })}
+                    </div>
+
+
+                    <p className='text-muted' > active regions </p>
+                    <div className='d-flex justify-content-start align-items-center flex-wrap'>
+                        {company.companyCategory?.map((category: string, index: number) => {
+                            return (<MotionContainer key={index}>
+                                <p className='text-warning mx-1 bg-warning bg-opacity-10 p-2 px-4 rounded-pill '>
+                                    {category}
+                                </p>
+                            </MotionContainer>)
+                        })}
+                    </div>
+
+                    <p className='text-muted' > aera of operation </p>
+                    <div className='d-flex justify-content-start align-items-center flex-wrap'>
+                        {company.aeraOfOperation?.map((aera: string, index: number) => {
+                            return (<MotionContainer key={index} >
+                                <p className='text-muted mx-1  p-2 px-4 rounded-pill bg-light-subtle text-muted bg-opacity-10'>
+                                    {aera}
+                                </p>
+                            </MotionContainer>
+                            )
+                        })}
+                    </div>
+
                 </Col>
 
-                <Col md={5} className=' text-wrap overflow-auto justify-content-start align-items-center d-flex flex-column'>
+                <Col md={5}
+
+                    className=' text-wrap overflow-auto justify-content-start align-items-center d-flex flex-column'>
                     <img src={company?.companyLogo} alt="" className='img-fluid rounded shadow m-2 p-3 mb-5 w-50 h-50 '
                         style={{
                             objectFit: 'contain', objectPosition: 'center',
@@ -125,6 +128,12 @@ export default function CompanyDetailPage() {
                 </Col>
 
             </Row>
+
+
+
+
+
+
             <p className='fs-6 fw-light text-muted  m-3 mt-5' > Goals and milestones  </p>
             <Row className='shadow p-4   d-flex justify-content-between'>
                 <div>

@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../Store/RootReducer'
 import Emailcanvas from '../Email/Emailcanvas'
 import { v4 as uuid } from 'uuid'
+import { IoMdClose } from 'react-icons/io'
 export default function VentureCards(
     {
         _id,
@@ -69,16 +70,23 @@ export default function VentureCards(
                 scrollable
                 isOpen={isOpen}
                 toggle={toggle}
+                fade
                 className="offcanvas-style"
-                style={{ width: '60%' }}>
-                <OffcanvasHeader onClick={toggle} className=" mb-0 App px-5 pt-3 shadow" >
+                style={{ width: '100%' }}
+
+
+            >
+                <OffcanvasHeader onClick={toggle} className=" mb-0 App px-5 pt-3 shadow"
+                    close={<IoMdClose className='text-danger' size={30} />}
+                >
                     <p className='fs-6 fw-light text-muted  m-0  '> Name </p>
                     <h1 className="">{companyName}</h1>
                     <p className="text-start "   >  {companyWebsite} </p>
                     <div className="d-flex justify-content-around mb-1 mt-3">
                         <MotionContainer>
                             <FaLinkedin className='text-primary mx-2 bg-primary bg-opacity-10 p-2 rounded-circle' size={35}
-                                onClick={() => window.open(linkedInUrl ? linkedInUrl : "", "_blank")} />
+                                onClick={() => window.open(linkedInUrl ? linkedInUrl : "", "_blank")}
+                            />
                         </MotionContainer>
                         <MotionContainer>
                             <FaTwitter className='text-info mx-2 bg-info bg-opacity-10 p-2 rounded-circle' size={35}
@@ -159,7 +167,7 @@ export default function VentureCards(
                         <div className='d-flex flex-wrap my-2' >
                             {companyCategory?.map((item: any) => (
                                 <MotionContainer key={uuid()}>
-                                    <p className='text-muted mx-1 bg-dark bg-opacity-10 p-2 px-4 rounded-pill '>{item}</p>
+                                    <p className='text-muted mx-1   p-2 px-4 rounded-pill  bg-light-subtle text-muted bg-opacity-10'>{item}</p>
                                 </MotionContainer>
                             ))}
                         </div>
@@ -167,8 +175,10 @@ export default function VentureCards(
                     <Row>
                         <MotionContainer>
                             <p onClick={() => navigate(`${appRoutes.ventures}/${_id}`)}
-                                className='fs-4 fw-bold m-3 text-success bg-success bg-opacity-10  py-2  px-5 rounded-1 '>
-                                got to the company page to see more
+                                className='fs-4 fw-normal m-3  py-2  px-5 rounded-1   
+                                bg-info bg-opacity-10 text-info border border-info shadow-sm
+                                '>
+                                got to the company page to see their goals, mileStones, their services and needs
                             </p>
                         </MotionContainer>
                     </Row>
@@ -181,7 +191,9 @@ export default function VentureCards(
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 40 }}
                 onClick={toggle}
-                className='my-2 py-2 rounded rounded-1 shadow-sm  border border-muted bg-light bg-opacity-10 '>
+                className='my-2 py-2 rounded rounded-1 shadow-sm  border border-secondary bg-secondary-subtle bg-opacity-10 '
+
+            >
                 <Row >
                     <Col
                         sm={12} md={2} lg={2} xl={2} xxl={2}

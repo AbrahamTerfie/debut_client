@@ -4,14 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initalState = {
     userID: '',
-    companyID: '',
-
-    userFullName: '',
     userEmail: '',
+    userFullName: '',
+    companyID: '',
     hasCompany: false,
     myBiography: '',
     myCompanyDescription: '',
-
 }
 
 

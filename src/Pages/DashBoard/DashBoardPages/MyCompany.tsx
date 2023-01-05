@@ -92,6 +92,8 @@ export default function YourComapany() {
       majorAchivements: dataCompany.getCompanyWithUserId.majorAchivements || [],
       companyDescription: dataCompany.getCompanyWithUserId.companyDescription || '',
     });
+    setSelectedAeraasOfImpact(dataCompany.getCompanyWithUserId.aeraOfOperation.map((aera: any) => ({ label: aera, value: aera })))
+    setSelectedGeography(dataCompany.getCompanyWithUserId.companyServivesGeography.map((geography: any) => ({ label: geography, value: geography })))
 
     dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id));
   }, [dataCompany, dispatch]);
@@ -407,7 +409,7 @@ export default function YourComapany() {
 
 
               <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.aeraOfOperation.map((aera: String, index: any) => {
+                {dataCompany && dataCompany.getCompanyWithUserId.aeraOfOperation?.map((aera: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>{aera}, </p>)
                 })}
               </div>
@@ -426,7 +428,7 @@ export default function YourComapany() {
               </Label>
 
               <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.companyCategory.map((savedRegion: String, index: any) => {
+                {dataCompany && dataCompany.getCompanyWithUserId.companyCategory?.map((savedRegion: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>
                     {savedRegion}
                   </p>)
