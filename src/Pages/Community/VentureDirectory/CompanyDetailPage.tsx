@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, AccordionBody, AccordionHeader, AccordionItem, UncontrolledAccordion } from 'reactstrap'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 import GoalsBody from '../../../Components/GoalsBody/GoalsBody';
@@ -11,9 +11,14 @@ import Loader from '../../../Components/Loader/Loader';
 import { notifyError } from '../../../Components/Notification/Toast';
 import { companyGoals } from '../../../types/Goals_MileStones';
 import { eventCard } from '../../../types/eventCardType'
+import { appRoutes } from '../../../Routes/routes';
+import { useDispatch } from 'react-redux';
+import { setActivePersonId } from '../../../Store/UI/sidebarController';
+
 
 export default function CompanyDetailPage() {
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { id } = useParams<{ id: string }>();
     const { data, loading, error } = useQuery(COMPANY_PAGE, {
         variables: { getDebutCompanyWithIdId: id }
@@ -24,8 +29,18 @@ export default function CompanyDetailPage() {
     // console.log("company data", data)
     const { getDebutCompanyWithId: company } = data;
 
+    console.log("company data", company)
+
+    const showUserProfile = (id: string, e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+        e.preventDefault();
+        // set the active person id in the store the navigate to the user profile page
+        dispatch(setActivePersonId(id)) &&
+            navigate(appRoutes.people);
+
+    }
+
     return (
-        <div className='m-5 p-5  '>
+        <div className='m-5 p-5 w-100 '>
             <div className='mt-5 '>
                 <p className='fs-6 fw-light text-muted  '> Name </p>
                 <h1 className=""> {company?.companyName} </h1>
@@ -55,7 +70,7 @@ export default function CompanyDetailPage() {
                 </div>
             </div>
             <p className='fs-6 fw-light text-muted  m-3' > company details </p>
-            <Row className='shadow p-4   d-flex justify-content-between'>
+            <Row className='shadow-sm border border-seondary py-3  d-flex justify-content-center'>
                 <Col
                     md={6} sm={12} lg={6} xl={6} xs={12}
                     className='m-2 text-wrap overflow-auto'>
@@ -101,26 +116,35 @@ export default function CompanyDetailPage() {
 
                 </Col>
 
-                <Col md={5}
-
-                    className=' text-wrap overflow-auto justify-content-start align-items-center d-flex flex-column'>
-                    <img src={company?.companyLogo} alt="" className='img-fluid rounded shadow m-2 p-3 mb-5 w-50 h-50 '
+                <Col md={5} className=' text-wrap overflow-auto justify-content-start align-items-center d-flex flex-column'>
+                    <img src={company?.companyLogo} alt="" className='img-fluid rounded shadow-sm '
                         style={{
-                            objectFit: 'contain', objectPosition: 'center',
-                            minWidth: '30rem', minHeight: '100px', maxWidth: '300px', maxHeight: '300px'
+                            objectFit: 'cover', objectPosition: 'center',
+                            // responsive image
+                            width: '100%', height: 'auto',
+                            maxHeight: '300px', maxWidth: '300px', minHeight: '200px', minWidth: '200px'
+
                         }} />
 
-                    <div>
-                        <p className='text-muted' > created by</p>
+                    <div
+                        className='d-flex justify-content-center align-items-start flex-column mt-5'
+                    >
+                        <p className='text-muted m-0' > created by</p>
                         <MotionContainer>
-                            <div className='d-flex justify-content-start align-items-center p-2 rounded shadow-sm'>
+                            <div className='d-flex justify-content-start align-items-center px-3 rounded shadow-sm border border-tertiary'
+                                onClick={
+                                    (e: React.MouseEvent<HTMLDivElement, MouseEvent>
+                                    ) => showUserProfile(company?.companyOwner?.id, e)}
+                            >
                                 <img src={company?.companyOwner?.profileImage}
-                                    alt="" className='img-fluid rounded-circle shadow m-2'
+                                    alt="" className='img-fluid rounded-circle mx-2 me-3 border border-tertiary '
                                     style={{ width: '50px', height: '50px' }} />
 
-                                <div className='mx-2 px-2 '>
-                                    <p className='m-0 fs-5' > {company.companyOwner?.firstName} , {company.companyOwner?.lastName}  </p>
-                                    <p className='text-muted' > {company.companyOwner?.role}  </p>
+                                <div className='
+                                    d-flex justify-content-start align-items-start flex-column
+                                '>
+                                    <p className='m-0 fs-5 text-wrap' > {company.companyOwner?.firstName} {company.companyOwner?.lastName}  </p>
+                                    <p className='text-muted text-wrap' > {company.companyOwner?.titleAtCompany}  </p>
                                 </div>
                             </div>
                         </MotionContainer>
@@ -135,7 +159,7 @@ export default function CompanyDetailPage() {
 
 
             <p className='fs-6 fw-light text-muted  m-3 mt-5' > Goals and milestones  </p>
-            <Row className='shadow p-4   d-flex justify-content-between'>
+            <Row className='shadow-sm border border-secondary p-4   d-flex justify-content-start'>
                 <div>
                     <UncontrolledAccordion flush open={open} stayOpen={true} >
                         {company.companyGoals?.length === 0 ? <p className='text-muted text-center' > no goals added yet </p> :
@@ -166,20 +190,29 @@ export default function CompanyDetailPage() {
 
             {/* company events and registries  */}
             < p className='fs-6 fw-light text-muted  m-3 mt-5' > Events and registries  </ p>
-            <Row className='shadow p-4   d-flex justify-content-start'>
-                {company.debutEvents?.length === 0 ? <p className='text-muted text-center' > no events added yet </p> :
-                    company.debutEvents?.map((event: eventCard, index: number) => {
-                        return (<EventCard key={index}
-                            event={{
-                                _id: event._id,
-                                debutEventImage: event.debutEventImage,
-                                debutEventName: event.debutEventName,
-                                debutEventDescription: event.debutEventDescription,
-                            }}
-                        />
-                        )
-                    })}
+            <Row className='shadow-sm p-4  d-flex justify-content-start border border-secondary'>
+                {company.debutEvents?.length === 0 ? <p className='text-muted text-center' > no events added yet </p>
+                    :
+                    <div className='d-flex justify-content-start align-items-start flex-wrap'>
+                        {
+                            company.debutEvents?.map((event: eventCard, index: number) => {
+                                return (<EventCard key={index}
+                                    event={{
+                                        _id: event._id,
+                                        debutEventImage: event.debutEventImage,
+                                        debutEventName: event.debutEventName,
+                                        debutEventDescription: event.debutEventDescription,
+                                    }}
+                                />
+                                )
+                            })
+                        }
+                    </div>
+
+
+                }
             </Row>
         </div >
     )
 }
+

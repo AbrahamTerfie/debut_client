@@ -23,11 +23,12 @@ query getDebutCompanyWithId($getDebutCompanyWithIdId: ID!) {
     companySize
     companyCategory
     companyOwner {
+      _id
       firstName
       lastName
       email
       profileImage
-      role
+      titleAtCompany
     }
     debutEvents {
       _id
