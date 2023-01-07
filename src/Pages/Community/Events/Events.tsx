@@ -1,14 +1,15 @@
 import React from 'react'
-import { Row } from 'reactstrap'
+import { Col, Row } from 'reactstrap'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import EventCard from '../../../Components/EventCard/EventCard'
-import { MdSearch, MdSettings } from 'react-icons/md'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 import { eventCard } from '../../../types/eventCardType'
 import { EVENTS_PAGE } from '../../../GraphQl/index'
 import { useQuery } from '@apollo/client'
 import Loader from '../../../Components/Loader/Loader'
 import { notifyError } from '../../../Components/Notification/Toast'
+import { FaSearch } from 'react-icons/fa'
+import { IoMdSettings } from 'react-icons/io'
 export default function Events() {
 
     const { data, loading, error } = useQuery(EVENTS_PAGE)
@@ -17,35 +18,61 @@ export default function Events() {
     const { getdebutEvents: events } = data
 
     return (
-        <div className='m-5 p-5  d-flex flex-column' >
-
-            <h1 className=' fw-light mt-5 ' > Explore Events </h1>
-
-            <div className='d-flex justify-content-start align-items-center  m-5' >
-                <SearchComponent />
-
-                <MotionContainer>
-                    <div className='d-flex justify-content-between align-items-center bg-success bg-opacity-10 p-2 rounded-1 m-2 px-5'>
-                        <MdSearch className='text-success' size={25} />
-                    </div>
-                </MotionContainer>
-                <MotionContainer>
-                    <div className='d-flex justify-content-between align-items-center bg-warning bg-opacity-10 p-2 rounded-1 m-2 px-5'>
-                        <MdSettings className='text-warning' size={25} />
-                    </div>
-                </MotionContainer>
-            </div>
-            <p className='fs-3 text-success fw-light m-2 mx-5 '> Featured  </p>
-
-            <Row className='d-flex  flex-wrap justify-content-start align-items-start shadow p-3' >
-                {events.map((event: eventCard, index: number) => <EventCard key={index} event={event} />)}
+        <div>
+            <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
+                <h1 className='fw-light fs-1  m-5 mb-3'> Events and  Regisries</h1>
+                <p className="text-muted ms-5" >
+                    explore events and registries in your community
+                </p>
             </Row>
+            <Row
+                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
 
-            <p className='fs-3 text-success fw-light m-2 mx-5 mt-5'> events around you   </p>
-            <Row className='d-flex  flex-wrap justify-content-start align-items-center shadow p-3' >
-                {events.map((event: eventCard, index: number) => <EventCard key={index} event={event} />)}
+                <Col md={10}>
+                    <SearchComponent />
+                </Col>
+                <Col md={1} >
+                    <MotionContainer>
+                        <div className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
+                            <FaSearch />
+                        </div>
+                    </MotionContainer>
+                </Col>
+                <Col md={1} >
+                    <MotionContainer>
+                        <div className='shado-sm border border-muted rounded rounded-5   p-2 m-1  me-2 bg-warning bg-opacity-10   text-warning align-items-center justify-content-center d-flex'>
+                            <IoMdSettings />
+                        </div>
+                    </MotionContainer>
+                </Col>
             </Row>
+            <Row className=' mb-1 my-auto  px-5 mx-5  ' >
+                <p className='fw-light fs-1  m-5 mb-3'>
+                    Featured
+                </p>
+            </Row>
+            <Row className='d-flex justify-content-start p-5 ms-2 mt-5'>
 
+                {events.map((event: eventCard, index: number) => {
+                    return (
+                        <Col >
+                            <EventCard key={index} event={event} />
+                        </Col>)
+                })}
+            </Row>
+            <Row className=' mb-1 my-auto  px-5 mx-5  ' >
+                <p className='fw-light fs-1  m-5 mb-3'>New </p>
+            </Row>
+            <Row className='d-flex justify-content-start ps-5 ms-2 mt-5'>
+                {events.map((event: eventCard, index: number) => {
+                    return (
+                        <Col
+                            sm={6} md={3} lg={3} xl={3}
+
+                        ><EventCard key={index} event={event} /></Col>
+                    )
+                })}
+            </Row>
         </div>
 
     )
