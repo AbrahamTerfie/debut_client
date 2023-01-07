@@ -69,8 +69,8 @@ export default function CompanyDetailPage() {
                         </MotionContainer> : null}
                 </div>
             </div>
-            <p className='fs-6 fw-light text-muted  m-3' > company details </p>
-            <Row className='shadow-sm border border-seondary py-3  d-flex justify-content-center'>
+            <p className='fs-6 fw-light text-info  m-3' > company details </p>
+            <Row className='shadow-sm border border-info-subtle py-3  d-flex justify-content-center'>
                 <Col
                     md={6} sm={12} lg={6} xl={6} xs={12}
                     className='m-2 text-wrap overflow-auto'>
@@ -158,16 +158,18 @@ export default function CompanyDetailPage() {
 
 
 
-            <p className='fs-6 fw-light text-muted  m-3 mt-5' > Goals and milestones  </p>
-            <Row className='shadow-sm border border-secondary p-4   d-flex justify-content-start'>
+            <p className='fs-6 fw-light text-info  m-3 mt-5' > Goals and milestones  </p>
+            <Row className='shadow-sm border border-info-subtle p-0  d-flex justify-content-start'>
                 <div>
                     <UncontrolledAccordion flush open={open} stayOpen={true} >
                         {company.companyGoals?.length === 0 ? <p className='text-muted text-center' > no goals added yet </p> :
                             company.companyGoals?.map((goal: companyGoals, index: number, ownerEmail: string) => {
                                 return (<AccordionItem key={index}>
                                     <AccordionHeader targetId={goal._id}
-                                        className="shadow-sm d-flex justify-content-between align-items-center  my-3  MyeventCard  ">
-                                        {goal.goalTitle}
+                                        className=" d-flex justify-content-between align-items-center  my-3   border border-secondary-subtle  ">
+                                        <MotionContainer>
+                                            {goal.goalTitle}
+                                        </MotionContainer>
                                     </AccordionHeader>
                                     <AccordionBody accordionId={goal._id}>
                                         <GoalsBody
@@ -189,8 +191,8 @@ export default function CompanyDetailPage() {
 
 
             {/* company events and registries  */}
-            < p className='fs-6 fw-light text-muted  m-3 mt-5' > Events and registries  </ p>
-            <Row className='shadow-sm p-4  d-flex justify-content-start border border-secondary'>
+            < p className='fs-6 fw-light text-info  m-3 mt-5' > Events and registries  </ p>
+            <Row className='shadow-sm p-4  d-flex justify-content-start border border-info-subtle'>
                 {company.debutEvents?.length === 0 ? <p className='text-muted text-center' > no events added yet </p>
                     :
                     <div className='d-flex justify-content-start align-items-start flex-wrap'>

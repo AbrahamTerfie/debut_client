@@ -42,7 +42,7 @@
 
 .MyeventCardActive {
   transition: all 0.2s ease-in-out;
-  border-bottom: 3px solid #1985a1;
+  border-bottom: 1px solid #1985a1;
   
   transform: scale(1.01);
   /* background-color: rgb(231, 229, 229); */
