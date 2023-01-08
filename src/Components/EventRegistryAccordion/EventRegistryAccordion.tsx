@@ -32,9 +32,7 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
 
 
     return (
-        <Col
-            md={4}
-            sm={12}
+        <Col sm={12} md={4} lg={4} xl={3} xxl={3}
             className={classNames('  rounded-3 d-flex flex-column  justify-content-start  border border-muted  ', 'm-2',
                 item.registryItemFullfiled ? 'border border-success' : '')} >
             <Emailcanvas />

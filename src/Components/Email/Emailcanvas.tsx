@@ -104,11 +104,16 @@ export default function Emailcanvas() {
 
     return (
         <Offcanvas
-            direction="bottom"
+            direction="end"
             scrollable
             isOpen={emailPopup}
-            className=" text-success "
-            style={{ height: '80%', width: '50%', left: '50%', }}>
+            className=" text-success w=100 "
+            style={{
+                // width the smaller the scteen the bigger the width with diffrent breakpoints 
+                width: window.innerWidth < 576 ? "100%" : window.innerWidth < 768 ? "70%" :
+                    window.innerWidth < 992 ? "60%" : window.innerWidth < 1200 ? "50%" : "50%",
+            }}
+        >
             <OffcanvasHeader toggle={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => closeCanvasHandler(e)}
                 className="bg-success text-success bg-opacity-10 "
                 toggleClassName="text-primary">
