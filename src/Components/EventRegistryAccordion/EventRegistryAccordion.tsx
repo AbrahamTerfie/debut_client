@@ -24,7 +24,7 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
                 itemName: item.registryItemName,
                 userEmail: userEmail,
                 emailTo: createdBy.email,
-                userBioGraphy: "this is plaveholder biography  ",
+                userBioGraphy: "this is placeholder biography  ",
 
             }
         }))
@@ -35,7 +35,7 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
         <Col
             md={4}
             sm={12}
-            className={classNames(' shadow-sm rounded-3 d-flex flex-column  justify-content-start m-3  border border-muted  ', 'm-2',
+            className={classNames('  rounded-3 d-flex flex-column  justify-content-start  border border-muted  ', 'm-2',
                 item.registryItemFullfiled ? 'border border-success' : '')} >
             <Emailcanvas />
             <motion.div
@@ -44,7 +44,7 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
                 exit={{ opacity: 0 }}
                 whileHover={{ scale: 1.01 }}>
                 <Row
-                    className='shadow-lg'
+                    className=''
                     style={{
                         height: '250px', backgroundSize: 'cover', backgroundPosition: 'center',
                         backgroundImage: `url(${item.registryItemImage})`, backgroundBlendMode: 'darken',
@@ -54,15 +54,15 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
                     <p className='text-light fs-3  text-end p-5 align-self-end'> {item.registryItemName} </p>
                 </Row>
                 <Row className='px-3 py-2' >
-                    <p className='text-muted'> description</p>
-                    <p className=' '>
+                    <p className='text-info m-0'> description</p>
+                    <p className='text-muted fs-5 '>
                         {item.registryItemDescription}
                     </p>
-                    <p className='text-muted m-0'> item link</p>
+                    <p className='text-info m-0'> item link</p>
                     <MotionContainer>
-                        <p className=' m-2 mt-0 bg-primary text-start text-primary rounded-pill px-4 m-1 mx-1 bg-opacity-10  py-2 flex-wrap'>
+                        <a href={item.registryItemLink} target={item.registryItemLink} rel="noreferrer" className=' m-2 mt-0  text-start text-primary  m-1 py-2 flex-wrap  my-3'>
                             {item.registryItemLink}
-                        </p>
+                        </a>
                     </MotionContainer>
                     <div className='d-flex justify-content-around align-items-center'>
                         <div>
