@@ -47,30 +47,21 @@ export default function Events() {
                 </Col>
             </Row>
             <Row className=' mb-1 my-auto  px-5 mx-5  ' >
-                <p className='fw-light fs-1  m-5 mb-3'>
-                    Featured
+                <p className='fw-light fs-1  m-5 mb-1'>
+                    Featured Events
                 </p>
             </Row>
-            <Row className='d-flex justify-content-start p-5 ms-2 mt-5'>
-
+            <Row className='d-flex justify-content-start p-5 ms-2   border border-right-1 bordr-left-0 border-top-0 border-bottom-1 border-muted'>
                 {events.map((event: eventCard, index: number) => {
-                    return (
-                        <Col >
-                            <EventCard key={index} event={event} />
-                        </Col>)
+                    return (<Col ><EventCard key={index} event={event} /> </Col>)
                 })}
             </Row>
-            <Row className=' mb-1 my-auto  px-5 mx-5  ' >
-                <p className='fw-light fs-1  m-5 mb-3'>New </p>
+            <Row className='  my-auto  px-5 mx-5  ' >
+                <p className='fw-light fs-1  m-5 mb-1'>New &  upcomming  </p>
             </Row>
-            <Row className='d-flex justify-content-start ps-5 ms-2 mt-5'>
+            <Row className='d-flex justify-content-start shadow   p-5 ms-2  border border-right-1 bordr-left-0 border-top-0 border-bottom-1 border-muted'>
                 {events.map((event: eventCard, index: number) => {
-                    return (
-                        <Col
-                            sm={6} md={3} lg={3} xl={3}
-
-                        ><EventCard key={index} event={event} /></Col>
-                    )
+                    return (<Col sm={6} md={3} lg={3} xl={3}><EventCard key={index} event={event} /></Col>)
                 })}
             </Row>
         </div>
