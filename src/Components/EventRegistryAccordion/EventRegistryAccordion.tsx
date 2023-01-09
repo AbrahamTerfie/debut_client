@@ -51,7 +51,7 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
                     }}>
                     <p className='text-light fs-3  text-end p-5 align-self-end'> {item.registryItemName} </p>
                 </Row>
-                <Row className='px-3 py-2' >
+                <Row className='px-3 py-2 my-4' >
                     <p className='text-info m-0'> description</p>
                     <p className='text-muted fs-5 '>
                         {item.registryItemDescription}
@@ -62,14 +62,14 @@ export default function ItemCard({ item, createdBy }: { item: DebutRegistryItem,
                             {item.registryItemLink}
                         </a>
                     </MotionContainer>
-                    <div className='d-flex justify-content-around align-items-center'>
+                    <div className='d-flex justify-content-between align-items-center flex-row my-3'>
                         <div>
-                            <p className='text-muted'> price</p>
-                            <p className='text-success '>   {item.registryItemPrice} </p>
+                            <p className='text-info m-0'> price</p>
+                            <p className='text-success fs-4 '> ${item.registryItemPrice} </p>
                         </div>
                         <div>
-                            <p className='text-muted'> quantity</p>
-                            <p className=' '> {item.registryItemQuantity} </p>
+                            <p className='text-info m-0'> quantity</p>
+                            <p className=' fs-4 text-warning'> #{item.registryItemQuantity} </p>
                         </div>
                     </div>
                 </Row>
