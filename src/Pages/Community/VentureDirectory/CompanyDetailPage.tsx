@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { Navigate, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, AccordionBody, AccordionHeader, AccordionItem, UncontrolledAccordion } from 'reactstrap'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
 import GoalsBody from '../../../Components/GoalsBody/GoalsBody';

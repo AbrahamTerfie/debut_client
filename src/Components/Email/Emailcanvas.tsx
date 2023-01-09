@@ -40,7 +40,7 @@ export default function Emailcanvas() {
 
     useEffect(() => {
         editor?.commands.setContent(emailBody)
-    }, [emailBody])
+    }, [emailBody, editor])
 
 
 
@@ -95,8 +95,8 @@ export default function Emailcanvas() {
                 reply_to: emailTo,
             },
             emailJsInfo.public_key
-        ).then((result) => { notifySuccess(result.text.toString() + " " + "email sent") })
-            .catch((error) => { notifyError(error.text.toString() + " " + "email not sent") })
+        ).then((result) => { notifySuccess(result.text.toString() + "email sent") })
+            .catch((error) => { notifyError(error.text.toString() + "email not sent") })
 
     }
 

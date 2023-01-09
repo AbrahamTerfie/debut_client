@@ -1,5 +1,4 @@
 import React from 'react'
-import { Col } from 'reactstrap'
 import MotionContainer from '../MotionContainer/MotionContainer'
 import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../Routes/routes'

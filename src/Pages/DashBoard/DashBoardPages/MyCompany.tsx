@@ -8,10 +8,7 @@ import { RootState } from '../../../Store/RootReducer';
 import { setCompanyID } from '../../../Store/identfiers/identfiers'
 import Axios from 'axios';
 import { useMutation, useQuery } from '@apollo/client'
-import {
-  CHECK_IF_USER_HAS_COMPANY, CREATE_COMPANY,
-  FETCH_COMPANY, UPDATE_COMPANY
-} from '../../../GraphQl/index';
+import { CREATE_COMPANY, FETCH_COMPANY, UPDATE_COMPANY } from '../../../GraphQl/index';
 import Loader from '../../../Components/Loader/Loader';
 import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
