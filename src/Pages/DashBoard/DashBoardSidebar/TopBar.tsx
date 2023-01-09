@@ -25,8 +25,8 @@ export default function TopBar({ toggleSidebar }: any) {
             light
             className="navbar shadow-sm p-3 my-5  rounded h-10 border border-muted "
             expand="xl"
-            md="12"
-            sticky="top"
+            // sm="12" md="12" lg="12" xl="12"
+            // sticky="top"
         // style={{ width: "150vh" }}
         >
             <motion.div

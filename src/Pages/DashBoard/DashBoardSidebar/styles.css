@@ -1,8 +1,6 @@
 .sidebar {
     min-width: 250px;
     max-width: 250px;
-
-    /* margin-top: -4em; */
     margin-left: -250px;
     transition: all 0.5s;
 }

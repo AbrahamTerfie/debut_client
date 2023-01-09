@@ -19,9 +19,14 @@ export default function SideBar({ isOpen, toggle }: {
         color: "#1985a1", cursor: "default",
     }
     return (
-        <div className={classNames(" sidebar shadow   ", { "is-open": isOpen })}>
+        <div className={classNames(" sidebar shadow-sm border border-muted   ", { "is-open": isOpen }
+            // make it responsive for all screen sizes 
+            , "d-none d-md-block" , "d-none d-lg-block" , "d-none d-xl-block" , "d-none d-xxl-block"
+
+
+        )}>
             <div className="sidebar-header">
-                <span color="info" onClick={toggle} style={{ color: "#222" }}>
+                <span color="info" onClick={toggle} style={{ color: "#fff" }}>
                     &times;
                 </span>
             </div>

@@ -15,6 +15,7 @@ import { motion } from 'framer-motion';
 
 // icon imports
 import { IoBusiness, IoCalendarClear, IoHandLeft, IoPerson, IoTrophy, IoNewspaperOutline } from 'react-icons/io5';
+import { Row } from 'reactstrap';
 // describe className="fa-5x"
 
 
@@ -31,14 +32,6 @@ export default function Dashboard() {
         variables: { userId: userID }
     })
 
-
-    // useEffect(() => {
-    //     if (hasCompany && dataCompany?.getCompanyWithUserId) {
-    //         getCompany()
-    //         dataCompany && dispatch(setCompanyID(dataCompany?.getCompanyWithUserId?._id))
-    //     }
-    // }, [dataCompany])
-
     useEffect(() => {
         if (dataCompany) {
             if (hasCompany && dataCompany.getCompanyWithUserId) {
@@ -46,9 +39,7 @@ export default function Dashboard() {
                 dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id))
             }
         }
-
     })
-
 
 
     if (loadingCompany) return <Loader />
@@ -107,9 +98,11 @@ export default function Dashboard() {
         }
     ]
     return (
-        <div className="d-flex mt-5   ">
-            <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
-            <div className={classNames("content  Page overflow-scroll ", { "is-open overflow-scroll  ": sidebarIsOpen })}
+        <Row className="d-flex mt-5   ">
+            <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} 
+             
+            />
+            <div className={classNames("content   overflow-scroll ", { "is-open overflow-scroll  ": sidebarIsOpen })}
                 style={sidebarIsOpen ? { width: window.innerWidth * 0.8 } : { width: window.innerWidth }} >
                 <Topbar toggleSidebar={toggleSidebar} />
 
@@ -119,10 +112,10 @@ export default function Dashboard() {
                         <h5 className="text-start text-muted px-5">
                             Here you can keep track of your company, events, goals, milestones, gratitude and work experience.
                         </h5>
-                        <div className="d-flex flex-wrap justify-content-start align-items-center">
+                        <div className="d-flex flex-wrap justify-content-start align-items-center  ">
                             {cardInfo.map((card, index) => (
                                 <motion.div
-                                    whileHover={{ scale: 1.01 }}
+                                    whileHover={{ scale: 1.04 }}
                                     whileTap={{ scale: 0.9 }}
                                     animate={{ scale: 1 }}
                                     transition={{ duration: 0.2 }}
@@ -149,7 +142,7 @@ export default function Dashboard() {
                     :
                     <Outlet />}
             </div>
-        </div>
+        </Row>
 
 
     )

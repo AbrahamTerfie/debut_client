@@ -445,7 +445,7 @@ export default function YourComapany() {
           </Row>
 
 
-          <Col md={12} className=' mx-5 my-5'>
+          <Row className='  w-100'>
             <motion.div whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
               className=" px-5   mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill   "
@@ -456,7 +456,7 @@ export default function YourComapany() {
 
 
             </motion.div>
-          </Col>
+          </Row>
         </Form>
       }
     </>
