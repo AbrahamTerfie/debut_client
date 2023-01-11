@@ -9,7 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 
-
+// import { ThemeToggler } from '../../Styles/darkModeToggler'
 
 export default function NavBarComponent() {
     const location = useLocation()
@@ -21,9 +21,9 @@ export default function NavBarComponent() {
     const textColor = { color: "#1985a1", cursor: "pointer" }
     return (
         <Navbar
-            className='px-5  mb-5 shadow-sm  bg-dark '
-             expand="xl" fixed="top" fluid="true"    >
-            <NavbarBrand onClick={() => { navigate(appRoutes.forum) }} 
+            className='px-5  mb-5 shadow-sm   '
+            expand="xl" fixed="top" fluid="true"    >
+            <NavbarBrand onClick={() => { navigate(appRoutes.forum) }}
                 style={{
                     fontFamily: 'Bungee Shade, cursive',
                     color: '#1985a1',
@@ -61,22 +61,34 @@ export default function NavBarComponent() {
                         </NavItem>
 
                     </div>
-                    <div className='d-flex '>
-                        <NavItem>
-                            <NavLink style={textColor} onClick={() => { navigate(appRoutes.dashboard) }}
-                                className={classNames(" mx-2", location.pathname === appRoutes.dashboard ? "MyeventCardActive" : "MyeventCard")}  >
-                                <MdOutlineSpaceDashboard size={15} className='mx-2 my-1' />
-                                My Debut
-                            </NavLink>
-                        </NavItem>
-                        <NavItem className=' justify-content-end align-self-end'>
-                            <NavLink style={textColor} onClick={() => { logout() }} className="MyeventCard" >
-                                <MdLogout size={15} className='mx-3 my-2' />
-                                Logout
-                            </NavLink>
-                        </NavItem>
-                    </div>
 
+                    <NavItem>
+                        <NavLink style={textColor} onClick={() => { navigate(appRoutes.dashboard) }}
+                            className={classNames(" mx-2", location.pathname === appRoutes.dashboard ? "MyeventCardActive" : "MyeventCard")}  >
+                            <MdOutlineSpaceDashboard size={15} className='mx-2 my-1' />
+                            My Debut
+                        </NavLink>
+                    </NavItem>
+                    <NavItem className=' justify-content-end align-self-end'>
+                        <NavLink style={textColor} onClick={() => { logout() }} className="MyeventCard" >
+                            <MdLogout size={15} className='mx-3 my-2' />
+                            Logout
+                        </NavLink>
+                    </NavItem>
+
+
+                    <NavItem className=' d-flex w-100 justify-content-end align-self-end'>
+                        <NavLink style={textColor}
+                            onClick={() => {
+                                // change the valure of the darkMode variable in the dom element of html passed as data-bs-theme
+                                const darkMode = document.documentElement.getAttribute('data-bs-theme') === 'dark'
+                                document.documentElement.setAttribute('data-bs-theme', darkMode ? 'light' : 'dark')
+                            }}
+                            className="MyeventCard" >
+                            toggle
+
+                        </NavLink>
+                    </NavItem>
 
 
                 </Nav>

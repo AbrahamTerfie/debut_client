@@ -42,11 +42,6 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
-  const { hasCompany } = useSelector((store: RootState) => store.identfiers)
-
-
-
-
   const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER,
     {
       onCompleted: (data) => {
@@ -100,7 +95,7 @@ function App() {
       <div className="App" >
         {isAuthenticated && <NavBarComponent />}
         {/* {isAuthenticated && user && StartUp()} */}
-        ƒ
+      
         <Routes>
           <Route path={appRoutes.landing} element={<Landing />} />
 

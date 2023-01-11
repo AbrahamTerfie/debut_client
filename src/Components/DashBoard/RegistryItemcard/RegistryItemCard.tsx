@@ -70,7 +70,7 @@ export default function RegistryItem(
                 </ModalBody>
                 <ModalFooter>
 
-                    <Button color="warning" size="sm" outline className="text-warningƒ" onClick={toggle}>
+                    <Button color="warning" size="sm" outline className="text-warning" onClick={toggle}>
                         Cancel
                     </Button>
                     <Button color="danger" outline size="sm" className='text-danger  px-5' onClick={() => { handleDeleteItem() }}>
