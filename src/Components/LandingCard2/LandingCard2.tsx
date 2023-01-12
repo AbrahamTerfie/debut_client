@@ -19,7 +19,7 @@ export function LandingCard2({
                 <div className='m-1  text-center h-75'>
                     {icon}
                 </div>
-                <p className='fs-4 fw-bold text-center text-light m-0  ' >
+                <p className='fs-4 fw-bold text-center text-muted m-0  ' >
                     {title}
                 </p>
                 <p className=' fw-bold text-center  ' >

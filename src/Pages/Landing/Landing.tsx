@@ -87,7 +87,7 @@ export default function Landing() {
                     icon={<img src={thankyou} alt="asking help" className="img-fluid" />} />
             </Row>
             <Row className='my-5' >
-                <p className='fs-2 py-5  fw-lighter text-center text-light '>
+                <p className='fs-2 py-5  fw-lighter text-center  '>
                     mobilize your community to help with the launch of your idea
                 </p>
             </Row>
@@ -99,7 +99,7 @@ export default function Landing() {
             </Row>
 
             <Row className='fs-2 my-5   '>
-                <p className='fw-lighter text-center text-light flex-wrap'>
+                <p className='fw-lighter text-center flex-wrap'>
                     our solutoin for mobilizing your village
                 </p>
             </Row>
@@ -109,19 +109,19 @@ export default function Landing() {
 
                 <LandingCard2
                     number={1}
-                    icon={<FiTarget size={60} color="#ffffff" />}
+                    icon={<FiTarget size={60}  />}
                     title='set start up goals '
                     text="define your professional goal with guidance .  "
                 />
                 <LandingCard2
                     number={2}
-                    icon={<TbCalendarTime size={60} color="#ffffff" />}
+                    icon={<TbCalendarTime size={60}  />}
                     title='set timeline '
                     text="define timeline of your goals "
                 />
                 <LandingCard2
                     number={3}
-                    icon={<IoCheckmarkCircleOutline size={60} color="#ffffff" />}
+                    icon={<IoCheckmarkCircleOutline size={60}  />}
                     title='small commitments'
                     text="Debut breaks the goal to incremental “small offers"
                 />
