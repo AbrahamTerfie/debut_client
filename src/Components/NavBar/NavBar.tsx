@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Navbar, Collapse, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap'
 import { BsPeople } from 'react-icons/bs'
 import { FaCalendar, FaRegBuilding } from 'react-icons/fa'
-import { MdOutlineForum, MdLogout, MdOutlineSpaceDashboard, MdDarkMode } from 'react-icons/md'
+import { MdOutlineForum, MdLogout, MdOutlineSpaceDashboard } from 'react-icons/md'
 import { appRoutes } from '../../Routes/routes'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import "./styles.css";
 import { cardDataDetails } from './landingCarddata'
-import { Col, Row } from "reactstrap";
+import { Col } from "reactstrap";
 
 type CardProps = {
     title: string,
@@ -21,17 +21,19 @@ export default function LandingDetailCards() {
     return (
         <AnimateSharedLayout>
             <motion.div
-                className="d-flex justify-content-center   align-items-start  flex-wrap flex-row mb-5"
+                className="d-flex justify-content-center   align-items-center  flex-wrap flex-row mb-5"
                 layout initial={{ borderRadius: 25 }}>
 
-                    {cardDataDetails.map(item => (
-                        <Item key={item.id}
-                            title={item.title}
-                            icon={item.icon}
-                            id={item.id}
-                            cardDescriptions={item.cardDescriptions}
-                        />
-                    ))}
+                {cardDataDetails.map(item => (
+
+                    <Item key={item.id}
+                        title={item.title}
+                        icon={item.icon}
+                        id={item.id}
+                        cardDescriptions={item.cardDescriptions}
+                    />
+
+                ))}
 
             </motion.div>
         </AnimateSharedLayout>
@@ -52,10 +54,10 @@ function Item(
 
     return (
         <Col
-            sm="12" md="6" lg="4" xl="3"
+            sm={12} md={6} lg={3} xl={3}
         >
             <motion.div
-                className="w-10 p-3 m-3  bg-muted bg-opacity-10 rounded-3  border border-info border-2 shadow-lg"
+                className=" p-3 m-3  bg-muted bg-opacity-10 rounded-3  border border-info border-2 shadow-lg"
                 layout
                 onClick={toggleOpen}
                 initial={{ borderRadius: 10 }}
@@ -67,7 +69,7 @@ function Item(
                     {title}
                 </p>
                 <AnimatePresence
-                
+
                 >{isOpen && <Content
                     title={title}
                     icon={icon}
@@ -99,7 +101,7 @@ function Content(
                 {cardDescriptions?.map((item: any) => (
                     <div key={item.id} className=" flex-column" >
 
-                        <p className=' fw-light  fs-6 text-center  text-light'>
+                        <p className=' fw-light text-center  text-light'>
                             {item.description}
                         </p>
 

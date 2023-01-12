@@ -8,7 +8,7 @@ import "./styles.css";
 
 const textStyles: {} = {
     color: "#1985a1",
-    fontSize: "1.2rem",
+    fontSize: "1.8rem",
     fontWeight: "bold",
     textAlign: "center",
     padding: "1rem 0",
@@ -41,6 +41,12 @@ const accordoindata = [
         title: "community",
         titleDescription: "You are your community ",
         descriprion: "Make milestones recommendations to mobilize your community at the various stages of your startup and keep everyone in the loop. With different types of gratitude.",
+    },
+    {
+        id: 4,
+        title: "contributors",
+        titleDescription: "how tou can help as a contributor ",
+        descriprion: "starting from donating money to time to anything you might have to offer and the debutor willing to accept. no kind of help is a small help  ",
     }
 
 ]
@@ -76,7 +82,7 @@ const Accordion = ({ i, expanded, setExpanded,
                 </span>
 
             </motion.header>
-            <AnimatePresence initial={false}>
+            <AnimatePresence initial={true}>
                 {isOpen && (
 
                     <motion.section
@@ -89,15 +95,15 @@ const Accordion = ({ i, expanded, setExpanded,
                             open: {
                                 opacity: 1, height: "min-content",
                                 animation: "fadeIn 1s ease-in-out",
-                                width: "50vh", margin: "0", padding: "0", borderRadius: "1.5rem"
+                                width: "100%", margin: "0", padding: "0", borderRadius: "1.5rem"
                             },
                             collapsed: {
-                                opacity: 0, height: 0, width: "50vh",
+                                opacity: 0, height: 0, width: "100%",
                                 margin: "0", padding: "0", borderRadius: "1.5rem"
                             },
                         }}>
 
-                        <p style={textStyles} className="text-start text-dark p-5">
+                        <p style={textStyles} className="text-start  p-6">
                             {descriprion}
                         </p>
                     </motion.section>
@@ -108,9 +114,8 @@ const Accordion = ({ i, expanded, setExpanded,
 };
 
 export function LandingAccordion() {
-    // This approach is if you only want max one section open at a time. If you want multiple
-    // sections to potentially be open simultaneously, they can all be given their own `useState`.
-    const [expanded, setExpanded] = useState<false | number>(0);
+
+    const [expanded, setExpanded] = useState<false | number>(1);
 
     return (
         <div
