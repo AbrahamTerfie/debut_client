@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
-import { Row, Col } from 'reactstrap'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 import VentureCards from '../../../Components/VentureCards/VentureCards'
 
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
@@ -11,7 +11,11 @@ import { FaSearch } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
 import { notifyError } from '../../../Components/Notification/Toast'
 
-type Venture = {
+
+
+
+
+type Company = {
     _id: string,
     companyName: string,
     companyMissionStatement: string,
@@ -33,18 +37,73 @@ type Venture = {
     debutEvents: string,
 }
 
+
+type VentureReturns = {
+    TotalAmount: number,
+    Ventures: [Company]
+
+}
 export default function Ventures() {
-    const { loading, error, data } = useQuery<{ getdebutCompanies: Venture[] }>(GET_ALL_VENTURES)
+    const [pagination, setPagination] = useState<{ limit: number, offset: number, allcompany: number }>({
+        limit: 20,
+        offset: 0,
+        allcompany: 0,
+    })
+    const { loading, error, data } = useQuery<{ getdebutCompanies: VentureReturns }>(GET_ALL_VENTURES, {
+        variables: {
+            limit: pagination.limit,
+            offset: pagination.offset
+        },
+    })
+
+
+    useEffect(() => {
+        setPagination({
+            ...pagination,
+            allcompany: data?.getdebutCompanies.TotalAmount ?? 0
+
+        })
+    }, [data?.getdebutCompanies.TotalAmount])
+
+
+    const nextPage = () => {
+        pagination.offset + pagination.limit < pagination.allcompany &&
+            setPagination({ ...pagination, offset: pagination.offset + pagination.limit })
+    }
+    const prevPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: pagination.offset - pagination.limit })
+    }
+    const firstPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: 0 })
+    }
+    const lastPage = () => {
+        pagination.offset + pagination.limit < pagination.allcompany &&
+            setPagination({
+                ...pagination, offset: Math.floor(
+                    pagination.allcompany / pagination.limit) * pagination.limit
+            })
+    }
+    // refetch()
+
+
+
+
+
+
 
     if (loading) return <Loader />
     if (error) { notifyError(error.message.toString()) }
 
-    const ventures = data?.getdebutCompanies ?? []
+    const companies = data?.getdebutCompanies.Ventures ?? []
 
 
 
     return (
-        <div >
+        <div
+            className='w-100'
+        >
 
             <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
                 <h1 className='fw-light fs-1  m-5 mb-3'>
@@ -77,8 +136,8 @@ export default function Ventures() {
 
                 </Col>
             </Row>
-            <Row className='d-flex justify-content-center px-5 ms-2 mt-5'>
-                {ventures.map((item: Venture, index: number) => (
+            <Row className='d-flex justify-content-center px-5 ms-2 mt-5 w-100'>
+                {companies.map((item: Company, index: number) => (
                     <VentureCards
                         key={item._id}
                         _id={item._id}
@@ -102,6 +161,27 @@ export default function Ventures() {
                         debutEvents={item.debutEvents}
                     />
                 ))}
+            </Row>
+            <Row>
+                {/* paginaton  */}
+                <Pagination className='d-flex justify-content-center align-items-center  my-5 ' size="md">
+                    <PaginationItem>
+                        <PaginationLink first onClick={firstPage}>
+                            first
+                        </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem onClick={prevPage}>
+                        <PaginationLink previous />
+                    </PaginationItem>
+                    <PaginationItem onClick={nextPage}>
+                        <PaginationLink next />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink last onClick={lastPage}>
+                            last
+                        </PaginationLink>
+                    </PaginationItem>
+                </Pagination>
             </Row>
         </div>
     )

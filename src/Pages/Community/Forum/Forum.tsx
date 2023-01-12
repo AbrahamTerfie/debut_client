@@ -51,7 +51,7 @@ export default function Forum() {
         offset: 0,
         TotalAmount: 0,
     })
-    const { data, loading, error, refetch } = useQuery(FETCH_ALL_FORUM_POSTS, {
+    const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS, {
         variables: {
             limit: pagination.limit,
             offset: pagination.offset
@@ -64,15 +64,23 @@ export default function Forum() {
 
 
     const nextPage = () => {
-        setPagination({ ...pagination, offset: pagination.offset + pagination.limit })
+        pagination.offset + pagination.limit < pagination.TotalAmount &&
+            setPagination({ ...pagination, offset: pagination.offset + pagination.limit })
     }
     const prevPage = () => {
-        setPagination({ ...pagination, offset: pagination.offset - pagination.limit })
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: pagination.offset - pagination.limit })
     }
-    const firstPage = () => { setPagination({ ...pagination, offset: 0 }) }
+    const firstPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: 0 })
+    }
     const lastPage = () => {
-        setPagination({ ...pagination, offset: Math.floor(data?.getForumPosts.TotalAmount / pagination.limit) * pagination.limit })
-        refetch()
+        pagination.offset + pagination.limit < pagination.TotalAmount &&
+            setPagination({
+                ...pagination, offset: Math.floor(
+                    pagination.TotalAmount / pagination.limit) * pagination.limit
+            })
     }
 
     if (loading) { return <Loader /> }
