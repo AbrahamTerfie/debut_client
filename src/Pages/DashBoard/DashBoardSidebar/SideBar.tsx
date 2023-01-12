@@ -1,5 +1,5 @@
 import React from "react";
-import { MdOutlineEvent } from 'react-icons/md'
+import { MdDarkMode, MdOutlineEvent } from 'react-icons/md'
 import { FiTarget } from 'react-icons/fi'
 import { FaRegHandSpock } from 'react-icons/fa'
 import { BsArchive, BsBuilding, BsPerson } from 'react-icons/bs'
@@ -19,9 +19,9 @@ export default function SideBar({ isOpen, toggle }: {
         color: "#1985a1", cursor: "default",
     }
     return (
-        <div className={classNames(" sidebar shadow-sm border border-muted   ", { "is-open": isOpen }
+        <div className={classNames(" sidebar shadow-sm border border-muted  mt-5  ", { "is-open": isOpen }
             // make it responsive for all screen sizes 
-            , "d-none d-md-block" , "d-none d-lg-block" , "d-none d-xl-block" , "d-none d-xxl-block"
+            , "d-none d-md-block", "d-none d-lg-block", "d-none d-xl-block", "d-none d-xxl-block"
 
 
         )}>
@@ -31,8 +31,8 @@ export default function SideBar({ isOpen, toggle }: {
                 </span>
             </div>
             <div className="side-menu">
-                <Nav vertical className=" p-3">
-                    <p className="text-muted fs-2 mt-5 mb-1 mx-2"
+                <Nav vertical className=" p-3  pt-1">
+                    <p className="text-muted fs-2  mb-1 mx-2"
                         style={textColor}
                         onClick={() => navigate(appRoutes.dashboard)}>
                         MyDebut
@@ -75,7 +75,7 @@ export default function SideBar({ isOpen, toggle }: {
 
                     </NavItem>
                     <NavItem
-                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 fw-lighter" : "MyeventCard my-2 fs-6 fw-lighter"} >
                         <NavLink
                             onClick={() => navigate(appRoutes.myProfile)}
                             style={textColor}>
@@ -83,6 +83,18 @@ export default function SideBar({ isOpen, toggle }: {
                             Profile
                         </NavLink>
 
+
+                    </NavItem>
+
+                    <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
+                        <NavLink style={textColor}
+                            onClick={() => {
+                                const darkMode = document.documentElement.getAttribute('data-bs-theme') === 'dark'
+                                document.documentElement.setAttribute('data-bs-theme', darkMode ? 'light' : 'dark')
+                            }} >
+                            <MdDarkMode className="mx-2" />
+                            Dark Mode
+                        </NavLink>
                     </NavItem>
 
                 </Nav>

@@ -18,7 +18,7 @@ export default function Events() {
     const { getdebutEvents: events } = data
 
     return (
-        <div>
+        <div className='w-100'>
             <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
                 <h1 className='fw-light fs-1  m-5 mb-3'> Events and  Regisries</h1>
                 <p className="text-muted ms-5" >
@@ -26,7 +26,7 @@ export default function Events() {
                 </p>
             </Row>
             <Row
-                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
+                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 2, top: '10%', }}>
 
                 <Col md={10}>
                     <SearchComponent />
