@@ -11,9 +11,18 @@ import MotionContainer from '../../../Components/MotionContainer/MotionContainer
 
 export default function NewForumPost({ toggler }: { toggler: () => void }) {
     const { userID } = useSelector((store: RootState) => store.identfiers)
-
+    const [pagination] = useState({
+        limit: 15,
+        offset: 0
+    })
     const [createNewPost, createNewPostRes] = useMutation(CREATE_FORUM_POST, {
-        refetchQueries: [{ query: FETCH_ALL_FORUM_POSTS }],
+        refetchQueries: [{
+            query: FETCH_ALL_FORUM_POSTS,
+            variables: {
+                limit: pagination.limit,
+                offset: pagination.offset
+            }
+        }],
         onCompleted: () => {
             notifySuccess('Post Created Successfully')
             toggler()

@@ -123,7 +123,7 @@ export default function ForumCards(
                             return (
                                 <div key={uuid()} className='shadow-sm   rounded  my-1 ps-2 p-1  border border-tertiary-emphasis border-1 ' >
                                     <p className=' m-0  fw-normal fs-6' > {comment.comment}</p>
-                                    <span className=' m-0  text-secondary fw-lighter text-small  text-start ' >  {comment.createdBy.firstName + "" + comment.createdBy.lastName}  </span>
+                                    <span className=' m-0  text-secondary fw-lighter text-small  text-start ' >  {comment.createdBy.firstName + " " + comment.createdBy.lastName}  </span>
                                 </div>
                             )
                         })}
@@ -137,7 +137,7 @@ export default function ForumCards(
                 transition={{ duration: 1, type: 'spring', stiffness: 100, damping: 20 }}
                 whileHover={{ scale: 1.005 }}
                 whileTap={{ scale: 0.9 }}>
-                <Row className=' MyeventCard border border-muted shadow-sm rounded p-3 m-2  ' onClick={() => toggle()}>
+                <Row className=' MyeventCard border border-muted shadow-sm rounded p-3 m-2 w-100  ' onClick={() => toggle()}>
                     <p className='fw-light fs-5 m-1 ' > {postTitle} </p>
                     <p className=' fw-lighter text-muted m-0' >   posted time  .  {channel}  .   {comments.length}  comments  </p>
                     <p className='fw-light m-0' > {postContent} </p>

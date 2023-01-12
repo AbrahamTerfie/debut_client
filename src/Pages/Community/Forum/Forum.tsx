@@ -1,6 +1,9 @@
 
 import React, { useState, useEffect } from 'react'
-import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader, Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
+import {
+    Row, Offcanvas, OffcanvasBody, OffcanvasHeader, Button, Modal, ModalBody, ModalFooter, ModalHeader,
+    Pagination, PaginationItem, PaginationLink,
+} from 'reactstrap'
 // components
 import ForumCards from '../../../Components/ForumCards/ForumCards'
 import NewForumPost from './NewForumPost'
@@ -9,12 +12,11 @@ import './Forum.css'
 import Loader from '../../../Components/Loader/Loader'
 // icons
 import { IoMdAdd, IoMdClose } from 'react-icons/io'
-import { IoChatbubblesOutline, IoExit, IoLogoXbox } from 'react-icons/io5'
+import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 // graphql
 import { useQuery } from '@apollo/client'
 import { FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
-// auth and redux
 
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
@@ -41,26 +43,46 @@ export default function Forum() {
     const { hasCompany } = useSelector((store: RootState) => store.identfiers)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
-
-    const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS)
     const [isNewUser, setIsNewUser] = useState(true)
     const toggleIsNewUser = (): void => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
+    const [pagination, setPagination] = useState({
+        limit: 15,
+        offset: 0,
+        TotalAmount: 0,
+    })
+    const { data, loading, error, refetch } = useQuery(FETCH_ALL_FORUM_POSTS, {
+        variables: {
+            limit: pagination.limit,
+            offset: pagination.offset
+        },
+    })
 
+    useEffect(() => {
+        setPagination({ ...pagination, TotalAmount: data?.getForumPosts.TotalAmount })
+    }, [data?.getForumPosts.TotalAmount])
+
+
+    const nextPage = () => {
+        setPagination({ ...pagination, offset: pagination.offset + pagination.limit })
+    }
+    const prevPage = () => {
+        setPagination({ ...pagination, offset: pagination.offset - pagination.limit })
+    }
+    const firstPage = () => { setPagination({ ...pagination, offset: 0 }) }
+    const lastPage = () => {
+        setPagination({ ...pagination, offset: Math.floor(data?.getForumPosts.TotalAmount / pagination.limit) * pagination.limit })
+        refetch()
+    }
 
     if (loading) { return <Loader /> }
     if (error) { notifyError("soething went wrong ") }
 
 
-
-
-    // console.log("authenticatedUsrRes", authenticatedUsrRes)
-
     return (
-        <div>
+        <div className='w-100'>
             <Modal centered size='lg' isOpen={hasCompany === false} toggle={toggleIsNewUser}  >
                 <ModalHeader
-                    // className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>
                     <p className='m-0'>Welcome to Debut </p>
                 </ModalHeader>
@@ -69,10 +91,7 @@ export default function Forum() {
                     {/* welcome prompt to the app and tell them to set up profile and compnay infomation */}
                     <h3 className='m-0'> We are glad to have you here</h3>
                     <h5 className='text-success'>Please set up your profile and company information to continue </h5>
-
                     <OnBoardingForm />
-
-
                 </ModalBody>
                 <ModalFooter className=' text-muted'>
                     <Button color="success " size="sm" outline onClick={() => navigate(appRoutes.dashboard)}>
@@ -115,7 +134,7 @@ export default function Forum() {
                 {/* <SearchComponent /> */}
             </Row>
 
-            <div className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 mt-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
+            <div className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 mt-5 mb-3  ' style={{ zIndex: 1, top: '10%', }}>
                 <MotionContainer>
                     <p onClick={() => toggle()}
                         className='   p-2 py-auto px-3 shadow-sm  text-success-emphasis bg-success  bg-opacity-10  border border-success-subtle rounded-pill '>
@@ -145,8 +164,7 @@ export default function Forum() {
                         <FaRegHandPaper size={15}
                             style={{ backgroundColor: 'transparent', }}
                             className='mx-2' />
-                        <span className='d-none d-md-inline-block'>Contributions  </span>
-
+                        <span className='d-none d-md-inline-block'> Collaboration</span>
                     </p>
                 </MotionContainer>
                 <MotionContainer>
@@ -174,8 +192,8 @@ export default function Forum() {
 
             </div>
 
-            <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto '>
-                {data.getForumPosts.map((post: any, index: number) => {
+            <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto  '>
+                {data?.getForumPosts.Posts?.map((post: any, index: number) => {
                     if (channelFilter === '') {
                         return (
                             <ForumCards
@@ -204,7 +222,38 @@ export default function Forum() {
                     }
                 })}
             </Row>
-
+            <Row>
+                {/* paginaton  */}
+                <Pagination className='d-flex justify-content-center align-items-center  my-5 ' size="md">
+                    <PaginationItem>
+                        <PaginationLink first onClick={firstPage}>
+                            first
+                        </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem onClick={prevPage}>
+                        <PaginationLink previous />
+                    </PaginationItem>
+                    <PaginationItem onClick={nextPage}>
+                        <PaginationLink next />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink last onClick={lastPage}>
+                            last
+                        </PaginationLink>
+                    </PaginationItem>
+                </Pagination>
+            </Row>
+            <Row>
+                <p className='text-center' >
+                    <span className='text-muted'>Powered by </span>
+                    <span className='text-primary-emphasis'>  <FaRegHandshake size={15}
+                        style={{ backgroundColor: 'transparent', }}
+                        className='mx-2' />  </span>
+                    <span className='text-muted'>  Community</span>
+                </p>
+                <p className='text-muted text-center '>
+                    @2021 All rights reserved Debut Co. </p>
+            </Row>
         </div >
 
 

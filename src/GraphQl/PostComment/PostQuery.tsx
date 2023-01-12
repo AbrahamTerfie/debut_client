@@ -11,7 +11,6 @@ mutation CreateNewForumPost ($forumPostInput: ForumPostInput){
     postTitle
     comments {
       _id
-
     },
     createdBy {
       _id,
@@ -24,20 +23,23 @@ mutation CreateNewForumPost ($forumPostInput: ForumPostInput){
 
 
 export const FETCH_ALL_FORUM_POSTS = gql`
-   query FetchAllForumPosts {
-  getForumPosts {
-    _id
-    channel
-    postContent
-    postTitle
-    comments {
+   query FetchAllForumPosts ($limit: Int, $offset: Int){
+    getForumPosts(offset: $offset, limit: $limit) {
+    TotalAmount
+    Posts {
       _id
-
-    },
-    createdBy {
-      _id,
-      firstName,
-      email
+      channel
+      postContent
+      postTitle
+      comments {
+        _id
+      }
+      createdBy {
+        _id
+        firstName
+        lastName
+        email
+      }
     }
   }
 }
@@ -73,6 +75,7 @@ query postComments ($getPostCommentWithPostIdId: ID!){
     createdBy {
       _id,
       firstName,
+      lastName,
       email
     },
     post {
