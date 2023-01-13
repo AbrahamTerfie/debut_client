@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col, Collapse, Pagination, PaginationItem, PaginationLink, Input, FormGroup } from 'reactstrap'
 import PeopleCards from '../../../Components/PeopleCards/PeopleCards'
 import './People.css'
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
-import { useQuery } from '@apollo/client'
+import { useQuery, useLazyQuery } from '@apollo/client'
 
 import PersonDetail from '../../../Components/PersonDetail/PersonDetail'
 import PeopleFilterOptions from '../../../Components/PeopleFilterOptions/PeopleFilterOptions'
@@ -13,18 +12,19 @@ import UserResults from '../../../Components/Search/UserResults'
 //context
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer'
-import { All_USERS } from '../../../GraphQl/index'
+import { All_USERS, SearchUser } from '../../../GraphQl/index'
 import Loader from '../../../Components/Loader/Loader'
 import { motion } from 'framer-motion'
 import { notifyError } from '../../../Components/Notification/Toast'
 import { v4 as uuid } from 'uuid'
 export default function People() {
+
     const [pagination, setPagination] = useState<{ limit: number, offset: number, allPeople: number }>({
         limit: 25,
         offset: 0,
         allPeople: 0,
     })
-    const [search, setSearch] = useState<string>('abrahm')
+    const [search, setSearch] = useState<string>('')
     const { peopleExpertiseFilter, peopleRegionFilter, activePersonId } = useSelector((store: RootState) => store.uiStore)
     const [modal, setModal] = useState(false);
     const toggle = (): void => setModal(!modal);
@@ -35,6 +35,12 @@ export default function People() {
         }
     })
 
+    const [searchUser, { loading: searchLoading, data: searchData, error: searchError }] = useLazyQuery(SearchUser, {
+        variables: {
+            searchParam: search,
+
+        }
+    })
 
     useEffect(() => {
         setPagination({
@@ -66,67 +72,50 @@ export default function People() {
     }
 
 
-    if (error) { notifyError("something went wrong") }
+    if (error || searchError) { notifyError("something went wrong") }
     if (loading) { return <Loader /> }
 
     return (
 
-        <div
-            className='w-100'
-        >
-            <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
+        <div className='w-100'>
+            <Row className=' mb-1 my-auto pt-5 mt-5 px-5  mx-5  w-100  
+            
+            d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 
+            
+            ' >
                 <h1 className='fw-light fs-1  m-5 mb-3'>
                     People directory
                 </h1>
                 <p className="text-muted ms-5" >
                     Find people you will love to work with and help grow
                 </p>
-
             </Row>
-            <Row
-                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ top: '10%', }}>
-
-
-
+            <Row className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ top: '10%', }}>
                 <Col md={10} sm={8} xs={8} >
-                    <Row
-                        className='w-100 d-flex flex-column'
-                    >
+                    <Row className='w-100 d-flex flex-column'>
                         <FormGroup>
                             <Input
                                 className='App'
                                 type="text"
                                 name="textarea-input"
                                 placeholder='Search using name or email ... '
-                                onChange={(e) => { setSearch(e.target.value) }}
+                                onChange={(e) => setSearch(e.target.value)}
+                                value={search}
+
+
 
                             />
                         </FormGroup>
                         <div className='w-75 position-absolute mt-5   shadow-lg'
-                            style={{ zIndex: 1000, backgroundColor: 'white', maxHeight: '300px', overflowY: 'scroll' }}
-                        >
-
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
-                            <UserResults />
+                            style={{ zIndex: 1000, maxHeight: '300px', overflowY: 'scroll' }}>
+                            {searchLoading ? <div>
+                                <p className='text-center text-muted ' > please wait  ....</p>
+                            </div> : searchData?.searchUserWithParam.map((user: any) => {
+                                return (<UserResults key={uuid()}
+                                    setSearch={setSearch}
+                                    people={user} />)
+                            })}
                         </div>
-
-
                     </Row>
                 </Col>
                 <Col md={1} sm={4} xs={4}>
@@ -134,6 +123,7 @@ export default function People() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        onClick={() => searchUser()}
                         className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
                         <FaSearch />
                     </motion.div>
