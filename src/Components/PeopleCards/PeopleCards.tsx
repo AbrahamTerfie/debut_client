@@ -22,17 +22,19 @@ export default function PeopleCards({ people }: any) {
         <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 1.1 }}
+
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             style={{ cursor: 'pointer' }}
             className={activePersonId === people._id ?
                 '  my-2 text-info-emphasis bg-info-subtle border border-info-subtle '
-                : '  rounded-1   my-2  border border-muted '}
+                : ' bg-tertiary  rounded-1   my-2 border-2 border border-muted  '}
         >
             <Row onClick={(e: any) => handleClick(e)}>
                 <Col md={3}
                     sm={4}
                     xs={4}
                     lg={2}
+                    className='d-flex flex-column justify-content-center align-items-center p-2 mx-auto flex-wrap overflow-hidden  '
                 >
                     <img
                         src={people.profileImage}
