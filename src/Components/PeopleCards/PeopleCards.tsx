@@ -27,7 +27,7 @@ export default function PeopleCards({ people }: any) {
             style={{ cursor: 'pointer' }}
             className={activePersonId === people._id ?
                 '  my-2 text-info-emphasis bg-info-subtle border border-info-subtle '
-                : ' bg-tertiary  rounded-1   my-2 border-2 border border-muted  '}
+                : '  rounded-1   my-2 border border-secondary bg-secondary-subtle bg-opacity-10'}
         >
             <Row onClick={(e: any) => handleClick(e)}>
                 <Col md={3}

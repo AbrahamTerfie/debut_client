@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Collapse, Pagination, PaginationItem, PaginationLink } from 'reactstrap'
+import { Row, Col, Collapse, Pagination, PaginationItem, PaginationLink, Input, FormGroup } from 'reactstrap'
 import PeopleCards from '../../../Components/PeopleCards/PeopleCards'
 import './People.css'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
@@ -9,7 +9,7 @@ import PersonDetail from '../../../Components/PersonDetail/PersonDetail'
 import PeopleFilterOptions from '../../../Components/PeopleFilterOptions/PeopleFilterOptions'
 import { IoMdSettings } from 'react-icons/io'
 import { FaSearch } from 'react-icons/fa'
-
+import UserResults from '../../../Components/Search/UserResults'
 //context
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer'
@@ -24,6 +24,7 @@ export default function People() {
         offset: 0,
         allPeople: 0,
     })
+    const [search, setSearch] = useState<string>('abrahm')
     const { peopleExpertiseFilter, peopleRegionFilter, activePersonId } = useSelector((store: RootState) => store.uiStore)
     const [modal, setModal] = useState(false);
     const toggle = (): void => setModal(!modal);
@@ -83,12 +84,50 @@ export default function People() {
 
             </Row>
             <Row
-                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
+                className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ top: '10%', }}>
 
 
 
                 <Col md={10} sm={8} xs={8} >
-                    <SearchComponent />
+                    <Row
+                        className='w-100 d-flex flex-column'
+                    >
+                        <FormGroup>
+                            <Input
+                                className='App'
+                                type="text"
+                                name="textarea-input"
+                                placeholder='Search using name or email ... '
+                                onChange={(e) => { setSearch(e.target.value) }}
+
+                            />
+                        </FormGroup>
+                        <div className='w-75 position-absolute mt-5   shadow-lg'
+                            style={{ zIndex: 1000, backgroundColor: 'white', maxHeight: '300px', overflowY: 'scroll' }}
+                        >
+
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                            <UserResults />
+                        </div>
+
+
+                    </Row>
                 </Col>
                 <Col md={1} sm={4} xs={4}>
                     <motion.div
@@ -115,6 +154,10 @@ export default function People() {
 
                 </Col>
             </Row>
+
+
+
+
             <Collapse isOpen={modal} toggle={toggle} >
 
                 <PeopleFilterOptions />
