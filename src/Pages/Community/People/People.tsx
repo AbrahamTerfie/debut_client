@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Row, Col, Collapse } from 'reactstrap'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Collapse, Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 import PeopleCards from '../../../Components/PeopleCards/PeopleCards'
 import './People.css'
 import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
@@ -19,13 +19,50 @@ import { motion } from 'framer-motion'
 import { notifyError } from '../../../Components/Notification/Toast'
 import { v4 as uuid } from 'uuid'
 export default function People() {
-
+    const [pagination, setPagination] = useState<{ limit: number, offset: number, allPeople: number }>({
+        limit: 25,
+        offset: 0,
+        allPeople: 0,
+    })
     const { peopleExpertiseFilter, peopleRegionFilter, activePersonId } = useSelector((store: RootState) => store.uiStore)
     const [modal, setModal] = useState(false);
     const toggle = (): void => setModal(!modal);
-    const { loading, data, error } = useQuery(All_USERS)
+    const { loading, data, error } = useQuery(All_USERS, {
+        variables: {
+            limit: pagination.limit,
+            offset: pagination.offset,
+        }
+    })
 
 
+    useEffect(() => {
+        setPagination({
+            ...pagination,
+            allPeople: data?.getdebutUsers.TotalAmount ?? 0
+
+        })
+    }, [data?.getdebutUsers.TotalAmount])
+
+
+    const nextPage = () => {
+        pagination.offset + pagination.limit < pagination.allPeople &&
+            setPagination({ ...pagination, offset: pagination.offset + pagination.limit })
+    }
+    const prevPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: pagination.offset - pagination.limit })
+    }
+    const firstPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: 0 })
+    }
+    const lastPage = () => {
+        pagination.offset + pagination.limit < pagination.allPeople &&
+            setPagination({
+                ...pagination, offset: Math.floor(
+                    pagination.allPeople / pagination.limit) * pagination.limit
+            })
+    }
 
 
     if (error) { notifyError("something went wrong") }
@@ -33,7 +70,9 @@ export default function People() {
 
     return (
 
-        <div  >
+        <div
+            className='w-100'
+        >
             <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
                 <h1 className='fw-light fs-1  m-5 mb-3'>
                     People directory
@@ -85,7 +124,7 @@ export default function People() {
                 <Col className={`overflow-scroll  ${activePersonId === "" ? '' : 'd-none d-sm-block'}`}
                     style={{ maxHeight: '80vh' }}>
 
-                    {data?.getdebutUsers.map((user: any) => {
+                    {data?.getdebutUsers.Users.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={uuid()}
                                 people={user} />
@@ -102,9 +141,30 @@ export default function People() {
                         }
                     })}
                 </Col>
-                <Col className={`overflow-auto ${activePersonId === "" ? 'd-none d-sm-block' : ''}`}>
+                <Col className={`overflow-auto ${activePersonId === "" ? 'd-none d-block' : ''}`}>
                     <PersonDetail />
                 </Col>
+            </Row>
+            <Row>
+                {/* paginaton  */}
+                <Pagination className='d-flex justify-content-center align-items-center  my-5 ' size="md">
+                    <PaginationItem>
+                        <PaginationLink first onClick={firstPage}>
+                            first
+                        </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem onClick={prevPage}>
+                        <PaginationLink previous />
+                    </PaginationItem>
+                    <PaginationItem onClick={nextPage}>
+                        <PaginationLink next />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink last onClick={lastPage}>
+                            last
+                        </PaginationLink>
+                    </PaginationItem>
+                </Pagination>
             </Row>
         </div>
 

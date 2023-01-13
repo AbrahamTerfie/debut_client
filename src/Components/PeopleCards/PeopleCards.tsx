@@ -37,10 +37,11 @@ export default function PeopleCards({ people }: any) {
                     <img
                         src={people.profileImage}
                         alt='profile'
-                        // have fixed sizes for all images and responsive sizes for all devices
-                        className='rounded img-fluid mx-auto  d-block  object-fit-cover h-100
-
-                        '
+                        className='rounded-2 img-fluid  '
+                        style={{
+                            width: '100px', height: '100px', objectFit: 'cover', maxHeight: '100%',
+                            minWidth: '100px', minHeight: '100px'
+                        }}
                     />
                 </Col>
                 <Col md={9} sm={8} xs={8} lg={10}

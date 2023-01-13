@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './ForumCards.css'
-import { Row, Offcanvas, OffcanvasBody, FormGroup, OffcanvasHeader, Col, } from 'reactstrap'
+import { Row, Offcanvas, OffcanvasBody, FormGroup, OffcanvasHeader } from 'reactstrap'
 import { useSelector } from 'react-redux'
 import { useMutation, useQuery } from '@apollo/client'
 import { RootState } from '../../Store/RootReducer';
