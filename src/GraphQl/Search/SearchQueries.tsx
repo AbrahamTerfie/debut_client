@@ -17,3 +17,24 @@ query SearchUser($searchParam: String) {
   }
 }
 `
+
+
+export const SearchVenture = gql`
+query  SearchVenture($searchParam: String) {
+  searchCompanyWithParam(searchParam: $searchParam) {
+    _id
+    companyName
+    companyHeadquarters
+    companyLogo
+    companyDescription
+    companyOwner {
+      _id
+      firstName
+      lastName
+      profileImage
+      email
+    }
+   
+  }
+}
+`

@@ -148,7 +148,6 @@ mutation updateDebutCompany ($updateDebutCompanyId: ID!, $companyInput: CompanyI
 export const GET_ALL_VENTURES = gql`
 query AllVentures($limit: Int, $offset: Int) {
   getdebutCompanies (limit: $limit, offset: $offset) {
-
     TotalAmount
     Ventures {
       _id

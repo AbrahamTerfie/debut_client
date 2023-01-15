@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap'
+import { Row, Col, Pagination, PaginationItem, PaginationLink, FormGroup, Input } from 'reactstrap'
 import VentureCards from '../../../Components/VentureCards/VentureCards'
 
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
-import { useQuery } from '@apollo/client'
-import { GET_ALL_VENTURES } from '../../../GraphQl/index'
+import { useQuery, useLazyQuery } from '@apollo/client'
+import { GET_ALL_VENTURES, SearchVenture } from '../../../GraphQl/index'
 import Loader from '../../../Components/Loader/Loader'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 import { FaSearch } from 'react-icons/fa'
@@ -12,7 +11,7 @@ import { IoMdSettings } from 'react-icons/io'
 import { notifyError } from '../../../Components/Notification/Toast'
 
 
-
+import VentureResults from '../../../Components/Search/VentureResults'
 
 
 type Company = {
@@ -56,6 +55,13 @@ export default function Ventures() {
         },
     })
 
+    const [search, setSearch] = useState<string>('')
+    const [searchVenture, { loading: searchLoading, error: searchError, data: searchData }] = useLazyQuery(SearchVenture, {
+        variables: {
+            searchParam: search
+        }
+    })
+    console.log(searchData)
 
     useEffect(() => {
         setPagination({
@@ -94,17 +100,14 @@ export default function Ventures() {
 
 
     if (loading) return <Loader />
-    if (error) { notifyError(error.message.toString()) }
+    if (error || searchError) { notifyError("something went wrong ") }
 
     const companies = data?.getdebutCompanies.Ventures ?? []
 
 
 
     return (
-        <div
-            className='w-100'
-        >
-
+        <div className='w-100'>
             <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
                 <h1 className='fw-light fs-1  m-5 mb-3'>
                     Venture Directory
@@ -112,17 +115,41 @@ export default function Ventures() {
                 <p className="text-muted ms-5" >
                     Find and connect with other ventures in your industry
                 </p>
-
             </Row>
             <Row
                 className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 1, top: '10%', }}>
 
                 <Col md={10}>
-                    <SearchComponent />
+                    <Row>
+                        <FormGroup>
+                            <Input
+                                className='App'
+                                type="text"
+                                name="textarea-input"
+                                placeholder='Search using name or email ... '
+                                onChange={(e) => setSearch(e.target.value)}
+                                value={search} />
+                        </FormGroup>
+                        <div className='w-75 position-absolute mt-5   shadow-lg'
+                            style={{ zIndex: 1000, maxHeight: '300px', overflowY: 'scroll' }}>
+                            {searchLoading ? <div>
+                                <p className='text-center text-warning bg-muted py-5 ' > please wait  ....</p>
+                            </div> : searchData.searchCompanyWithParam?.length === 0 && search.length !== 0 ?
+                                <p className='text-center text-warning py-5 bg-muted ' >  no match foud.</p>
+                                :
+                                searchData?.searchCompanyWithParam.map((venture: any) => {
+                                    return (<VentureResults key={venture._id}
+                                        ventures={venture} />)
+                                })}
+
+                        </div>
+                    </Row>
                 </Col>
                 <Col md={1} >
                     <MotionContainer>
-                        <div className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
+                        <div className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'
+                            onClick={() => searchVenture()}
+                        >
                             <FaSearch />
                         </div>
                     </MotionContainer>
