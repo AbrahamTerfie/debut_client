@@ -1,21 +1,30 @@
-import React from 'react'
-import { Col, Row } from 'reactstrap'
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
+import React, { useState } from 'react'
+import { Col, FormGroup, Input, Row } from 'reactstrap'
 import EventCard from '../../../Components/EventCard/EventCard'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 import { eventCard } from '../../../types/eventCardType'
 import { EVENTS_PAGE } from '../../../GraphQl/index'
-import { useQuery } from '@apollo/client'
+import { useQuery, useLazyQuery } from '@apollo/client'
 import Loader from '../../../Components/Loader/Loader'
 import { notifyError } from '../../../Components/Notification/Toast'
 import { FaSearch } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
+import { searchDebutEvent } from '../../../GraphQl/index'
+import EventResults from '../../../Components/Search/EventResults'
 export default function Events() {
+    const [search, setSearch] = useState<string>('')
+    const [searchEvents, { loading: searchLoading, error: searchError, data: searchData }] = useLazyQuery(searchDebutEvent,
+        {
+            variables: { searchParam: search }
+        })
 
     const { data, loading, error } = useQuery(EVENTS_PAGE)
     if (loading) return <Loader />
-    if (error || !data) { notifyError('Error fetching events') }
+    if (error || !data || searchError) { notifyError('Error fetching events') }
     const { getdebutEvents: events } = data
+
+
+
 
     return (
         <div className='w-100'>
@@ -29,11 +38,39 @@ export default function Events() {
                 className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 2, top: '10%', }}>
 
                 <Col md={10}>
-                    <SearchComponent />
+                    <FormGroup>
+                        <Input
+                            className='App'
+                            type="text"
+                            name="textarea-input"
+                            placeholder='Search using name or email ... '
+                            onChange={(e) => setSearch(e.target.value)}
+                            value={search} />
+                    </FormGroup>
+                    <div className='w-75 position-absolute  shadow-lg'
+                        style={{ zIndex: 1000, maxHeight: '300px', overflowY: 'scroll' }}>
+
+                        {searchLoading ?
+                            <div>
+                                <p className='text-center text-warning bg-muted py-5 ' > please wait  ....</p>
+                            </div>
+                            :
+                            searchData?.searchEventWithParam?.length === 0 && search.length !== 0 ?
+                                <p className='text-center text-warning py-5 bg-muted ' >  no match foud.</p>
+                                :
+                                searchData?.searchEventWithParam.map((event: any) => {
+                                    return (
+                                        <EventResults key={event.id} event={event} />)
+                                })}
+                    </div>
                 </Col>
                 <Col md={1} >
-                    <MotionContainer>
-                        <div className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
+                    <MotionContainer
+
+                    >
+                        <div
+                            onClick={() => searchEvents()}
+                            className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
                             <FaSearch />
                         </div>
                     </MotionContainer>

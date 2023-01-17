@@ -32,7 +32,7 @@ import {
 } from './DebutEvents/DebutEvents'
 import { COMPANY_PAGE } from './Company/companyPage'
 
-import { SearchUser, SearchVenture } from './Search/SearchQueries'
+import { SearchUser, SearchVenture, searchDebutEvent } from './Search/SearchQueries'
 
 
 export {
@@ -95,6 +95,7 @@ export {
 
     // search
     SearchUser,
-    SearchVenture
+    SearchVenture,
+    searchDebutEvent
 
 }

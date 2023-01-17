@@ -110,7 +110,7 @@ export default function People() {
                             style={{ zIndex: 1000, maxHeight: '300px', overflowY: 'scroll' }}>
                             {searchLoading ? <div>
                                 <p className='text-center text-warning bg-muted py-5 ' > please wait  ....</p>
-                            </div> : searchData.searchUserWithParam?.length === 0 && search.length !== 0 ?
+                            </div> : searchData?.searchUserWithParam?.length === 0 && search.length !== 0 ?
                                 <p className='text-center text-warning py-5 bg-muted ' >  no match foud.</p>
                                 :
                                 searchData?.searchUserWithParam.map((user: any) => {

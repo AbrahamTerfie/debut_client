@@ -38,3 +38,17 @@ query  SearchVenture($searchParam: String) {
   }
 }
 `
+export const searchDebutEvent = gql`
+query SearchDebutEvent($searchParam: String){
+  searchEventWithParam (
+    searchParam: $searchParam
+  ) {
+    _id,
+    debutEventName,
+    debutEventDate,
+    debutEventDescription,
+    debutEventImage,
+  }
+}
+
+`

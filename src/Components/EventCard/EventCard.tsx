@@ -20,9 +20,7 @@ export default function EventCard({ event }: { event: eventCard }) {
     return (
 
         <MotionContainer>
-
-            <div className={'shadow-sm rounded-3  p-2 m-1  me-2 bg-secondary-emphasis bg-opacity-10   text-secondary-emphasis align-items-center justify-content-end d-flex '
-        }
+            <div className={'shadow-sm rounded-3  p-2 m-1  me-2 bg-secondary-emphasis bg-opacity-10   text-secondary-emphasis align-items-center justify-content-end d-flex '}
                 onClick={() => navigate(appRoutes.debutEvent + `/${event._id}`)}
                 style={background}>
                 <div className='d-flex justify-content-end align-items-end flex-column'>
