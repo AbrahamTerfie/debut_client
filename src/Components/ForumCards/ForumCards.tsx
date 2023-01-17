@@ -95,8 +95,8 @@ export default function ForumCards(
                     shadow-sm p-3 mt-3 mb-5
                       rounded-1 ' >
                         <small className="text-start fw-light m-0 flex-wrap text-secondary">title</small>
-                        <span className=' fw-light m-0    flex-wrap' > {postTitle} </span>
-                        <p className=' App fw-light m-0 fs-5 flex-wrap'>{postContent} </p>
+                        <span className=' fw-light m-0  d-flex  flex-wrap' > {postTitle} </span>
+                        <p className=' App fw-light m-0 fs-5 d-flex flex-wrap'>{postContent} </p>
                         <small className=' fw-light ' > channel - <span className='fw-bold text-success-emphasis  ' >#{channel}</span> </small>
                     </div>
 

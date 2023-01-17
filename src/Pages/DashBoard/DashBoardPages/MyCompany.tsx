@@ -348,7 +348,7 @@ export default function YourComapany() {
                 <div
                   className='d-flex flex-wrap justify-content-start align-items-center mt-3 mx-3'
                 >
-                  {companyState.majorAchivements.map((savedAchivement: String, index: any) => {
+                  {companyState.majorAchivements?.map((savedAchivement: String, index: any) => {
                     return <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -406,7 +406,7 @@ export default function YourComapany() {
 
 
               <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.aeraOfOperation?.map((aera: String, index: any) => {
+                {dataCompany?.getCompanyWithUserId.aeraOfOperation?.map((aera: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>{aera}, </p>)
                 })}
               </div>
@@ -425,7 +425,7 @@ export default function YourComapany() {
               </Label>
 
               <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.companyCategory?.map((savedRegion: String, index: any) => {
+                {dataCompany?.getCompanyWithUserId.companyCategory?.map((savedRegion: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>
                     {savedRegion}
                   </p>)

@@ -16,6 +16,8 @@ import { RootState } from './Store/RootReducer';
 import { AUTHENTICATED_USER } from './GraphQl';
 import { setHasCompany, setPersonaldata } from './Store/identfiers/identfiers';
 import { saveAuth0UserInfo } from './Store/Auth/AuthSlice';
+import { Row } from 'reactstrap';
+import { FaRegHandshake } from 'react-icons/fa';
 const Landing = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Landing })));
 const Dashboard = React.lazy(() => import('./Pages/inedx').then((module) => ({ default: module.Dashboard })));
 const MyProfile = React.lazy(() => import('./Pages/DashBoard/DashBoardPages/index').then((module) => ({ default: module.MyProfile })));
@@ -95,7 +97,7 @@ function App() {
       <div className="App" >
         {isAuthenticated && <NavBarComponent />}
         {/* {isAuthenticated && user && StartUp()} */}
-      
+
         <Routes>
           <Route path={appRoutes.landing} element={<Landing />} />
 
@@ -120,6 +122,7 @@ function App() {
           </Route>
         </Routes>
         <Toaster />
+
       </div>
     </Suspense >
   );

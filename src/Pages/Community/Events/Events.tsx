@@ -11,6 +11,7 @@ import { FaSearch } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
 import { searchDebutEvent } from '../../../GraphQl/index'
 import EventResults from '../../../Components/Search/EventResults'
+import Footer from '../../../Components/Footer/Footer'
 export default function Events() {
     const [search, setSearch] = useState<string>('')
     const [searchEvents, { loading: searchLoading, error: searchError, data: searchData }] = useLazyQuery(searchDebutEvent,
@@ -96,11 +97,12 @@ export default function Events() {
             <Row className='  my-auto  px-5 mx-5  ' >
                 <p className='fw-light fs-1  m-5 mb-1'>New &  upcomming  </p>
             </Row>
-            <Row className='d-flex justify-content-start shadow   p-5 ms-2  border border-right-1 bordr-left-0 border-top-0 border-bottom-1 border-muted'>
+            <Row className='d-flex justify-content-start shadow   p-5 ms-2  border border-right-1 bordr-left-0 border-top-0 border-bottom-1 border-muted mb-5'>
                 {events.map((event: eventCard, index: number) => {
                     return (<Col sm={6} md={3} lg={3} xl={3}><EventCard key={index} event={event} /></Col>)
                 })}
             </Row>
+            <Footer />
         </div>
 
     )

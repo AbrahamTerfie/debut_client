@@ -7,7 +7,6 @@ import {
 // components
 import ForumCards from '../../../Components/ForumCards/ForumCards'
 import NewForumPost from './NewForumPost'
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import './Forum.css'
 import Loader from '../../../Components/Loader/Loader'
 // icons
@@ -27,7 +26,7 @@ import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../../Routes/routes'
 import OnBoardingForm from '../../../Components/OnBoarding/OnBoardingForm'
 
-
+import Footer from '../../../Components/Footer/Footer'
 
 const channelNames = {
     'general': 'general',
@@ -251,17 +250,7 @@ export default function Forum() {
                     </PaginationItem>
                 </Pagination>
             </Row>
-            <Row>
-                <p className='text-center' >
-                    <span className='text-muted'>Powered by </span>
-                    <span className='text-primary-emphasis'>  <FaRegHandshake size={15}
-                        style={{ backgroundColor: 'transparent', }}
-                        className='mx-2' />  </span>
-                    <span className='text-muted'>  Community</span>
-                </p>
-                <p className='text-muted text-center '>
-                    @2021 All rights reserved Debut Co. </p>
-            </Row>
+            <Footer />
         </div >
 
 

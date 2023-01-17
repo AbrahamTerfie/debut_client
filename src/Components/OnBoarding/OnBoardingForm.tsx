@@ -87,7 +87,7 @@ export default function OnBoardingForm() {
     }
     )
 
-    console.log('dataCompany', dataCompany)
+    console.log('userrr id ', userID)
 
     // const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
     //     // variables: { userId: userID },
@@ -103,7 +103,7 @@ export default function OnBoardingForm() {
         {
             // refetchQueries: [{ query: FETCH_USER_WITH_ID, variables: { getDebutUserWithIdId: userID } }],
             onCompleted: () => {
-                console.log('Personal Information Updated Successfully')
+                // console.log('Personal Information Updated Successfully')
                 notifySuccess('Personal Information Updated Successfully')
             },
             onError: (error) => {

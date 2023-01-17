@@ -35,7 +35,7 @@ export default function PersonDetail() {
     const { userEmail, myBiography } = useSelector((store: RootState) => store.identfiers)
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
     if (loading) { <Loader /> }
-    // console.log(data)
+    console.log(data)
     if (activePersonId === "") { return <p className='text-center p-5 shadow-sm h-auto rounded  border border-muted  text-muted fw-bolder my-2 ' > select user </p> }
     if (error) { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p> }
 
@@ -163,7 +163,7 @@ export default function PersonDetail() {
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.aeraOfExpertise.map((item: any) => {
                             return <MotionCover key={uuid()}>
-                                <p className='text-muted mx-1 my-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle p-2 px-4 rounded-pill flex-wrap '>
+                                <p className='text-muted mx-1 d-flex my-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle p-2 px-4 rounded-pill flex-wrap '>
                                     {item}
                                 </p>
                             </MotionCover>
@@ -178,7 +178,7 @@ export default function PersonDetail() {
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.regions.map((item: any) => {
                             return <MotionCover key={uuid()}>
-                                <span className='text-muted mx-1 my-2 text-secondary-emphasis bg-secondary-subtle border border-secondary-subtle p-2 px-4 rounded-pill flex-wrap '>
+                                <span className='text-muted mx-1 my-2 d-flex text-secondary-emphasis bg-secondary-subtle border border-secondary-subtle p-2 px-4 rounded-pill flex-wrap '>
                                     {item}
                                 </span>
                             </MotionCover>
@@ -186,12 +186,15 @@ export default function PersonDetail() {
                     </div>
 
                 </Col>
-                <Col md={12}>
+                <Col md={12}
+
+                    className="mt-5"
+                >
                     <p className="m-3">company</p> </Col>
 
                 <Col md={10} className='d-flex flex-wrap justify-content-start  m-3'>
                     <img src={data?.getDebutUserWithId.company[0]?.companyLogo}
-                        alt="profile" 
+                        alt="profile"
                         className='rounded-1 shadow-sm  img-fluid  border border-muted'
                         style={{
                             // responsive image 
@@ -199,7 +202,7 @@ export default function PersonDetail() {
                             width: window.innerWidth * 0.07,
                             objectFit: 'cover', objectPosition: 'center'
                         }}
-                        />
+                    />
 
 
                     <div className='d-flex flex-column justify-content-start align-items-start ms-4'>

@@ -12,7 +12,9 @@ import Loader from '../../../Components/Loader/Loader'
 import { Outlet } from 'react-router-dom'
 import NewEvent from '../../../Components/DashBoard/NewEvent'
 import { notifyError } from '../../../Components/Notification/Toast'
-
+import Footer from '../../../Components/Footer/Footer'
+import { motion } from 'framer-motion'
+import { v4 as uuid } from 'uuid'
 export default function CompanyEvents() {
   const { userID } = useSelector((store: RootState) => store.identfiers)
   const { data, loading, error } = useQuery(MY_DEBUT_EVENTS, {
@@ -34,7 +36,9 @@ export default function CompanyEvents() {
   return (
     <div  >
       <div className='d-flex justify-content-between align-items-center' >
-        <div >
+        <div
+          className='d-flex flex-column justify-content-center align-items-center'
+        >
           <p className=' fs-1 fw-light mt-4 mb-1 mx-3' > your events  </p>
           <p className='text-muted fs-6 mt-0 mb-2 mx-3'>
             your events are listed here
@@ -45,10 +49,24 @@ export default function CompanyEvents() {
 
       <div className='d-flex flex-row flex-wrap' >
         {data.getDebutEventsWithUserId?.length === 0 ?
-          <p className='text-muted text-center fs-6 mt-0 mb-2 mx-3'>  you have no events yet </p> :
+
+
+          <motion.div className='m-5'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            whileHover={{ scale: 1.009 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <p className='text-muted text-center fs-4 '>  you have no goals yet </p>
+            <p className=' text-center fs-6 '>  click on the button above to create one </p>
+          </motion.div >
+
+
+          :
           data.getDebutEventsWithUserId?.map((event: any, index: number) => {
             return <MyEventCard
-              key={index}
+              key={uuid()}
               _id={event._id}
               debutEventName={event.debutEventName}
               debutEventDate={event.debutEventDate}
@@ -65,6 +83,7 @@ export default function CompanyEvents() {
         }
 
       </div>
+      <Footer />
       <Outlet />
 
     </div>
