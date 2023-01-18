@@ -35,7 +35,7 @@ export default function PersonDetail() {
     const { userEmail, myBiography } = useSelector((store: RootState) => store.identfiers)
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
     if (loading) { <Loader /> }
-    console.log(data)
+
     if (activePersonId === "") { return <p className='text-center p-5 shadow-sm h-auto rounded  border border-muted  text-muted fw-bolder my-2 ' > select user </p> }
     if (error) { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p> }
 

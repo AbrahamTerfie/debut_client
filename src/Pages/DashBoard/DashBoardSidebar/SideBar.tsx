@@ -15,6 +15,8 @@ export default function SideBar({ isOpen, toggle }: {
 }) {
     const location = useLocation()
     const navigate = useNavigate();
+    const darkMode = document.documentElement.getAttribute('data-bs-theme') === 'dark'
+
     const textColor = {
         color: "#1985a1", cursor: "default",
     }
@@ -89,11 +91,10 @@ export default function SideBar({ isOpen, toggle }: {
                     <NavItem className="MyeventCard my-2 fs-6 fw-lighter" >
                         <NavLink style={textColor}
                             onClick={() => {
-                                const darkMode = document.documentElement.getAttribute('data-bs-theme') === 'dark'
                                 document.documentElement.setAttribute('data-bs-theme', darkMode ? 'light' : 'dark')
                             }} >
                             <MdDarkMode className="mx-2" />
-                            Dark Mode
+                            {darkMode ? "Light Mode" : "Dark Mode"}
                         </NavLink>
                     </NavItem>
 

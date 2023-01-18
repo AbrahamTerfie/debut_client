@@ -10,15 +10,13 @@ import Axios from 'axios';
 import { GiDividedSpiral } from 'react-icons/gi';
 import MotionContainer from '../MotionContainer/MotionContainer';
 
-import { CHECK_IF_USER_HAS_COMPANY, CREATE_COMPANY, FETCH_COMPANY, FETCH_USER_WITH_ID, UPDATE_COMPANY, UPDATE_DEBUT_USER_WITH_ID } from '../../GraphQl/index';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { CREATE_COMPANY, FETCH_COMPANY, FETCH_USER_WITH_ID, UPDATE_DEBUT_USER_WITH_ID } from '../../GraphQl/index';
+import { useMutation, useQuery } from '@apollo/client';
 import { notifyError, notifySuccess } from '../Notification/Toast';
 import { RootState } from '../../Store/RootReducer';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCompanyID, setHasCompany, togglehasCompany } from '../../Store/identfiers/identfiers';
-import Loader from '../Loader/Loader';
-import { useNavigate } from 'react-router-dom';
-import { appRoutes } from '../../Routes/routes';
+import { togglehasCompany } from '../../Store/identfiers/identfiers';
+
 
 // dummy place holder component
 function FinalComponent() {
@@ -34,12 +32,10 @@ function FinalComponent() {
 
 export default function OnBoardingForm() {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const { hasCompany, userID, userEmail } = useSelector((store: RootState) => store.identfiers)
+    const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
 
     const [imageSelected, setImageSelected] = useState<any>()
 
-    const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
     const [onBoardingPersonalform, setOnBoardingPersonalform] = useState({
         firstName: '',
         lastName: '',
@@ -72,33 +68,10 @@ export default function OnBoardingForm() {
     })
     const { data: dataCompany,
         //  loading: loadingCompany, error: errorCompany
-    } = useQuery(FETCH_COMPANY, {
-        variables: { userId: userID },
+    } = useQuery(FETCH_COMPANY, { variables: { userId: userID }, })
 
 
-        // onCompleted: (data) => {
-        //     const { getCompanyWithUserId } = data
-        //     if (getCompanyWithUserId) {
-        //         dispatch(setCompanyID(getCompanyWithUserId._id))
-        //         dispatch(setHasCompany(true))
-        //     }
 
-        // }
-    }
-    )
-
-    console.log('userrr id ', userID)
-
-    // const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
-    //     // variables: { userId: userID },
-    //     onCompleted: (data) => {
-    //         if (data?.checkIfUserHasCompany === true) {
-    //             dispatch(setHasCompany(true))
-    //         } else if (data?.checkIfUserHasCompany === false) {
-    //             dispatch(setHasCompany(false))
-    //         }
-    //     }
-    // })
     const [updatePersonalInfo] = useMutation(UPDATE_DEBUT_USER_WITH_ID,
         {
             // refetchQueries: [{ query: FETCH_USER_WITH_ID, variables: { getDebutUserWithIdId: userID } }],
@@ -113,15 +86,9 @@ export default function OnBoardingForm() {
 
 
 
-    const [createMyCompany, createMyCompanyRes] = useMutation(CREATE_COMPANY, {
+    const [createMyCompany] = useMutation(CREATE_COMPANY, {
         onCompleted: (data) => {
-            const { createDebutCompany } = data
-            // dispatch(setHasCompany(true))
-
             dispatch(togglehasCompany(true))
-            // dispatch(setCompanyID(createDebutCompany._id))
-            // dispatch(setHasCompany(true))
-            // checkIsNewUser({ variables: { userId: userID } });
             notifySuccess("Company created successfully")
         },
         onError: (error) => { notifyError(" failed to create" + error.message.toString()) }
@@ -129,7 +96,7 @@ export default function OnBoardingForm() {
 
     useEffect(() => {
         if (data) {
-            const { firstName, lastName, preferredName, pronouns, titleAtCompany, linkedinUrl, email,
+            const { firstName, lastName, preferredName, titleAtCompany, linkedinUrl, email,
                 yourBiography, howyouContribute, aeraOfExpertise, regions } = data.getDebutUserWithId;
             setOnBoardingPersonalform({
                 firstName: firstName || '', lastName: lastName || '',
@@ -169,77 +136,32 @@ export default function OnBoardingForm() {
         const formData = new FormData();
         formData.append('file', imageSelected)
         // file is the file object
-
         formData.append('upload_preset', 'debutCompanyProfilePicture')
         imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
             .then((response) => {
-                const imageUri = response.data.secure_url
-                setOnBoardingCompanyform({ ...onBoardingCompanyform, companyLogo: imageUri })
-            }).then(() => {
-                console.log('onBoardingCompanyform', onBoardingCompanyform)
                 createMyCompany({
                     variables: {
                         companyInput: {
                             ...onBoardingCompanyform,
-                            // companyLogo: imageUri,
+                            companyLogo: response.data.secure_url,
                             companyOwner: userID,
                         }
                     }
                 })
             })
-
-            .catch((error) => {
-                notifyError("Error uploading image" + error.message.toString())
-            })
-
-
+            .catch((error) => { notifyError("Error uploading image" + error.message.toString()) })
 
     }
 
-
-
-
     // stepper controller
     const [activeStep, setActiveStep] = useState(0);
-    // console.log(activeStep, hasCompany, "has comp")
-    const handleNext
-        = () => {
-            // console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd')
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        if (activeStep === 0) { return (handleProfileUpdate()) }
+        if (activeStep === 1) { return (handleCompanySubimt()) }
 
-
-
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-            if (activeStep === 0) {
-                return (
-                    // console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd'),
-                    handleProfileUpdate()
-                )
-                // setUserNeeds({ ...userNeeds, isNewUser: true })
-            }
-            if (activeStep === 1) {
-                return (
-                    // console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd'),
-                    handleCompanySubimt()
-
-                )
-            }
-            // if (activeStep === 2) {
-            //     return (
-            //         console.log(activeStep, 'calleddddddddcalleddddddddcalleddddddddcalledddddddd')
-            //     )
-            // }
-            // if (activeStep === 3) {
-            //     return (
-            //         // navigate(appRoutes.dashboard)
-            //     )
-            // }
-
-        };
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-    // console.log("onBoardingPersonalform", onBoardingPersonalform)
+    const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); };
 
     const steps = [
         {
@@ -262,7 +184,7 @@ export default function OnBoardingForm() {
         },
     ];
 
-    // console.log(imageSelected, "imageSelected")
+
     return (
         <div>
             <p>let's get you set up </p>
