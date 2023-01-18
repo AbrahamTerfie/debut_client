@@ -88,9 +88,7 @@ export default function NavBarComponent() {
                             Logout
                         </NavLink>
                     </NavItem>
-                    <NavbarText className='d-flex justify-content-end align-self-end position-relative end-0'>
-                        <MdDarkMode className="mx-2" />
-                    </NavbarText>
+                
                 </Nav>
             </Collapse>
         </Navbar >
