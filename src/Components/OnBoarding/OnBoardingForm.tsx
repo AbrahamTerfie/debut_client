@@ -22,9 +22,10 @@ import { togglehasCompany } from '../../Store/identfiers/identfiers';
 function FinalComponent() {
     return (
         <div>
-            {/* icon and text showing the they successfully signed up  */}
-            {/* <Loader /> */}
-            <h2> you're all set!</h2>
+            <h2 className='text-2xl font-bold text-center text-success'> you're all set!</h2>
+            <h1 className='text-2xl font-bold text-center text-success'>
+                you can go to your dashboard and add more information about yourself and start using the platform
+            </h1>
         </div>
     )
 }

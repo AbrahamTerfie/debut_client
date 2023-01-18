@@ -25,17 +25,11 @@ export default function YourComapany() {
   const [selectedGeography, setSelectedGeography] = useState([]);
   const [isCreatingAcompany, setIsCreatingAcompany] = useState(false)
   const [achivement, setAchivement] = useState('');
-  // const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
-  //   variables: { userId: userID }
-  // })
+  const [imageuri, setImageuri] = useState('')
+  const [imagePreview, setImagePreview] = useState<any>()
+
   const [companyState, setCompanyState] = useState(myComapnyInitialState)
 
-
-  // console.log({
-  //   ...companyState,
-  //   companyServivesGeography: selectedGeography.map((geography: any) => geography.value),
-  //   aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-  // })
 
   const { data: dataCompany, loading: loadingCompany, error: errorCompany
   } = useQuery(FETCH_COMPANY, {
@@ -102,12 +96,7 @@ export default function YourComapany() {
     setCompanyState({ ...companyState, [name]: value })
   }
 
-  // console.log("loadingCompany", loadingCompany)
-  // console.log("errorCompany", errorCompany)
 
-
-
-  //add to majot achivement to company
   const addToMajorAchovements = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setCompanyState({ ...companyState, majorAchivements: [...companyState.majorAchivements, achivement] })
@@ -119,31 +108,11 @@ export default function YourComapany() {
     setCompanyState({ ...companyState, majorAchivements: newAchivements })
   }
 
-  // if (createMyCompanyRes.error || (updateMyCompanyRes.error)) {
-  //   createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
-  //   updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
 
-  // }
 
-  console.log("companyState", userID)
-
-  const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData();
-    formData.append('file', imageSelected)
-    // file is the file object
-    let imageUri = companyState.companyLogo
-    formData.append('upload_preset', 'debutCompanyProfilePicture')
-    imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
-      .then((response) => {
-        imageUri = response.data.secure_url
-      })
-
-      .catch((error) => {
-        notifyError("Error uploading image" + error.message.toString())
-        // console.log(error)
-      })
-
+  const sendData = (
+    image?: string,
+  ) => {
     if (isCreatingAcompany) {
       createMyCompany({
         variables: {
@@ -152,7 +121,7 @@ export default function YourComapany() {
             companyOwner: userID,
             companyCategory: selectedGeography.map((geography: any) => geography.value),
             aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-            companyLogo: imageUri
+            companyLogo: image
 
           }
         }
@@ -167,32 +136,36 @@ export default function YourComapany() {
             ...companyState,
             companyCategory: selectedGeography.map((geography: any) => geography.value),
             aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-            companyLogo: imageUri
+            companyLogo: image
           }
         }
       })
     }
+  }
 
+  const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append('file', imageSelected)
+    // file is the file object
+
+    formData.append('upload_preset', 'debutCompanyProfilePicture')
+
+    if (imageSelected !== "") {
+      Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+        .then((response) => {
+          response && console.log(response.data.secure_url)
+          sendData(response.data.secure_url)
+        })
+        .catch((error) => { notifyError("Error uploading image" + error.message.toString()) })
+    }
+
+    if (imageSelected === "") { sendData() }
   }
 
 
-
-
-
-  if (
-    // loading ||
-    loadingCompany) { return <Loader /> }
-  if ((hasCompany === true) && (
-    // error ||
-    errorCompany)) {
-    // if has company is false dont show thos error otherwise show it
-
-    // error && notifyError(error.message.toString())
-    errorCompany && notifyError(errorCompany.message.toString())
-
-    // return <div> something went wrong  </div>
-  }
-  // if (data) { dispatch(togglehasCompany(data.checkIfUserHasCompany)) }
+  if (loadingCompany) { return <Loader /> }
+  if ((hasCompany === true) && (errorCompany)) { errorCompany && notifyError("Error loading company" + errorCompany.message.toString()) }
 
 
 
@@ -332,10 +305,17 @@ export default function YourComapany() {
                 <Col md={3}
                   className='d-flex flex-column  justify-content-between align-items-center px-5'
                 >
-                  <img src={companyState?.companyLogo} alt="" className='w-50' />
+                  <img src={
+                    // transpile and show a previrew of the image
+                    imagePreview ? imagePreview : companyState.companyLogo
+                  }
+                    alt="" className='w-50' />
                   <FormGroup>
                     <Label for="companyLogo"> upload high resolution image of your logo </Label>
-                    <Input onChange={(event: any) => { setImageSelected(event.target.files[0]) }} type="file" />
+                    <Input onChange={(event: any) => {
+                      setImageSelected(event.target.files[0])
+                      setImagePreview(URL.createObjectURL(event.target.files[0]))
+                    }} type="file" />
                   </FormGroup>
                 </Col>
               </Row>

@@ -80,15 +80,13 @@ export default function NavBarComponent() {
                         </NavLink>
                     </NavItem>
                     <NavItem
-                        // place this at the end of the navbar
                         className=' d-flex justify-content-end align-self-end position-relative end-0'>
-
                         <NavLink style={textColor} onClick={() => { logout() }} className="MyeventCard me-5" >
                             <MdLogout size={15} className='mx-3 my-2' />
                             Logout
                         </NavLink>
                     </NavItem>
-                
+
                 </Nav>
             </Collapse>
         </Navbar >
