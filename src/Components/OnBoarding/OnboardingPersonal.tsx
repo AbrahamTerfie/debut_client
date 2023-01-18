@@ -3,9 +3,7 @@ import { Row, Col, Input, FormGroup, Label } from 'reactstrap'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { aeraOfExpertise, regions } from '../../Constants/index';
-import { UPDATE_DEBUT_USER_WITH_ID } from '../../GraphQl/index';
-import { useMutation } from '@apollo/client';
-import { notifyError } from '../Notification/Toast';
+
 
 interface OnBoardingPersonalform {
     firstName: string,
@@ -38,7 +36,7 @@ export default function OnboardingPersonal(
             ...onBoardingPersonalform, [name]: e.map((item: any) => item.value)
         })
     }
-// console.log("onBoardingPers...........onalform", onBoardingPersonalform)
+    // console.log("onBoardingPers...........onalform", onBoardingPersonalform)
     return (
         <Row>
             <Col sm={12} md={6} lg={6} xl={6} >

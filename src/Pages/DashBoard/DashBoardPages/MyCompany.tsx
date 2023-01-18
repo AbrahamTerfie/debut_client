@@ -14,7 +14,7 @@ import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
-
+import { aeraOfExpertise, regions } from '../../../Constants/index'
 
 
 export default function YourComapany() {
@@ -385,7 +385,7 @@ export default function YourComapany() {
 
 
 
-              <div className='d-flex' >
+              <div className='d-flex flex-wrap' >
                 {dataCompany?.getCompanyWithUserId.aeraOfOperation?.map((aera: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>{aera}, </p>)
                 })}
@@ -404,7 +404,7 @@ export default function YourComapany() {
 
               </Label>
 
-              <div className='d-flex' >
+              <div className='d-flex flex-wrap' >
                 {dataCompany?.getCompanyWithUserId.companyCategory?.map((savedRegion: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>
                     {savedRegion}
@@ -413,7 +413,7 @@ export default function YourComapany() {
               </div>
               <MultiSelect
                 hasSelectAll={false}
-                options={optionOfGeography}
+                options={regions}
                 value={selectedGeography}
                 onChange={setSelectedGeography}
                 labelledBy="Select your aera of operaitons"
