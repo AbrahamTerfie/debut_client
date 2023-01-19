@@ -47,8 +47,6 @@ function App() {
     {
       onCompleted: (data) => {
         const { authenticatedUser } = data;
-        console.log("111111111111authenticatedUser", authenticatedUser)
-
         dispatch(setPersonaldata({
           userID: authenticatedUser._id,
           userEmail: authenticatedUser.email,
@@ -56,20 +54,16 @@ function App() {
 
         }));
         dispatch(setHasCompany(authenticatedUser.hasCompany))
-        // checkIsNewUser({ variables: { userId: authenticatedUser._id } });
       }
     }
   )
 
-  // if authenticated and on landing page, redirect to forum page
+
   if (isAuthenticated && location.pathname === appRoutes.landing) {
     navigate(appRoutes.forum);
   } else if (!isAuthenticated && location.pathname !== appRoutes.landing) {
     navigate(appRoutes.landing);
   }
-  // else if (isAuthenticated && hasCompany) {
-  //   navigate(appRoutes.dashboard);
-  // }
 
 
   useEffect(() => {
@@ -88,7 +82,7 @@ function App() {
         })
       }
     }
-  }, [isAuthenticated, user, auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser]);
+  }, [isAuthenticated, user, auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser ]);
   if (authenticatedUsrRes.loading) { return <Loader /> }
 
   return (

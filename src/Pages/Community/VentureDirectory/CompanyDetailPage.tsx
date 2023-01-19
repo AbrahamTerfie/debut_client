@@ -29,7 +29,7 @@ export default function CompanyDetailPage() {
     // console.log("company data", data)
     const { getDebutCompanyWithId: company } = data;
 
-    console.log("company data", company)
+    // console.log("company data", company)
 
     const showUserProfile = (id: string, e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
         e.preventDefault();

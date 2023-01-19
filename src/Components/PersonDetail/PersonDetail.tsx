@@ -12,6 +12,8 @@ import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import Emailcanvas from '../Email/Emailcanvas';
 import { EmailTypes } from '../../Email/EmailTypes';
 import { v4 as uuid } from 'uuid'
+import { appRoutes } from '../../Routes/routes';
+import { useNavigate } from 'react-router-dom';
 import { setActivePersonId } from '../../Store/UI/sidebarController'
 function MotionCover({ children }: any) {
     return (
@@ -31,6 +33,7 @@ function MotionCover({ children }: any) {
 
 export default function PersonDetail() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { activePersonId } = useSelector((store: RootState) => store.uiStore)
     const { userEmail, myBiography } = useSelector((store: RootState) => store.identfiers)
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
@@ -190,31 +193,35 @@ export default function PersonDetail() {
 
                     className="mt-5"
                 >
-                    <p className="m-3">company</p> </Col>
+                    <p className="m-3 mb-0">company</p> </Col>
 
-                <Col md={10} className='d-flex flex-wrap justify-content-start  m-3'>
-                    <img src={data?.getDebutUserWithId.company[0]?.companyLogo}
-                        alt="profile"
-                        className='rounded-1 shadow-sm  img-fluid  border border-muted'
-                        style={{
-                            // responsive image 
-                            height: window.innerWidth * 0.07,
-                            width: window.innerWidth * 0.07,
-                            objectFit: 'cover', objectPosition: 'center'
-                        }}
-                    />
+                <MotionContainer>
+                    <Col md={10} className='d-flex flex-wrap justify-content-start  m-3 border border-muted rounded-1 shadow-sm p-3'
+                        onClick={() => navigate(`${appRoutes.ventures}/${data?.getDebutUserWithId.company[0]?._id}`)}
+                    >
+                        <img src={data?.getDebutUserWithId.company[0]?.companyLogo}
+                            alt="profile"
+                            className='rounded-1 shadow-sm  img-fluid p-2'
+                            style={{
+                                // responsive image 
+                                height: window.innerWidth * 0.07,
+                                width: window.innerWidth * 0.07,
+                                objectFit: 'cover', objectPosition: 'center'
+                            }}
+                        />
 
 
-                    <div className='d-flex flex-column justify-content-start align-items-start ms-4'>
-                        <p className='m-0 fs-4 fw-bold' > {data?.getDebutUserWithId.company[0]?.companyName} </p>
-                        <p className='m-0 text-muted  fs-6 fw-light'>
-                            {data?.getDebutUserWithId.company[0]?.companyHeadquarters}
-                        </p>
-                        <p className='m-0'>
-                            {data?.getDebutUserWithId.company[0]?.companyWebsite}
-                        </p>
-                    </div>
-                </Col>
+                        <div className='d-flex flex-column justify-content-start align-items-start ms-4'>
+                            <p className='m-0 fs-4 fw-bold' > {data?.getDebutUserWithId.company[0]?.companyName} </p>
+                            <p className='m-0 text-muted  fs-6 fw-light'>
+                                {data?.getDebutUserWithId.company[0]?.companyHeadquarters}
+                            </p>
+                            <p className='m-0'>
+                                {data?.getDebutUserWithId.company[0]?.companyWebsite}
+                            </p>
+                        </div>
+                    </Col>
+                </MotionContainer>
 
             </Row>
         </div>

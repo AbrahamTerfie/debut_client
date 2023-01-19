@@ -247,6 +247,7 @@ export default function MyProfile() {
                 type="email"
                 name="email"
                 id="FirstNemailame"
+                readOnly
                 placeholder={personalInfoForm.email}
                 defaultValue={personalInfoForm.email}
               />
