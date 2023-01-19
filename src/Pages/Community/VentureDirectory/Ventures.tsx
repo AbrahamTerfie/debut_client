@@ -104,9 +104,6 @@ export default function Ventures() {
 
     const companies = data?.getdebutCompanies.Ventures ?? []
 
-    console.log(companies)
-
-
     return (
         <div className='w-100'>
             <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
