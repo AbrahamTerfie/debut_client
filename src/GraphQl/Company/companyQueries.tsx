@@ -146,54 +146,56 @@ mutation updateDebutCompany ($updateDebutCompanyId: ID!, $companyInput: CompanyI
 `
 
 export const GET_ALL_VENTURES = gql`
-query AllVentures {
-  getdebutCompanies {
-  _id,
-    companyName,
-    companyMissionStatement,
-    companyHeadquarters,
-    companyWebsite,
-    companyLogo,
-    jobBoard,
-    linkedInUrl,
-    twitterUrl,
-    instagramUrl,
-    facebookUrl,
-    majorAchivements,
-    companyDescription,
-    companyServivesGeography,
-    aeraOfOperation,
-    companySize,
-    companyCategory,
-    companyOwner{
-      _id,
-      firstName,
-      lastName,
-      profileImage,
-      email,
-      assistantEmail,
-      yourBiography
-    },
-    debutEvents{
-      _id,
-      debutEventName,
-      debutEventImage,
-      debutEventDescription,
-      debutEventDate,
-      belongsTo {
-        _id,
-        companyName
-
-      }
-      createdBy {
-        _id,
-        firstName,
+query AllVentures($limit: Int, $offset: Int) {
+  getdebutCompanies (limit: $limit, offset: $offset) {
+    TotalAmount
+    Ventures {
+      _id
+      companyName
+      companyMissionStatement
+      companyHeadquarters
+      companyWebsite
+      companyLogo
+      jobBoard
+      linkedInUrl
+      twitterUrl
+      instagramUrl
+      facebookUrl
+      majorAchivements
+      companyDescription
+      companyServivesGeography
+      aeraOfOperation
+      companySize
+      companyCategory
+      companyOwner {
+        _id
+        firstName
         lastName
+        profileImage
+        email
+        assistantEmail
+        yourBiography
       }
-    },
-
+      debutEvents {
+        _id
+        debutEventName
+        debutEventImage
+        debutEventDescription
+        debutEventDate
+        belongsTo {
+          _id
+          companyName
+        }
+        createdBy {
+          _id
+          firstName
+          lastName
+        }
+      }
+    }
   }
 }
+
 `
 
 

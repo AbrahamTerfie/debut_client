@@ -6,7 +6,7 @@ import {
     Col, Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label
 } from 'reactstrap'
 import { NEW_REGISTRY_ITEM, GET_EVENT_WITH_ID, DELETE_DEBUT_REGISTRY, TOGGLE_REGISTRY_STATUS, } from '../../../GraphQl/index'
-import { useMutation,  } from '@apollo/client'
+import { useMutation, } from '@apollo/client'
 import RegistryItem from '../RegistryItemcard/RegistryItemCard'
 import { notifyError, notifyLoading, notifySuccess } from '../../Notification/Toast'
 import { useParams } from 'react-router-dom'
@@ -123,23 +123,29 @@ export default function RegistryAccordion(
 
 
     //create preview image string 
-    useEffect(() => {
-        if (!imageSelected) {
-            setPreviewImage("")
-            return
-        }
-        const objectURL = URL.createObjectURL(imageSelected)
-        setPreviewImage(objectURL)
-        return () => URL.revokeObjectURL(objectURL)
-    }, [imageSelected])
+    // useEffect(() => {
+    //     if (!imageSelected) {
+    //         setPreviewImage("")
+    //         return
+    //     }
+    //     const objectURL = URL.createObjectURL(imageSelected)
+    //     setPreviewImage(objectURL)
+    //     return () => URL.revokeObjectURL(objectURL)
+    // }, [imageSelected])
 
 
     const onSelectFile = (e: any) => {
+        // if (e.target.files && e.target.files.length > 0) {
+        //     setImageSelected(e.target.files[0])
+        // }
+
         if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader()
+            reader.addEventListener('load', () => setPreviewImage(reader.result as string))
+            reader.readAsDataURL(e.target.files[0])
             setImageSelected(e.target.files[0])
         }
     }
-
     const submitHandler = (e: any) => {
         e.preventDefault()
         const formData = new FormData()
@@ -269,7 +275,7 @@ export default function RegistryAccordion(
                             className=' accordionHeader fw-light shadow-sm my-2  '
                             targetId={_id.toString()} >
                             {debutRegistryName}
-                            {debutRegistryStatus ? <span className="badge bg-success bg-opacity-10 text-success mx-4">Active</span> :
+                            {!debutRegistryStatus ? <span className="badge bg-success bg-opacity-10 text-success mx-4">Active</span> :
                                 <span className="badge bg-danger mx-4 bg-danger bg-opacity-10 text-danger">Inactive</span>}
 
                         </AccordionHeader>
@@ -289,8 +295,8 @@ export default function RegistryAccordion(
                                 <motion.div
                                     initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
                                     whileHover={{ scale: 1.008 }} whileTap={{ scale: 1.09 }} style={{ cursor: 'pointer' }} onClick={() => toggleRegistryStatus()}
-                                    className={`shadow-sm rounded rounded-5   p-2 mx-1  me-2  ${debutRegistryStatus ? 'bg-danger bg-opacity-10  text-danger' : 'bg-success bg-opacity-10  text-success'}  justify-content-center d-flex`}>
-                                    {debutRegistryStatus ? <span>deactivate</span> : <span >activate</span>}
+                                    className={`shadow-sm rounded rounded-5   p-2 mx-1  me-2  ${!debutRegistryStatus ? 'bg-danger bg-opacity-10  text-danger' : 'bg-success bg-opacity-10  text-success'}  justify-content-center d-flex`}>
+                                    {!debutRegistryStatus ? <span>deactivate</span> : <span >activate</span>}
                                 </motion.div>
                             </Col>
                             <Col md={2}>

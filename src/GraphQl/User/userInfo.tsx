@@ -3,20 +3,24 @@ import { gql } from "@apollo/client";
 
 
 export const All_USERS = gql`
-query DebutUsers{
-  getdebutUsers {
-    _id
-    firstName
-    lastName
-    titleAtCompany
-    profileImage
-    aeraOfExpertise
-    regions
-    company {
+query DebutUsers($offset: Int, $limit: Int) {
+  getdebutUsers (offset: $offset, limit: $limit) {
+    TotalAmount
+    Users {
       _id
-      companyName
+      firstName
+      lastName
+      titleAtCompany
+      profileImage
+      aeraOfExpertise
+      regions
+      company {
+        _id
+        companyName
+      }
     }
   }
+
 }
 `
 

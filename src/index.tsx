@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "draft-js/dist/Draft.css";
-// import 'react-pro-sidebar/dist/css/styles.css';
+import 'react-image-picker-editor/dist/index.css'
 
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';

@@ -3,8 +3,7 @@ import { Input } from 'reactstrap'
 export default function SearchComponent() {
     return (
         <Input
-
-            size={200}
+            className='App'
             type="text"
             name="textarea-input"
             placeholder='Search'

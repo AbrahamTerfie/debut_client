@@ -1,31 +1,32 @@
 
 import React, { useState, useEffect } from 'react'
-import { Row, Offcanvas, OffcanvasBody, OffcanvasHeader, Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
+import {
+    Row, Offcanvas, OffcanvasBody, OffcanvasHeader, Button, Modal, ModalBody, ModalFooter, ModalHeader,
+    Pagination, PaginationItem, PaginationLink,
+} from 'reactstrap'
 // components
 import ForumCards from '../../../Components/ForumCards/ForumCards'
 import NewForumPost from './NewForumPost'
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
 import './Forum.css'
 import Loader from '../../../Components/Loader/Loader'
 // icons
-import { IoMdAdd } from 'react-icons/io'
+import { IoMdAdd, IoMdClose } from 'react-icons/io'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { FaRegHandPaper, FaRegHandshake } from 'react-icons/fa'
 // graphql
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
-import { AUTHENTICATED_USER, CHECK_IF_USER_HAS_COMPANY, FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
-// auth and redux
-import { useAuth0 } from '@auth0/auth0-react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useQuery } from '@apollo/client'
+import { FETCH_ALL_FORUM_POSTS } from '../../../GraphQl/index'
+
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../Store/RootReducer'
-import { saveAuth0UserInfo } from '../../../Store/Auth/AuthSlice'
-import { setHasCompany, setPersonaldata } from '../../../Store/identfiers/identfiers'
+
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 import { notifyError } from '../../../Components/Notification/Toast'
 import { useNavigate } from 'react-router-dom'
 import { appRoutes } from '../../../Routes/routes'
-// types
+import OnBoardingForm from '../../../Components/OnBoarding/OnBoardingForm'
 
+import Footer from '../../../Components/Footer/Footer'
 
 const channelNames = {
     'general': 'general',
@@ -36,177 +37,170 @@ const channelNames = {
 
 
 export default function Forum() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
 
-    const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
+    const navigate = useNavigate()
     const { hasCompany } = useSelector((store: RootState) => store.identfiers)
     const [canvas, setCanvas] = useState(false);
     const toggle = () => setCanvas(!canvas);
-    const { user } = useAuth0();
-    const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
-    const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS)
     const [isNewUser, setIsNewUser] = useState(true)
     const toggleIsNewUser = (): void => setIsNewUser(!isNewUser)
     const [channelFilter, setChannelFilter] = useState('')
-
-    // console.log(authenticatedUsrRes, "userID")
-
-    // console.log("channelFilter", channelFilter)
-    // saves the user information when the user logs in to keep it in sybc with store 
-    useEffect(() => { if (user) { dispatch(saveAuth0UserInfo(user)) } }, [user, dispatch])
-
-    //gets the user from the server if it exists and if it doesn't it creates a new user
-    // console.log(data.allForumPosts)
-    useEffect(() => {
-        if (user && auth0UserInfo) authenticatedUser({
-            variables: {
-                userInput: {
-                    email: auth0UserInfo.email,
-                    userName: auth0UserInfo.name,
-                    firstName: auth0UserInfo.nickname,
-                    profileImage: hasCompany === false ? auth0UserInfo.picture : '',
-                }
-            }
-        })
-    }, [auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser])
-
-
-
-    const [checkIsNewUser,] = useLazyQuery(CHECK_IF_USER_HAS_COMPANY, {
-        // variables: { userId: userID },
-        onCompleted: (data) => {
-
-            // ********** is not checkeing for new user but instead for company **********
-            if (data?.checkIfUserHasCompany === true) {
-                dispatch(setHasCompany(true))
-
-            } else if (data?.checkIfUserHasCompany === false) {
-
-                dispatch(setHasCompany(false))
-            }
-        }
+    const [pagination, setPagination] = useState({
+        limit: 15,
+        offset: 0,
+        TotalAmount: 0,
+    })
+    const { data, loading, error } = useQuery(FETCH_ALL_FORUM_POSTS, {
+        variables: {
+            limit: pagination.limit,
+            offset: pagination.offset
+        },
     })
 
-
     useEffect(() => {
-        if (authenticatedUsrRes.data) {
-            const { authenticatedUser } = authenticatedUsrRes.data;
-            dispatch(setPersonaldata({
-                userID: authenticatedUser._id,
-                userEmail: authenticatedUser.email,
-                myBiography: authenticatedUser.yourBiography || '',
-                userFullName: `${authenticatedUser.firstName} ${authenticatedUser.lastName}`,
-                myCompanyDescription: authenticatedUser.company?.companyDescription,
-            }));
-            checkIsNewUser({
-                variables: {
-                    userId: authenticatedUser._id,
-                },
-            });
-        }
-    }, [authenticatedUsrRes?.data, dispatch, checkIsNewUser]);
+        setPagination({ ...pagination, TotalAmount: data?.getForumPosts.TotalAmount })
+    }, [data?.getForumPosts.TotalAmount])
 
 
-    if (loading || authenticatedUsrRes.loading) { return <Loader /> }
+    const nextPage = () => {
+        pagination.offset + pagination.limit < pagination.TotalAmount &&
+            setPagination({ ...pagination, offset: pagination.offset + pagination.limit })
+    }
+    const prevPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: pagination.offset - pagination.limit })
+    }
+    const firstPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: 0 })
+    }
+    const lastPage = () => {
+        pagination.offset + pagination.limit < pagination.TotalAmount &&
+            setPagination({
+                ...pagination, offset: Math.floor(
+                    pagination.TotalAmount / pagination.limit) * pagination.limit
+            })
+    }
+
+    if (loading) { return <Loader /> }
     if (error) { notifyError("soething went wrong ") }
 
 
     return (
-        <div>
+        <div className='w-100'>
             <Modal centered size='lg' isOpen={hasCompany === false} toggle={toggleIsNewUser}  >
                 <ModalHeader
-                    className='bg-success bg-opacity-10 text-success'
                     toggle={toggleIsNewUser}>
                     <p className='m-0'>Welcome to Debut </p>
                 </ModalHeader>
-                <ModalBody className='bg-success bg-opacity-10 text-muted text-start p-5 d-flex flex-column  '>
+                <ModalBody
+                    className=' text-muted text-start p-5 d-flex flex-column  '>
                     {/* welcome prompt to the app and tell them to set up profile and compnay infomation */}
                     <h3 className='m-0'> We are glad to have you here</h3>
                     <h5 className='text-success'>Please set up your profile and company information to continue </h5>
+                    <OnBoardingForm />
                 </ModalBody>
-                <ModalFooter className='bg-success bg-opacity-10 text-muted'>
+                <ModalFooter className=' text-muted'>
                     <Button color="success " size="sm" outline onClick={() => navigate(appRoutes.dashboard)}>
                         <p className='mx-5 my-0'>set up</p>
                     </Button>{' '}
                 </ModalFooter>
             </Modal>
 
-            <Offcanvas Offcanvas style={{ width: '50%' }}
+            <Offcanvas
+                responsive={true}
+                fade={true}
+                keyboard
+                backdrop={true}
+                md={6} lg={6} xl={6} sm={8} xs={10}
                 direction="end" isOpen={canvas}
                 toggle={toggle} scrollable={true}
             >
-                <OffcanvasHeader toggle={toggle}>
-                    <h1 className='fs-3 m-3 px-5 fw-light' >Create New Post</h1>
-                    <p className='fs-5 m-3 px-5 fw-light ' > share your events , ideas , or anything you want to share with the community</p>
+                <OffcanvasHeader toggle={toggle}
+                    close={<MotionContainer>
+                        <IoMdClose className=' text-danger-emphasis' onClick={toggle} size={20} />
+                    </MotionContainer>}
+                >
+                    <p className='fs-1 m-0 ps-2  text-success-emphasis ' >
+                        post to forun
+                    </p>
+                    <p className='fs-5 me-3 ps-3 fw-light ' > share your events , ideas , or anything you want to share with the community</p>
                 </OffcanvasHeader>
                 <OffcanvasBody >
                     <NewForumPost toggler={toggle} />
                 </OffcanvasBody>
             </Offcanvas >
 
-            <Row className='searchInput mb-1 my-4 pt-5 mt-5 px-5 mx-5  ' >
-                <p className='fw-light fs-1'> Fellow Forum </p>
-                <p className="text-muted" >
+            <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
+                <h1 className='fw-light fs-1  m-5 mb-3'> Forum </h1>
+                <p className="text-muted ms-5" >
                     A place to discuss and share
                     ideas with fellow members of the
                     community.
                 </p>
-                <SearchComponent />
+                {/* <SearchComponent /> */}
             </Row>
 
-            <div className='d-flex justify-content-around mx-5  flex-row flex-wrap sticky-xxl-top px-5 py-3 '
-                style={{ zIndex: 1, top: '10%', backgroundColor: 'white', }}>
+            <div className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 mt-5 mb-3  ' style={{ zIndex: 1, top: '10%', }}>
                 <MotionContainer>
                     <p onClick={() => toggle()}
-                        className='  my-1 p-3 py-2 px-5 shadow-sm  bg-success bg-opacity-10 rounded-pill text-success  d-flex justify-content-center align-items-center'>
-                        <IoMdAdd size={20} className='mx-3 ' />
-                        <span  > New Post </span>
+                        className='   p-2 py-auto px-3 shadow-sm  text-success-emphasis bg-success  bg-opacity-10  border border-success-subtle rounded-pill '>
+                        <IoMdAdd
+                            size={15}
+                            style={{ backgroundColor: 'transparent', }}
+                            className='mx-2'
+
+                        />
+                        <span className='d-none d-md-inline-block'>New Post</span>
                     </p>
                 </MotionContainer>
 
                 <MotionContainer>
-                    <p
-                        className={`  my-1 p-3 py-2 px-5 shadow-sm  bg-warning bg-opacity-10 rounded-pill text-warning  d-flex justify-content-center align-items-center
-                                    ${channelFilter === channelNames.general ? 'shadow border border-2 border-warning  ' : ''}`}
+                    <p className={`  p-2 py-auto px-3  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-warning-emphasis bg-warning-emphasis  border-warning-emphasis 
+                                    ${channelFilter === channelNames.general ? '   text-warning-emphasis bg-warning-subtle border border-warning-subtle    ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.general)}  >
                         <IoChatbubblesOutline size={20} className='mx-3' />
-                        General
+                        <span className='d-none d-md-inline-block'>General </span>
+
                     </p>
                 </MotionContainer>
                 <MotionContainer>
-                    <p
-                        className={` my-1 p-3 py-2 px-5 shadow-sm  bg-info bg-opacity-10 rounded-pill text-info  d-flex justify-content-center align-items-center
-                                ${channelFilter === channelNames.collaboration ? 'shadow border border-2 border-info  ' : ''}`}
+                    <p className={`  p-2 py-auto px-3   border border-2 rounded-pill   d-flex justify-content-center align-items-center text-info-emphasis bg-info-emphasis  border-info-emphasis 
+                                ${channelFilter === channelNames.collaboration ? '   text-info-emphasis bg-info-subtle border border-info-subtle   ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.collaboration)} >
                         <FaRegHandPaper size={15}
                             style={{ backgroundColor: 'transparent', }}
                             className='mx-2' />
-                        Collabration
+                        <span className='d-none d-md-inline-block'> Collaboration</span>
                     </p>
                 </MotionContainer>
                 <MotionContainer>
-                    <p className={` my-1 p-3 py-2 px-5 shadow-sm  bg-primary bg-opacity-10 rounded-pill text-primary  d-flex justify-content-center align-items-center
-                            ${channelFilter === channelNames.community ? 'shadow border border-2 border-primary  ' : ''}`}
+                    <p className={`   p-2 py-auto px-3  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-primary-emphasis bg-primary-emphasis  border-primary-emphasis 
+                            ${channelFilter === channelNames.community ? '  text-primary-emphasis bg-primary-subtle border border-primary-subtle   ' : ''}`}
                         onClick={() => setChannelFilter(channelNames.community)} >
                         <FaRegHandshake size={15}
                             style={{ backgroundColor: 'transparent', }}
                             className='mx-2' />
-                        Community
+                        <span className='d-none d-md-inline-block'>Community </span>
+
                     </p>
                 </MotionContainer>
 
                 <MotionContainer>
-                    <span className='py-2  text-muted px-5  my-2  bg-dark bg-opacity-10 rounded-pill text-dark  d-flex justify-content-center align-items-center'
+                    <p className={`   p-2 py-auto px-3  border border-2  rounded-pill   d-flex justify-content-center align-items-center text-secondary-emphasis bg-secondary-emphasis  border-secondary-emphasis`}
                         onClick={() => setChannelFilter('')} >
-                        clear filter
-                    </span>
+                        <IoMdClose size={15}
+                            style={{ backgroundColor: 'transparent', }}
+                            className='mx-2' />
+                        <span className='d-none d-md-inline-block'>clear </span>
+
+                    </p>
                 </MotionContainer>
 
             </div>
 
-            <Row className='m-3 mx-5 px-5'>
-                {data.getForumPosts.map((post: any, index: number) => {
+            <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto  '>
+                {data?.getForumPosts.Posts?.map((post: any, index: number) => {
                     if (channelFilter === '') {
                         return (
                             <ForumCards
@@ -235,7 +229,28 @@ export default function Forum() {
                     }
                 })}
             </Row>
-
+            <Row>
+                {/* paginaton  */}
+                <Pagination className='d-flex justify-content-center align-items-center  my-5 ' size="md">
+                    <PaginationItem>
+                        <PaginationLink first onClick={firstPage}>
+                            first
+                        </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem onClick={prevPage}>
+                        <PaginationLink previous />
+                    </PaginationItem>
+                    <PaginationItem onClick={nextPage}>
+                        <PaginationLink next />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink last onClick={lastPage}>
+                            last
+                        </PaginationLink>
+                    </PaginationItem>
+                </Pagination>
+            </Row>
+            <Footer />
         </div >
 
 

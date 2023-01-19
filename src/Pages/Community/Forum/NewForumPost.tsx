@@ -11,9 +11,18 @@ import MotionContainer from '../../../Components/MotionContainer/MotionContainer
 
 export default function NewForumPost({ toggler }: { toggler: () => void }) {
     const { userID } = useSelector((store: RootState) => store.identfiers)
-
+    const [pagination] = useState({
+        limit: 15,
+        offset: 0
+    })
     const [createNewPost, createNewPostRes] = useMutation(CREATE_FORUM_POST, {
-        refetchQueries: [{ query: FETCH_ALL_FORUM_POSTS }],
+        refetchQueries: [{
+            query: FETCH_ALL_FORUM_POSTS,
+            variables: {
+                limit: pagination.limit,
+                offset: pagination.offset
+            }
+        }],
         onCompleted: () => {
             notifySuccess('Post Created Successfully')
             toggler()
@@ -49,7 +58,7 @@ export default function NewForumPost({ toggler }: { toggler: () => void }) {
         return <Loader />
     }
     return (
-        <div className=' px-5 App d-flex flex-column '>
+        <div className=' d-flex flex-column '>
             <FormGroup>
                 <Label for="exampleSelect">Select channel you want to post to</Label>
                 <Input type="select" name="select" id="exampleSelect"
@@ -74,7 +83,10 @@ export default function NewForumPost({ toggler }: { toggler: () => void }) {
             </FormGroup>
 
             <MotionContainer>
-                <p className="bg-success text-success text-center my-3 p-3 px-5 rounded-pill  bg-opacity-10"
+                <p className="
+                 my-3 p-3 px-5  text-center 
+                 text-success-emphasis bg-success-subtle border border-success-emphasis rounded
+                "
                     onClick={(e: any) => formSubmitHandler(e)}>
                     post to
                     <span className='fw-bold mx-2'>

@@ -1,70 +1,132 @@
-import React, { useEffect, useState } from 'react'
-import { Row, Col, Collapse } from 'reactstrap'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Collapse, Pagination, PaginationItem, PaginationLink, Input, FormGroup } from 'reactstrap'
 import PeopleCards from '../../../Components/PeopleCards/PeopleCards'
 import './People.css'
-import SearchComponent from '../../../Components/GlobalSearch/SearchComponent'
-import { useMutation, useQuery } from '@apollo/client'
-import { AUTHENTICATED_USER } from '../../../GraphQl/index'
-import { useAuth0 } from '@auth0/auth0-react'
+import { useQuery, useLazyQuery } from '@apollo/client'
+
 import PersonDetail from '../../../Components/PersonDetail/PersonDetail'
 import PeopleFilterOptions from '../../../Components/PeopleFilterOptions/PeopleFilterOptions'
 import { IoMdSettings } from 'react-icons/io'
 import { FaSearch } from 'react-icons/fa'
-
+import UserResults from '../../../Components/Search/UserResults'
 //context
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer'
-import { All_USERS } from '../../../GraphQl/index'
+import { All_USERS, SearchUser } from '../../../GraphQl/index'
 import Loader from '../../../Components/Loader/Loader'
 import { motion } from 'framer-motion'
 import { notifyError } from '../../../Components/Notification/Toast'
 import { v4 as uuid } from 'uuid'
 export default function People() {
 
-    const { user } = useAuth0();
+    const [pagination, setPagination] = useState<{ limit: number, offset: number, allPeople: number }>({
+        limit: 25,
+        offset: 0,
+        allPeople: 0,
+    })
+    const [search, setSearch] = useState<string>('')
     const { peopleExpertiseFilter, peopleRegionFilter, activePersonId } = useSelector((store: RootState) => store.uiStore)
-    const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER)
     const [modal, setModal] = useState(false);
     const toggle = (): void => setModal(!modal);
-    const { loading, data, error } = useQuery(All_USERS)
+    const { loading, data, error } = useQuery(All_USERS, {
+        variables: {
+            limit: pagination.limit,
+            offset: pagination.offset,
+        }
+    })
 
+    const [searchUser, { loading: searchLoading, data: searchData, error: searchError }] = useLazyQuery(SearchUser, {
+        variables: {
+            searchParam: search,
 
+        }
+    })
 
     useEffect(() => {
-        authenticatedUser({
-            variables: {
-                userInput: {
-                    email: user?.email,
-                    userName: user?.name,
-                    firstName: user?.nickname,
-                }
+        setPagination({
+            ...pagination,
+            allPeople: data?.getdebutUsers.TotalAmount ?? 0
 
-            }
         })
+    }, [data?.getdebutUsers.TotalAmount])
 
-    }, [user?.email, user?.name, user?.nickname, authenticatedUser])
-    if (authenticatedUsrRes.error) { (notifyError(authenticatedUsrRes.error.message)) }
-    if (authenticatedUsrRes.loading || loading) { return <Loader /> }
 
-    if (error) {
-        console.log(error)
-        notifyError(error.message.toString())
+    const nextPage = () => {
+        pagination.offset + pagination.limit < pagination.allPeople &&
+            setPagination({ ...pagination, offset: pagination.offset + pagination.limit })
     }
+    const prevPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: pagination.offset - pagination.limit })
+    }
+    const firstPage = () => {
+        pagination.offset > 0 &&
+            setPagination({ ...pagination, offset: 0 })
+    }
+    const lastPage = () => {
+        pagination.offset + pagination.limit < pagination.allPeople &&
+            setPagination({
+                ...pagination, offset: Math.floor(
+                    pagination.allPeople / pagination.limit) * pagination.limit
+            })
+    }
+
+
+    if (error || searchError) { notifyError("something went wrong") }
+    if (loading) { return <Loader /> }
 
     return (
 
-        <div className=' d-flex flex-column m-5  p-5 ' >
-            <p className='fw-light fs-1  mx-5'> People directory</p>
-            <Row className=''>
-
+        <div className='w-100'>
+            <Row className=' mb-1 my-auto pt-5 mt-5 px-5  mx-5  w-100  
+            
+            d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 
+            
+            ' >
+                <h1 className='fw-light fs-1  m-5 mb-3'>
+                    People directory
+                </h1>
+                <p className="text-muted ms-5" >
+                    Find people you will love to work with and help grow
+                </p>
+            </Row>
+            <Row className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ top: '10%', }}>
                 <Col md={10} sm={8} xs={8} >
-                    <SearchComponent />
+                    <Row className='w-100 d-flex flex-column'>
+                        <FormGroup>
+                            <Input
+                                className='App'
+                                type="text"
+                                name="textarea-input"
+                                placeholder='Search using name or email ... '
+                                onChange={(e) => setSearch(e.target.value)}
+                                value={search}
+
+
+
+                            />
+                        </FormGroup>
+                        <div className='w-75 position-absolute mt-5   shadow-lg'
+                            style={{ zIndex: 1000, maxHeight: '300px', overflowY: 'scroll' }}>
+                            {searchLoading ? <div>
+                                <p className='text-center text-warning bg-muted py-5 ' > please wait  ....</p>
+                            </div> : searchData?.searchUserWithParam?.length === 0 && search.length !== 0 ?
+                                <p className='text-center text-warning py-5 bg-muted ' >  no match foud.</p>
+                                :
+                                searchData?.searchUserWithParam.map((user: any) => {
+                                    return (<UserResults key={uuid()}
+                                        setSearch={setSearch}
+                                        people={user} />)
+                                })}
+                        </div>
+                    </Row>
                 </Col>
                 <Col md={1} sm={4} xs={4}>
                     <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        onClick={() => searchUser()}
                         className='shadow-sm rounded rounded-5   p-2 m-1  me-2 bg-success bg-opacity-10   text-success align-items-center justify-content-center d-flex'>
                         <FaSearch />
                     </motion.div>
@@ -72,9 +134,7 @@ export default function People() {
                 </Col>
                 <Col md={1} >
 
-                    <div
-                        onClick={toggle}
-                    >
+                    <div onClick={toggle}>
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -87,19 +147,20 @@ export default function People() {
 
                 </Col>
             </Row>
+
+
+
+
             <Collapse isOpen={modal} toggle={toggle} >
 
                 <PeopleFilterOptions />
 
             </Collapse>
-            <Row className='mt-5 '  >
+            <Row className='mx-auto ms-5  px-auto overflow-y-auto '>
                 <Col className={`overflow-scroll  ${activePersonId === "" ? '' : 'd-none d-sm-block'}`}
-                //    make col scrollable  on y axis
-                style={{ maxHeight: '80vh' }}
+                    style={{ maxHeight: '80vh' }}>
 
-                >
-
-                    {data?.getdebutUsers.map((user: any) => {
+                    {data?.getdebutUsers.Users.map((user: any) => {
                         if (peopleExpertiseFilter.length === 0 && peopleRegionFilter.length === 0) {
                             return <PeopleCards key={uuid()}
                                 people={user} />
@@ -114,19 +175,32 @@ export default function People() {
                             return <PeopleCards key={uuid()}
                                 people={user} />
                         }
-                    }
-                    )}
+                    })}
                 </Col>
-                <Col
-                    className={`overflow-auto ${activePersonId === "" ? 'd-none d-sm-block' : ''}`}
-
-
-
-                // on small screens if person is selected fhow it full screen otherwise hide it
-
-                >
+                <Col className={`overflow-auto ${activePersonId === "" ? 'd-none d-block' : ''}`}>
                     <PersonDetail />
                 </Col>
+            </Row>
+            <Row>
+                {/* paginaton  */}
+                <Pagination className='d-flex justify-content-center align-items-center  my-5 ' size="md">
+                    <PaginationItem>
+                        <PaginationLink first onClick={firstPage}>
+                            first
+                        </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem onClick={prevPage}>
+                        <PaginationLink previous />
+                    </PaginationItem>
+                    <PaginationItem onClick={nextPage}>
+                        <PaginationLink next />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink last onClick={lastPage}>
+                            last
+                        </PaginationLink>
+                    </PaginationItem>
+                </Pagination>
             </Row>
         </div>
 

@@ -4,6 +4,7 @@ import { GRATITUDE_TO_USER, CREATE_GRATITUDE, SENT_GRATITUDE } from '../../Graph
 import { useQuery, useMutation } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Store/RootReducer';
+import { notifyError, notifySuccess } from '../Notification/Toast';
 const inputStyles = {
     width: '80%',
     margin: 'auto',
@@ -52,31 +53,19 @@ export default function NewGratitudeForm() {
     }] = useMutation(CREATE_GRATITUDE,
         {
             refetchQueries: [{ query: SENT_GRATITUDE, variables: { userId: userID } }],
-            // update(cache, { data: { createGratitude } }) {
-            //     const { getSentGratitudes }: any = cache.readQuery({
-            //         query: SENT_GRATITUDE,
-            //         variables: { userId: userID }
-            //     })
-            //     cache.writeQuery({
-            //         query: SENT_GRATITUDE,
-            //         variables: { userId: userID },
-            //         data: { getSentGratitudes: [createGratitude, ...getSentGratitudes] }
-            //     })
-            // }
+            onCompleted: () => {
+                notifySuccess('Gratitude sent successfully')
+            },
+            onError: (error) => {
+                notifyError("Error sending gratitude")
+            }
         }
     )
 
 
 
-    // if (gratitudeToUserData) {
-    //     console.log('gratitudeToUserData', gratitudeToUserData)
-    // }
-    // if (gratitudeToUserLoading) {
-    //     console.log('gratitudeToUserLoading', gratitudeToUserLoading)
-    // }
-    // if (gratitudeToUserError) {
-    //     console.log('gratitudeToUserError', gratitudeToUserError)
-    // }
+
+
     const onSubmitHandler = (e: any) => {
         e.preventDefault()
         gratitudeToUser({
@@ -89,24 +78,19 @@ export default function NewGratitudeForm() {
     }
 
     if (error) {
-        console.log('error.....', error)
+        notifyError("Error fetching users")
     }
 
-    // filter objects by name value 
-    // const filterByName = (name: String) => {
 
-    // }
     useEffect(() => {
-        if (  searchInput.length > 0) {
-
-            const filtered = data.getdebutUsers.filter((user: any) => {
+        if (searchInput.length > 0) {
+            return setFilteredUsers(data.getdebutUsers.Users?.filter((user: any) => {
                 return (user.firstName?.toLowerCase().includes(searchInput.toLowerCase())
                     || user.lastName?.toLowerCase().includes(searchInput.toLowerCase())
                 )
-            })
-            return setFilteredUsers(filtered)
+            }))
         }
-    }, [searchInput, data?.getdebutUsers])
+    }, [searchInput, data?.getdebutUsers?.Users])
 
 
 
@@ -134,7 +118,7 @@ export default function NewGratitudeForm() {
             </FormGroup>
 
             <Row className='d-flex justify-content-between ' md={12} >
-                {focused && filteredUsers.map((user: any) => {
+                {focused && filteredUsers?.map((user: any) => {
                     return (
                         <Col
                             className='shadow-sm  p-1 px-3 my-2 forumCardParent' md={6} >

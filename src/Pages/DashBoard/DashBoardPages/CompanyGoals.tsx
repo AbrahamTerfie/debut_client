@@ -127,7 +127,7 @@ export default function CompanyGolas(props: any) {
             </Button>{' '}
           </ModalFooter>
         </Modal>
-      </div>
+    </div>
 
       <div className='mx-3 p-3' >
 

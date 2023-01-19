@@ -4,20 +4,17 @@ import { MultiSelect } from "react-multi-select-component";
 import { optionOfGeography, optionsOfAeraasOfImpact } from "../../MyDebutInfo/selectInputs";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
-// import { setMyDebutTab } from '../../../Store/UI/sidebarController';
+
 import { setCompanyID } from '../../../Store/identfiers/identfiers'
 import Axios from 'axios';
 import { useMutation, useQuery } from '@apollo/client'
-import {
-  CHECK_IF_USER_HAS_COMPANY, CREATE_COMPANY,
-  FETCH_COMPANY, UPDATE_COMPANY
-} from '../../../GraphQl/index';
+import { CREATE_COMPANY, FETCH_COMPANY, UPDATE_COMPANY } from '../../../GraphQl/index';
 import Loader from '../../../Components/Loader/Loader';
 import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
-
+import { aeraOfExpertise, regions } from '../../../Constants/index'
 
 
 export default function YourComapany() {
@@ -28,17 +25,11 @@ export default function YourComapany() {
   const [selectedGeography, setSelectedGeography] = useState([]);
   const [isCreatingAcompany, setIsCreatingAcompany] = useState(false)
   const [achivement, setAchivement] = useState('');
-  const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
-    variables: { userId: userID }
-  })
+  const [imageuri, setImageuri] = useState('')
+  const [imagePreview, setImagePreview] = useState<any>()
+
   const [companyState, setCompanyState] = useState(myComapnyInitialState)
 
-
-  // console.log({
-  //   ...companyState,
-  //   companyServivesGeography: selectedGeography.map((geography: any) => geography.value),
-  //   aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-  // })
 
   const { data: dataCompany, loading: loadingCompany, error: errorCompany
   } = useQuery(FETCH_COMPANY, {
@@ -92,6 +83,8 @@ export default function YourComapany() {
       majorAchivements: dataCompany.getCompanyWithUserId.majorAchivements || [],
       companyDescription: dataCompany.getCompanyWithUserId.companyDescription || '',
     });
+    setSelectedAeraasOfImpact(dataCompany.getCompanyWithUserId.aeraOfOperation.map((aera: any) => ({ label: aera, value: aera })))
+    setSelectedGeography(dataCompany.getCompanyWithUserId.companyServivesGeography.map((geography: any) => ({ label: geography, value: geography })))
 
     dispatch(setCompanyID(dataCompany.getCompanyWithUserId._id));
   }, [dataCompany, dispatch]);
@@ -103,12 +96,7 @@ export default function YourComapany() {
     setCompanyState({ ...companyState, [name]: value })
   }
 
-  // console.log("loadingCompany", loadingCompany)
-  // console.log("errorCompany", errorCompany)
 
-
-
-  //add to majot achivement to company
   const addToMajorAchovements = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setCompanyState({ ...companyState, majorAchivements: [...companyState.majorAchivements, achivement] })
@@ -120,31 +108,11 @@ export default function YourComapany() {
     setCompanyState({ ...companyState, majorAchivements: newAchivements })
   }
 
-  // if (createMyCompanyRes.error || (updateMyCompanyRes.error)) {
-  //   createMyCompanyRes.error && notifyError(createMyCompanyRes.error.message.toString())
-  //   updateMyCompanyRes.error && notifyError(updateMyCompanyRes.error.message.toString())
 
-  // }
 
-  console.log("companyState", userID)
-
-  const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData();
-    formData.append('file', imageSelected)
-    // file is the file object
-    let imageUri = companyState.companyLogo
-    formData.append('upload_preset', 'debutCompanyProfilePicture')
-    imageSelected && Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
-      .then((response) => {
-        imageUri = response.data.secure_url
-      })
-
-      .catch((error) => {
-        notifyError("Error uploading image" + error.message.toString())
-        // console.log(error)
-      })
-
+  const sendData = (
+    image?: string,
+  ) => {
     if (isCreatingAcompany) {
       createMyCompany({
         variables: {
@@ -153,7 +121,7 @@ export default function YourComapany() {
             companyOwner: userID,
             companyCategory: selectedGeography.map((geography: any) => geography.value),
             aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-            companyLogo: imageUri
+            companyLogo: image
 
           }
         }
@@ -168,28 +136,36 @@ export default function YourComapany() {
             ...companyState,
             companyCategory: selectedGeography.map((geography: any) => geography.value),
             aeraOfOperation: selectedAeraasOfImpact.map((aera: any) => aera.value),
-            companyLogo: imageUri
+            companyLogo: image
           }
         }
       })
     }
+  }
 
+  const handleCompanySubimt = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append('file', imageSelected)
+    // file is the file object
+
+    formData.append('upload_preset', 'debutCompanyProfilePicture')
+
+    if (imageSelected !== "") {
+      Axios.post('https://api.cloudinary.com/v1_1/djpiwnxwl/image/upload', formData)
+        .then((response) => {
+          response && console.log(response.data.secure_url)
+          sendData(response.data.secure_url)
+        })
+        .catch((error) => { notifyError("Error uploading image" + error.message.toString()) })
+    }
+
+    if (imageSelected === "") { sendData() }
   }
 
 
-
-
-
-  if (loading || loadingCompany) { return <Loader /> }
-  if ((hasCompany === true) && (error || errorCompany)) {
-    // if has company is false dont show thos error otherwise show it
-
-    error && notifyError(error.message.toString())
-    errorCompany && notifyError(errorCompany.message.toString())
-
-    // return <div> something went wrong  </div>
-  }
-  if (data) { dispatch(togglehasCompany(data.checkIfUserHasCompany)) }
+  if (loadingCompany) { return <Loader /> }
+  if ((hasCompany === true) && (errorCompany)) { errorCompany && notifyError("Error loading company" + errorCompany.message.toString()) }
 
 
 
@@ -201,9 +177,10 @@ export default function YourComapany() {
           details and information about your company
         </p>
       </div>
-      {!hasCompany && !isCreatingAcompany ?
+      {hasCompany === false ?
 
-        <Row>
+
+        < Row Row >
           <p className='m-5 text-muted fs-2 fw-light text-center'  >
             you haven't registerd a company yet
           </p>
@@ -328,10 +305,17 @@ export default function YourComapany() {
                 <Col md={3}
                   className='d-flex flex-column  justify-content-between align-items-center px-5'
                 >
-                  <img src={companyState?.companyLogo} alt="" className='w-50' />
+                  <img src={
+                    // transpile and show a previrew of the image
+                    imagePreview ? imagePreview : companyState.companyLogo
+                  }
+                    alt="" className='w-50' />
                   <FormGroup>
                     <Label for="companyLogo"> upload high resolution image of your logo </Label>
-                    <Input onChange={(event: any) => { setImageSelected(event.target.files[0]) }} type="file" />
+                    <Input onChange={(event: any) => {
+                      setImageSelected(event.target.files[0])
+                      setImagePreview(URL.createObjectURL(event.target.files[0]))
+                    }} type="file" />
                   </FormGroup>
                 </Col>
               </Row>
@@ -344,7 +328,7 @@ export default function YourComapany() {
                 <div
                   className='d-flex flex-wrap justify-content-start align-items-center mt-3 mx-3'
                 >
-                  {companyState.majorAchivements.map((savedAchivement: String, index: any) => {
+                  {companyState.majorAchivements?.map((savedAchivement: String, index: any) => {
                     return <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -401,8 +385,8 @@ export default function YourComapany() {
 
 
 
-              <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.aeraOfOperation.map((aera: String, index: any) => {
+              <div className='d-flex flex-wrap' >
+                {dataCompany?.getCompanyWithUserId.aeraOfOperation?.map((aera: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>{aera}, </p>)
                 })}
               </div>
@@ -420,8 +404,8 @@ export default function YourComapany() {
 
               </Label>
 
-              <div className='d-flex' >
-                {dataCompany && dataCompany.getCompanyWithUserId.companyCategory.map((savedRegion: String, index: any) => {
+              <div className='d-flex flex-wrap' >
+                {dataCompany?.getCompanyWithUserId.companyCategory?.map((savedRegion: String, index: any) => {
                   return (<p key={index} className='fs-6 text-success  fw-light  bg-success bg-opacity-10 rounded-pill px-4 py-1 mx-1'>
                     {savedRegion}
                   </p>)
@@ -429,7 +413,7 @@ export default function YourComapany() {
               </div>
               <MultiSelect
                 hasSelectAll={false}
-                options={optionOfGeography}
+                options={regions}
                 value={selectedGeography}
                 onChange={setSelectedGeography}
                 labelledBy="Select your aera of operaitons"
@@ -438,7 +422,7 @@ export default function YourComapany() {
           </Row>
 
 
-          <Col md={12} className=' mx-5 my-5'>
+          <Row className='  w-100'>
             <motion.div whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
               className=" px-5   mx-5 py-2 my-4 bg-success bg-opacity-25  rounded-pill   "
@@ -449,7 +433,7 @@ export default function YourComapany() {
 
 
             </motion.div>
-          </Col>
+          </Row>
         </Form>
       }
     </>

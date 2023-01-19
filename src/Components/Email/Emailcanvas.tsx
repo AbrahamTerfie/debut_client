@@ -40,7 +40,7 @@ export default function Emailcanvas() {
 
     useEffect(() => {
         editor?.commands.setContent(emailBody)
-    }, [emailBody])
+    }, [emailBody, editor])
 
 
 
@@ -95,8 +95,8 @@ export default function Emailcanvas() {
                 reply_to: emailTo,
             },
             emailJsInfo.public_key
-        ).then((result) => { notifySuccess(result.text.toString() + " " + "email sent") })
-            .catch((error) => { notifyError(error.text.toString() + " " + "email not sent") })
+        ).then((result) => { notifySuccess(result.text.toString() + "email sent") })
+            .catch((error) => { notifyError(error.text.toString() + "email not sent") })
 
     }
 
@@ -104,34 +104,38 @@ export default function Emailcanvas() {
 
     return (
         <Offcanvas
-            direction="bottom"
+            direction="end"
             scrollable
             isOpen={emailPopup}
-            className=" text-success "
-            style={{ height: '80%', width: '50%', left: '50%', }}>
+            className=" text-success  "
+            style={{
+                width: window.innerWidth < 576 ? "100%" : window.innerWidth < 768 ? "70%" :
+                    window.innerWidth < 992 ? "60%" : window.innerWidth < 1200 ? "50%" : "50%",
+            }}
+        >
             <OffcanvasHeader toggle={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => closeCanvasHandler(e)}
-                className="bg-success text-success bg-opacity-10 "
+                className="bg-secondary bg-gradient"
                 toggleClassName="text-primary">
                 {headers.title}
             </OffcanvasHeader>
             <OffcanvasBody className='p-0 border border-dark border-2   justify-content-between d-flex flex-column'>
                 <Row>
-                    <Row className='border border-light d-flex justify-content-center align-items-center py-1 bg-success text-success bg-opacity-10'>
+                    <Row className=' d-flex justify-content-center align-items-center py-1 bg-secondary'>
 
                         <FormGroup className='  d-flex '>
-                            <Label for="emailfrom" className='text-center d-flex justify-content-center align-items-center  mx-4' > FROM</Label>
+                            <Label for="emailfrom" className='text-center text-dark d-flex justify-content-center align-items-center  mx-4' > FROM</Label>
                             <Input disabled type="text" name="emailfrom" id="emailfrom" placeholder=" your email  " value={userEmail} />
                         </FormGroup>
                     </Row>
-                    <Row className='border border-light  p-0 border-2 py-1  bg-success text-success bg-opacity-10' >
+                    <Row className='  p-0 border-2 py-1  bg-secondary' >
                         <FormGroup className='   d-flex '>
-                            <Label for="emailTo" className='text-center d-flex justify-content-center align-items-center  mx-4' > TO</Label>
+                            <Label for="emailTo" className='text-center text-dark d-flex justify-content-center align-items-center  mx-4' > TO</Label>
                             <Input type="text" name="emailTo" id="emailTo" placeholder=" email to " value={emailTo} disabled />
                         </FormGroup>
                     </Row>
-                    <Row className='border border-light  p-0  py-1  bg-success text-success bg-opacity-10' >
+                    <Row className='  p-0  py-1  bg-secondary' >
                         <FormGroup className='   d-flex '>
-                            <Label for="emailTo" className='text-center d-flex justify-content-center align-items-center  mx-4' > SUBJECT</Label>
+                            <Label for="emailTo" className='text-center text-dark d-flex justify-content-center align-items-center  mx-4' > SUBJECT</Label>
                             <Input type="text" name="emailTo" id="emailTo" placeholder={headers.subject} disabled />
                         </FormGroup>
                     </Row>
@@ -139,21 +143,17 @@ export default function Emailcanvas() {
                 <Row>
 
                     <EditorContent
-                        style={{ minHeight: '30em', border: "1px solid black", padding: "2em", paddingLeft: "4em" }}
+                        style={{ minHeight: '70vh', border: "1px solid black", padding: "2em", paddingLeft: "4em" }}
                         editor={editor} />
                 </Row>
-                <Row
-                    onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => sendEmail(e)}
-                >
+                <Row onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => sendEmail(e)}>
                     <MotionContainer>
                         <p className='text-center text-primary bg-success bg-opacity-10 p-3 text-success fw-bold m-3'>
                             send
                         </p>
                     </MotionContainer>
                 </Row>
-
             </OffcanvasBody>
-
         </Offcanvas >
     )
 }

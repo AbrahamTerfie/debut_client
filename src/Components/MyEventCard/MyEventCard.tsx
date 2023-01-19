@@ -9,6 +9,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import Loader from '../Loader/Loader'
 import { motion } from 'framer-motion'
 
+
 export default function MyEventCard(
   { _id,
     createdBy,
@@ -76,23 +77,29 @@ export default function MyEventCard(
   return (
     <>
       <motion.div
-        whileTap={{ scale: 0.9 }}
-        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 1.09 }}
+        whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 40 }}
 
-        onClick={() => navigate(_id.toString())}
-        className='d-flex m-3 h-50 shadow rounded flex-column  align-items-end w-25  ' >
-        <img src={debutEventImage}
-          style={{ maxHeight: "200px" }}
-          alt="eventIdentfiier"
-          className='w-100 h-50 rounded-top' />
-
-        <div className='px-4 py-3' >
-          <p className='fs-5 d-flex justify-content-end ' >  {debutEventName}  </p>
-          <small className=' text-muted fw-light  d-flex justify-content-end ' >
-            {moment(debutEventDate).format('MMMM Do YYYY')}
-          </small>
-        </div>
+      >
+        <Row
+          onClick={() => navigate(_id.toString())}
+          className='d-flex m-3  shadow-sm border rounded flex-column  align-items-end  justify-content-end '
+          style={{
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            backgroundImage: `url(${debutEventImage})`, backgroundBlendMode: 'overlay',
+            backgroundColor: 'rgba(0,0,0,0.6)', objectFit: 'fill', objectPosition: 'center', borderRadius: ' 10px 10px 0 0',
+            overflow: 'hidden', height: '300px',
+            width: '100%', cursor: 'pointer', minHeight: '300px',
+            minWidth: '300px', maxHeight: '300px', maxWidth: '300px',
+          }}>
+          <div className='px-4 py-3' >
+            <p className='fs-1 d-flex text-light dlex-wrap justify-content-end ' >  {debutEventName}  </p>
+            <small className=' text-muted fw-light  d-flex justify-content-end ' >
+              {moment(debutEventDate).format('MMMM Do YYYY')}
+            </small>
+          </div>
+        </Row>
       </motion.div>
       <div>
         <Offcanvas

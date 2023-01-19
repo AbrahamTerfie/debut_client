@@ -192,7 +192,7 @@ export default function NewGoalMilestone(
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 30 }} color="light"
-                                className=" px-5   d-flex justify-content-center align-items-center  mx-5  bg-light "
+                                className=" px-5   d-flex justify-content-center align-items-center  mx-5  bg-success bg-opacity-10 rounded-pill "
                                 style={{ cursor: 'default' }}
                                 onClick={(e: any) => addToNeedHelpWith(e)}
                             >
@@ -244,7 +244,7 @@ export default function NewGoalMilestone(
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 30 }} color="light"
-                                className=" px-5   d-flex justify-content-center align-items-center  mx-5  bg-light "
+                                className=" px-5   d-flex justify-content-center align-items-center  mx-5 bg-success bg-opacity-10 rounded-pill  "
                                 style={{ cursor: 'default' }}
                                 onClick={(e: any) => addToAdditionalLinks(e)}
                             >
@@ -264,7 +264,7 @@ export default function NewGoalMilestone(
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }} color="light"
-                    className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success rounded-pill   bg-opacity-75 "
+                    className=" px-5   d-flex justify-content-center align-items-center  mx-5 py-2 my-4 bg-success bg-opacity-25 border border-success rounded-pill  rounded-pill   "
                     style={{ cursor: 'default' }}>
 
                     <p className=' text-light m-2 fs-5' > save milestone </p>

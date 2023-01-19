@@ -32,6 +32,9 @@ import {
 } from './DebutEvents/DebutEvents'
 import { COMPANY_PAGE } from './Company/companyPage'
 
+import { SearchUser, SearchVenture, searchDebutEvent } from './Search/SearchQueries'
+
+
 export {
     CHECK_EMAIL_VALIDITY,
     CREATE_DEBUT_USER,
@@ -89,5 +92,10 @@ export {
     TOGGLE_REGISTRY_STATUS,
     NUKE_DEBUT_EVENT,
     COMPANY_PAGE,
+
+    // search
+    SearchUser,
+    SearchVenture,
+    searchDebutEvent
 
 }

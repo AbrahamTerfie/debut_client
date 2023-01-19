@@ -12,6 +12,8 @@ import { toggleEmailPopup } from '../../Store/UI/sidebarController'
 import Emailcanvas from '../Email/Emailcanvas';
 import { EmailTypes } from '../../Email/EmailTypes';
 import { v4 as uuid } from 'uuid'
+import { appRoutes } from '../../Routes/routes';
+import { useNavigate } from 'react-router-dom';
 import { setActivePersonId } from '../../Store/UI/sidebarController'
 function MotionCover({ children }: any) {
     return (
@@ -31,11 +33,12 @@ function MotionCover({ children }: any) {
 
 export default function PersonDetail() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { activePersonId } = useSelector((store: RootState) => store.uiStore)
     const { userEmail, myBiography } = useSelector((store: RootState) => store.identfiers)
     const { loading, error, data } = useQuery(FETCH_USER_WITH_ID, { variables: { getDebutUserWithIdId: activePersonId } })
     if (loading) { <Loader /> }
-    // console.log(data)
+
     if (activePersonId === "") { return <p className='text-center p-5 shadow-sm h-auto rounded  border border-muted  text-muted fw-bolder my-2 ' > select user </p> }
     if (error) { return <p className='text-center p-4 shadow-sm h-auto rounded   my-2 ' > something went wrong  </p> }
 
@@ -61,8 +64,13 @@ export default function PersonDetail() {
 
 
     return (
-        <div className='p-4 px-5 shadow  rounded rounded-5 my-2 overflow-auto d-flex flex-column  flex-wrap  py-5  bg-dark bg-opacity-10'>
+        <div className='p-4 px-auto shadow rounded  my-auto overflow-auto d-flex flex-column  flex-wrap  py-5  text-info-emphasis bg-info-subtle border border-info-subtle '>
             <Emailcanvas />
+            <div className='d-flex justify-content-end align-items-center my-auto '>
+                <MotionCover>
+                    <FaTimes className='text-danger bg-danger bg-opacity-10 p-2 rounded-circle' onClick={closePerson} size={35} />
+                </MotionCover>
+            </div>
             <Row>
                 <Col md={3}
                     sm={12} lg={3} xl={3} xxl={3} className='d-flex justify-content-start align-items-start'>
@@ -79,10 +87,10 @@ export default function PersonDetail() {
                         }}
                     />
                 </Col>
-                <Col md={8}
-                    sm={12} lg={8} xl={8} xxl={8} className='d-flex flex-row flex-wrap justify-content-start align-items-start'>
+                <Col md={9}
+                    sm={12} lg={9} xl={9} xxl={9} className='d-flex flex-column flex-wrap justify-content-start align-items-start'>
 
-                    <p className='fs-4 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}
+                    <p className='fs-1 fw-lighter m-0'>  {data?.getDebutUserWithId.firstName} {data?.getDebutUserWithId.lastName}
                         <span className='fs-6 fw-bold text-muted mx-2'>
                             {data?.getDebutUserWithId.pronouns}
                         </span>
@@ -90,16 +98,14 @@ export default function PersonDetail() {
                     <p className='fs-6 fw-bold  m-0'>
                         {data?.getDebutUserWithId.userName} / <span className='text-muted' >  {data?.getDebutUserWithId.preferredName} </span> </p>
 
-                    <p className='fs-5 fw-light m-0 d-flex justify-content-start  flex-row'>
-                        <span > {data?.getDebutUserWithId.titleAtCompany}</span>
-                        <span className='text-muted mx-1'> at </span>
-                        <span >{data?.getDebutUserWithId.company[0]?.companyName} </span>
+                    <p className='fs-5 fw-light m-0 d-flex justify-content-start  flex-row flex-wrap'>
+                        {data?.getDebutUserWithId.titleAtCompany} <span className='text-muted mx-1'> at </span>{data?.getDebutUserWithId.company[0]?.companyName}
                     </p>
 
-                   
 
 
-                    <div className='d-flex justify-content-start my-2' >
+
+                    <div className='d-flex justify-content-start my-2 flex-wrap' >
                         <MotionCover>
                             {data?.getDebutUserWithId.linkedinUrl ? <a href={data?.getDebutUserWithId.linkedinUrl}>
                                 <FaLinkedin className='text-primary mx-2 bg-primary bg-opacity-10 p-2 rounded-circle' size={35} />
@@ -123,7 +129,7 @@ export default function PersonDetail() {
                         </MotionCover>
                     </div>
                     <MotionContainer>
-                        <p className='d-flex flex-row justify-content-center align-items-center bg-primary bg-opacity-10 p-2 px-4 rounded-5 shadow-sm border border-muted'
+                        <p className='d-flex flex-row justify-content-center align-items-center  text-warning-emphasis bg-warning-subtle border border-warning-subtle  px-3 p-2 rounded  shadow-sm border border-muted'
 
                             onClick={(e: any) => personIntroductoinHandler(e)}>
                             request introduction
@@ -132,17 +138,7 @@ export default function PersonDetail() {
                     </MotionContainer>
 
                 </Col>
-                <Col md={1} sm={1} lg={1} xl={1} xxl={1} className='d-flex justify-content-end align-items-start'>
-                    <MotionCover>
-                        <FaTimes className='text-danger
-                        bg-danger bg-opacity-10 p-2 rounded-circle
-                        ' onClick={closePerson}
-                            size={35} />
 
-
-                    </MotionCover>
-
-                </Col>
             </Row>
             <Row className='mt-4 '>
 
@@ -170,7 +166,7 @@ export default function PersonDetail() {
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.aeraOfExpertise.map((item: any) => {
                             return <MotionCover key={uuid()}>
-                                <p className='text-muted mx-1 my-2 bg-dark bg-opacity-10 p-2 px-4 rounded-pill flex-wrap '>
+                                <p className='text-muted mx-1 d-flex my-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle p-2 px-4 rounded-pill flex-wrap '>
                                     {item}
                                 </p>
                             </MotionCover>
@@ -185,7 +181,7 @@ export default function PersonDetail() {
                     <div className='  d-flex flex-wrap justify-content-start '>
                         {data?.getDebutUserWithId.regions.map((item: any) => {
                             return <MotionCover key={uuid()}>
-                                <span className='text-muted mx-1 my-2 bg-dark bg-opacity-10 p-2 px-4 rounded-pill flex-wrap '>
+                                <span className='text-muted mx-1 my-2 d-flex text-secondary-emphasis bg-secondary-subtle border border-secondary-subtle p-2 px-4 rounded-pill flex-wrap '>
                                     {item}
                                 </span>
                             </MotionCover>
@@ -193,25 +189,43 @@ export default function PersonDetail() {
                     </div>
 
                 </Col>
-                <Col md={12}>
-                    <p className="m-3">company</p> </Col>
+                <Col md={12} className="mt-5">
+                    <p className="m-3 mb-0">company</p> </Col>
 
-                <Col md={10} className='d-flex flex-wrap justify-content-start  m-3'>
-                    <img src={data?.getDebutUserWithId.company[0]?.companyLogo}
-                        alt="profile" className='rounded-1 shadow-sm  img-fluid p-4 border border-darl border-opacity-10'
-                        style={{ height: '120px', width: '130px', objectFit: 'cover' }} />
+                {data?.getDebutUserWithId.company.length === 0 ? <Col md={12} className="mt-5">
+                    <p className=" mx-3 mb-0 text-start text-muted">
+                        debut user has not added any company yet
+                    </p> </Col> :
+
+                    <MotionContainer>
+                        <Col md={10} className='d-flex flex-wrap justify-content-start  m-3 border border-muted rounded-1 shadow-sm p-3'
+                            onClick={() => navigate(`${appRoutes.ventures}/${data?.getDebutUserWithId.company[0]?._id}`)}
+                        >
+                            <img src={data?.getDebutUserWithId.company[0]?.companyLogo}
+                                alt="profile"
+                                className='rounded-1 shadow-sm  img-fluid p-2'
+                                style={{
+                                    // responsive image 
+                                    height: window.innerWidth * 0.07,
+                                    width: window.innerWidth * 0.07,
+                                    objectFit: 'cover', objectPosition: 'center'
+                                }}
+                            />
 
 
-                    <div className='d-flex flex-column justify-content-start align-items-start ms-4'>
-                        <p className='m-0 fs-4 fw-bold' > {data?.getDebutUserWithId.company[0]?.companyName} </p>
-                        <p className='m-0 text-muted  fs-6 fw-light'>
-                            {data?.getDebutUserWithId.company[0]?.companyHeadquarters}
-                        </p>
-                        <p className='m-0'>
-                            {data?.getDebutUserWithId.company[0]?.companyWebsite}
-                        </p>
-                    </div>
-                </Col>
+                            <div className='d-flex flex-column justify-content-start align-items-start ms-4'>
+                                <p className='m-0 fs-4 fw-bold' > {data?.getDebutUserWithId.company[0]?.companyName} </p>
+                                <p className='m-0 text-muted  fs-6 fw-light'>
+                                    {data?.getDebutUserWithId.company[0]?.companyHeadquarters}
+                                </p>
+                                <p className='m-0'>
+                                    {data?.getDebutUserWithId.company[0]?.companyWebsite}
+                                </p>
+                            </div>
+                        </Col>
+                    </MotionContainer>}
+
+
 
             </Row>
         </div>
