@@ -58,7 +58,7 @@ export default function CompanyEvents() {
             whileHover={{ scale: 1.009 }}
             whileTap={{ scale: 0.9 }}
           >
-            <p className='text-muted text-center fs-4 '>  you have no goals yet </p>
+            <p className='text-muted text-center fs-4 '>  you have no events yet </p>
             <p className=' text-center fs-6 '>  click on the button above to create one </p>
           </motion.div >
 

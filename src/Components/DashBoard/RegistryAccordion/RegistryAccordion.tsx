@@ -275,7 +275,7 @@ export default function RegistryAccordion(
                             className=' accordionHeader fw-light shadow-sm my-2  '
                             targetId={_id.toString()} >
                             {debutRegistryName}
-                            {debutRegistryStatus ? <span className="badge bg-success bg-opacity-10 text-success mx-4">Active</span> :
+                            {!debutRegistryStatus ? <span className="badge bg-success bg-opacity-10 text-success mx-4">Active</span> :
                                 <span className="badge bg-danger mx-4 bg-danger bg-opacity-10 text-danger">Inactive</span>}
 
                         </AccordionHeader>
@@ -295,8 +295,8 @@ export default function RegistryAccordion(
                                 <motion.div
                                     initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
                                     whileHover={{ scale: 1.008 }} whileTap={{ scale: 1.09 }} style={{ cursor: 'pointer' }} onClick={() => toggleRegistryStatus()}
-                                    className={`shadow-sm rounded rounded-5   p-2 mx-1  me-2  ${debutRegistryStatus ? 'bg-danger bg-opacity-10  text-danger' : 'bg-success bg-opacity-10  text-success'}  justify-content-center d-flex`}>
-                                    {debutRegistryStatus ? <span>deactivate</span> : <span >activate</span>}
+                                    className={`shadow-sm rounded rounded-5   p-2 mx-1  me-2  ${!debutRegistryStatus ? 'bg-danger bg-opacity-10  text-danger' : 'bg-success bg-opacity-10  text-success'}  justify-content-center d-flex`}>
+                                    {!debutRegistryStatus ? <span>deactivate</span> : <span >activate</span>}
                                 </motion.div>
                             </Col>
                             <Col md={2}>
