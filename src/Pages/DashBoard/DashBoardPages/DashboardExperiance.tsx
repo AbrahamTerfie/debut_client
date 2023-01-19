@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import { v4 as uuid } from 'uuid';
 import { notifyError, notifySuccess } from "../../../Components/Notification/Toast";
 export default function DashboardExperiance() {
-    const { userID } = useSelector((store: RootState) => store.identfiers)
+    const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
     const dispatch = useDispatch();
     const { data, loading, error } = useQuery(FETCH_USER_WITH_ID, {
         variables: { getDebutUserWithIdId: userID }
@@ -26,6 +26,7 @@ export default function DashboardExperiance() {
         regions: selectedGeography.map((item: any) => item.value),
         aeraOfExpertise: selectedIntrest.map((item: any) => item.value),
         yourBiography: "",
+        email: userEmail
     }
     const [experienceInfoForm, setExperienceInfoForm] = useState(experienceInfoInitState)
     useEffect(() => {
@@ -37,6 +38,7 @@ export default function DashboardExperiance() {
             howyouContribute: data.getDebutUserWithId.howyouContribute || '',
             aeraOfExpertise: data.getDebutUserWithId.aeraOfExpertise || [],
             regions: data.getDebutUserWithId.regions || [],
+            email: userEmail
         });
     }, [data]);
 
@@ -48,6 +50,7 @@ export default function DashboardExperiance() {
                 notifySuccess("Experiance updated successfully")
             },
             onError: (err) => {
+                console.log(err)
                 notifyError("failed to update " + err.message.toString())
             }
 
@@ -66,7 +69,7 @@ export default function DashboardExperiance() {
                 updateDebutUserId: userID
             }
         })
-        updateExperianceRes.data &&  setExperienceInfoForm(experienceInfoInitState)
+        updateExperianceRes.data && setExperienceInfoForm(experienceInfoInitState)
     }
     if (loading) return <Loader />
     if (error) return <p>Error</p>

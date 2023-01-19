@@ -27,7 +27,7 @@ export default function OnBoardingCompany({ onBoardingCompanyform, setOnBoarding
 
 ) {
   const animatedComponents = makeAnimated();
-  console.log("onBoardingCompanyform", onBoardingCompanyform)
+
 
   const [imagePreview, setImagePreview] = useState<string>('')
 

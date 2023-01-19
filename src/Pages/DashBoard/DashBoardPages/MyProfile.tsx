@@ -259,6 +259,8 @@ export default function MyProfile() {
               <Input type="number"
                 name="mobilePhone"
                 id="mobilePhone"
+                onChange={handleChange}
+
                 placeholder={personalInfoForm.mobilePhone}
                 value={personalInfoForm.mobilePhone}
               />
