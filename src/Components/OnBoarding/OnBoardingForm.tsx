@@ -217,7 +217,7 @@ export default function OnBoardingForm() {
                                                 index === steps.length - 1 ? undefined : handleNext
                                             }
                                         >
-                                            {index === steps.length - 1 ? 'Finish' : 'save & Continue'}
+                                            {index === steps.length - 1 ? 'please wait .....' : 'save & Continue'}
                                         </div>
                                     </MotionContainer>
                                 </div>
