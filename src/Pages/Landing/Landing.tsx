@@ -52,7 +52,7 @@ export default function Landing() {
                     </h3>
                 </Col>
                 <Col md={5} xs={12} sm={12} lg={5} xl={5}
-                    className="shadow-lg p-5 rounded border    border-warning border-2  m-5 d-flex justify-content-start align-items-start flex-column"
+                    className="shadow-lg p-5 rounded rounded-4 border    border-warning border-5  m-5 d-flex justify-content-start align-items-start flex-column"
                     onClick={() => { loginWithRedirect({ redirectUri: redirectUri }) }}>
                     <MotionContainer>
                         <div className=" d-flex justify-content-start align-items-center w-100">
