@@ -131,7 +131,11 @@ export default function Forum() {
                 </OffcanvasBody>
             </Offcanvas >
 
-            <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
+            <Row
+            //  className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  '
+                className='   mb-1 my-auto pt-5 mt-5 d-flex justify-content-center align-items-center flex-column flex-wrap   mx-sm-5 px-sm-5 w-lg-25 '
+            
+            >
                 <h1 className='fw-light fs-1  m-5 mb-3'> Forum </h1>
                 <p className="text-muted ms-5" >
                     A place to discuss and share
@@ -199,7 +203,9 @@ export default function Forum() {
 
             </div>
 
-            <Row className='mx-auto ms-5 ps-5 px-auto overflow-y-auto  '>
+            <Row
+                className='overflow-y-auto  d-flex justify-content-center align-items-center flex-column flex-wrap   mx-sm-5 px-sm-5 w-lg-25 '
+            >
                 {data?.getForumPosts.Posts?.map((post: any, index: number) => {
                     if (channelFilter === '') {
                         return (

@@ -24,8 +24,8 @@ export default function EventCard({ event }: { event: eventCard }) {
                 onClick={() => navigate(appRoutes.debutEvent + `/${event._id}`)}
                 style={background}>
                 <div className='d-flex justify-content-end align-items-end flex-column'>
-                    <p className='fs-3 text-secondary-emphasis text-end' > {event.debutEventName} </p>
-                    <p className='text-secondary-emphasis text-end text-wrap' >
+                    <p className='fs-3 text-light text-end' > {event.debutEventName} </p>
+                    <p className='text-light text-end text-wrap' >
                         {event.debutEventDescription.slice(0, 30)}...
                     </p>
                 </div>
