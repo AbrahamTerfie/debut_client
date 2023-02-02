@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { MultiSelect } from "react-multi-select-component";
-import { optionOfGeography, optionsOfAeraasOfImpact } from "../../MyDebutInfo/selectInputs";
+import { optionsOfAeraasOfImpact } from "../../MyDebutInfo/selectInputs";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
 
@@ -14,7 +14,7 @@ import { togglehasCompany } from '../../../Store/identfiers/identfiers';
 import { myComapnyInitialState } from '../../MyDebutInfo/initSattes';
 import { motion } from 'framer-motion';
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
-import { aeraOfExpertise, regions } from '../../../Constants/index'
+import { regions } from '../../../Constants/index'
 
 
 export default function YourComapany() {

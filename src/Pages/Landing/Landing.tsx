@@ -3,7 +3,7 @@ import '../../Styles/Landing.css'
 
 import { LandingCard } from '../../Components/index'
 import { Row, Col } from 'reactstrap'
-import { BsPlay } from 'react-icons/bs'
+import { BsFillSignpostFill, BsPlay } from 'react-icons/bs'
 import waveSvg from '../../Svg/waveSvg.svg'
 import LandingDetailCards from '../../Components/LandingDetailCards/LandingDetailCards'
 import { LandingAccordion } from '../../Components/LandingAccordion/LandingAccordion'
@@ -36,7 +36,7 @@ export default function Landing() {
         <div>
             <div className='d-flex justify-content-start align-items-center flex-column p-3 mx-2 my-5' >
                 <Row className='headerText'  ><p>Debut</p></Row>
-                <Row className='d-flex flex-column' >
+                <Row className='d-flex flex-column text-center' >
                     <p className='fs-4 m-0' >Scroll down</p>
                     <p className='text-muted m-0' > to learn more </p>
                 </Row>
@@ -52,14 +52,14 @@ export default function Landing() {
                     </h3>
                 </Col>
                 <Col md={5} xs={12} sm={12} lg={5} xl={5}
-                    className="shadow-lg p-5 rounded border    border-warning border-2  m-5 d-flex justify-content-start align-items-start flex-column"
+                    className="shadow-lg p-5 rounded rounded-4 border    border-warning border-5  m-5 d-flex justify-content-start align-items-start flex-column"
                     onClick={() => { loginWithRedirect({ redirectUri: redirectUri }) }}>
                     <MotionContainer>
                         <div className=" d-flex justify-content-start align-items-center w-100">
-                            <BsPlay className='ml-3 text-warning' size={100} />
+                            <BsFillSignpostFill className='ms-5 me-3 text-warning' size={70} />
                             <div>
-                                <p className='m-0 fs-1 text-warning' >get started </p>
-                                <span className='text-warning' > sign up or login </span>
+                                <p className='m-0 fs-1 text-warning' >Get started </p>
+                                <p className='text-warning mx-2 ' > sign up or login </p>
                             </div>
                         </div>
                     </MotionContainer>

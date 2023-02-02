@@ -221,7 +221,8 @@ export default function VentureCards(
                                 className='rounded-circle img-fluid'
                                 style={{ width: '30px', height: '30px', objectFit: 'cover', maxHeight: '100%' }}
                                 alt='company owner profile  ' />
-                            <p className='mx-2  fs-6  fw-normal' > {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
+                            <p className='mx-2  fs-6  fw-normal' >
+                                 {companyOwner?.firstName + "  " + companyOwner?.lastName} </p>
                         </div>
                     </Col>
                 </Row>
