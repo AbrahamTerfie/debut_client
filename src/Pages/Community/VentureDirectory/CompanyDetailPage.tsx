@@ -166,9 +166,18 @@ export default function CompanyDetailPage() {
                             company.companyGoals?.map((goal: companyGoals, index: number, ownerEmail: string) => {
                                 return (<AccordionItem key={index}>
                                     <AccordionHeader targetId={goal._id}
-                                        className=" d-flex justify-content-between align-items-center  my-3   border border-secondary-subtle  ">
+                                        className=" d-flex justify-content-between align-items-center  my-2  "
+                                    >
                                         <MotionContainer>
-                                            {goal.goalTitle}
+
+                                            <p
+                                                className='text-info-emphasis  m-0 bg-info-subtle bg-opacity-10 p-2 px-4 
+                                              rounded-pill '
+                                            >
+                                                {goal.goalTitle}
+
+                                            </p>
+
                                         </MotionContainer>
                                     </AccordionHeader>
                                     <AccordionBody accordionId={goal._id}>

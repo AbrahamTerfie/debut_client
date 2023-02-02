@@ -28,7 +28,7 @@ export default function NavBarComponent() {
             expand="xl" fixed="top" container="fluid"
             style={{
                 // no opacity 
-                opacity: 2,
+                // opacity: 2,
 
 
             }}
