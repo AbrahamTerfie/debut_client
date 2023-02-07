@@ -7,28 +7,30 @@ export default function LandingCard({ icon, title }:
     { icon: any, title: string }) {
     return (
         <Col
-            sm={12} md={4} lg={4} xl={4}
-            className='d-flex justify-content-center align-items-center  '>
+            xs='12' sm='12' md='4' lg='3' xl='3'
+            className='d-flex justify-content-center align-items-center'
+        >
 
             <motion.div className="   "
                 whileHover={{ scale: 1.08 }}
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                style={{
-                    // responsive img  for all screen sizes 
-                    width: "100%",
-                    height: "100%",
-                    minHeight: "200px",
-                    minWidth: "200px",
-                    maxHeight: "350px",
-                    maxWidth: "300px",
-                }}>
+            >
+                <h3 className='text-center'>{title}</h3>
 
-                <div className='img-fluid'>
+                <div className='img-fluid'
+                    style={{
+                        // same size for all screen sizes cover 
+                        maxWidth: '300px',
+                        maxHeight: '300px',
+                        objectFit: 'cover',
+                        // same size for all screen sizes cover
+
+
+                    }}
+                >
                     {icon}
                 </div>
-                <p className='fs-6 fw-light text-center  text-light' >
-                    {title}
-                </p>
+
             </motion.div>
         </Col>
 

@@ -23,16 +23,7 @@ export default function NavBarComponent() {
 
 
     return (
-        <Navbar
-            className='px-5  mb-5 shadow-sm   '
-            expand="xl" fixed="top" container="fluid"
-            style={{
-                // no opacity 
-                // opacity: 2,
-
-
-            }}
-        >
+        <Navbar className='px-5  mb-5 shadow-sm ' expand="xl" fixed="top" container="fluid" >
             <NavbarBrand onClick={() => { navigate(appRoutes.forum) }}
                 style={{
                     fontFamily: 'Bungee Shade, cursive',
@@ -41,9 +32,8 @@ export default function NavBarComponent() {
                 <span className=' fs-1 m-0 p-0'> debut </span>
             </NavbarBrand>
             <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={dropdownOpen} navbar>
+            <Collapse isOpen={dropdownOpen} navbar >
                 <Nav className=" d-flex justify-content-between" navbar>
-
                     <NavItem >
                         <NavLink style={textColor} onClick={() => { navigate(appRoutes.people) }} className={classNames(" mx-1 px-2", location.pathname === appRoutes.people ? "MyeventCardActive" : "MyeventCard")}  >
                             <BsPeople size={15} className='mx-3 my-1' />
