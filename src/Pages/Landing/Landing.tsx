@@ -38,7 +38,7 @@ export default function Landing() {
             <div className='d-flex justify-content-start align-items-center flex-column p-3 mx-2 my-5' >
                 <Row   ><p className='headerText  text-center' >Debut</p>
                     <div className='d-flex justify-content-center align-items-center flex-column text-center text-secondary '>
-                        <span className='m-0 fw-bold '>Helspaning founders launch their startup</span>
+                        <span className='m-0 fw-bold '> Helping founders launch their startup</span>
                         <span className='m-0 fw-bold '>with their village</span>
 
                     </div>
@@ -75,12 +75,12 @@ export default function Landing() {
             <Row className='d-flex justify-content-center align-items-center mt-4 pt-5 '>
                 <Col md={5} xs={12} sm={12} lg={5} xl={5}
                     className="shadow-sm  p-4 rounded m-5 border border-secondary" >
-                    <h3 className=' m-0 fw-bold text-start   flex-wrap   text-secondary   '>
+                    <h5 className=' m-0 fw-light text-start   flex-wrap   text-secondary   '>
                         <span className='text-warning mx-2'>Debut </span>
                         is a digital platform aimed at helping founders mobilize
                         their village (family, friends and extended network) to help launch their startup or project.
                         Think “baby-shower for your startup”.
-                    </h3>
+                    </h5>
                 </Col>
                 {/* <Col md={5} xs={12} sm={12} lg={5} xl={5}
                     className="shadow-lg p-5 rounded rounded-4 border    border-warning border-5  m-5 d-flex justify-content-start align-items-start flex-column"
@@ -96,7 +96,7 @@ export default function Landing() {
                     </MotionContainer>
                 </Col> */}
             </Row>
-            <Row className='d-flex my-5  justify-content-between align-items-around flex-wrap  ps-5 pe-5 '
+            <Row className='d-flex my-5  justify-content-center align-items-around flex-wrap  ps-5 pe-5 '
                 style={{
                     backgroundColor: '#1985a1',
 
@@ -155,28 +155,28 @@ export default function Landing() {
                     text="Debut breaks the goal to incremental “small offers" />
             </Row>
 
-            <Row className='fs-2 my-5  p-5  bg-warning-subtle  d-flex  justify-content-center align-items-center flex-wrap
+            <Row className='fs-2 my-5  p-5  bg-warning-subtle  d-flex  justify-content-center align-items-around flex-wrap
               '>
-                <Col md={6} xs={12} sm={12} lg={6} xl={6} className='d-flex justify-content-center align-items-center flex-column px-5' >
+                <Col md={6} xs={12} sm={12} lg={6} xl={6} className=' flex-column mx-3 w-25' >
                     <p className='fw-lighter text-start flex-wrap fw-lighter text-warning-emphasis '>
-                        <span className='fw-bold m-3 fs-1'>Debut</span>
+                        <span className='fw-bold m-3 fs-5'>Debut</span>
                         will make bespoke recommendations to utilize your community and remove the friction in
                         <br />
-                        <p style={{ color: 'lightblue' }} className='fw-bold my-3 fs-1'>
+                        <p style={{ color: 'lightblue' }} className='fw-bold my-3 fs-5'>
                             asking for help, getting help and giving gratitude.
                         </p>
                     </p>
                 </Col>
-                <Col md={6} xs={12} sm={12} lg={6} xl={6} className='d-flex justify-content-center align-items-center flex-column px-5' >
+                <Col md={6} xs={12} sm={12} lg={6} xl={6} className=' flex-column mx-3 w-25' >
                     <p className='fw-lighter text-end flex-wrap text-warning-emphasis '>
                         Consistently follow up and reward your community with
                         <br />
-                        <span style={{ color: 'lightblue' }} className='fw-bold m-5 fs-1'> gratitude, shares, and other creative ways. </span>
+                        <span style={{ color: 'lightblue' }} className='fw-bold m-5 fs-5 text-end'> gratitude, shares, and other creative ways. </span>
                     </p>
                 </Col>
             </Row>
 
-            <Row className="d-flex justify-content-evenly flex-wrap flex-row align-items-center my-5">
+            <Row className="d-flex justify-content-center flex-wrap flex-row align-items-center my-5">
 
                 <LandingCard3
                     number={3.1}
@@ -201,7 +201,7 @@ export default function Landing() {
             </Row>
 
             <Row className='d-flex justify-content-center align-items-center flex-wrap flex-row mb-5' >
-                <Col md={12} sm={12} xs={12} lg={6} xl={6}
+                <Col md={11} sm={12} xs={11} lg={5} xl={5}
 
                 >
                     <img src={helping}
@@ -210,8 +210,8 @@ export default function Landing() {
 
 
                 </Col>
-                <Col md={12} sm={12} xs={12} lg={6} xl={6}  >
-                    <div className='px-5' >
+                <Col md={11} sm={12} xs={11} lg={5} xl={5}  >
+                    <div className='mx-3' >
                         <LandingAccordion />
                     </div>
                 </Col>

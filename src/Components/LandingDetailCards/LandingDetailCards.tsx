@@ -54,7 +54,7 @@ function Item(
 
     return (
         <Col
-            sm={12} md={6} lg={3} xl={3}
+            sm={12} md={5} lg={5} xl={5}
         >
             <motion.div
                 className=" p-3 m-3  bg-muted bg-opacity-10 rounded-3  border border-info border-2 shadow-lg"
