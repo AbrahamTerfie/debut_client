@@ -1,14 +1,13 @@
-
-
 .headerText {
     /* font-size: 10rem; */
-    min-height: 10rem;
-    font-size: 10em;
+
     color: #1985a1;
+    /* resposive fint  with as large as it gets  */
+    font-size: 10rem;
 
     /* display: flex; */
-    text-align: center;
-    justify-content: center;
+    /* text-align: center; */
+    /* justify-content: center; */
     font-family: 'Bungee Shade', cursive;
     transition: all 0.5s ease-in-out;
 }
@@ -16,7 +15,7 @@
 /* header text hover */
 .headerText:hover {
     color: #ffc107;
-    font-size: 11em;
+    font-size: 11rem;
 
     transition: all 0.5s ease-in-out;
 }

@@ -33,14 +33,45 @@ export default function Landing() {
     if (isLoading) { return <Loader /> }
 
     return (
-        <div>
+        <Row
+        >
             <div className='d-flex justify-content-start align-items-center flex-column p-3 mx-2 my-5' >
-                <Row className='headerText'  ><p>Debut</p></Row>
-                <Row className='d-flex flex-column text-center' >
-                    <p className='fs-4 m-0' >Scroll down</p>
-                    <p className='text-muted m-0' > to learn more </p>
+                <Row   ><p className='headerText  text-center' >Debut</p>
+                    <div className='d-flex justify-content-center align-items-center flex-column text-center text-secondary '>
+                        <span className='m-0 fw-bold '>Helspaning founders launch their startup</span>
+                        <span className='m-0 fw-bold '>with their village</span>
+
+                    </div>
                 </Row>
-            </div >
+            </div>
+
+
+
+
+            <Row className='text-warning-emphasis bg-warning-subtle border border-warning-subtle  py-2 px-5 text-center
+                ' >
+                {/* signup / log in  button with an icon  */}
+
+                <div className='d-flex justify-content-center align-items-center flex-column text-center text-secondary '>
+
+                    <span className='m-0 fw-bold '>Get started</span>
+                    <span className='m-0 fw-bold '>sign up or login</span>
+                    <div className='d-flex justify-content-center align-items-center flex-column text-center text-secondary '>
+                        <MotionContainer>
+                            <button
+                                onClick={() => { loginWithRedirect({ redirectUri: redirectUri }) }}
+                                className='btn btn-warning btn-lg rounded-pill px-5 py-2 m-2'>
+                                <BsFillSignpostFill className='mx-2' size={30} />
+                                <span className='m-0 fw-bold '>Sign up or login </span>
+                            </button>
+                        </MotionContainer>
+                    </div>
+                </div>
+
+
+
+            </Row >
+
             <Row className='d-flex justify-content-center align-items-center mt-4 pt-5 '>
                 <Col md={5} xs={12} sm={12} lg={5} xl={5}
                     className="shadow-sm  p-4 rounded m-5 border border-secondary" >
@@ -51,7 +82,7 @@ export default function Landing() {
                         Think “baby-shower for your startup”.
                     </h3>
                 </Col>
-                <Col md={5} xs={12} sm={12} lg={5} xl={5}
+                {/* <Col md={5} xs={12} sm={12} lg={5} xl={5}
                     className="shadow-lg p-5 rounded rounded-4 border    border-warning border-5  m-5 d-flex justify-content-start align-items-start flex-column"
                     onClick={() => { loginWithRedirect({ redirectUri: redirectUri }) }}>
                     <MotionContainer>
@@ -63,10 +94,13 @@ export default function Landing() {
                             </div>
                         </div>
                     </MotionContainer>
-                </Col>
+                </Col> */}
             </Row>
-            <Row className='d-flex justify-content-around align-items-center my-5 flex-wrap flex-row '
-                style={{ backgroundColor: '#1985a1', color: 'lightblue', height: "max-content", minHeight: 'max-content' }}>
+            <Row className='d-flex my-5  justify-content-between align-items-around flex-wrap  ps-5 pe-5 '
+                style={{
+                    backgroundColor: '#1985a1',
+
+                }}>
                 <LandingCard
                     title='ask for help'
                     icon={<img src={askingHelp} alt="asking help" className="img-fluid" />} />
@@ -102,7 +136,7 @@ export default function Landing() {
                 <LandingDetailCards />
             </Row>
 
-            <Row className='d-flex justify-content-evenly align-items-center flex-wrap  my-5'>
+            <Row className='d-flex justify-content-around align-items-around flex-wrap  my-5'>
 
                 <LandingCard2
                     number={1}
@@ -121,14 +155,11 @@ export default function Landing() {
                     text="Debut breaks the goal to incremental “small offers" />
             </Row>
 
-            <Row className='fs-2 my-5  p-5  bg-warning-subtle '>
+            <Row className='fs-2 my-5  p-5  bg-warning-subtle  d-flex  justify-content-center align-items-center flex-wrap
+              '>
                 <Col md={6} xs={12} sm={12} lg={6} xl={6} className='d-flex justify-content-center align-items-center flex-column px-5' >
                     <p className='fw-lighter text-start flex-wrap fw-lighter text-warning-emphasis '>
-                        <span
-                            className='fw-bold m-3 fs-1'
-                        >
-                            Debut
-                        </span>
+                        <span className='fw-bold m-3 fs-1'>Debut</span>
                         will make bespoke recommendations to utilize your community and remove the friction in
                         <br />
                         <p style={{ color: 'lightblue' }} className='fw-bold my-3 fs-1'>
@@ -170,14 +201,16 @@ export default function Landing() {
             </Row>
 
             <Row className='d-flex justify-content-center align-items-center flex-wrap flex-row mb-5' >
-                <Col md={6} >
+                <Col md={12} sm={12} xs={12} lg={6} xl={6}
+
+                >
                     <img src={helping}
                         className='img-fluid'
                         alt="helping gif" />
 
 
                 </Col>
-                <Col md={6} >
+                <Col md={12} sm={12} xs={12} lg={6} xl={6}  >
                     <div className='px-5' >
                         <LandingAccordion />
                     </div>
@@ -195,6 +228,6 @@ export default function Landing() {
                     © 2021 Debut. All rights reserved.
                 </p>
             </Row>
-        </ div >
+        </ Row >
     )
 }
