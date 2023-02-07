@@ -10,11 +10,11 @@ const textStyles: {} = {
     color: "#1985a1",
     // fontSize: "1.8rem",
     // fontWeight: "bold",
-    textAlign: "start",
-    padding: "1rem 0",
-    maxWidth: "100%",
-    minWidth: "100%",
-    margin: "0",
+    // textAlign: "start",
+    // padding: "1rem 0",
+    // maxWidth: "100%",
+    // minWidth: "100%",
+    // margin: "0",
     // lineHeight: "1.5",
     // textTransform: "uppercase",
     // letterSpacing: "0.2rem",
@@ -66,25 +66,24 @@ const Accordion = ({ i, expanded, setExpanded,
                 animate={{
                     backgroundColor: isOpen ? "#1985a1" : "darkgray",
                     color: isOpen ? "white" : "black",
-                    // height: "max-content",
+                    height: "max-content",
                     borderRadius: isOpen ? "1.5rem" : "0.5rem",
                 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                // style={textStyles}
-                className="d-flex justify-content-start align-items-start px-5 my-3 flex-column shadow  border border-info border-2 "
+                style={textStyles}
+                className="d-flex justify-content-start align-items-start px-5 my-3 flex-column shadow  "
                 onClick={() => setExpanded(isOpen ? false : i)}>
-                <p className=" text-center  text-muted m-3 mb-0">
+                <p className=" text-center  text-muted m-3  mb-0 mx-3">
                     {isOpen ? "👇" : "👉"}  {"  "}
-                    <span className="m-2  fs-4 ">{title}</span>
-                </p>
-                <p className="  text-start  text-muted mx-5">
-                    {titleDescription}
+                    <span className="ms-2 " >{title}</span> </p>
+                <p className="  text-start text-muted mx-5"> {titleDescription}
                 </p>
 
             </motion.header>
             <AnimatePresence initial={true}>
                 {isOpen && (
+
                     <motion.section
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         key="content"
@@ -103,7 +102,7 @@ const Accordion = ({ i, expanded, setExpanded,
                             },
                         }}>
 
-                        <p style={textStyles} className="text-start  mx-3 p-5  border border-muted ">
+                        <p style={textStyles} className="text-start  shadow-sm  m-1 p-3 border border-muted ">
                             {descriprion}
                         </p>
                     </motion.section>
