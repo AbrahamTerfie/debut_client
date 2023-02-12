@@ -16,6 +16,7 @@ import { notifyError, notifySuccess } from '../Notification/Toast';
 import { RootState } from '../../Store/RootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { togglehasCompany } from '../../Store/identfiers/identfiers';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 // dummy place holder component
@@ -34,13 +35,14 @@ function FinalComponent() {
 export default function OnBoardingForm() {
     const dispatch = useDispatch()
     const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
+    const { isAuthenticated, user } = useAuth0();
 
     const [imageSelected, setImageSelected] = useState<any>()
-
+    console.log("userEmail", userEmail)
     const [onBoardingPersonalform, setOnBoardingPersonalform] = useState({
         firstName: '',
         lastName: '',
-        email: userEmail,
+        email: user?.email || userEmail,
         preferredName: '',
         titleAtCompany: '',
         linkedinUrl: '',
@@ -101,7 +103,7 @@ export default function OnBoardingForm() {
                 yourBiography, howyouContribute, aeraOfExpertise, regions } = data.getDebutUserWithId;
             setOnBoardingPersonalform({
                 firstName: firstName || '', lastName: lastName || '',
-                preferredName: preferredName || '', email: userEmail,
+                preferredName: preferredName || '', email: user?.email || '',
                 titleAtCompany: titleAtCompany || '', linkedinUrl: linkedinUrl || '',
                 yourBiography: yourBiography || '', howyouContribute: howyouContribute || '',
                 aeraOfExpertise: aeraOfExpertise || [], regions: regions || []
