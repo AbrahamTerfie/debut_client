@@ -6,21 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./styles.css";
 
 
-const textStyles: {} = {
-    color: "#1985a1",
-    // fontSize: "1.8rem",
-    // fontWeight: "bold",
-    // textAlign: "start",
-    // padding: "1rem 0",
-    // maxWidth: "100%",
-    // minWidth: "100%",
-    // margin: "0",
-    // lineHeight: "1.5",
-    // textTransform: "uppercase",
-    // letterSpacing: "0.2rem",
-
-
-}
+const textStyles: {} = { color: "#1985a1" }
 
 const accordoindata = [
     {
@@ -94,12 +80,8 @@ const Accordion = ({ i, expanded, setExpanded,
                             open: {
                                 opacity: 1, height: "min-content",
                                 animation: "fadeIn 1s ease-in-out",
-                                // width: "100%", margin: "0", padding: "0", borderRadius: "1.5rem"
                             },
-                            collapsed: {
-                                opacity: 0, height: 0, width: "100%",
-                                // margin: "0", padding: "0", borderRadius: "1.5rem"
-                            },
+                            collapsed: { opacity: 0, height: 0, width: "100%", },
                         }}>
 
                         <p style={textStyles} className="text-start  shadow-sm  m-1 p-3 border border-muted ">
