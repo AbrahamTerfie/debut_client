@@ -43,6 +43,7 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { auth0UserInfo } = useSelector((store: RootState) => store.auth)
+
   const [authenticatedUser, authenticatedUsrRes] = useMutation(AUTHENTICATED_USER,
     {
       onCompleted: (data) => {
@@ -58,6 +59,7 @@ function App() {
     }
   )
 
+  console.log(authenticatedUsrRes.data)
 
   if (isAuthenticated && location.pathname === appRoutes.landing) {
     navigate(appRoutes.forum);
@@ -73,7 +75,7 @@ function App() {
         auth0UserInfo && authenticatedUser({
           variables: {
             userInput: {
-              email: auth0UserInfo.email,
+              email:user.email,
               userName: auth0UserInfo.name,
               firstName: auth0UserInfo.nickname,
               profileImage: auth0UserInfo.picture,
@@ -82,7 +84,7 @@ function App() {
         })
       }
     }
-  }, [isAuthenticated, user, auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser ]);
+  }, [isAuthenticated, user, auth0UserInfo.email, auth0UserInfo.name, auth0UserInfo.nickname, authenticatedUser]);
   if (authenticatedUsrRes.loading) { return <Loader /> }
 
   return (
