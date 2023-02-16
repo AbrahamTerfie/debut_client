@@ -16,6 +16,7 @@ interface OnBoardingPersonalform {
     howyouContribute: string,
     aeraOfExpertise: string[],
     regions: string[],
+    isFounder: boolean,
 
 }
 
