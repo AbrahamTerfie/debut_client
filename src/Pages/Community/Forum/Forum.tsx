@@ -88,7 +88,7 @@ export default function Forum() {
 
     return (
         <div className='w-100'>
-            <Modal centered size='lg' isOpen={isFounder === null} toggle={toggleIsNewUser}  >
+            <Modal centered size='lg' isOpen={isFounder === null || isFounder === undefined} toggle={toggleIsNewUser}  >
                 <ModalHeader
                     toggle={toggleIsNewUser}>
                     <p className='m-0'>Welcome to Debut </p>
