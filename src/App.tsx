@@ -52,6 +52,7 @@ function App() {
           userID: authenticatedUser._id,
           userEmail: authenticatedUser.email,
           hasCompany: authenticatedUser.hasCompany,
+          isFounder: authenticatedUser.isFounder,
 
         }));
         dispatch(setHasCompany(authenticatedUser.hasCompany))
@@ -75,7 +76,7 @@ function App() {
         auth0UserInfo && authenticatedUser({
           variables: {
             userInput: {
-              email:user.email,
+              email: user.email,
               userName: auth0UserInfo.name,
               firstName: auth0UserInfo.nickname,
               profileImage: auth0UserInfo.picture,
