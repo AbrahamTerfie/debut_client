@@ -10,6 +10,7 @@ const initalState = {
     hasCompany: false,
     myBiography: '',
     myCompanyDescription: '',
+    isFounder: null,
 }
 
 
@@ -22,6 +23,7 @@ const Id_Identfiers = createSlice({
             state.userFullName = action.payload.userFullName;
             state.userEmail = action.payload.userEmail;
             state.myBiography = action.payload.myBiography;
+            state.isFounder = action.payload.isFounder;
             state.myCompanyDescription = action.payload.myCompanyDescription;
         },
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import OnBoardingCompany from './OnBoardingCompany'
 import OnboardingPersonal from './OnboardingPersonal'
+import OnboardingWelcome from './OnboardingWelcome'
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -17,6 +18,7 @@ import { RootState } from '../../Store/RootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { togglehasCompany } from '../../Store/identfiers/identfiers';
 import { useAuth0 } from '@auth0/auth0-react';
+
 
 
 // dummy place holder component
@@ -36,7 +38,7 @@ export default function OnBoardingForm() {
     const dispatch = useDispatch()
     const { userID, userEmail } = useSelector((store: RootState) => store.identfiers)
     const { isAuthenticated, user } = useAuth0();
-
+    console.log("userod", userID)
     const [imageSelected, setImageSelected] = useState<any>()
     console.log("userEmail", userEmail)
     const [onBoardingPersonalform, setOnBoardingPersonalform] = useState({
@@ -50,6 +52,7 @@ export default function OnBoardingForm() {
         howyouContribute: '',
         aeraOfExpertise: [] as string[],
         regions: [] as string[],
+        isFounder: false,
     })
 
     const [onBoardingCompanyform, setOnBoardingCompanyform] = useState({
@@ -100,13 +103,13 @@ export default function OnBoardingForm() {
     useEffect(() => {
         if (data) {
             const { firstName, lastName, preferredName, titleAtCompany, linkedinUrl, email,
-                yourBiography, howyouContribute, aeraOfExpertise, regions } = data.getDebutUserWithId;
+                yourBiography, howyouContribute, aeraOfExpertise, regions, isFounder } = data.getDebutUserWithId;
             setOnBoardingPersonalform({
                 firstName: firstName || '', lastName: lastName || '',
-                preferredName: preferredName || '', email: user?.email || '',
+                preferredName: preferredName || '', email: user?.email || email,
                 titleAtCompany: titleAtCompany || '', linkedinUrl: linkedinUrl || '',
                 yourBiography: yourBiography || '', howyouContribute: howyouContribute || '',
-                aeraOfExpertise: aeraOfExpertise || [], regions: regions || []
+                aeraOfExpertise: aeraOfExpertise || [], regions: regions || [], isFounder: isFounder || false
 
 
             });
@@ -160,13 +163,22 @@ export default function OnBoardingForm() {
     const [activeStep, setActiveStep] = useState(0);
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        if (activeStep === 0) { return (handleProfileUpdate()) }
-        if (activeStep === 1) { return (handleCompanySubimt()) }
+        if (onBoardingPersonalform.isFounder === false && activeStep === 1) {
+            // if the use is a founder the nskip the copany section
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
+        if (activeStep === 1) { return (handleProfileUpdate()) }
+        if (activeStep === 2) { return (handleCompanySubimt()) }
 
     };
     const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); };
-
+    // console.log("activeStep", onBoardingPersonalform)
     const steps = [
+        {
+            label: 'Welcome',
+            Component: <OnboardingWelcome onBoardingPersonalform={onBoardingPersonalform}
+                setOnBoardingPersonalform={setOnBoardingPersonalform} />,
+        },
         {
             label: 'Personal Information',
             Component: <OnboardingPersonal onBoardingPersonalform={onBoardingPersonalform}

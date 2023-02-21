@@ -5,15 +5,17 @@ import MyProfile from "./MyProfile";
 import GratitudePage from "./GratitudePage";
 import DebutEventPage from "./DebutEventPage";
 import DashboardExperiance from "./DashboardExperiance";
+import MyVillage from "./MyVillage";
 
 
-export  {
+export {
     MyProfile,
     CompanyGoals,
     CompanyEvents,
     MyCompany,
     GratitudePage,
     DebutEventPage,
-    DashboardExperiance
+    DashboardExperiance,
+    MyVillage
 
 }

@@ -125,8 +125,19 @@ export default function DebutEventPage() {
                     <p className='text-muted ' > {data && moment(data.getDebutEventWithId.debutEventDate).format('DD MMMM YYYY')} </p>
                     <p className='text-muted m-0' > event description </p>
                     <p>{data?.getDebutEventWithId?.debutEventDescription}</p>
-                    <p className='text-muted m-0' > location  </p>
-                    <p> {data?.getDebutEventWithId?.debutEventLocation} </p>
+
+                    {data?.getDebutEventWithId?.isOnline ?
+                        <div>
+                            <p className='text-muted' >online  event link </p>
+                            <small className='mb-2' >zoom link </small>
+                            <p className='' > {data?.getDebutEventWithId?.debutInvitationLink} </p>
+                        </div>
+                        :
+                        (<div>
+                            <p className='text-muted m-0' > location  </p>
+                            <p> {data?.getDebutEventWithId?.debutEventLocation} </p>
+                        </div>)
+                    }
                     <p className='text-muted m-0' >  related liknks   </p>
                     {data?.getDebutEventWithId?.otherRelatedLinks.map((link: any, index: number) => {
                         return (
@@ -136,7 +147,8 @@ export default function DebutEventPage() {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.9 }}
                                 style={{ cursor: 'default' }}
-                                className='border border-info rounded-pill bg-dark bg-opacity-10 p-1  px-4  m-1 me-2'>
+                                className='  p-1  px-4  m-1 me-2 border   rounded-pill  bg-info-subtle  text-info-subtle  border-info-subtle
+                                '>
                                 <span> {link} </span>
                             </motion.a>
                         )

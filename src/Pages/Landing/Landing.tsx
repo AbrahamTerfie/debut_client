@@ -60,9 +60,10 @@ export default function Landing() {
                         <MotionContainer>
                             <button
                                 onClick={() => { loginWithRedirect({ redirectUri: redirectUri }) }}
-                                className='btn btn-warning btn-lg rounded-pill px-5 py-2 m-2'>
-                                <BsFillSignpostFill className='mx-2' size={30} />
-                                <span className='m-0 fw-bold '>Sign up or login </span>
+                                className='btn btn-warning btn-lg rounded-pill px-5 py-3 m-3 border border-warning-emphasis
+                                '>
+                                <BsFillSignpostFill className='mx-2 text-light' size={30} />
+                                <span className='m-0 fw-bold text-light '>Sign up or login </span>
                             </button>
                         </MotionContainer>
                     </div>
