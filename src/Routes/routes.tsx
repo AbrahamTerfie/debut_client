@@ -12,6 +12,7 @@ export const appRoutes = {
     debutEventPage: '/debutEvent/:id',
 
     dashboard: '/dashboard',
+    myVillage: 'myVillage',
     myProfile: 'myProfile',
     experience: 'experience',
     myCompany: 'myCompany',

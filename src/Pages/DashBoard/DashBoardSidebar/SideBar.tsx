@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { useNavigate, useLocation } from "react-router-dom";
 import { appRoutes } from "../../../Routes/routes";
 import "./styles.css"
+import { IoIosPeople } from "react-icons/io";
 
 export default function SideBar({ isOpen, toggle }: {
     isOpen: Boolean;
@@ -39,6 +40,14 @@ export default function SideBar({ isOpen, toggle }: {
                         onClick={() => navigate(appRoutes.dashboard)}>
                         MyDebut
                     </p>
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myVillage ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
+                        <NavLink onClick={() => navigate(appRoutes.myVillage)}
+                            style={textColor}>
+                            <IoIosPeople
+                                className="mx-2" />
+                            My Village
+                        </NavLink>
+                    </NavItem>
                     <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.events ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.events)}
                             style={textColor}>

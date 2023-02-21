@@ -26,6 +26,7 @@ const MyCompany = React.lazy(() => import('./Pages/DashBoard/DashBoardPages/inde
 const GratitudePage = React.lazy(() => import('./Pages/DashBoard/DashBoardPages/index').then((module) => ({ default: module.GratitudePage })));
 const DebutEventPage = React.lazy(() => import('./Pages/DashBoard/DashBoardPages/index').then((module) => ({ default: module.DebutEventPage })));
 const DashboardExperiance = React.lazy(() => import('./Pages/DashBoard/DashBoardPages/index').then((module) => ({ default: module.DashboardExperiance })));
+const MyVillage = React.lazy(() => import('./Pages/DashBoard/DashBoardPages/index').then((module) => ({ default: module.MyVillage })));
 
 const GiveGratitude = React.lazy(() => import('./Pages/Community/index').then((module) => ({ default: module.GiveGratitude })));
 const Forum = React.lazy(() => import('./Pages/Community/index').then((module) => ({ default: module.Forum })));
@@ -109,6 +110,7 @@ function App() {
           <Route path={appRoutes.venturePage} element={<CompanyDetailPage />} />
           <Route path={appRoutes.dashboard} element={<Dashboard />} >
             <Route path={appRoutes.myProfile} element={<MyProfile />} />
+            <Route path={appRoutes.myVillage} element={<MyVillage />} />
             <Route path={appRoutes.myCompany} element={<MyCompany />} />
             <Route path={appRoutes.goals} element={<CompanyGoals />} />
             <Route path={appRoutes.events} element={<CompanyEvents />} />
