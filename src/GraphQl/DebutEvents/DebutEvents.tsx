@@ -9,6 +9,8 @@ query getDebutEventWithId($getDebutEventWithIdId: ID!) {
     debutEventDate
     debutEventLocation
     debutEventImage
+    eventInviteCode
+    isOnline
     createdBy {
       _id,
       email

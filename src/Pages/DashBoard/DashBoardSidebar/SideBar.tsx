@@ -39,7 +39,7 @@ export default function SideBar({ isOpen, toggle }: {
                         onClick={() => navigate(appRoutes.dashboard)}>
                         MyDebut
                     </p>
-                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.events ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.events ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.events)}
                             style={textColor}>
                             <MdOutlineEvent
@@ -47,28 +47,28 @@ export default function SideBar({ isOpen, toggle }: {
                             Events
                         </NavLink>
                     </NavItem>
-                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.goals ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.goals ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.goals)}
                             style={textColor}>
                             <FiTarget className="mx-2" />
                             Goals
                         </NavLink>
                     </NavItem>
-                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.gratitudes ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.gratitudes ? "MyeventCardActive my-2 fs-6 fw-light" : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.gratitudes)}
                             style={textColor}>
                             <FaRegHandSpock className="mx-2" />
                             Gratitudes
                         </NavLink>
                     </NavItem>
-                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myCompany ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myCompany ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.myCompany)}
                             style={textColor}>
                             <BsBuilding className="mx-2" />
                             Company
                         </NavLink>
                     </NavItem>
-                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.experience ? "MyeventCardActive my-2 fs-6 fw-lighte" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.experience ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.experience)}
                             style={textColor}>
                             <BsArchive className="mx-2" />
@@ -77,7 +77,7 @@ export default function SideBar({ isOpen, toggle }: {
 
                     </NavItem>
                     <NavItem
-                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 fw-lighter" : "MyeventCard my-2 fs-6 fw-lighter"} >
+                        className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myProfile ? "MyeventCardActive my-2 fs-6 r" : "MyeventCard my-2 fs-6 "} >
                         <NavLink
                             onClick={() => navigate(appRoutes.myProfile)}
                             style={textColor}>

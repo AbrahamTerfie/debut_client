@@ -25,7 +25,8 @@ interface newEventForm {
     debutRegistry: string[],
     debutEventAttendees: string[]
     debutInvitationLink: string
-    otherRelatedLinks: string[]
+    otherRelatedLinks: string[],
+    isOnline: Boolean
 
 
 }
@@ -46,12 +47,14 @@ export default function NewEvent() {
         debutInvitationLink: "",
         otherRelatedLinks: [],
         createdBy: userID,
-        belongsTo: companyID
+        belongsTo: companyID,
+        isOnline: false
     }
     const [canvas, setCanvas] = useState(false);
     const [imageSelected, setImageSelected] = useState("")
     const [newEventData, setNewEventData] = useState(initState)
     const [relatedLknks, setRelatedLinks] = useState("")
+
     const addTOAdditionalLinks = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setNewEventData({ ...newEventData, otherRelatedLinks: [...newEventData.otherRelatedLinks, relatedLknks] })
@@ -66,7 +69,7 @@ export default function NewEvent() {
     const { data, loading, error } = useQuery(CHECK_IF_USER_HAS_COMPANY, {
         variables: { userId: userID }
     })
-    const {  loading: loadingCompany, error: errorCompany
+    const { loading: loadingCompany, error: errorCompany
     } = useQuery(FETCH_COMPANY, {
         variables: { userId: userID }
     })
@@ -95,8 +98,7 @@ export default function NewEvent() {
     const inputChecker = () => {
         if (newEventData.debutEventName === "" ||
             newEventData.debutEventDescription === "" ||
-            newEventData.debutEventDate === "" ||
-            newEventData.debutEventLocation === "") {
+            newEventData.debutEventDate === "") {
             notifyWarning("Please fill all fields")
             return false
         }
@@ -223,19 +225,71 @@ export default function NewEvent() {
                                     }} type="file" />
                                 </FormGroup>
                             </Col>
-                            <Col md={12}>
-                                <FormGroup>
-                                    <Label for="debutEventLocation"> location </Label>
-                                    <Input type="text"
-                                        name="debutEventLocation"
-                                        id="debutEventLocation"
-                                        placeholder="location"
-                                        onChange={handleChange}
-                                    />
+
+                            <Col md={12} className='d-flex  align-items-center flex-wrap mt-5 '>
+                                {/* check box to check if event is online or not  */}
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" name="isOnline"
+                                            onChange={(e) => {
+                                                setNewEventData({ ...newEventData, isOnline: e.target.checked })
+                                            }}
+                                        />{' '}
+                                        Is this event online ?
+                                    </Label>
                                 </FormGroup>
                             </Col>
 
-                            <Col md={12} className='d-flex  align-items-center flex-wrap mt-5 '>
+                            {
+                                newEventData.isOnline === false ?
+                                    <Col md={12}>
+                                        <FormGroup>
+                                            <Label for="debutEventLocation"> location </Label>
+                                            <Input type="text"
+                                                name="debutEventLocation"
+                                                id="debutEventLocation"
+                                                placeholder="location"
+                                                onChange={handleChange}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    : null
+
+                            }
+
+                            {/* if it is online inout for the invitation zoom link  */}
+                            {newEventData.isOnline === true ?
+
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label for="debutInvitationLink"> Zoom Link </Label>
+                                        <Input type="text"
+
+                                            name="debutInvitationLink"
+                                            id="debutInvitationLink"
+                                            placeholder="zoom link"
+                                            onChange={handleChange}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                                : null
+                            }
+                            <Col md={12}>
+                                <Label for="otherRelatedLinks"
+                                    className="m-0 "
+                                > links
+                                    <br />
+
+                                    <small className='text-muted'>
+                                        add links to your events social media pages or any other related links
+                                    </small>
+                                    <br />
+                                </Label>
+
+                            </Col>
+
+
+                            <Col md={12} className='d-flex  align-items-center flex-wrap  '>
                                 {newEventData.otherRelatedLinks.map((link, index) => {
                                     return <p key={index}
                                         className='border border-light rounded-pill bg-dark bg-opacity-10 p-2  px-4  '>
@@ -254,10 +308,10 @@ export default function NewEvent() {
                             </Col>
 
                             <Col md={8}>
+
                                 <FormGroup>
-                                    <Label for="otherRelatedLinks"
-                                        className=""
-                                    > links </Label>
+
+
                                     <Input type="text"
                                         name="otherRelatedLinks"
                                         id="otherRelatedLinks"
@@ -266,15 +320,24 @@ export default function NewEvent() {
                                     />
                                 </FormGroup>
                             </Col>
-                            <Col md={4}>
+                            <Col md={4}
+                                // align it to the bottom
+                                className='d-flex align-items-end justify-content-center'
+
+
+                            >
                                 <motion.div
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    className='btn m-3 px-5   bg-success text-success bg-opacity-10  rounded-pill   '
+                                    // align it to the bottom
+                                    className='btn m-3 px-4   bg-success text-success bg-opacity-10  rounded-pill   
+                                        d-flex align-items-center justify-content-center
+                                     
+                                    '
                                     onClick={(e: any) => { addTOAdditionalLinks(e) }}
                                 >
-                                    <FaPlus className='mx-3' size={15} />
+                                    <FaPlus className='mx-1' size={15} />
                                     add
                                 </motion.div>
                             </Col>
@@ -292,10 +355,10 @@ export default function NewEvent() {
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                className='btn m-3 px-5  py-4  bg-success text-success bg-opacity-10  rounded-pill   '
+                                className='btn m-3 px-2  py-4  bg-success text-success bg-opacity-10  rounded-pill   '
                                 onClick={(e: any) => { submitHandler(e) }}
                             >
-                                <FaPlus className='mx-3' size={20}
+                                <FaPlus className='mx-2' size={20}
                                     style={{ backgroundColor: 'transparent', }}
                                 />
                                 create event
@@ -306,6 +369,6 @@ export default function NewEvent() {
                 </OffcanvasBody>
             </Offcanvas>
 
-        </div>
+        </div >
     )
 }
