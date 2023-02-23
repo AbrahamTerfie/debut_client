@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Outlet, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_EVENT_WITH_ID, CREATE_DEBUT_REGISTRY } from '../../../GraphQl/index'
 import { Row, Col, Modal, Button, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Input, Label, } from 'reactstrap'
@@ -12,16 +12,19 @@ import RegistryAccordion from '../../../Components/DashBoard/RegistryAccordion/R
 import { RootState } from '../../../Store/RootReducer'
 import { BsTrash } from 'react-icons/bs'
 import NukeEvent from '../../../Components/DashBoard/NukeEvent/NukeEvent'
-
+import MyVillage from './MyVillage'
+import { appRoutes } from '../../../Routes/routes'
 export default function DebutEventPage() {
 
 
     const { userID, companyID } = useSelector((store: RootState) => store.identfiers)
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const [myvillageMOdal, setMyvillageMOdal] = useState(false);
+    const toggleMyvillageMOdal = () => setMyvillageMOdal(!myvillageMOdal);
     const [nukeEventModal, setNukeEventModal] = useState(false);
     const toggleNukeEventModal = () => setNukeEventModal(!nukeEventModal);
-
+    const navigation = useNavigate()
 
     const { id } = useParams<{ id: string }>()
     const newRegisstryState = {
@@ -87,6 +90,8 @@ export default function DebutEventPage() {
 
     return (
         <div className='px-5' >
+            {/* <Outlet /> */}
+
             <NukeEvent
                 event={data?.getDebutEventWithId}
                 loading={loading}
@@ -117,6 +122,17 @@ export default function DebutEventPage() {
                     </Button>{' '}
 
                 </ModalFooter>
+            </Modal>
+            <Modal isOpen={myvillageMOdal} toggle={toggleMyvillageMOdal} size="lg">
+                <ModalHeader toggle={toggleMyvillageMOdal}>
+                    <Row className='m-5' >
+                        <h3 className='text-start '>Your Community</h3>
+                        <span className='text-muted' > list of all your community members </span>
+                    </Row> </ModalHeader>
+                <ModalBody>
+                    <MyVillage />
+                </ModalBody>
+
             </Modal>
             <Row>
                 <Col md={8}>
@@ -155,12 +171,26 @@ export default function DebutEventPage() {
                     }
                     )}
                 </Col>
-                <Col md={4}>
+                <Col md={4}
+                    className='d-flex justify-content-center align-items-center flex-column'
+                >
                     <img
                         className='img-fluid shadow-lg rounded '
                         style={{ height: '300px', width: '100%' }}
                         src={data?.getDebutEventWithId?.debutEventImage} alt="event_identfier_image " />
+
                 </Col>
+            </Row>
+            <Row>
+                <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    style={{ cursor: 'pointer' }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => { toggleMyvillageMOdal() }}
+                    className='border border-primary rounded-pill bg-primary bg-opacity-10 p-1  px-4  m-4  w-100 text-center fw-bold text-primary'>
+
+                    your village
+                </motion.div>
             </Row>
 
             <Row>
@@ -174,16 +204,17 @@ export default function DebutEventPage() {
                             style={{ cursor: 'pointer' }}
                             whileTap={{ scale: 0.9 }}
                             onClick={toggle}
-                            className='border border-light rounded-pill bg-success bg-opacity-10 p-1  px-4  m-1 me-2 text-success'>
+                            className='border border-success rounded-pill bg-success bg-opacity-10 p-1  px-4  m-1 me-2 text-success'>
 
                             create a registry
                         </motion.div>
+
                         <motion.div
                             whileHover={{ scale: 1.02 }}
                             style={{ cursor: 'pointer' }}
                             whileTap={{ scale: 0.9 }}
                             onClick={toggleNukeEventModal}
-                            className='border border-light rounded-pill bg-danger bg-opacity-10 p-1  px-4  m-1 me-2 text-danger'>
+                            className='border border-danger rounded-pill bg-danger bg-opacity-10 p-1  px-4  m-1 me-2 text-danger'>
 
                             <BsTrash size={20} />
                         </motion.div>

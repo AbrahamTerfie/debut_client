@@ -40,14 +40,14 @@ export default function SideBar({ isOpen, toggle }: {
                         onClick={() => navigate(appRoutes.dashboard)}>
                         MyDebut
                     </p>
-                    <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myVillage ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
+                    {/* <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.myVillage ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.myVillage)}
                             style={textColor}>
                             <IoIosPeople
                                 className="mx-2" />
                             My Village
                         </NavLink>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem className={location.pathname === appRoutes.dashboard + "/" + appRoutes.events ? "MyeventCardActive my-2 fs-6 " : "MyeventCard my-2 fs-6 "} >
                         <NavLink onClick={() => navigate(appRoutes.events)}
                             style={textColor}>

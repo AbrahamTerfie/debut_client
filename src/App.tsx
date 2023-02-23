@@ -110,11 +110,13 @@ function App() {
           <Route path={appRoutes.venturePage} element={<CompanyDetailPage />} />
           <Route path={appRoutes.dashboard} element={<Dashboard />} >
             <Route path={appRoutes.myProfile} element={<MyProfile />} />
-            <Route path={appRoutes.myVillage} element={<MyVillage />} />
             <Route path={appRoutes.myCompany} element={<MyCompany />} />
             <Route path={appRoutes.goals} element={<CompanyGoals />} />
             <Route path={appRoutes.events} element={<CompanyEvents />} />
             <Route path={appRoutes.eventDetails} element={<DebutEventPage />} />
+            <Route path={appRoutes.myVillage} element={<MyVillage />} />
+
+
             <Route path={appRoutes.gratitudes} element={<GratitudePage />} />
             <Route path={appRoutes.experience} element={<DashboardExperiance />} />
           </Route>
