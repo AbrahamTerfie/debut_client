@@ -53,7 +53,7 @@ export default function MyVillage(
                 invitationToUserEmail: newEmail,
                 invitationToEvent: invitationToEvent,
                 eventCode: eventCode,
-                status: "accepted",
+                status: "pending",
             }
 
 
