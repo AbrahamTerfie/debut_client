@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Row, Col, FormGroup, Label, Input, Table } from 'reactstrap';
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer';
-
-
-// i will send an invitation to a user and the invitation containts a lnk to the app and event with the event id that is created by the user
-// todo: the template will include the event code and the website link 
-// todo:  when the usser id registring it will ask it fir the event code and the user will be added to the event as if it accepted the event invitation
-
-
-
+import InvitationEmail from '../../../Components/Email/InvitationEmail';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../Store/RootReducer';
+import { useQuery, useMutation } from '@apollo/client';
+import emailjs from '@emailjs/browser';
+import { emailJsInfo } from '../../../Components/Email/emailJsInfo';
+import { EmailStatticValues } from '../../../Email/EmailTypes';
+import { SEND_INVIE_TO_USER } from '../../../GraphQl/index';
+import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
 function PendingComponent() {
     return (
         <small className='text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill px-3 py-1 w-25 text-center m-0'>pending</small>
@@ -21,27 +22,66 @@ function AcceptedComponent() {
 }
 
 
-export default function MyVillage() {
+export default function MyVillage(
+    {
+        createdBy,
+        invitationToEvent,
+        eventCode,
+        status,
+        eventName,
+        eventDate
+    }: {
+        createdBy: string,
+        invitationToEvent: string,
+        eventCode: string,
+        status: string,
+        eventName: string,
+        eventDate: string
+    }
 
 
-
-
-
-
-
+) {
 
     const [modal, setModal] = useState(false);
     const [newEmail, setNewEmail] = useState('');
+    const { userEmail, userID, userFullName } = useSelector((store: RootState) => store.identfiers)
+
+    const [createInvitation, createInvitationData] = useMutation(SEND_INVIE_TO_USER, {
+        variables: {
+            invitationInput: {
+                createdBy: createdBy,
+                invitationToUserEmail: newEmail,
+                invitationToEvent: invitationToEvent,
+                eventCode: eventCode,
+                status: "accepted",
+            }
+
+
+        },
+        onCompleted: () => {
+            InvitationEmail({
+                invitationToEmail: newEmail,
+                InvitationCode: eventCode,
+                eventName: eventName,
+                eventDate: eventDate,
+                userEmail: userEmail
+            })
+            notifySuccess("invite sent")
+        },
+        onError: (error) => {
+            console.log(error)
+            notifyError("invite not sent")
+        }
+    })
     function Sendinvite() {
+
+        createInvitation()
+
         console.log("send invite ")
     }
-
     const toggle = () => setModal(!modal);
     return (
         <div>
-
-
-          
             <Row className='d-flex justify-content-center   align-items-center mx-2'>
                 <Col md={8}>
                     <Label for="exampleEmail">Email</Label>

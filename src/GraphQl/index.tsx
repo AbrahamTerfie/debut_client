@@ -34,6 +34,7 @@ import { COMPANY_PAGE } from './Company/companyPage'
 
 import { SearchUser, SearchVenture, searchDebutEvent } from './Search/SearchQueries'
 
+import { SEND_INVIE_TO_USER } from './EInvitation/invitation'
 
 export {
     CHECK_EMAIL_VALIDITY,
@@ -96,6 +97,12 @@ export {
     // search
     SearchUser,
     SearchVenture,
-    searchDebutEvent
+    searchDebutEvent,
+
+
+
+    // INVITATION
+
+    SEND_INVIE_TO_USER
 
 }

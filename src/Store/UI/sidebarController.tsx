@@ -9,7 +9,7 @@ interface EmailBodyInterface {
     emailTo: string,
     emailSubject: string,
     emailBody: string,
-    userBiography: string,
+    userBiography?: string,
     name?: string,
     companyName?: string,
     companyDescription?: string,
@@ -90,12 +90,18 @@ const uiStore = createSlice({
             <h6> 
             Best regards,
             ${emailData.userEmail} 
-            </h6>
-                
-`
+            </h6>`
             }
-
-
+            else if (state.emailType === EmailTypes.inviteToEvent) {
+                state.emailTo = emailData.emailTo
+                state.emailBody = `
+                <h6>   Dear ${emailData.name}, </h6>
+                <p>  You are invited to ${emailData.eventName} on ${emailData.eventDate} at .</p>
+                <p> please use code <h3> ${emailData.eventCode} </h3> to register for debut as a <h4> supporter </h4> .</p>
+                <p>  Thank you for your time and consideration. I look forward to hearing from you.</p>
+                <h6>Best regards, </h6>
+                <br/>${emailData.userEmail}</h6>`
+            }
         },
 
 

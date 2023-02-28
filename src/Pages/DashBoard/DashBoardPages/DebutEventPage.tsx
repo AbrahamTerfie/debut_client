@@ -130,7 +130,15 @@ export default function DebutEventPage() {
                         <span className='text-muted' > list of all your community members </span>
                     </Row> </ModalHeader>
                 <ModalBody>
-                    <MyVillage />
+                    <MyVillage
+                        key={data?.getDebutEventWithId?._id}
+                        eventName={data?.getDebutEventWithId?.debutEventName}
+                        createdBy={data?.getDebutEventWithId?.createdBy._id}
+                        eventCode={data?.getDebutEventWithId?.eventInviteCode}
+                        invitationToEvent={data?.getDebutEventWithId?._id}
+                        eventDate={data?.getDebutEventWithId?.debutEventDate}
+                        status="pending"
+                    />
                 </ModalBody>
 
             </Modal>

@@ -85,6 +85,7 @@ query DebutEventDetails($getDebutEventWithIdId: ID!){
     debutEventImage,
     otherRelatedLinks,
     debutInvitationLink,
+    eventInviteCode
     belongsTo {
       _id,
       companyName,

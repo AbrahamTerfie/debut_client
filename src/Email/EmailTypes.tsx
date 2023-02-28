@@ -4,6 +4,7 @@ interface EmailTypeInterface {
     companyIntroduction: string,
     helpWithGoal: string,
     helpWiithItem: string,
+    inviteToEvent: string,
     clear: string
 
 }
@@ -13,6 +14,7 @@ export const EmailTypes: EmailTypeInterface = {
     companyIntroduction: "INTRODUCE_COMPANY",
     helpWithGoal: "HELP_WITH_GOAL",
     helpWiithItem: "HELP_WITH_ITEM",
+    inviteToEvent: "INVITE_TO_EVENT",
     clear: "CLEAR"
 }
 
@@ -33,6 +35,10 @@ export const EmailStatticValues = {
     HelpWithItem: {
         title: "Help with item",
         subject: "Request of help with item (Debut) ",
+    },
+    InviteToEvent: {
+        title: "Invite to event",
+        subject: "Request of invite to event (Debut) ",
     },
     empty: {
         title: "",

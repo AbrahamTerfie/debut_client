@@ -13,6 +13,7 @@ import Text from '@tiptap/extension-text'
 import Heading from '@tiptap/extension-heading'
 import emailjs from '@emailjs/browser';
 import { notifySuccess, notifyError } from '../Notification/Toast'
+import { emailJsInfo } from './emailJsInfo'
 
 
 export default function Emailcanvas() {
@@ -77,11 +78,11 @@ export default function Emailcanvas() {
         }
     }, [emailType])
 
-    const emailJsInfo = {
-        service_id: "service_st0qe55",
-        template_id: "template_c1f7n49",
-        public_key: "rO7tJ3s1smQ3YT5Vb"
-    }
+    // const emailJsInfo = {
+    //     service_id: "service_st0qe55",
+    //     template_id: "template_c1f7n49",
+    //     public_key: "rO7tJ3s1smQ3YT5Vb"
+    // }
 
 
     const sendEmail = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
