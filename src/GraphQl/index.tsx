@@ -34,7 +34,7 @@ import { COMPANY_PAGE } from './Company/companyPage'
 
 import { SearchUser, SearchVenture, searchDebutEvent } from './Search/SearchQueries'
 
-import { SEND_INVIE_TO_USER } from './EInvitation/invitation'
+import { SEND_INVIE_TO_USER, GET_EVENT_INVITATIONS } from './EInvitation/invitation'
 
 export {
     CHECK_EMAIL_VALIDITY,
@@ -103,6 +103,7 @@ export {
 
     // INVITATION
 
-    SEND_INVIE_TO_USER
+    SEND_INVIE_TO_USER,
+    GET_EVENT_INVITATIONS
 
 }

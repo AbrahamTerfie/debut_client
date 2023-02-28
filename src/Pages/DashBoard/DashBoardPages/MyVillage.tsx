@@ -5,23 +5,17 @@ import InvitationEmail from '../../../Components/Email/InvitationEmail';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Store/RootReducer';
 import { useQuery, useMutation } from '@apollo/client';
-import emailjs from '@emailjs/browser';
-import { emailJsInfo } from '../../../Components/Email/emailJsInfo';
-import { EmailStatticValues } from '../../../Email/EmailTypes';
-import { SEND_INVIE_TO_USER } from '../../../GraphQl/index';
+import { GET_EVENT_INVITATIONS, SEND_INVIE_TO_USER } from '../../../GraphQl/index';
 import { notifyError, notifySuccess } from '../../../Components/Notification/Toast';
+
+
+
 function PendingComponent() {
-    return (
-        <small className='text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill px-3 py-1 w-25 text-center m-0'>pending</small>
-    )
+    return (<small className='text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill px-3 py-1 w-25 text-center m-0'>pending</small>)
 }
 function AcceptedComponent() {
-    return (
-        <small className='text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill px-3 py-1 w-25 text-center m-0'>accepted</small>
-    )
+    return (<small className='text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill px-3 py-1 w-25 text-center m-0'>accepted</small>)
 }
-
-
 export default function MyVillage(
     {
         createdBy,
@@ -42,11 +36,13 @@ export default function MyVillage(
 
 ) {
 
-    const [modal, setModal] = useState(false);
+    // const [modal, setModal] = useState(false);
     const [newEmail, setNewEmail] = useState('');
-    const { userEmail, userID, userFullName } = useSelector((store: RootState) => store.identfiers)
-
-    const [createInvitation, createInvitationData] = useMutation(SEND_INVIE_TO_USER, {
+    const { userEmail } = useSelector((store: RootState) => store.identfiers)
+    const { data, error } = useQuery(GET_EVENT_INVITATIONS, {
+        variables: { eventId: invitationToEvent }
+    })
+    const [createInvitation] = useMutation(SEND_INVIE_TO_USER, {
         variables: {
             invitationInput: {
                 createdBy: createdBy,
@@ -55,9 +51,8 @@ export default function MyVillage(
                 eventCode: eventCode,
                 status: "pending",
             }
-
-
         },
+        refetchQueries: [{ query: GET_EVENT_INVITATIONS, variables: { eventId: invitationToEvent } }],
         onCompleted: () => {
             InvitationEmail({
                 invitationToEmail: newEmail,
@@ -66,6 +61,7 @@ export default function MyVillage(
                 eventDate: eventDate,
                 userEmail: userEmail
             })
+            setNewEmail('')
             notifySuccess("invite sent")
         },
         onError: (error) => {
@@ -74,12 +70,11 @@ export default function MyVillage(
         }
     })
     function Sendinvite() {
-
         createInvitation()
-
         console.log("send invite ")
     }
-    const toggle = () => setModal(!modal);
+    // const toggle = () => setModal(!modal);
+    if (error) notifyError("error")
     return (
         <div>
             <Row className='d-flex justify-content-center   align-items-center mx-2'>
@@ -99,42 +94,27 @@ export default function MyVillage(
                     </button>
                 </Col>
             </Row>
-
             <Row className='justify-content-center mx-2 mt-5 '>
                 <Table hover size="sm" striped>
                     <thead>
                         <tr>
                             <th> #</th>
                             <th>Email</th>
-                            <th> Full Name </th>
                             <th> Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
-                                <AcceptedComponent />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>
-                                <PendingComponent />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>
-                                <PendingComponent />
-                            </td>
-                        </tr>
+                        {data?.getInvitationWithEventId.map((item: any, index: number) => {
+                            return (
+                                <tr key={index}>
+                                    <th scope="row">{index + 1}</th>
+                                    <td>{item.invitationToUserEmail}</td>ƒ
+                                    <td>
+                                        {item.status === "pending" ? <PendingComponent /> : <AcceptedComponent />}
+                                    </td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </Table>
             </Row>
