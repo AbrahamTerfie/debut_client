@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Col, FormGroup, Input, Row } from 'reactstrap'
+import { Col, FormGroup, Input, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
 import EventCard from '../../../Components/EventCard/EventCard'
 import MotionContainer from '../../../Components/MotionContainer/MotionContainer'
 import { eventCard } from '../../../types/eventCardType'
@@ -12,6 +12,7 @@ import { IoMdSettings } from 'react-icons/io'
 import { searchDebutEvent } from '../../../GraphQl/index'
 import EventResults from '../../../Components/Search/EventResults'
 import Footer from '../../../Components/Footer/Footer'
+import { motion } from 'framer-motion'
 export default function Events() {
     const [search, setSearch] = useState<string>('')
     const [searchEvents, { loading: searchLoading, error: searchError, data: searchData }] = useLazyQuery(searchDebutEvent,
@@ -19,6 +20,10 @@ export default function Events() {
             variables: { searchParam: search }
         })
 
+
+    const [inviteCodeModal, setInviteCodeModal] = useState<boolean>(false)
+    const toggle = () => setInviteCodeModal(!inviteCodeModal)
+    const [invteCOdeInput, setInviteCodeInput] = useState<string>('')
     const { data, loading, error } = useQuery(EVENTS_PAGE)
     if (loading) return <Loader />
     if (error || !data || searchError) { notifyError('Error fetching events') }
@@ -29,6 +34,43 @@ export default function Events() {
 
     return (
         <div className='w-100'>
+
+            <Modal isOpen={inviteCodeModal} toggle={toggle} >
+                <ModalHeader>
+                    <h1 className='fw-light fs-1  m-5 mb-3'> Join with invite Code</h1>
+                </ModalHeader>
+                <ModalBody>
+                    <Row className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top   mb-3 ' style={{ zIndex: 2, top: '10%', }}>
+                        <Col md={10}>
+                            <FormGroup>
+                                <Input
+                                    className='App'
+                                    type="text"
+                                    name="textarea-input"
+                                    placeholder='Enter invite code ... '
+                                    onChange={(e) => setInviteCodeInput(e.target.value)}
+                                    value={invteCOdeInput} />
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <motion.div
+
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                className='d-flex justify-content-center align-items-center'>
+                                <button className=' text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill px-4 py-1'
+                                    onClick={() => { console.log("send invite ") }}>
+
+
+                                    <span className='text-success-emphasis'>join</span>
+
+                                </button>
+                            </motion.div>
+                        </Col>
+                    </Row>
+                </ModalBody>
+            </Modal>
+
             <Row className=' mb-1 my-auto pt-5 mt-5 px-5 mx-5  ' >
                 <h1 className='fw-light fs-1  m-5 mb-3'> Events and  Regisries</h1>
                 <p className="text-muted ms-5" >
@@ -38,7 +80,7 @@ export default function Events() {
             <Row
                 className='d-flex justify-content-evenly   flex-row flex-wrap sticky-xxl-top  ms-5 ps-5 mb-3 ' style={{ zIndex: 2, top: '10%', }}>
 
-                <Col md={10}>
+                <Col md={8}>
                     <FormGroup>
                         <Input
                             className='App'
@@ -84,6 +126,41 @@ export default function Events() {
                     </MotionContainer>
                 </Col>
             </Row>
+
+            <Row>
+                <Col md={12} className='d-flex justify-content-center'>
+                    <div className='w-75'>
+                        <p className='text-center text-muted'>
+                            <small>
+                                <i>
+                                    <b><u>Note:</u></b>
+                                    <br />
+                                    <b><u>1.</u></b>
+                                    {' '}
+                                    you can search for events by name
+                                    <br />
+                                    <b><u>2.</u></b>
+                                    {' '}
+                                    <motion.u
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
+
+                                        onClick={() => {
+                                            toggle()
+                                        }}
+                                        // underline color 
+                                        className="text-decoration-underline text-primary cursor-pointer"
+                                    >insert invite code to join an event
+
+                                    </motion.u>
+                                </i>
+                            </small>
+                        </p>
+                    </div>
+                </Col>
+
+            </Row>
+
             <Row className=' mb-1 my-auto  px-5 mx-5  ' >
                 <p className='fw-light fs-1  m-5 mb-1'>
                     Featured Events

@@ -108,7 +108,7 @@ export default function MyVillage(
                             return (
                                 <tr key={index}>
                                     <th scope="row">{index + 1}</th>
-                                    <td>{item.invitationToUserEmail}</td>ƒ
+                                    <td>{item.invitationToUserEmail}</td>
                                     <td>
                                         {item.status === "pending" ? <PendingComponent /> : <AcceptedComponent />}
                                     </td>

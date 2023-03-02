@@ -41,11 +41,8 @@ export default function Dashboard() {
         }
     })
 
-
     if (loadingCompany) return <Loader />
-
     if (hasCompany === true && errorCompany) { notifyError("something went wrong" + errorCompany?.message.toString()) }
-
     const cardInfo = [
         {
             title: "Profile",
@@ -99,8 +96,8 @@ export default function Dashboard() {
     ]
     return (
         <Row className="d-flex mt-5   ">
-            <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} 
-             
+            <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen}
+
             />
             <div className={classNames("content   overflow-scroll ", { "is-open overflow-scroll  ": sidebarIsOpen })}
                 style={sidebarIsOpen ? { width: window.innerWidth * 0.8 } : { width: window.innerWidth }} >
@@ -113,6 +110,35 @@ export default function Dashboard() {
                             Here you can keep track of your company, events, goals, milestones, gratitude and work experience.
                         </h5>
                         <div className="d-flex flex-wrap justify-content-start align-items-center  ">
+
+
+                            <motion.div
+                                whileHover={{ scale: 1.04 }}
+                                whileTap={{ scale: 0.9 }}
+                                animate={{ scale: 1 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <div className=" my-3 mx-4" style={{ width: "18rem" }} >
+                                    <div className={` bg-primary border border-primary-subtle text-light border-muted  bg-opacity-50 d-flex justify-content-center align-items-center flex-row p-3 rounded`}
+                                        // make the card size the same
+                                        style={{ height: "150px", cursor: "default" }}>
+                                        <div className='d-flex justify-content-center align-items-center mx-2'>
+                                            <IoNewspaperOutline className="fa-4x" />
+
+                                        </div>
+                                        <div className='py-3 . px-2' >
+                                            <h5 className="text-start">
+                                                accept invite
+                                            </h5>
+                                            <p className="text-start text-light">
+                                                accept your invite to an event
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </motion.div>
+
                             {cardInfo.map((card, index) => (
                                 <motion.div
                                     whileHover={{ scale: 1.04 }}
@@ -123,7 +149,6 @@ export default function Dashboard() {
                                     <div className={` shadow-sm border ${card.bgColor} text-${card.color} border-muted  bg-opacity-10 d-flex justify-content-center align-items-center flex-row p-3 rounded  `}
                                         // make the card size the same
                                         style={{ height: "150px", cursor: "default" }}>
-
                                         <div className='d-flex justify-content-center align-items-center mx-2'>
                                             {card.icon}
                                         </div>
@@ -133,10 +158,8 @@ export default function Dashboard() {
                                             <span className="card-text fw-light text-muted"> {card.description} .</span>
                                         </div>
                                     </div>
-
                                 </motion.div>
-                            )
-                            )}
+                            ))}
                         </div>
                     </>
                     :
