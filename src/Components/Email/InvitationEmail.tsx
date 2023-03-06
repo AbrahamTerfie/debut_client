@@ -1,39 +1,16 @@
 import React from 'react'
 import { emailJsInfo } from './emailJsInfo'
 import emailjs from '@emailjs/browser';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../Store/RootReducer';
 import { EmailStatticValues } from '../../Email/EmailTypes';
-import { useMutation, useQuery } from '@apollo/client';
+
 
 
 
 export default function InvitationEmail(
-    { invitationToEmail,
-        InvitationCode,
-        eventName,
-        userEmail,
-        eventDate }: {
-            invitationToEmail: string,
-            InvitationCode: string,
-            eventName: string,
-            eventDate: string,
-            userEmail: string
-        }
-)
-    : boolean {
-
-
-    // const testData = {
-    //     invitationToEmail: "abrahamTerfie4563@gmail.com",
-    //     InvitationCode: "123456",
-    //     eventName: "event name",
-    //     eventDate: " 2021-09-09",
-    //     userEmail: "abrahamTerfir4563@gmail.com"
-    // }
-
-
-    // const { userEmail } = useSelector((store: RootState) => store.identfiers)
+    { invitationToEmail, InvitationCode, eventName, userEmail, eventDate }: {
+        invitationToEmail: string, InvitationCode: string, eventName: string,
+        eventDate: string, userEmail: string
+    }): boolean {
 
     const EmailTemplate = ` <h6>   Dear   ${invitationToEmail}, </h6>
 <p>  You are invited to ${eventName}   on  ${eventDate} .</p>
@@ -41,7 +18,6 @@ export default function InvitationEmail(
 <p>  Thank you for your time and consideration. I look forward to hearing from you.</p>
 <h6>Best regards, </h6>
 <br/>  ${userEmail}  </h6>`
-
 
     emailjs.send(
         emailJsInfo.service_id,
